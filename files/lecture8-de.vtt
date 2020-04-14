@@ -1,0 +1,322 @@
+WEBVTT
+
+0
+00:01.420 --> 00:06.660
+SQL-Serverleistung; Verbesserung der Datenlatenz.
+
+1
+00:07.120 --> 00:09.120
+Warum Leistung wichtig ist.
+
+2
+00:09.190 --> 00:16.360
+Amazon fand heraus, dass für 100 Millisekunden Latenzkosten für 1 Prozent und Umsatz. 
+
+3
+00:16.360 --> 00:23.230
+Google fand eine zusätzliche 500 Millisekunden Latenz um 20 Prozent reduziert; Damit Ihre Datenbank schneller reagiert
+
+4
+00:23.230 --> 00:32.400
+Abfragen machen die Website oder App, die sie unterstützt, schneller. Messung der Leistung; unten rechts
+
+5
+00:32.460 --> 00:34.260
+der Benutzeroberfläche.
+
+6
+00:34.550 --> 00:41.220
+Ein Zeitzähler würde die Leistung in der nächsten Sekunde anzeigen; für eine genauere Messung.
+
+7
+00:41.320 --> 00:46.290
+Sie wählen Abfrage > Clientstatistiken einschließen.
+
+8
+00:46.520 --> 00:51.980
+Beachten Sie, dass SQL Server Ergebnisse und Arbeitsspeicher zwischenspeichert, sodass Sie SQL für einen fairen Test mehrere Speicher löschen können.
+
+9
+00:51.980 --> 00:56.150
+Cache mithilfe des Befehls dbcc dropcleanbuffers
+
+10
+00:59.830 --> 01:00.550
+WÄHLEN SIE OBEN.
+
+11
+01:02.350 --> 01:08.620
+Wenn Sie nicht jeden übereinstimmenden Datensatz nur die ersten 5 Datensätze benötigen, dann können Sie die Anweisung eingeben.
+
+12
+01:08.680 --> 01:16.330
+SELECT TOP FIVE * vom Tisch;  um einen Leistungsgewinn zu erzielen, sollte die Anzahl der übereinstimmenden Datensätze
+
+13
+01:16.330 --> 01:24.750
+mehr als fünf; Reihenfolge nach und Gruppieren nach Klauseln begrenzen den Leistungsgewinn, da die Datenbank
+
+14
+01:24.750 --> 01:26.300
+Lesen Sie trotzdem das gesamte Matching-Set.
+
+15
+01:29.500 --> 01:31.060
+Video-Demonstration.
+
+16
+01:31.390 --> 01:39.610
+Hier zeigen wir, wie Sie ein großes zufälliges Dataset erstellen. Wir zeigen dann Leistungssteigerungen durch angebotene
+
+17
+01:39.610 --> 01:43.260
+von SELECT TOP.
+
+18
+01:43.780 --> 01:48.970
+In diesem Video zeigen wir, wie Sie ein großes Zufalls-Dataset erstellen, und dann werden wir
+
+19
+01:49.210 --> 01:54.750
+leistungssteigernd von SELECT TOP. Erstellen eines großen Zufälligen Datasets.
+
+20
+01:54.750 --> 01:57.390
+Es ist nicht etwas, was Sie häufig in SQL Server tun.
+
+21
+01:58.020 --> 02:01.620
+Die Arbeit mit großen Datasets ist jedoch sehr häufig.
+
+22
+02:02.950 --> 02:10.420
+Um die Vorteile dieser Leistungsverbesserungen zu sehen, hilft es bei der Arbeit mit
+
+23
+02:10.420 --> 02:15.410
+Dataset, da die Unterschiede ausgeprägter sind.
+
+24
+02:15.670 --> 02:18.340
+Lassen Sie uns also zunächst einen großen zuzufälligen Satz erstellen.
+
+25
+02:18.400 --> 02:27.550
+Also werde ich eine Testtabelle erstellen und in diesem werde ich ein paar Spalten haben, die automatisch
+
+26
+02:27.790 --> 02:39.720
+mit Standardwerten gefüllt, die ziemlich zufällig sind;
+
+27
+02:39.770 --> 02:40.210
+Tabellentest1 erstellen ( id int identity(1,1) nicht NULL
+
+28
+02:45.000 --> 02:48.220
+Wir werden eine GUID haben
+
+29
+02:48.690 --> 02:49.570
+Spalte.
+
+30
+02:50.430 --> 02:53.750
+GUID steht für einen wirklich eindeutigen Bezeichner.
+
+31
+02:54.000 --> 03:07.210
+Es ist ein 36-stelliger Varchar und hat den Standardwert newid(). eine neue, wirklich eindeutige Kennung.
+
+32
+03:07.890 --> 03:15.810
+Wir können ein erstelltes Datum haben, bei dem es sich um einen Datetime-Standard handelt.
+
+33
+03:16.080 --> 03:17.930
+getdate()
+
+34
+03:18.000 --> 03:23.550
+Lassen Sie uns einen zufälligen Float namens "Zahl" haben.
+
+35
+03:23.670 --> 03:26.590
+Standard-Rand()
+
+36
+03:27.780 --> 03:32.210
+Es gibt also ein paar zufällige Spalten und eine Tabelle.
+
+37
+03:32.230 --> 03:35.590
+Wir sollten diese Tabelle jetzt erstellen; Ausführen.
+
+38
+03:37.410 --> 03:45.420
+Wenn wir eine Zeile mit allen Standardwerten einfügen, geben Sie in Test 1 ein.
+
+39
+03:45.750 --> 03:47.040
+Standardwerte
+
+40
+03:54.040 --> 03:56.320
+Ausführen
+
+41
+03:59.000 --> 03:59.530
+Wählen * aus test1
+
+42
+04:04.560 --> 04:14.340
+und wir werden sehen, dass es eine Autonummer, eine GUID, ein Datum und eine Zahl erstellt hat; um zu schaffen,
+
+43
+04:14.820 --> 04:16.170
+viele davon.
+
+44
+04:16.170 --> 04:18.810
+Ich werde eine while-Schleife erstellen.
+
+45
+04:19.620 --> 04:31.700
+während 1=1 beginnen; Ende; so laufe ich dies kann ich es an jedem Punkt zu stoppen und zu sehen, was erstellt wird.
+
+46
+04:32.550 --> 04:40.500
+Dies hat viele und viele Zeilen erstellt, so dass ich nicht dies ausführen werde und ich werde versuchen, zu generieren
+
+47
+04:40.530 --> 04:44.590
+ein paar Millionen Zeilen, so dass dies einige Zeit dauern wird.
+
+48
+04:44.620 --> 04:51.210
+Also gehen Sie und machen Sie sich einen Kaffee und das Video wird schneiden.
+
+49
+04:51.220 --> 04:51.490
+Hier
+
+50
+04:54.600 --> 04:55.060
+Also.
+
+51
+04:55.400 --> 05:03.450
+Ich habe dieses Video nun wieder aufgenommen und diese Anweisung läuft seit etwa drei Minuten.
+
+52
+05:03.520 --> 05:07.680
+Ich werde jetzt aufhören und wenn ich es tue;
+
+53
+05:10.560 --> 05:15.450
+Count(*) aus test1 auswählen; wir haben anderthalb Millionen Reihen
+
+54
+05:18.750 --> 05:23.630
+, um zu sehen, wie lange es dauern würde, die Auswahl * aus Test1 durchzuführen.
+
+55
+05:23.730 --> 05:30.330
+An dieser Stelle kann dies natürlich je nach Leistung Ihres jeweiligen Systems länger oder
+
+56
+05:30.330 --> 05:33.190
+kürzer; Ausführen
+
+57
+05:35.460 --> 05:42.720
+Sie können die untere rechte Ecke sehen, dass timer tickt, wie es ist
+
+58
+05:42.720 --> 05:43.830
+Rückgabe all dieser Daten
+
+59
+05:48.180 --> 05:56.820
+über eine Million Reihen, die dorthin zurückkommen; 19 Sekunden, 20 Sekunden, 21 Sekunden, um anderthalb
+
+60
+05:56.820 --> 06:00.410
+Millionen Zeilen.
+
+61
+06:00.560 --> 06:04.790
+Es versteht sich von selbst, wenn ich nur die ersten 10 Reihen wollte
+
+62
+06:09.050 --> 06:11.840
+dann kehrt es in praktisch kürzester Zeit zurück.
+
+63
+06:13.600 --> 06:21.890
+Nun, wenn Sie genau sehen wollten, wie lange es tatsächlich dauert; Auf geht es.
+
+64
+06:21.920 --> 06:34.600
+Abfrage umfassen Clientstatistiken und; ausführen; Klicken Sie auf Client-Statistiken und die Gesamtausführungszeit
+
+65
+06:34.780 --> 06:45.040
+acht Millisekunden, während, wenn ich dies ändern, um die top tausend wählen ; Ausführen
+
+66
+06:47.920 --> 06:57.600
+Gesamtausführung beträgt 42 Millisekunden; so offensichtlich in einer Situation, in der Sie nicht alle Zeilen benötigen.
+
+67
+06:57.820 --> 07:02.620
+Wenn Sie oben wählen, um Ihre Geschwindigkeit erheblich zu erhöhen.
+
+68
+07:05.300 --> 07:11.210
+Das ist also eine sehr einfache Demonstration einer sehr einfachen Leistungssteigerung.
+
+69
+07:11.240 --> 07:19.220
+Wenn Sie z. B. eine Website erstellen, auf der Sie mehrere Seiten mit Daten anzeigen möchten,
+
+70
+07:19.220 --> 07:26.780
+Viel Sinn, die Auswahl oben zu verwenden, um anzuzeigen, dass die Daten für diese Seite abgerufen werden, anstatt zurückzugeben
+
+71
+07:26.810 --> 07:32.480
+alle Daten und dann die Verwendung des Client-Seitencodes, um das Paging zu tun.
+
+72
+07:32.600 --> 07:41.890
+Das ist also ein einfaches Beispiel, und wir sollten mit dem Rest fortfahren. 
+
+73
+07:42.520 --> 07:47.670
+Indizes zur Beschleunigung von Lesevorgängen durch Beschleunigung des Betriebs von Where-Klauseln; sie werden wie folgt erstellt:
+
+74
+07:47.710 --> 07:57.430
+Erstellen sie index idxBookTitle on Books (Titel);
+
+75
+07:57.790 --> 08:06.100
+Nach dem Erstellen einer Auswahlanweisung in der Büchertabelle mit einer where-Klausel auf
+
+76
+08:06.100 --> 08:16.420
+Die Titelspalte wird schneller ausgeführt. Indizes verlangsamen jedoch INSERT-, UPDATE- und Löschvorgänge leicht
+
+77
+08:17.120 --> 08:19.630
+also nur Indizes einschließen, in denen sie nützlich sind
+
+78
+08:23.280 --> 08:30.640
+gruppierte und nicht gruppierte Indizes. Der gruppierte Index stellt sicher, dass Daten physisch auf
+
+79
+08:30.640 --> 08:38.260
+einen Datenträger, während ein nicht gruppierter Index unabhängig von den Daten vorhanden ist, die keine physische
+

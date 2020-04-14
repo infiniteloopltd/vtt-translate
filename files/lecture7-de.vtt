@@ -1,0 +1,1128 @@
+WEBVTT
+
+0
+00:01.980 --> 00:11.750
+Gespeicherte Prozeduren und benutzerdefinierte Funktionen; komplexe Operationen einfach machen; Gespeicherte Prozeduren
+
+1
+00:11.750 --> 00:18.800
+Gespeicherte Prozeduren bieten eine Möglichkeit, komplexe Datenbankvorgänge in einer wiederverwendbaren einzeiligen Anweisung zu beenden.
+
+2
+00:18.800 --> 00:26.090
+Auf diese Weise erleichtert sie die Bedienung der Datenbank und verbessert die Leistung. um eine zu erstellen
+
+3
+00:26.300 --> 00:28.380
+verwenden Sie das folgende Format.
+
+4
+00:28.430 --> 00:36.690
+Erstellen Sie prozedur dann der Name der Prozedur "- der Name der Variablen, der Datentyp, alle anderen
+
+5
+00:36.690 --> 00:43.380
+Variablen als und dann Ihre SQL-Anweisung.
+
+6
+00:43.900 --> 00:50.080
+Videodemonstration; hier zeigen wir ein gespeichertes Verfahren, das aufgerufen wird, wenn ein Buch ausgeliehen wird
+
+7
+00:50.250 --> 00:50.980
+aus der Bibliothek.
+
+8
+00:52.720 --> 00:58.280
+Wir akzeptieren zwei Parameter der Student I.D. und der Buch-ID 
+
+9
+00:58.280 --> 00:58.980
+Im gespeicherten Verfahren
+
+10
+00:59.060 --> 01:02.080
+Wir werden die folgenden Operationen durchführen.
+
+11
+01:02.540 --> 01:06.890
+Erstellen einer Transaktion; fügen Sie der Buchkredittabelle einen Kredit hinzu.
+
+12
+01:06.890 --> 01:14.750
+Aktualisieren Sie die Buchtabelle, um anzuzeigen, dass das Buch zurückgezogen wird, und aktualisieren Sie sie ab heute und können Innerhalb eines Monats zurückgegeben werden.
+
+13
+01:16.320 --> 01:18.200
+und sich dann schließlich zur Transaktion verpflichten.
+
+14
+01:21.690 --> 01:28.830
+Hier werden wir das Erstellen einer gespeicherten Prozedur demonstrieren, die eine Transaktion erstellt. Hinzufügen eines Darlehens
+
+15
+01:28.830 --> 01:35.130
+an die Buchausleihetabelle und aktualisieren Sie dann die Buchtabelle, um anzuzeigen, dass das Buch zurückgezogen wurde, und
+
+16
+01:35.130 --> 01:37.180
+die Transaktion festzumachen.
+
+17
+01:37.320 --> 01:44.480
+Werfen wir also einen Blick auf die Buchleihe Tabelle
+
+18
+01:44.820 --> 01:51.790
+Um diese Operation durchzuführen, können wir also das zurückgezogene Datum berechnen, da es das aktuelle Datum ist.
+
+19
+01:51.870 --> 01:58.230
+Wir können das Fälligkeitsdatum berechnen, da es 30 Tage von heute oder einen Monat ab heute sein wird.
+
+20
+01:58.230 --> 02:02.160
+Der Schüler- und Buchausweis muss in die gespeicherte Prozedur übergeben werden.
+
+21
+02:02.160 --> 02:03.770
+Also lasst uns das tun.
+
+22
+02:03.790 --> 02:08.490
+Erstellen von Prozedur WithdrawBook
+
+23
+02:14.440 --> 02:25.890
+Sie benötigen den Studentenausweis vom Typ int, Buch-ID, der auch vom Typ int ist.
+
+24
+02:26.280 --> 02:31.720
+Jetzt wollen wir die Transaktion erstellen, die ist; Transaktion beginnen
+
+25
+02:35.960 --> 02:41.290
+In Bookloan-Werte einfügen (studentID, bookId, dateWithdrawn, dateDue)
+
+26
+02:41.910 --> 02:47.640
+In Bookloan-Werte einfügen (studentID, bookId, dateWithdrawn, dateDue)
+
+27
+02:48.500 --> 02:58.320
+Die Werte dafür sind die Studenten-ID, wie sie übergeben wurde. die Buch-ID, wie sie übergeben wurde;
+
+28
+02:58.450 --> 03:06.050
+Das zurückgezogene Datum ist das aktuelle Datum; und das Fälligkeitsdatum ist ein Monat ab heute; als die Sie schreiben;
+
+29
+03:06.050 --> 03:15.710
+dateadd(monat,1,getdate())
+
+30
+03:15.800 --> 03:21.410
+Wir möchten auch die Büchertabelle aktualisieren; Schauen wir uns also die Büchertabelle an.
+
+31
+03:23.030 --> 03:31.450
+Okay, wir möchten die Bücherregal-ID aktualisieren und auf 6 setzen, um anzuzeigen, dass sie zurückgezogen wurde
+
+32
+03:31.520 --> 03:39.520
+Aktualisieren Bücher setzen bookShelfId=6 wobei id=@bookid
+
+33
+03:40.810 --> 03:43.700
+Und dann endlich Commit-Transaktion
+
+34
+03:49.890 --> 03:50.230
+Okay.
+
+35
+03:50.270 --> 03:59.800
+Also, was wir hier tatsächlich getan haben, haben wir diese wenigen SQL-Zeilen in eine SQL-Zeile eingewickelt.
+
+36
+04:00.020 --> 04:01.190
+was ich jetzt demonstrieren werde.
+
+37
+04:02.000 --> 04:06.760
+Werfen wir also einen Moment auf unseren Büchertisch.
+
+38
+04:06.800 --> 04:12.990
+Angenommen, Sie möchten Buch 3 zurückziehen.
+
+39
+04:13.540 --> 04:14.860
+Schauen wir uns unsere Schülertabelle an
+
+40
+04:20.590 --> 04:22.240
+und wir werden nehmen.
+
+41
+04:22.280 --> 04:24.260
+PETER MURPHY als Student
+
+42
+04:29.250 --> 04:39.660
+so; Um eine gespeicherte Prozedur auszuführen, schreiben Sie den Namen der gespeicherten Prozedur; 
+
+43
+04:39.670 --> 04:46.260
+Erster Parameter ist die Studenten-ID, die 3 ist; zweiter Parameter ist BookID, das ebenfalls 3 ist.
+
+44
+04:46.330 --> 04:53.230
+Also führe ich diese Aussage nun aus; 3 Zeilen sind betroffen.
+
+45
+04:53.330 --> 04:56.000
+Die erste besteht darin, in den Buchkredit einzufügen.
+
+46
+04:56.060 --> 05:02.770
+Das zweite sind die Aktualisierungsbücher und das dritte wäre tatsächlich der Auslöser der vorherigen Übung.
+
+47
+05:02.900 --> 05:08.220
+Schauen wir uns also an und sehen, was passiert ist; Wählen * aus Bookloan
+
+48
+05:11.880 --> 05:18.380
+Wir können jetzt sehen, dass dieses dritte Buch Darlehen in diesem Fall Student ID 3 hat Buch ID 3
+
+49
+05:19.680 --> 05:20.710
+Schauen wir uns unsere Bücher an
+
+50
+05:26.300 --> 05:37.440
+und wir können auch sehen, dass das Buch ID 3 jetzt auf Bücherregal ID 6 eingestellt ist; deshalb haben wir diese
+
+51
+05:37.530 --> 05:43.020
+vier Zeilen SQL in diese sehr einfache kleine Anweisung.
+
+52
+05:44.240 --> 05:47.800
+Und tatsächlich hilft dies auch der Leistung; 
+
+53
+05:47.810 --> 05:50.340
+So macht es nicht nur Ihre SQL prägnanter.
+
+54
+05:50.340 --> 05:51.290
+Es macht es schneller
+
+55
+05:54.100 --> 05:59.580
+Benutzerdefinierte Funktionen oder UDF; 
+
+56
+05:59.630 --> 06:06.110
+Benutzerdefinierte Funktionen wickeln auch komplexeres SQL auf wiederverwendbare Weise ein. sind jedoch so konzipiert, dass sie innerhalb eines
+
+57
+06:06.190 --> 06:09.290
+SQL-Anweisung und nicht eigenweise wie eine gespeicherte Prozedur.
+
+58
+06:10.300 --> 06:17.010
+Um eine benutzerdefinierte Funktion zu erstellen, verwenden Sie das Format. Funktion "Funktionsname" erstellen, @variable
+
+59
+06:20.080 --> 06:23.680
+gibt int as und dann Ihre SQL-Anweisung zurück.
+
+60
+06:26.210 --> 06:32.590
+Videodemonstration; Hier erstellen wir eine benutzerdefinierte Funktion, um das Rückgabedatum für eine
+
+61
+06:32.590 --> 06:40.210
+Buch, das Folgendes erfüllt; 30 Tage ab heute; und ändern Sie dann die gespeicherte Prozedur, um diese
+
+62
+06:40.420 --> 06:45.070
+UDF für Rückgabedatumsberechnung
+
+63
+06:45.100 --> 06:50.260
+Hier zeigen wir das Erstellen einer benutzerdefinierten Funktion, die das Rückgabedatum für eine
+
+64
+06:50.260 --> 06:52.820
+Buch, das 30 Tage ab heute ist.
+
+65
+06:53.890 --> 07:01.510
+Um dies zu tun, geben wir: Create Funktion CalculateDueDate
+
+66
+07:04.570 --> 07:08.830
+Hier würde es alle Parameter übergeben, in diesem Fall.
+
+67
+07:08.830 --> 07:09.630
+Wir haben keine.
+
+68
+07:09.640 --> 07:13.990
+Es sind also leere Klammern, kehrt zurück.
+
+69
+07:14.040 --> 07:15.700
+Name des Datentyps.
+
+70
+07:15.720 --> 07:21.630
+Vom Rückgabewert, der in diesem Fall die Datumszeit als Anfang.
+
+71
+07:22.860 --> 07:33.650
+Rückgabe datumadd(Tag, 30, getdate())
+
+72
+07:35.510 --> 07:42.330
+So veranschaulichen Sie, dass diese Funktion aufgerufen wird; Schreiben Sie eine Select-Anweisung.
+
+73
+07:44.440 --> 07:54.940
+Um eine benutzerdefinierte Funktion aufzurufen, setzen wir ihr dbo vor, was für eine Datenbank steht, alle Besitzer und
+
+74
+07:54.940 --> 08:03.790
+wir nennen die Funktion so; ausführen; und dies gibt das Datum in 30 Tagen zurück.
+
+75
+08:03.790 --> 08:12.250
+Das Datum wird in Ihrem Beispiel unterschiedlich sein; Der nächste Schritt in diesem Verfahren besteht also darin, die gespeicherte
+
+76
+08:12.250 --> 08:19.090
+mit dieser neuen benutzerdefinierten Funktion statt der Verwendung von dateAdd direkt.
+
+77
+08:19.960 --> 08:29.460
+Wenn wir also zu der gespeicherten Prozedur zurückkehren, die wir im vorherigen Video erstellt hatten; werden wir ersetzen
+
+78
+08:30.300 --> 08:42.300
+dateAdd und mit der benutzerdefinierten Funktion CalculateDueDate und statt zu erstellen, um die
+
+79
+08:42.300 --> 08:45.010
+Wortändern.
+
+80
+08:45.030 --> 08:46.680
+Führen Sie nun dieses Update aus
+
+81
+08:52.550 --> 09:01.610
+Unsere gespeicherte Prozedur verwendet jetzt eine benutzerdefinierte Funktion, um komplexere SQL weiter zu extrahieren
+
+82
+09:04.450 --> 09:10.840
+Ansichten; Ansichten sind eine Möglichkeit, komplexe Auswahlanweisungen wie eine Tabelle erscheinen zu lassen.
+
+83
+09:10.840 --> 09:16.940
+Auf diese Weise kann komplexere Logik abstrahiert werden und der Benutzer kann ausgewählte Anweisungen gegen
+
+84
+09:16.940 --> 09:24.910
+die Ansicht, als wäre es eine Tabelle; Ansichten, die mit der Formaterstellungsansicht erstellt wurden, gefolgt von Ihrem Ansichtsnamen
+
+85
+09:25.360 --> 09:29.690
+als auswahl; und Ihre ausgewählte Anweisung
+
+86
+09:32.400 --> 09:34.470
+Video-Demonstration.
+
+87
+09:34.500 --> 09:42.030
+In diesem Video erstellen Sie eine Ansicht der ausstehenden Darlehen, die enthalten: der vollständige Name des Studenten
+
+88
+09:42.450 --> 09:50.240
+den Namen des Buches; die Anzahl der fälligen Tage oder die verbleibende Tage auf dem Darlehen; und nach Dem Namen des Schülers geordnet.
+
+89
+09:50.410 --> 09:57.700
+Wir zeigen dann, wie Auswahlanweisungen in die Ansicht geschrieben werden, indem wir die Reihenfolge der Ergebnisse ändern.
+
+90
+09:58.190 --> 10:05.160
+Jetzt wird das Erstellen einer Ansicht veranschaulicht, die eine komplexe Select-Anweisung in eine einfachere umschließen kann.
+
+91
+10:06.660 --> 10:08.590
+so wird es sich ein bisschen wie eine Tabelle verhalten.
+
+92
+10:08.670 --> 10:13.230
+Sehen wir uns also in diesem Video eine Ansicht der ausstehenden Buchausleihen an, die
+
+93
+10:13.230 --> 10:16.140
+vollständigen Namen des Schülers; den Namen des Buches; und die Anzahl der überfälligen Tage.
+
+94
+10:16.320 --> 10:22.230
+Beginnen wir mit einer select-Anweisung; Wählen * aus Buchdarlehen
+
+95
+10:22.830 --> 10:28.010
+Sie müssen dies sowohl auf dem Schülertisch als auch auf dem Büchertisch mitmachen.
+
+96
+10:28.040 --> 10:36.860
+Teilnehmer auf s.id = bl.studentID beitreten
+
+97
+10:37.210 --> 10:40.490
+Buche b auf b.id = bl.bookId verbinden
+
+98
+10:40.760 --> 10:41.480
+Großartig.
+
+99
+10:42.810 --> 10:45.340
+Das sollten also alle Daten sein, die wir brauchen.
+
+100
+10:45.520 --> 10:48.270
+Jetzt müssen wir mit dem vollständigen Namen des Schülers beginnen.
+
+101
+10:48.280 --> 10:57.540
+s.Vorname + ' ' + s.Surname als FullName
+
+102
+10:58.640 --> 11:02.200
+So haben wir jetzt den vollständigen Namen des Studenten.
+
+103
+11:02.240 --> 11:07.230
+Jetzt wollen wir auch den Namen des Buches; die bereits da ist; und die Anzahl der überfälligen Tage.
+
+104
+11:07.290 --> 11:08.450
+So verwenden wir eine datediff
+
+105
+11:11.020 --> 11:11.410
+datedif(Tag, Datumfällig, getdate())
+
+106
+11:14.230 --> 11:17.160
+datedif(Tag, Datumfällig, getdate())
+
+107
+11:17.830 --> 11:23.700
+Das ist die Anzahl der Tage Differenz zwischen dem Datum, das am aktuellen Datum fällig ist, und wir nennen es überfällig.
+
+108
+11:26.600 --> 11:36.550
+Die überfällige Spalte ist negativ, da das Fälligkeitsdatum in der Zukunft liegt. So jetzt brauchen wir nicht alle Spalten
+
+109
+11:36.570 --> 11:40.730
+also nur den Buchnamen hier haben.
+
+110
+11:41.770 --> 11:43.710
+Das hat uns unsere ausgewählte Aussage gegeben.
+
+111
+11:43.750 --> 11:48.460
+Jetzt können wir dies in einer Ansicht abschließen; durch das Sprichwort;
+
+112
+11:48.500 --> 11:58.070
+Ansicht überfälligerstellenKredite als 
+
+113
+11:58.300 --> 12:05.280
+Und jetzt, wenn wir diese select-Anweisung erneut ausführen möchten, könnten wir einfach ein ausgewähltes * aus überfälligen Krediten machen.
+
+114
+12:05.710 --> 12:11.380
+Als ob überfällige Kredite eine Tabelle wären; und wir können es jetzt unter vollem Namen bestellen
+
+115
+12:15.740 --> 12:19.160
+was die Dinge nicht beeinflussen wird, weil es alles gleich ist.
+
+116
+12:19.160 --> 12:21.110
+Wir könnten durch überfällige Abstiege bestellen
+
+117
+12:26.500 --> 12:32.100
+also werden wir sehen, dass dieser nach oben geht;  Na bitte.
+
+118
+12:32.110 --> 12:36.900
+Also diese überfälligeKredite wie eine Tabelle erscheinen.
+
+119
+12:36.940 --> 12:39.920
+Aber es ist eigentlich diese ausgewählte Aussage hier.
+
+120
+12:40.090 --> 12:41.130
+Das ist eine Ansicht.
+
+121
+12:43.350 --> 12:47.970
+Temporäre Tabellen; manchmal bei der Arbeit mit komplexen Abfragen
+
+122
+12:48.090 --> 12:54.690
+Möglicherweise möchten Sie Zwischenergebnisse im temporären Speicher speichern, müssen diese jedoch nicht dauerhaft starten.
+
+123
+12:54.690 --> 13:01.570
+Sie können dies tun, indem Sie temporäre Tabellen mit dem Hashtag-Präfix erstellen. In temporären Tabellen gespeicherte Daten
+
+124
+13:01.570 --> 13:06.390
+wird verworfen, sobald die Sitzung geschlossen wurde, und ist für andere Sitzungen nicht sichtbar.
+
+125
+13:08.530 --> 13:17.890
+Wählen Sie in; Wenn Sie die Ausgabe einer Select-Anweisung in eine neue Tabelle kopieren müssen, können Sie die
+
+126
+13:18.100 --> 13:26.450
+wählen Sie in Syntax; Eine Tabelle wird für Sie erstellt, und diese Tabelle darf nicht bereits vorhanden sein.
+
+127
+13:26.450 --> 13:31.760
+Dies wird häufig in Verbindung mit temporären Tabellen verwendet und lässt das Formular in
+
+128
+13:34.630 --> 13:38.160
+Der temporäre Tabellenname aus der Tabelle
+
+129
+13:42.500 --> 13:45.040
+in select einfügen.
+
+130
+13:45.040 --> 13:51.550
+Wenn Sie die Ausgabe einer Select-Anweisung in eine vorhandene Tabelle kopieren möchten, sollten Sie die
+
+131
+13:51.550 --> 13:55.220
+in die Select-Syntax einfügen.
+
+132
+13:55.240 --> 13:59.720
+Die Tabelle darf vor der Ausführung der Anweisung nicht vorhanden sein.
+
+133
+13:59.740 --> 14:09.040
+Dies wird häufig in Verbindung mit temporären Tabellen verwendet und hat das Formular in "Tabellenname" "Spaltennamen" einfügen.
+
+134
+14:09.040 --> 14:12.880
+Spaltennamen aus Tabelle auswählen
+
+135
+14:17.260 --> 14:19.100
+Video-Demonstration.
+
+136
+14:19.750 --> 14:27.650
+Hier erstellen wir eine temporäre Tabelle mit den drei Spalten BookName, Author1 und Author2
+
+137
+14:28.150 --> 14:33.290
+Wir verwenden select in, um die Tabelle für Einzelne Autorenbücher zu erstellen.
+
+138
+14:33.430 --> 14:39.240
+Wir verwenden Insert in, um diese Tabelle für Bücher mit zwei Autoren anzuhängen.
+
+139
+14:39.330 --> 14:43.040
+Wir zeigen, wie eine temporäre Tabelle für andere Datenbankbenutzer nicht sichtbar ist.
+
+140
+14:45.080 --> 14:51.080
+Okay, also werden wir hier temporäre Tabellen demonstrieren, in denen wir eine temporäre Tabelle erstellen werden
+
+141
+14:51.080 --> 14:56.630
+Verwenden Sie den Befehl Wählen sie in, und fügen Sie dann mit dem Einfügen an die temporäre Tabelle an.
+
+142
+14:56.720 --> 14:57.740
+in den Befehl.
+
+143
+14:58.520 --> 15:07.810
+Was wir also wollen, sind drei Spalten eins oder der Buchname; eine mit Autor eins; ein Autor zwei; so was wir brauchen
+
+144
+15:07.810 --> 15:14.150
+Zu tun ist zuerst eine ausgewählte Aussage zu finden, die uns nur Einzelautorenbücher geben wird.
+
+145
+15:14.170 --> 15:20.570
+Beginnen wir also mit der Bookauthor-Tabelle; Wählen * aus bookAuthor
+
+146
+15:20.770 --> 15:29.020
+Was wir nun tun werden, ist, auf BookID zu gruppieren und eine Having-Klausel zu verwenden, um zu erklären, dass wir nur wollen
+
+147
+15:31.040 --> 15:33.660
+nur eine davon.
+
+148
+15:33.820 --> 15:34.710
+Also gehen wir.
+
+149
+15:36.190 --> 15:36.840
+BookID
+
+150
+15:39.370 --> 15:41.640
+Und Gruppe nach bookId
+
+151
+15:42.780 --> 15:44.230
+Okay.
+
+152
+15:44.370 --> 15:47.310
+Mit Count(*) entspricht 1.
+
+153
+15:47.710 --> 15:51.400
+Also suchen wir hier Bücher, wo es nur einen Autor gibt.
+
+154
+15:51.430 --> 15:59.430
+Ich erwarte also Buch 1 und 2; aber nicht 3. 1 und 2 nicht 3.
+
+155
+15:59.880 --> 16:00.970
+Werfen wir einen Blick.
+
+156
+16:01.110 --> 16:06.060
+Wenn wir Bücher mit zwei Autoren sagen wollen, dann wäre das so.
+
+157
+16:06.180 --> 16:08.210
+So erhalten wir Buch ID 3
+
+158
+16:08.340 --> 16:10.680
+Lassen Sie uns nun das auf dem Büchertisch verbinden
+
+159
+16:14.270 --> 16:24.850
+Buche b auf b.id = ba.bookID beitreten
+
+160
+16:24.860 --> 16:30.480
+Wir tun dasselbe für die Dual-Author-Abfrage
+
+161
+16:31.260 --> 16:33.200
+Jetzt brauchen wir hier den Buchnamen.
+
+162
+16:33.280 --> 16:37.300
+Also sagen wir b.Bookname, und 
+
+163
+16:37.360 --> 16:40.040
+die Gruppe von wird auf dem Buchnamen sein
+
+164
+16:40.090 --> 16:41.770
+Also machen wir das hier und hier.
+
+165
+16:42.250 --> 16:49.810
+Es sollten also Bücher mit einem Autor sein, und dies sollten Bücher mit zwei Autoren sein.
+
+166
+16:50.760 --> 16:54.310
+Als nächstes brauchen wir also den Namen des eigentlichen Autors.
+
+167
+16:54.540 --> 16:57.010
+Also werden wir uns dem Autor anschließen.
+
+168
+16:57.060 --> 17:01.650
+Autor beitreten a on a.id = ba.authorid
+
+169
+17:02.040 --> 17:05.290
+Autor beitreten a on a.id = ba.authorid
+
+170
+17:05.460 --> 17:06.530
+hier genauso.
+
+171
+17:12.660 --> 17:13.680
+Und in dieser Auswahl...
+
+172
+17:14.190 --> 17:15.750
+Was wir brauchen, ist eine aggregierte Abfrage.
+
+173
+17:15.750 --> 17:20.790
+Also in diesem Fall wird Minimum verwenden, aber um ehrlich zu sein, kann es alles hier sein, weil es nur
+
+174
+17:20.790 --> 17:28.870
+wird nur eine so sein; AuthorName als Autor1
+
+175
+17:29.520 --> 17:33.360
+Hier werden sowohl Min als auch Max
+
+176
+17:36.900 --> 17:44.620
+also sagen wir Min für author1 auf max für author2.
+
+177
+17:44.790 --> 17:46.490
+Mal sehen, wie das funktioniert.
+
+178
+17:47.550 --> 17:54.240
+So der Buchname Autor1 J.K. Rowling; Buchname author2
+
+179
+17:54.330 --> 17:58.680
+Also gehen wir hin; jetzt; weil ich diese beiden Dinge kombinieren möchte.
+
+180
+17:58.740 --> 18:03.300
+Ich möchte eine Spalte author2 darin haben; aber es muss NULL sein.
+
+181
+18:03.750 --> 18:13.200
+Was ich also tun muss, ist NULL in denselben Datentyp wie den Autorennamen zu werfen, der varchar(max) ist.
+
+182
+18:13.260 --> 18:16.370
+cast(NULL as varchar(max))
+
+183
+18:16.590 --> 18:18.920
+cast(NULL as varchar(max))
+
+184
+18:19.020 --> 18:26.140
+als Autor2
+
+185
+18:26.270 --> 18:32.920
+Wenn wir dies ausführen, haben wir eine zweite Spalte in diesem autor2, die nur NULL sagt.
+
+186
+18:32.970 --> 18:39.690
+Jetzt hier ist, wo wir versuchen werden, die beiden Dinge zu kombinieren, so werde ich ändern, um in eine
+
+187
+18:40.020 --> 18:44.530
+select in-Anweisung; und wir werden es #TempBooks nennen.
+
+188
+18:44.610 --> 18:50.730
+Beachten Sie, dass das Hashsymbol oder das Hashtag-Symbol vor dem Tabellennamen angezeigt wird.
+
+189
+18:50.730 --> 18:55.890
+Dies weist darauf hin, dass es sich um eine temporäre Tabelle handelt, und sie ist für keinen anderen Benutzer dieser Datenbank sichtbar.
+
+190
+18:55.920 --> 18:56.940
+außerhalb der Sitzung.
+
+191
+18:56.940 --> 19:04.690
+Es ist also nützlich für eine Art Arbeitsgedächtnis.
+
+192
+19:05.730 --> 19:06.180
+Tut mir Leid
+
+193
+19:13.830 --> 19:14.300
+Okay.
+
+194
+19:14.520 --> 19:16.050
+Es tut mir leid, dass ich das einfach wieder erstelle.
+
+195
+19:17.270 --> 19:27.680
+OK, also haben wir jetzt zwei Reihen in der #TempBooks Tabelle; so können wir uns die #TempBooks Tabelle ansehen; wählen * aus 
+#TempBooks
+
+196
+19:29.710 --> 19:33.520
+Die beiden Zeilen für Einzelautorenbücher.
+
+197
+19:33.570 --> 19:42.720
+Jetzt werden wir einfügen; fügen Sie also in #TempBooks gefolgt von der select-Anweisung ein. die wir jetzt ausführen können
+
+198
+19:43.190 --> 19:46.890
+eine zusätzliche Zeile hinzugefügt; führen Sie dort auswählen;
+
+199
+19:46.890 --> 19:50.370
+Und wir haben alle drei Bücher.
+
+200
+19:50.560 --> 19:56.370
+Mit Author1, Autor2. Nun, um zu zeigen, dass dies nur für diese Sitzung sichtbar ist.
+
+201
+19:56.370 --> 20:00.990
+Wir können hier eine neue Abfrage erstellen; und versuchen Sie, dies zu sehen.
+
+202
+20:01.020 --> 20:08.070
+Dies simuliert also einen anderen Benutzer; und dieser Benutzer kann die #TempBooks Tabelle nicht sehen.
+
+203
+20:08.070 --> 20:15.710
+Es ist also nützlich für den Arbeitsspeicher; etwas, an dem Sie nur arbeiten möchten; und dann wegwerfen.
+
+204
+20:16.530 --> 20:18.180
+Also Hoffnung, die Sinn machte
+
+205
+20:21.040 --> 20:29.360
+sp_help und sp_helptext;  sp_help und sp_helptext sind System-
+
+206
+20:29.360 --> 20:32.360
+SQL-Anweisungen bereitgestellt.
+
+207
+20:32.360 --> 20:38.160
+Diese können verwendet werden, um den Inhalt oder das Schema von Datenbankobjekten wie Tabellen anzuzeigen. gespeicherte Prozeduren; Ansichten
+
+208
+20:38.180 --> 20:43.990
+Auslöser; benutzerdefinierte Funktionen; usw., die wie folgt verwendet werden könnten; 
+
+209
+20:43.980 --> 20:48.690
+sp_help 'Tabelle'
+
+210
+20:52.290 --> 20:59.220
+Video-Demonstration. Hier zeigen wir Ihnen, wie Sie die Benutzeroberfläche und die sp_help
+
+211
+21:00.070 --> 21:09.810
+oder sp_helptext Befehle anzuzeigen: Tabellen; Ansichten; gespeicherte Prozeduren; Auslöser; und benutzerdefinierte Funktionen.
+
+212
+21:09.810 --> 21:16.730
+Hier werden wir die Benutzeroberfläche mit den sp_help in sp_helptext Befehlen demonstrieren
+
+213
+21:16.740 --> 21:21.720
+zu sehen; Tabellen; Ansichten; gespeicherte Prozeduren; Auslöser; und benutzerdefinierte Funktionen.
+
+214
+21:21.720 --> 21:24.290
+Beginnen wir also mit Tabellen.
+
+215
+21:24.870 --> 21:29.110
+Navigieren Sie einfach zu Ihrer Datenbank.
+
+216
+21:29.130 --> 21:30.120
+Erweitern Sie Tabellen.
+
+217
+21:30.130 --> 21:31.920
+Werfen wir einen Blick auf die Autorentabelle.
+
+218
+21:31.950 --> 21:41.140
+Sie können die Tabelle erweitern, um Spalten anzuzeigen. Schlüssel und so weiter.
+
+219
+21:41.250 --> 21:50.710
+Oder wenn Sie die Befehlszeile verwenden möchten, die Sie verwenden können: sp_help Autor
+
+220
+21:50.750 --> 21:59.210
+Dadurch erhalten Sie einige Informationen darüber, welche Spalten sich in der Tabelle befinden.
+
+221
+21:59.210 --> 22:00.120
+So tun Sie dasselbe mit einer Ansicht:
+
+222
+22:00.350 --> 22:05.400
+Wir können Ansichten erweitern, zum Beispiel überfällige Kredite.
+
+223
+22:05.440 --> 22:14.810
+Es gibt die Spalten unserer überfälligenLoans-Ansicht; und wenn Sie den Inhalt dieser sehen möchten, können Sie
+
+224
+22:14.810 --> 22:24.460
+klicken und gehen; Skriptansicht als; erstellen Sie in einen neuen Abfrage-Editor, und Sie können die Select-Anweisung sehen, die verwendet wird, um
+
+225
+22:24.460 --> 22:28.580
+erstellen Sie diese Ansicht, oder wenn Sie möchten, können Sie gehen.
+
+226
+22:28.580 --> 22:34.420
+sp_helptext überfällige Darlehen
+
+227
+22:37.720 --> 22:39.920
+Ausführen
+
+228
+22:40.150 --> 22:41.650
+Dies befindet sich in einer Rasteransicht.
+
+229
+22:41.650 --> 22:46.280
+Sie können dies tatsächlich als Text anzeigen, indem Sie die Steuerung und T
+
+230
+22:49.010 --> 22:59.750
+Das könnte ein wenig nützlicher machen, um zurück zur vorherigen Rasteransicht Pressesteuerung D zu gehen; Ausführen.
+
+231
+23:00.440 --> 23:04.980
+So ist es wirklich persönliche Präferenz einige Arten von Daten ist es einfacher, im Raster zu sehen und manchmal
+
+232
+23:04.980 --> 23:07.750
+es ist einfacher, als Text zu sehen.
+
+233
+23:08.190 --> 23:19.450
+Sehen wir uns also die Speicherprozeduren an; Erweiterung der Programmierbarkeit ; gespeicherte Prozeduren; Es gibt rückzugBook.
+
+234
+23:19.970 --> 23:30.000
+Eine Verknüpfung, wenn Sie sie nicht erneut eingeben möchten.  Sie können es tatsächlich von der Seite ziehen und sp_helptext
+
+235
+23:33.260 --> 23:41.120
+um das Ausziehbuch einzusehen; Die eckigen Klammern sind in diesem Fall eher irrelevant, es ist wirklich nur 
+
+236
+23:41.190 --> 23:48.770
+Wenn Sie ein Objekt haben, das wie ein Leerzeichen in der Mitte hat, können Sie eckige Klammern verwenden, um es einzuschließen
+
+237
+23:49.150 --> 23:54.920
+So gibt es unsere auszahlungBook gespeicherte Prozedur.
+
+238
+23:55.080 --> 24:00.300
+Auslöser; Wieder einmal navigieren Sie zu der Tabelle erweitern Trigger.
+
+239
+24:00.390 --> 24:02.450
+Es gibt unsere Auslöser.
+
+240
+24:02.690 --> 24:05.120
+Wir können sie mit sp_helptext
+
+241
+24:10.230 --> 24:17.230
+Dies gibt uns eine Vorstellung davon, was in diesem speziellen Auslöser ist; und schließlich benutzerdefinierte Funktionen, die
+
+242
+24:17.230 --> 24:23.840
+wieder programmierfähig sind;  Funktionen.
+
+243
+24:23.840 --> 24:29.380
+Und es war eine skalare geschätzte Funktion; wir verwenden sp_helptext
+
+244
+24:33.490 --> 24:36.980
+So zeigen Sie diese bestimmte benutzerdefinierte Funktion an.
+
+245
+24:37.870 --> 24:45.180
+Das ist also eine kurze Ansicht, wie Sie verschiedene Schemaobjekte der Datenbank sehen können.
+
+246
+24:46.190 --> 24:49.880
+Du wirst das sehr schnell in den Dreh rausbekommen; 
+
+247
+24:51.790 --> 24:57.790
+Und es ist an dir vorbei; Für diese Übung möchte ich, dass Sie eine gespeicherte Prozedur schreiben, um ein zurückgegebenes Buch zu behandeln.
+
+248
+24:57.790 --> 24:59.590
+Es sollte Folgendes ausführen.
+
+249
+24:59.890 --> 25:06.340
+Erstellen einer Transaktion; aktualisieren Sie die Spalte "Buchkredittabelle Datumsrückgabe" mit dem aktuellen Datum.
+
+250
+25:07.890 --> 25:15.720
+Hinzufügen der Buchtabelle mit der mitgelieferten Bücherregal-ID hinzufügen und schließlich eine Transaktion übernehmen
+
+251
+25:15.750 --> 25:17.880
+Also halten Sie dieses Video jetzt inne und geben Sie es aus.
+
+252
+25:18.420 --> 25:27.430
+Sobald Sie es versucht haben; setzen Sie das Video fort und sehen Sie, wie Sie weitergekommen sind. 
+
+253
+25:27.440 --> 25:29.060
+Ich hoffe, Sie haben diese Übung vor der Suche nach der Lösung gegeben.
+
+254
+25:29.160 --> 25:30.800
+Aber das ist die Lösung.
+
+255
+25:30.860 --> 25:35.660
+Wir wollen also eine gespeicherte Prozedur schaffen, die das Gegenteil eines Auszahlungsbuchs tut.
+
+256
+25:35.810 --> 25:39.420
+Es wird ein Buch an die Bibliothek zurückgeben.
+
+257
+25:39.830 --> 25:41.580
+Werfen wir also einen Blick auf unsere TabelleAusleihen
+
+258
+25:45.800 --> 25:59.790
+Was wir tun möchten, ist die Bookloan-Tabelle zu aktualisieren.
+
+259
+26:00.450 --> 26:00.800
+Update bookloan set DateReturned = getDate() wobei BookID=@BookId
+
+260
+26:03.540 --> 26:05.890
+Update bookloan set DateReturned = getDate() wobei BookID=@BookId
+
+261
+26:09.210 --> 26:17.650
+und dann wollen wir die Büchertabelle aktualisieren, also schauen Sie sich die Büchertabelle an.
+
+262
+26:19.220 --> 26:25.790
+Update-Bücher setzen BookShelfId = @BookShelfID wo id=@bookID
+
+263
+26:28.070 --> 26:28.960
+Update-Bücher setzen BookShelfId = @BookShelfID wo id=@bookID
+
+264
+26:33.380 --> 26:38.540
+Update-Bücher setzen BookShelfId = @BookShelfID wo id=@bookID
+
+265
+26:41.800 --> 26:47.430
+dies muss also in eine Transaktion eingewickelt werden, so dass wir einfach in eingeben.
+
+266
+26:48.310 --> 26:48.900
+Transaktion starten
+
+267
+26:53.120 --> 26:53.990
+Commit-Transaktion
+
+268
+26:58.010 --> 27:06.630
+und dann ist das Ganze innerhalb der gespeicherten Prozedur so erstellen Prozedur returnBook.
+
+269
+27:07.320 --> 27:09.330
+Es werden zwei Parameter verwendet.
+
+270
+27:09.410 --> 27:16.030
+Die @bookID int und die @bookshelfID
+
+271
+27:16.280 --> 27:17.350
+Was auch ein int
+
+272
+27:22.070 --> 27:23.860
+Als
+
+273
+27:23.930 --> 27:30.090
+Dies ist also das Lagerverfahren geschrieben; Ausführen
+
+274
+27:33.840 --> 27:38.040
+Das sollte eine ID dort sein, nicht bookID
+
+275
+27:38.350 --> 27:45.410
+Okay, also stellen wir das auf die Probe; Und wir werden uns eines der Bücher ansehen
+
+276
+27:45.450 --> 27:48.180
+Wählen * aus Bookloan
+
+277
+27:50.210 --> 27:58.160
+Und wir werden Buch ID 1 in sregal 1 zurückgeben;  
+
+278
+28:04.250 --> 28:06.470
+ReturnBook 1,1
+
+279
+28:06.480 --> 28:08.700
+Und so ist dies dieses Buch hier.
+
+280
+28:09.530 --> 28:13.130
+Also das Buch zurückgeben.
+
+28

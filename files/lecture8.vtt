@@ -1,0 +1,1381 @@
+WEBVTT
+
+0
+00:01.420 --> 00:06.660
+SQL server performance; improving data latency.
+
+1
+00:07.120 --> 00:09.120
+Why performance matters.
+
+2
+00:09.190 --> 00:16.360
+Amazon found that for every 100 milliseconds of latency cost on 1 percent and sales; 
+
+3
+00:16.360 --> 00:23.230
+Google found an extra 500 milliseconds of latency dropped traffic by 20 percent; making your database respond faster to
+
+4
+00:23.230 --> 00:32.400
+queries will make the website or app it supports work faster. Measuring performance; in the bottom right
+
+5
+00:32.460 --> 00:34.260
+of the user interface.
+
+6
+00:34.550 --> 00:41.220
+A time counter would show the performance to the nearest second; for more precise measurement.
+
+7
+00:41.320 --> 00:46.290
+You select query > include Client statistics.
+
+8
+00:46.520 --> 00:51.980
+Note that SQL server will cache results and memory so for a fair test you can clear SQL several memory
+
+9
+00:51.980 --> 00:56.150
+cache by using the command dbcc dropcleanbuffers
+
+10
+00:59.830 --> 01:00.550
+SELECT TOP.
+
+11
+01:02.350 --> 01:08.620
+If you do not need every matching record just the first 5 records then you can type the statement.
+
+12
+01:08.680 --> 01:16.330
+SELECT TOP FIVE * from table;  to give a performance gain the number of matching records should be
+
+13
+01:16.330 --> 01:24.750
+more than five; order by and group by clauses limit the performance gain since the database has to
+
+14
+01:24.750 --> 01:26.300
+read the whole matching set anyway.
+
+15
+01:29.500 --> 01:31.060
+Video demonstration.
+
+16
+01:31.390 --> 01:39.610
+Here we will demonstrate how to create a large random dataset. We will then demonstrate performance gain by offered
+
+17
+01:39.610 --> 01:43.260
+by SELECT TOP.
+
+18
+01:43.780 --> 01:48.970
+In this video we will demonstrate how to create a large random dataset and then we will demonstrate
+
+19
+01:49.210 --> 01:54.750
+the performance gain offered by SELECT TOP. Creating a large random dataset.
+
+20
+01:54.750 --> 01:57.390
+It's not something you do commonly in SQL server.
+
+21
+01:58.020 --> 02:01.620
+However working with large datasets is very common.
+
+22
+02:02.950 --> 02:10.420
+In order to see the benefits provided by these performance improvements it helps working with a large
+
+23
+02:10.420 --> 02:15.410
+dataset because the differences are more pronounced.
+
+24
+02:15.670 --> 02:18.340
+So firstly let's create a large random set.
+
+25
+02:18.400 --> 02:27.550
+So I'm going to create a test table and in that I'm gonna have a couple of columns that will automatically
+
+26
+02:27.790 --> 02:39.720
+fill with default values that are pretty much random;
+
+27
+02:39.770 --> 02:40.210
+create table test1 ( id int identity(1,1)  not null
+
+28
+02:45.000 --> 02:48.220
+We shall have a GUID
+
+29
+02:48.690 --> 02:49.570
+column.
+
+30
+02:50.430 --> 02:53.750
+GUID stands for a genuinely unique identifier.
+
+31
+02:54.000 --> 03:07.210
+It is a 36 digit varchar and it has a default value of newid(). which is a new genuinely unique identifier.
+
+32
+03:07.890 --> 03:15.810
+We can have a created date which is a datetime default.
+
+33
+03:16.080 --> 03:17.930
+getdate()
+
+34
+03:18.000 --> 03:23.550
+Let's have a random float called "number" .
+
+35
+03:23.670 --> 03:26.590
+Default rand()
+
+36
+03:27.780 --> 03:32.210
+So there's a couple of random columns and a table.
+
+37
+03:32.230 --> 03:35.590
+We should create that table now; execute.
+
+38
+03:37.410 --> 03:45.420
+If we insert one row with all default values you say insert into Test 1.
+
+39
+03:45.750 --> 03:47.040
+Default values
+
+40
+03:54.040 --> 03:56.320
+execute
+
+41
+03:59.000 --> 03:59.530
+select * from test1
+
+42
+04:04.560 --> 04:14.340
+and we'll see that it's created an autonumber, a guid, a date, and a number; in order to create
+
+43
+04:14.820 --> 04:16.170
+lots of these.
+
+44
+04:16.170 --> 04:18.810
+I'm going to create a while loop an infinite loop.
+
+45
+04:19.620 --> 04:31.700
+while 1=1 begin; end; so I run this I can stop it at any point and see what is created.
+
+46
+04:32.550 --> 04:40.500
+This has created lots and lots of rows so I'm not going to run this and I'm going to try and generate
+
+47
+04:40.530 --> 04:44.590
+a couple of million rows so this will take some time.
+
+48
+04:44.620 --> 04:51.210
+So go and make yourself a coffee and the video will cut.
+
+49
+04:51.220 --> 04:51.490
+Here
+
+50
+04:54.600 --> 04:55.060
+so.
+
+51
+04:55.400 --> 05:03.450
+I've now resumed this video and this statement has been running for about three minutes.
+
+52
+05:03.520 --> 05:07.680
+I'm gonna stop now and if I do;
+
+53
+05:10.560 --> 05:15.450
+select count(*) from test1; we have one and a half million rows
+
+54
+05:18.750 --> 05:23.630
+in order to see how long it would take to do select * from Test1.
+
+55
+05:23.730 --> 05:30.330
+At this point obviously depending on the performance of your particular system this may be longer or
+
+56
+05:30.330 --> 05:33.190
+shorter; execute
+
+57
+05:35.460 --> 05:42.720
+You can see the bottom right hand corner that timer is ticking up as it's
+
+58
+05:42.720 --> 05:43.830
+returning all this data
+
+59
+05:48.180 --> 05:56.820
+over a million rows coming back to there; 19 seconds, 20 seconds, 21 seconds to return one and a half
+
+60
+05:56.820 --> 06:00.410
+million rows.
+
+61
+06:00.560 --> 06:04.790
+It goes without saying if I only wanted the top 10 rows
+
+62
+06:09.050 --> 06:11.840
+then it returns in virtually no time at all.
+
+63
+06:13.600 --> 06:21.890
+Now if you wanted to see exactly how long it actually takes; let's go.
+
+64
+06:21.920 --> 06:34.600
+Query include client statistics and; execute; click client statistics and the total execution time is
+
+65
+06:34.780 --> 06:45.040
+eight milliseconds whereas if I change this to select the top thousand ; execute
+
+66
+06:47.920 --> 06:57.600
+total execution is 42 milliseconds; so evidently in a situation where you don't need all the rows.
+
+67
+06:57.820 --> 07:02.620
+If you select top in order to greatly enhance your speed.
+
+68
+07:05.300 --> 07:11.210
+So that's a very simple demonstration of a very simple performance gain.
+
+69
+07:11.240 --> 07:19.220
+For example if you're doing a Web site where you want to show multiple pages of data then it makes a
+
+70
+07:19.220 --> 07:26.780
+lot of sense to use the select top in order to show to retrieve the data for that page rather than returning
+
+71
+07:26.810 --> 07:32.480
+all the data and then using the client side code to do the paging.
+
+72
+07:32.600 --> 07:41.890
+So that's a simple example and we should move on with the rest. 
+
+73
+07:42.520 --> 07:47.670
+Indexes to speed up read operations by speeding up the operation of where clauses; they're created as follows:
+
+74
+07:47.710 --> 07:57.430
+Create index idxBookTitle on Books (Title);
+
+75
+07:57.790 --> 08:06.100
+Once created any select statement on the books table involving a where clause on
+
+76
+08:06.100 --> 08:16.420
+the title column will execute faster; However indexes slow down INSERT, UPDATE and delete operations slightly
+
+77
+08:17.120 --> 08:19.630
+so only include indexes where they are useful
+
+78
+08:23.280 --> 08:30.640
+clustered versus non-clustered indexes. The clustered index ensures that data is ordered physically on
+
+79
+08:30.640 --> 08:38.260
+a disk whereas a non clustered index exists independently of the data enforcing no physical order to
+
+80
+08:38.260 --> 08:47.380
+the data; only one clustered index can exist on a table but it is faster for reading than a non clustered
+
+81
+08:47.380 --> 08:47.830
+index
+
+82
+08:50.640 --> 08:54.560
+a clustered index should only be used on identity columns.
+
+83
+08:55.820 --> 09:03.140
+Since an insert at a point other than at the end of the table would cause all the rows to be physically
+
+84
+09:03.140 --> 09:03.920
+moved on disk.
+
+85
+09:07.480 --> 09:09.410
+Video demonstration.
+
+86
+09:09.500 --> 09:16.310
+Here we demonstrate a performance gain offered by creating an index and show how the execution plan
+
+87
+09:16.340 --> 09:19.670
+can explain the performance gains.
+
+88
+09:19.770 --> 09:26.710
+We also demonstrate illustrative versus non clustered indexes; here will demonstrate a performance gain
+
+89
+09:26.740 --> 09:33.610
+offered by creating an index and show how the execution plan can explain the performance gains.
+
+90
+09:33.610 --> 09:37.330
+We shall also demonstrate clustered vs. non-clustered indexes.
+
+91
+09:37.390 --> 09:44.380
+So let's start by writing a very simple query against our test data; so I type:
+
+92
+09:44.620 --> 09:50.230
+select * from test1 where guid like 'ABCD%'
+
+93
+09:51.210 --> 09:57.810
+So this is where I'm looking for rows where the GUID; which is a random string; begins with the letters
+
+94
+09:57.840 --> 09:58.610
+ABCD
+
+95
+09:59.760 --> 10:10.940
+So if I turn on both include client statistics and I'm also going to ask here query and include actual
+
+96
+10:10.940 --> 10:17.020
+execution plan; the execution plan will say under the hood.
+
+97
+10:17.060 --> 10:25.460
+What did the SQL Server database do to execute this command and client Statistics will say exactly how
+
+98
+10:25.460 --> 10:26.620
+long it took.
+
+99
+10:26.930 --> 10:28.340
+So execute this
+
+100
+10:31.270 --> 10:39.610
+look at client statistics and we'll see that this took five hundred fifty two milliseconds which is
+
+101
+10:39.610 --> 10:44.080
+good but not good enough.
+
+102
+10:46.090 --> 10:50.750
+The execution tab will tell us what happened under the hood.
+
+103
+10:51.190 --> 10:55.660
+So what is used here is a table scan which is the database reading.
+
+104
+10:55.660 --> 11:03.990
+Row by row down through the table until it reached rows that matched our where criteria as in GUID is 
+
+105
+11:03.990 --> 11:12.390
+like ABCD%; There was no index in use so therefore it's actually hinting that there is a missing index
+
+106
+11:12.930 --> 11:16.920
+saying that there will be a 79 percent performance increase.
+
+107
+11:16.950 --> 11:22.030
+If we were to create a non clustered index on this table.
+
+108
+11:22.380 --> 11:31.550
+So that's what we're going to do now; 
+
+109
+11:31.580 --> 11:39.950
+create index idxGuid on test1(guid)
+
+110
+11:40.680 --> 11:44.480
+So we should run this and this will create a non clustered index.
+
+111
+11:44.540 --> 11:50.340
+Now non clustered index lives apart from the main data itself doesn't affect the physical order of the
+
+112
+11:50.340 --> 11:53.040
+data on the disk.
+
+113
+11:53.850 --> 11:57.750
+In this way you can create as many of these as you want.
+
+114
+11:57.990 --> 12:05.450
+However indexes do generally improve read performance but they do have a slight negative effect on write
+
+115
+12:05.450 --> 12:12.630
+write performance so they slightly affect your update, insert , delete statements so don't create too many
+
+116
+12:12.630 --> 12:19.170
+indexes; only where they make sense and will actually speed up your queries.
+
+117
+12:19.280 --> 12:28.910
+So we shall execute this and it'll take a few seconds to create this index for us
+
+118
+12:28.910 --> 12:29.570
+as it sorts out the rows
+
+119
+12:33.040 --> 12:37.230
+Okay so that's now being created in about 11 seconds.
+
+120
+12:37.240 --> 12:45.310
+So now if I run this statement again it's going to use that index and we're going to see that reflected
+
+121
+12:45.370 --> 12:48.400
+in both the execution plan and the client statistics.
+
+122
+12:48.400 --> 12:51.400
+Hopefully this will execute a lot faster.
+
+123
+12:51.400 --> 13:01.640
+So; execute; Client statistics; now shows the total execution time is now down to thirty eight milliseconds
+
+124
+13:01.740 --> 13:05.370
+so that's a huge performance improvement with exactly the same.
+
+125
+13:05.420 --> 13:08.960
+SQL statement 
+
+126
+13:09.030 --> 13:11.120
+The execution plan now it looks quite different.
+
+127
+13:11.300 --> 13:19.520
+It no longer has the hint saying that we're missing an index and it shows that it is using a index seek
+
+128
+13:19.730 --> 13:22.440
+which is a faster operation than a table scan
+
+129
+13:26.170 --> 13:29.770
+It uses a heap lookup because 
+
+130
+13:29.770 --> 13:33.140
+There is no clustered index on this table.
+
+131
+13:34.680 --> 13:43.440
+So to demonstrate what a clustered index versus a non clustered index is let's refresh this
+
+132
+13:46.330 --> 13:54.800
+Expand indexes; and we can see that idxGuid is a non unique, non clustered index so we haven't indicated to
+
+133
+13:54.800 --> 14:00.910
+the database that the guid column is genuinely unique.
+
+134
+14:01.760 --> 14:02.920
+We just haven't told it.
+
+135
+14:03.260 --> 14:08.130
+So the database is assuming that it's not unique.
+
+136
+14:08.240 --> 14:15.650
+It could be; non clustered which means that the index lives independently of the dot itself on its index
+
+137
+14:15.650 --> 14:19.980
+does not affect the order of the data on disk.
+
+138
+14:20.000 --> 14:25.380
+If we looked at the index created on another table.
+
+139
+14:25.500 --> 14:32.740
+Now this is the primary key index on the author table which is basically an index is created every time
+
+140
+14:32.740 --> 14:37.110
+you create a primary key.
+
+141
+14:37.190 --> 14:45.070
+We can see that this is a clustered index which means that on the author table the physical ordering
+
+142
+14:45.070 --> 14:49.540
+of the data on disk actually follows the primary key.
+
+143
+14:49.810 --> 14:59.320
+So author 1, author 2, author 3 would appear in order on the disk whereas on test1
+
+144
+14:59.320 --> 15:08.840
+we're not saying that the GUIDs need to be in alphabetical order or anything like that.
+
+145
+15:08.980 --> 15:13.450
+The benefit of the clustered index is it's faster than a non clustered index but you can only have one
+
+146
+15:13.450 --> 15:20.330
+of them per table and also the clustered index should only be used on an identity column.
+
+147
+15:20.470 --> 15:30.520
+Because if you put it into for instance the GUID column in this then as you inserted a new GUID
+
+148
+15:30.940 --> 15:36.920
+there's no guarantee that that's going to be alphabetically lower than anything else.
+
+149
+15:37.630 --> 15:45.150
+So it would reorder all the data in that table making your inserts, updates, deletes a lot slower
+
+150
+15:46.450 --> 15:55.630
+so that's a brief demonstration of indexes and you can quite clearly see that there is a huge performance
+
+151
+15:55.630 --> 15:59.680
+gain to be obtained by using indexes correctly.
+
+152
+16:03.510 --> 16:13.140
+With (NOLOCK) hint, SQL server values data consistency so it will lock tables if they are in the middle
+
+153
+16:13.230 --> 16:22.050
+of being updated; with (NOLOCK) hint will return data regardless of another update in progress and as written
+
+154
+16:22.050 --> 16:25.680
+as such: select * from author with (nolock)
+
+155
+16:27.150 --> 16:32.460
+Obviously this is only for situations where data consistency is less important than speed.
+
+156
+16:37.860 --> 16:43.160
+Video demonstration: Here we will demonstrate the performance gain of a with (NOLOCK) select hint
+
+157
+16:43.170 --> 16:48.450
+Here we will demonstrate the performance gain of a with (NOLOCK).
+
+158
+16:48.450 --> 16:49.250
+select hint
+
+159
+16:50.040 --> 16:58.020
+What this does is it hints to SQL Server that we would prefer to get the data quickly than to get consistent
+
+160
+16:58.110 --> 16:59.420
+data.
+
+161
+16:59.430 --> 17:06.120
+What I mean by consistent data is that if two processes are updating a table then typically the select
+
+162
+17:06.120 --> 17:07.380
+statement will be locked.
+
+163
+17:08.520 --> 17:16.440
+Until such time as the update is complete; now in certain circumstances static consistency is crucially
+
+164
+17:16.440 --> 17:23.480
+important and you wouldn't want to use this select hint in order to try and speed up your database.
+
+165
+17:23.610 --> 17:31.350
+For example if you're a bank you couldn't allow two A.T.M. withdrawals at the same time without making
+
+166
+17:31.350 --> 17:36.140
+sure that the first transaction had completed before the second transaction had completed.
+
+167
+17:37.050 --> 17:45.390
+Otherwise two A.T.M. transactions could be completed and the money could be debited twice and that account
+
+168
+17:45.390 --> 17:47.880
+could be overdrawn for instance.
+
+169
+17:47.880 --> 17:55.350
+However in certain circumstances speed is more important than data consistency so you can use the select hint
+
+170
+17:56.340 --> 17:57.660
+to demonstrate this.
+
+171
+17:57.660 --> 18:04.410
+What I'm going to do is create a second connection to the database using a second query window.
+
+172
+18:04.720 --> 18:12.210
+And going to begin a transaction in that and demonstrate that a select will be paused until the transaction
+
+173
+18:12.210 --> 18:16.270
+is completed, unless you use the select no lock hint.
+
+174
+18:17.640 --> 18:29.190
+So let's first create a new query and I'm going to make a pointless change to the author table within
+
+175
+18:29.190 --> 18:29.960
+the transaction.
+
+176
+18:30.110 --> 18:31.790
+So I type begin transaction
+
+177
+18:35.240 --> 18:40.820
+update author set authorname = authorname + ''
+
+178
+18:41.210 --> 18:43.330
+empty string
+
+179
+18:43.400 --> 18:49.690
+This effectively is adding an empty string to the author column which will make no difference whatsoever.
+
+180
+18:49.800 --> 18:57.800
+But I'm just demonstrating a update transaction which is not completing because I'm not committing it
+
+181
+18:57.800 --> 18:58.160
+yet.
+
+182
+18:58.190 --> 19:03.350
+So we just have to imagine lots of other operations here.
+
+183
+19:06.190 --> 19:11.550
+So we execute this; and this will now lock
+
+184
+19:11.580 --> 19:19.420
+The author table so that I can't actually see what the author name is because it's in mid-update; demonstrate
+
+185
+19:19.450 --> 19:23.020
+this would go back to the other window to select * from author
+
+186
+19:27.040 --> 19:30.110
+and the statement hangs.
+
+187
+19:30.390 --> 19:38.340
+This is on purpose because we haven't committed the transaction in the other session so therefore this
+
+188
+19:38.520 --> 19:40.210
+is not allowed to read.
+
+189
+19:40.230 --> 19:43.520
+The author table because it's in mid-update.
+
+190
+19:44.670 --> 19:47.170
+So let's stop this.
+
+191
+19:47.520 --> 19:49.340
+If I use the with (nolock) hint
+
+192
+19:53.900 --> 19:58.220
+this will allow me to see the author's name table again.
+
+193
+19:58.360 --> 20:03.680
+Now you can imagine and a busy situation and a busy database where you have lots of updates happening
+
+194
+20:03.770 --> 20:10.110
+on lots of select statements happening at the same time but select statements can be held back due to other
+
+195
+20:10.130 --> 20:11.110
+updates.
+
+196
+20:11.150 --> 20:20.690
+Now once again to reiterate the point that this is ignoring data consistency so that if it was very
+
+197
+20:20.690 --> 20:28.310
+important that you showed the latest author name and not the author's name previous to the update then
+
+198
+20:28.310 --> 20:30.080
+you couldn't use this with nolock hint
+
+199
+20:30.110 --> 20:30.670
+Hint.
+
+200
+20:30.680 --> 20:37.900
+But in this particular instance with nolock gives you a performance benefit because it negates the
+
+201
+20:37.900 --> 20:38.230
+lock
+
+202
+20:42.620 --> 20:44.990
+SQL server profiler.
+
+203
+20:45.250 --> 20:51.630
+Oftentimes when diagnosing SQL server performance issues you may not know exactly what SQL statements
+
+204
+20:51.690 --> 20:52.800
+are being run.
+
+205
+20:52.920 --> 21:00.150
+For example if it is a live website running another developer's code you can use the SQL server profiler.
+
+206
+21:00.150 --> 21:08.140
+In this instance to see exactly what's being run; video demonstration: here we will demonstrate the 
+
+207
+21:08.140 --> 21:09.380
+SQL server profiler
+
+208
+21:12.090 --> 21:20.430
+Here we will demonstrate SQL Server Profiler; SQL Server Profiler is a really useful tool if you're investigating
+
+209
+21:20.910 --> 21:29.690
+performance bottlenecks of a live system or a system which involves SQL code that you didn't write
+
+210
+21:30.840 --> 21:34.190
+and it allows you to see what's being run.
+
+211
+21:34.370 --> 21:44.690
+And if there's anything that's taking too long; so to run it just do a search for SQL Server Profiler
+
+212
+21:49.900 --> 21:56.410
+and we shall creat a new trace; connect to your local database server.
+
+213
+21:56.660 --> 21:57.670
+Run
+
+214
+21:59.380 --> 22:03.480
+And if we run something such as "select * from author"
+
+215
+22:07.360 --> 22:12.700
+we can see "select * from author" appearing in the trace, and you can imagine it in a live system this
+
+216
+22:12.700 --> 22:19.210
+could be really helpful to see what statements are being run how long they're taking what client is
+
+217
+22:19.420 --> 22:22.160
+executing them.
+
+218
+22:22.720 --> 22:24.420
+That's pretty much all there is to that.
+
+219
+22:24.730 --> 22:26.020
+So I'll move on.
+
+220
+22:29.560 --> 22:33.760
+Importing data; random data is not something that's used in the real world.
+
+221
+22:34.330 --> 22:39.290
+So here's an example of how to import large datasets into a database.
+
+222
+22:39.310 --> 22:42.620
+Let's download a database of books from github.com at this URL;
+
+223
+22:42.780 --> 22:43.390
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+224
+22:43.410 --> 22:47.450
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+225
+22:47.470 --> 22:52.800
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+226
+22:52.810 --> 22:56.020
+Or you can scan the QR code at the bottom right of this screen.
+
+227
+22:58.580 --> 23:00.810
+Video demonstration.
+
+228
+23:00.960 --> 23:08.340
+Here we going to demonstrate how to import a CSV into SQL server using the data import tool.
+
+229
+23:08.340 --> 23:12.320
+Up to now we've been working with random data; now in the real world.
+
+230
+23:12.320 --> 23:17.060
+You'll never work with a random data, but you will be working with large datasets.
+
+231
+23:17.070 --> 23:22.350
+So this is an example of how to download and import a large dataset.
+
+232
+23:22.650 --> 23:28.080
+So this is a list of 10000 books from goodbooks.com.
+
+233
+23:28.680 --> 23:34.110
+You can access this via https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+234
+23:34.130 --> 23:38.820
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+235
+23:39.380 --> 23:42.090
+Now you get to this page; press view raw.
+
+236
+23:44.070 --> 23:51.120
+You can have a look at what the CSV looks like; CSV stands for a comma separated values; it's also known
+
+237
+23:51.120 --> 24:00.200
+as a flat file; the first row of a CSV will typically have the column titles; such as Book ID
+
+238
+24:00.240 --> 24:01.950
+Good Reads Book ID
+
+239
+24:01.950 --> 24:11.170
+BestBookID,  etc,  ISBN, Authors and the next row will have ;
+
+240
+24:11.450 --> 24:14.140
+This is the next row.
+
+241
+24:14.180 --> 24:20.880
+This will have the values corresponding to each of these columns so bookID is 1
+
+242
+24:20.900 --> 24:21.190
+GoodReadsBookID
+
+243
+24:21.200 --> 24:22.010
+Is this.
+
+244
+24:22.130 --> 24:22.840
+And so forth.
+
+245
+24:23.480 --> 24:28.790
+So we're goint go save this; right click; save as; desktop; Books.csv
+
+246
+24:28.820 --> 24:31.110
+Save
+
+247
+24:31.580 --> 24:34.240
+We now go back into our database.
+
+248
+24:34.240 --> 24:43.370
+We write click on our database; tasks; import flat file; flat files and other word for CSV; press next
+
+249
+24:43.520 --> 24:45.250
+input file; browse.
+
+250
+24:45.320 --> 24:47.640
+Take it from desktop.
+
+251
+24:47.840 --> 24:52.230
+We already have a table of books; so we'll call this allBooks.
+
+252
+24:52.970 --> 24:54.910
+Next; preview data;
+
+253
+24:54.920 --> 24:59.870
+This will give you a view of the first 50 rows of your CSV
+
+254
+24:59.900 --> 25:06.250
+You can quickly check to see if each of those data looks if they're in the right place.
+
+255
+25:06.260 --> 25:09.750
+So that looks fine to me.
+
+256
+25:10.130 --> 25:12.700
+Next, modify columns.
+
+257
+25:12.710 --> 25:19.250
+Now the very important thing about this is that this is the best guess that this tool has taken from
+
+258
+25:19.250 --> 25:22.330
+the first 50 rows of your data.
+
+259
+25:23.200 --> 25:29.830
+So for instance it's looked down through the authors the longest author that it's found within the first
+
+260
+25:29.830 --> 25:35.550
+50 rows is approximately a hundred and fifty characters wide.
+
+261
+25:35.590 --> 25:43.450
+Now I know from experience that there are books in here that have a lot more authors and not have much
+
+262
+25:43.450 --> 25:48.030
+longer values than 150.
+
+263
+25:48.130 --> 25:50.690
+So therefore this will fail on its first attempt.
+
+264
+25:50.710 --> 25:54.970
+You have to go back to this screen to increase some of those numbers beyond 150.
+
+265
+25:55.000 --> 25:57.120
+So for example I want to change that to a thousand.
+
+266
+25:58.210 --> 26:00.130
+But let's see what happens next.
+
+267
+26:00.130 --> 26:00.550
+Next.
+
+268
+26:01.330 --> 26:03.770
+So operation failed.
+
+269
+26:03.840 --> 26:11.200
+And it says "String or binary data would be truncated"; truncated means that the data in the CSV is too
+
+270
+26:11.200 --> 26:12.430
+long.
+
+271
+26:12.430 --> 26:15.640
+In one instance for the column that it's trying to go into.
+
+272
+26:15.960 --> 26:26.230
+So I'm to stop that; press previous; previous; and then I'm going to update authors to a thousand
+
+273
+26:32.240 --> 26:36.110
+I want to change the original title to a thousand as well.
+
+274
+26:41.970 --> 26:43.920
+Title give it another thousand
+
+275
+26:47.390 --> 26:56.040
+language code a thousand; you can shorten this later you can modify your columns to
+
+276
+26:58.970 --> 27:00.620
+other lengths that are more appropriate.
+
+277
+27:00.640 --> 27:04.700
+But this should work this time; next.
+
+278
+27:04.760 --> 27:05.320
+Next.
+
+279
+27:07.170 --> 27:10.950
+Insert is now successful; close.
+
+280
+27:11.260 --> 27:13.600
+Now if we refresh this
+
+281
+27:18.450 --> 27:21.060
+tables; you should have an allBooks table.
+
+282
+27:21.060 --> 27:24.560
+select * from allbooks
+
+283
+27:27.270 --> 27:38.690
+and we can see we now have ten thousand books with their authors, names, titles, ISBN etc. which is really
+
+284
+27:38.690 --> 27:39.260
+great.
+
+285
+27:39.350 --> 27:45.770
+That's much more along the lines of the type of data that you would work with in a real database rather
+
+286
+27:45.770 --> 27:49.310
+than the five or six rows or the random data we've shown to date.
+
+287
+27:52.630 --> 27:54.130
+And finally it's over to you.
+
+288
+27:54.760 --> 28:01.330
+So let's optimize the data that we've just imported: write a select statement returning any five books
+
+289
+28:01.450 --> 28:09.480
+by Dan Brown using one clustered index one non clustered index; and using the select top and
+
+290
+28:09.550 --> 28:11.800
+nolock hints.
+
+291
+28:12.000 --> 28:12.840
+Best of luck.
+
+292
+28:12.840 --> 28:14.560
+You can pause this video now.
+
+293
+28:14.930 --> 28:19.290
+Try to write the statement and resume once you've given it a go.
+
+294
+28:20.540 --> 28:21.020
+OK.
+
+295
+28:21.060 --> 28:23.280
+So I hope you've given this a go.
+
+296
+28:23.490 --> 28:24.450
+You can.
+
+297
+28:24.450 --> 28:27.160
+If you haven't then you can pause this video now.
+
+298
+28:27.300 --> 28:31.510
+Try it yourself and resume it when you're ready.
+
+299
+28:32.690 --> 28:39.900
+OK so we want write a select statement returns five books by Dan Brown.
+
+300
+28:40.300 --> 28:44.370
+We need to create a clustered index, a non clustered index 
+
+301
+28:44.560 --> 28:48.230
+and use the  select top and nolock hint.
+
+302
+28:48.500 --> 28:53.520
+So let's have a look at our allbooks table
+
+303
+28:56.900 --> 28:58.130
+obviously the top 5
+
+304
+28:58.290 --> 29:01.260
+That's straightforward; from allbooks
+
+305
+29:05.270 --> 29:18.890
+our author is gonna be a Dan Brown so we say where authors = 'Dan Brown'
+
+306
+29:19.450 --> 29:21.710
+So that's our select top.
+
+307
+29:22.150 --> 29:26.610
+And if we want to put on with nolock hint it's just with (nolock)
+
+308
+29:30.070 --> 29:33.580
+This
+
+309
+29:33.640 --> 29:36.800
+we need to create our clustered index.
+
+310
+29:36.810 --> 29:46.870
+Now you need to put a clustered index on an identity column, as in an ID that's going to automatically
+
+311
+29:46.870 --> 29:47.610
+increment.
+
+312
+29:47.640 --> 29:55.020
+Now I think that if you look at the allbooks table the identity column is going to be book_id.
+
+313
+29:55.180 --> 29:58.920
+So we'll create a clustered index on there.
+
+314
+29:59.170 --> 30:06.010
+Putting a clustered index on anything else would be a bad idea because if you were to insert,
+
+315
+30:06.400 --> 30:12.640
+delete or update rows on this you could physically shift around the data.
+
+316
+30:12.700 --> 30:15.550
+So we're going to create our clustered index there.
+
+317
+30:15.550 --> 30:16.960
+So
+
+318
+30:21.040 --> 30:24.710
+create clustered index idxBookId on AllBooks(book_id)
+
+319
+30:29.510 --> 30:30.340
+create clustered index idxBookId on AllBooks(book_id)
+
+320
+30:34.710 --> 30:35.060
+create clustered index idxBookId on AllBooks(book_id)
+
+321
+30:40.100 --> 30:44.960
+created; and we now want to create a non clustered index.
+
+322
+30:44.960 --> 30:51.050
+Now the column that we query on is the authors column so that's where we want to put the non clustered index.
+
+323
+30:51.050 --> 30:55.820
+So if you don't specify clustered then it will be non clustered by default.
+
+324
+30:55.940 --> 31:00.160
+So:
+
+325
+31:01.370 --> 31:02.070
+create idxAuthors on AllBooks(authors)
+
+326
+31:06.120 --> 31:10.650
+create idxAuthors on AllBooks(authors)
+
+327
+31:22.980 --> 31:24.350
+so it's interesting.
+
+328
+31:24.450 --> 31:30.730
+The maximum key length for a non clustered index is 1700 bytes so
+
+329
+31:30.830 --> 31:31.130
+Okay.
+
+330
+31:31.140 --> 31:36.840
+So the authors column, it's an nvarchar which means it is 2 bytes per character.
+
+331
+31:37.050 --> 31:39.480
+And we have a list of a thousand of them.
+
+332
+31:39.480 --> 31:46.620
+So let's have a look and see; can we shorten the authors column
+
+333
+31:50.080 --> 31:52.540
+select Max(len(authors)) from allbooks
+
+334
+31:53.730 --> 31:54.200
+select Max(len(authors)) from allbooks
+
+335
+32:04.410 --> 32:05.280
+742
+
+336
+32:08.980 --> 32:18.570
+alter table allbooks alter column authors nvarchar(742)
+
+337
+32:21.690 --> 32:24.690
+alter table allbooks alter column authors nvarchar(742)
+
+338
+32:33.110 --> 32:34.280
+drop the index
+
+339
+32:48.190 --> 32:56.830
+create this again; and we're not going to recreate this index ; and it's created successfully.
+
+340
+32:57.730 --> 33:09.720
+So now run this; and we can see the execution plan that's using our index plan; client statistics; 10 miliseconds very
+
+341
+33:09.720 --> 33:10.140
+fast.
+
+342
+33:11.610 --> 33:11.980
+Okay.
+
+343
+33:12.180 --> 33:13.780
+Well I hope you got that ...
+
+344
+33:13.830 --> 33:14.910
+good luck.

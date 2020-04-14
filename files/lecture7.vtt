@@ -1,0 +1,1158 @@
+WEBVTT
+
+0
+00:01.980 --> 00:11.750
+Stored procedures and user defined functions; making complex operations Simple; Stored procedures
+
+1
+00:11.750 --> 00:18.800
+Stored procedures provide a way to wrap up complex database operations in a reusable one line statement.
+
+2
+00:18.800 --> 00:26.090
+In this way it makes the database easier to operate and actually improves performance; to create one
+
+3
+00:26.300 --> 00:28.380
+use the following format.
+
+4
+00:28.430 --> 00:36.690
+Create procedure then the name of the procedure "@" the name the variable, the data type, any other
+
+5
+00:36.690 --> 00:43.380
+variables as, and then your SQL statement.
+
+6
+00:43.900 --> 00:50.080
+Video demonstration; here we will demonstrate a stored procedure which will be called when a book is loaned
+
+7
+00:50.250 --> 00:50.980
+from the library.
+
+8
+00:52.720 --> 00:58.280
+We accept two parameters the student I.D. and the book ID 
+
+9
+00:58.280 --> 00:58.980
+In the stored procedure
+
+10
+00:59.060 --> 01:02.080
+We will carry out the following operations.
+
+11
+01:02.540 --> 01:06.890
+Create a transaction; add a loan to the book loan table.
+
+12
+01:06.890 --> 01:14.750
+Starting from today, and to be returned within a month, update the book table to indicate the book is withdrawn
+
+13
+01:16.320 --> 01:18.200
+and then finally commit to transaction.
+
+14
+01:21.690 --> 01:28.830
+Here we're going to demonstrate creating a stored procedure that will create a transaction; add a loan
+
+15
+01:28.830 --> 01:35.130
+to the book loan table and then update the book table to indicate the book is withdrawn and then finally
+
+16
+01:35.130 --> 01:37.180
+commit the transaction.
+
+17
+01:37.320 --> 01:44.480
+So let's have a look at the book loan  table
+
+18
+01:44.820 --> 01:51.790
+So in order to carry out this operation we can calculate the date withdrawn because it will be current date.
+
+19
+01:51.870 --> 01:58.230
+We can calculate the date due because it'll be 30 days from today or one month from today.
+
+20
+01:58.230 --> 02:02.160
+The student ID and book ID will need to be passed in to the stored procedure.
+
+21
+02:02.160 --> 02:03.770
+So let's do that.
+
+22
+02:03.790 --> 02:08.490
+Create procedure WithdrawBook
+
+23
+02:14.440 --> 02:25.890
+You will need the student ID which is of type int, Book ID, which is also of type int
+
+24
+02:26.280 --> 02:31.720
+Now we want to create the transaction which is; Begin transaction
+
+25
+02:35.960 --> 02:41.290
+insert into bookloan (studentID, bookId, dateWithdrawn, dateDue) values
+
+26
+02:41.910 --> 02:47.640
+insert into bookloan (studentID, bookId, dateWithdrawn, dateDue) values
+
+27
+02:48.500 --> 02:58.320
+The values for this will be student ID as passed in; the book ID as passed in;
+
+28
+02:58.450 --> 03:06.050
+The date withdrawn is the current date; and the date due is one month from today; which you write as;
+
+29
+03:06.050 --> 03:15.710
+dateadd(month,1,getdate())
+
+30
+03:15.800 --> 03:21.410
+We also want to update the books table; so let's look at the books table.
+
+31
+03:23.030 --> 03:31.450
+Okay we want to update the bookshelf ID and set it to 6 to indicate that it's withdrawn
+
+32
+03:31.520 --> 03:39.520
+update books set bookShelfId=6 where id=@bookid
+
+33
+03:40.810 --> 03:43.700
+And then finally commit transaction
+
+34
+03:49.890 --> 03:50.230
+okay.
+
+35
+03:50.270 --> 03:59.800
+So what we've actually done here his we've wrapped up this few lines of SQL into one line of SQL
+
+36
+04:00.020 --> 04:01.190
+which I shall demonstrate now.
+
+37
+04:02.000 --> 04:06.760
+So let's have a look at our books table for a moment.
+
+38
+04:06.800 --> 04:12.990
+Let's say you want to withdraw book 3.
+
+39
+04:13.540 --> 04:14.860
+Let's look at our students table
+
+40
+04:20.590 --> 04:22.240
+and we shall take.
+
+41
+04:22.280 --> 04:24.260
+PETER MURPHY as the student
+
+42
+04:29.250 --> 04:39.660
+so; to execute a stored procedure you write the name of the stored procedure; 
+
+43
+04:39.670 --> 04:46.260
+first parameter is student ID which is 3; second parameter is BookID which is also 3.
+
+44
+04:46.330 --> 04:53.230
+So I now execute this statement; 3 rows have been affected.
+
+45
+04:53.330 --> 04:56.000
+The first is to insert into the book loan.
+
+46
+04:56.060 --> 05:02.770
+The second is the update books and the third would actually be the trigger from the previous exercise.
+
+47
+05:02.900 --> 05:08.220
+So let's have a look and see what has happened; select * from bookloan
+
+48
+05:11.880 --> 05:18.380
+we can now see this third book loan in which case student ID 3 has taken out book ID 3
+
+49
+05:19.680 --> 05:20.710
+Let's look at our books
+
+50
+05:26.300 --> 05:37.440
+and we can also see the book  ID 3 is now set to bookshelf ID 6; so therefore we have wrapped up these
+
+51
+05:37.530 --> 05:43.020
+four lines of SQL into this very simple small statement.
+
+52
+05:44.240 --> 05:47.800
+And actually this helps performance too; 
+
+53
+05:47.810 --> 05:50.340
+So not only does it make your SQL more concise.
+
+54
+05:50.340 --> 05:51.290
+It makes it faster
+
+55
+05:54.100 --> 05:59.580
+User defined Functions or UDF; 
+
+56
+05:59.630 --> 06:06.110
+User defined functions also wrap up more complex SQL in a reusable way; but are designed to be called from within an
+
+57
+06:06.190 --> 06:09.290
+SQL statement rather than on their own like a stored procedure.
+
+58
+06:10.300 --> 06:17.010
+To create a user defined function use the format; create function "function name",  @variable
+
+59
+06:20.080 --> 06:23.680
+returns int as,  and then your SQL statement.
+
+60
+06:26.210 --> 06:32.590
+Video demonstration; Here we will create a user defined function to calculate the return date for a
+
+61
+06:32.590 --> 06:40.210
+book which satisfies the following; 30 days from today; and then alter the stored procedure to use this
+
+62
+06:40.420 --> 06:45.070
+UDF for return date calculation
+
+63
+06:45.100 --> 06:50.260
+Here we will demonstrate creating a user defined function that will calculate the return date for a
+
+64
+06:50.260 --> 06:52.820
+book which is 30 days from today.
+
+65
+06:53.890 --> 07:01.510
+So to do so we type: create function CalculateDueDate
+
+66
+07:04.570 --> 07:08.830
+Here it would pass any parameters, in this case.
+
+67
+07:08.830 --> 07:09.630
+We don't have any.
+
+68
+07:09.640 --> 07:13.990
+So it's empty parentheses,  returns.
+
+69
+07:14.040 --> 07:15.700
+Name of the data type.
+
+70
+07:15.720 --> 07:21.630
+Of the return value which in this case the date time, as begin.
+
+71
+07:22.860 --> 07:33.650
+Return dateadd(day, 30, getdate())
+
+72
+07:35.510 --> 07:42.330
+To demonstrate this function being called; Write a select statement.
+
+73
+07:44.440 --> 07:54.940
+In order to call a user defined function we prefix it with dbo,  which stands for a database all owner and
+
+74
+07:54.940 --> 08:03.790
+we call the function like so; execute; and this returns the date 30 days from now.
+
+75
+08:03.790 --> 08:12.250
+The date will be different on your example; so the next step in this procedure is to update the stored
+
+76
+08:12.250 --> 08:19.090
+procedure with this new user defined function instead of using dateAdd directly.
+
+77
+08:19.960 --> 08:29.460
+So if we go back to the stored procedure that we'd created in the previous video; we're going to replace
+
+78
+08:30.300 --> 08:42.300
+dateAdd and with the user defined function which is CalculateDueDate and instead of create to use the
+
+79
+08:42.300 --> 08:45.010
+word alter.
+
+80
+08:45.030 --> 08:46.680
+Now run this update
+
+81
+08:52.550 --> 09:01.610
+our stored procedure now uses a user defined function to further extract some more complex SQL
+
+82
+09:04.450 --> 09:10.840
+views; views are a way to make complex select statements appear like a table.
+
+83
+09:10.840 --> 09:16.940
+In this way more complex logic can be abstracted away and the user can write select statements against
+
+84
+09:16.940 --> 09:24.910
+the view as if it were a table; views created using the format create view followed by your view name
+
+85
+09:25.360 --> 09:29.690
+as select; and your select statement
+
+86
+09:32.400 --> 09:34.470
+video demonstration.
+
+87
+09:34.500 --> 09:42.030
+In this video you will create a view of outstanding loans which will include: the full name of the student
+
+88
+09:42.450 --> 09:50.240
+the name of the book; the number of days overdue or remaining on the loan; and ordered by student name.
+
+89
+09:50.410 --> 09:57.700
+We will then demonstrate how to write select statements on the view by changing the ordering of the results.
+
+90
+09:58.190 --> 10:05.160
+Now going to demonstrate creating a view which can wrap a complex select statement in a simpler one
+
+91
+10:06.660 --> 10:08.590
+so it will behave a bit like a table.
+
+92
+10:08.670 --> 10:13.230
+So let's see in this video we're going to create a view of outstanding book loans which will include
+
+93
+10:13.230 --> 10:16.140
+full name of the student; the name of the book; and the number of days overdue.
+
+94
+10:16.320 --> 10:22.230
+Let's start with a select statement; select * from bookloans
+
+95
+10:22.830 --> 10:28.010
+You will need to join this on both the student table and the books table.
+
+96
+10:28.040 --> 10:36.860
+join student s on s.id = bl.studentID
+
+97
+10:37.210 --> 10:40.490
+join books b on b.id = bl.bookId
+
+98
+10:40.760 --> 10:41.480
+Great.
+
+99
+10:42.810 --> 10:45.340
+So this should be all the data we need.
+
+100
+10:45.520 --> 10:48.270
+Now we need to start with the full name of the student.
+
+101
+10:48.280 --> 10:57.540
+s.FirstName + '  ' + s.Surname as FullName
+
+102
+10:58.640 --> 11:02.200
+So we now have the full name of the student.
+
+103
+11:02.240 --> 11:07.230
+Now we also want the name of the book; which is already here; and the number of days overdue.
+
+104
+11:07.290 --> 11:08.450
+So we use a datediff
+
+105
+11:11.020 --> 11:11.410
+datedif(day, datedue, getdate())
+
+106
+11:14.230 --> 11:17.160
+datedif(day, datedue, getdate())
+
+107
+11:17.830 --> 11:23.700
+That's the number of days difference between the date due on the current date, and we'll call it overdue.
+
+108
+11:26.600 --> 11:36.550
+The overdue column is negative because the date due is in the future; so now we don't need all the columns
+
+109
+11:36.570 --> 11:40.730
+so just have the book name here.
+
+110
+11:41.770 --> 11:43.710
+That's given us our select statement.
+
+111
+11:43.750 --> 11:48.460
+Now we can wrap this up in a view; by saying;
+
+112
+11:48.500 --> 11:58.070
+create view overdueLoans as 
+
+113
+11:58.300 --> 12:05.280
+And now if we want to run that select statement again we could just do a select * from overdueloans.
+
+114
+12:05.710 --> 12:11.380
+As if overdueloans were a table; and we can now order it by full name
+
+115
+12:15.740 --> 12:19.160
+which is not going to affect things because it's all the same.
+
+116
+12:19.160 --> 12:21.110
+We could order by overdue descending
+
+117
+12:26.500 --> 12:32.100
+so we'll see this one going to the top;  there we go.
+
+118
+12:32.110 --> 12:36.900
+So this overdueloans as appearing like a table.
+
+119
+12:36.940 --> 12:39.920
+But it's actually this select statement here.
+
+120
+12:40.090 --> 12:41.130
+This is what a view is.
+
+121
+12:43.350 --> 12:47.970
+Temporary tables; sometimes when working with complex queries
+
+122
+12:48.090 --> 12:54.690
+You might want to store intermediary results in temporary storage but have no need to start them permanently.
+
+123
+12:54.690 --> 13:01.570
+You can do this by creating temporary tables with the hashtag prefix; data stored in temporary tables
+
+124
+13:01.570 --> 13:06.390
+will be discarded once the session is closed and are not visible to other sessions.
+
+125
+13:08.530 --> 13:17.890
+Select into; if you need to copy the output of a select statement into a new table you can use the
+
+126
+13:18.100 --> 13:26.450
+select into syntax; a table will be created for you and this table must not already be present.
+
+127
+13:26.450 --> 13:31.760
+This is often used in conjunction with temporary tables and has the form select into
+
+128
+13:34.630 --> 13:38.160
+the temporary table name from table
+
+129
+13:42.500 --> 13:45.040
+insert into select.
+
+130
+13:45.040 --> 13:51.550
+If you want to copy the output of a select statement into an existing table then you should use the
+
+131
+13:51.550 --> 13:55.220
+insert into select syntax.
+
+132
+13:55.240 --> 13:59.720
+The table must not exist prior to executing the statement.
+
+133
+13:59.740 --> 14:09.040
+This is often used in conjunction with temporary tables and has the form insert into "table name" "column names".
+
+134
+14:09.040 --> 14:12.880
+Select column names from table
+
+135
+14:17.260 --> 14:19.100
+video demonstration.
+
+136
+14:19.750 --> 14:27.650
+Here we will create a temporary table that has three columns BookName, Author1 and Author2
+
+137
+14:28.150 --> 14:33.290
+We shall use select into to create the table for single author books.
+
+138
+14:33.430 --> 14:39.240
+We will use insert into to append to this table for dual author books.
+
+139
+14:39.330 --> 14:43.040
+We shall demonstrate how a temporary table is not visible to other database users.
+
+140
+14:45.080 --> 14:51.080
+Okay so here we're going to demonstrate temporary tables where we're going to create a temporary table
+
+141
+14:51.080 --> 14:56.630
+using the Select into command and then we're going to append to the temporary table using the insert
+
+142
+14:56.720 --> 14:57.740
+into command.
+
+143
+14:58.520 --> 15:07.810
+So what we want is three columns one or the book name; one with author one; one author two; so what we need
+
+144
+15:07.810 --> 15:14.150
+to do is first find a select statement that will give us single author books only.
+
+145
+15:14.170 --> 15:20.570
+So let's start with the bookauthor table; select * from bookAuthor
+
+146
+15:20.770 --> 15:29.020
+Now what we're going to do is group on BookID and use a having clause to state that we only want
+
+147
+15:31.040 --> 15:33.660
+only one of these.
+
+148
+15:33.820 --> 15:34.710
+So we go.
+
+149
+15:36.190 --> 15:36.840
+BookID
+
+150
+15:39.370 --> 15:41.640
+And group by bookId
+
+151
+15:42.780 --> 15:44.230
+Okay.
+
+152
+15:44.370 --> 15:47.310
+Having count(*) equals 1.
+
+153
+15:47.710 --> 15:51.400
+So we're looking for here is books where there is only one author.
+
+154
+15:51.430 --> 15:59.430
+So I'm expecting to see book 1 and 2; but not 3. 1 and 2 not 3.
+
+155
+15:59.880 --> 16:00.970
+Let's have a look.
+
+156
+16:01.110 --> 16:06.060
+If we want to say books with two authors it would be like this.
+
+157
+16:06.180 --> 16:08.210
+So we get book ID 3
+
+158
+16:08.340 --> 16:10.680
+So now let's join that on the books table
+
+159
+16:14.270 --> 16:24.850
+join books b on b.id = ba.bookID
+
+160
+16:24.860 --> 16:30.480
+We'll do the same for the dual author query
+
+161
+16:31.260 --> 16:33.200
+Now we'll need the book name here.
+
+162
+16:33.280 --> 16:37.300
+So we'll say b.Bookname, and 
+
+163
+16:37.360 --> 16:40.040
+the group by is going to be on the bookname
+
+164
+16:40.090 --> 16:41.770
+So we'll do that here and here.
+
+165
+16:42.250 --> 16:49.810
+So therefore this should be books with one author and this should be books with two authors.
+
+166
+16:50.760 --> 16:54.310
+So next thing we need is the actual author's name.
+
+167
+16:54.540 --> 16:57.010
+So we're going to join on the author.
+
+168
+16:57.060 --> 17:01.650
+join author a on a.id = ba.authorid
+
+169
+17:02.040 --> 17:05.290
+join author a on a.id = ba.authorid
+
+170
+17:05.460 --> 17:06.530
+Same here.
+
+171
+17:12.660 --> 17:13.680
+And in this Select...
+
+172
+17:14.190 --> 17:15.750
+What we need is an aggregate query.
+
+173
+17:15.750 --> 17:20.790
+So in this case going to use minimum but to be honest it can be anything here because there is only
+
+174
+17:20.790 --> 17:28.870
+going to be only one so; AuthorName as author1
+
+175
+17:29.520 --> 17:33.360
+Here are going to have both Min and Max
+
+176
+17:36.900 --> 17:44.620
+so we'll say Min for author1 on max for author2.
+
+177
+17:44.790 --> 17:46.490
+So let's see how that works.
+
+178
+17:47.550 --> 17:54.240
+So the book name author1 J.K. Rowling; book name author2
+
+179
+17:54.330 --> 17:58.680
+So there we go; now; because I want to combine these two things.
+
+180
+17:58.740 --> 18:03.300
+I want to have a author2 column in this; but it has to be NULL.
+
+181
+18:03.750 --> 18:13.200
+So what I need to do is cast NULL to the same data type as the author name which is varchar(max)
+
+182
+18:13.260 --> 18:16.370
+cast(NULL as varchar(max))
+
+183
+18:16.590 --> 18:18.920
+cast(NULL as varchar(max))
+
+184
+18:19.020 --> 18:26.140
+as Author2
+
+185
+18:26.270 --> 18:32.920
+So if we run this we have a second column in this author2 which just says NULL.
+
+186
+18:32.970 --> 18:39.690
+Now here is where we're going to try combine the two things so I'm going to change to select into a
+
+187
+18:40.020 --> 18:44.530
+select into statement; and we're going to call it #TempBooks.
+
+188
+18:44.610 --> 18:50.730
+Notice that hash symbol or the hashtag symbol before the table name.
+
+189
+18:50.730 --> 18:55.890
+This indicates that it is a temporary table and it will not be visible to any other user of this database
+
+190
+18:55.920 --> 18:56.940
+outside of the session.
+
+191
+18:56.940 --> 19:04.690
+So it's useful for sort of working memory.
+
+192
+19:05.730 --> 19:06.180
+Sorry
+
+193
+19:13.830 --> 19:14.300
+OK.
+
+194
+19:14.520 --> 19:16.050
+Sorry I just create that again.
+
+195
+19:17.270 --> 19:27.680
+OK so now we have two rows in the #TempBooks table; so we can look at the #TempBooks table; select * from 
+#TempBooks
+
+196
+19:29.710 --> 19:33.520
+The two rows for single author books.
+
+197
+19:33.570 --> 19:42.720
+Now we're going to insert into; so insert into #TempBooks followed by the select statement; which we can now run
+
+198
+19:43.190 --> 19:46.890
+added an extra row; run select there;
+
+199
+19:46.890 --> 19:50.370
+And we have all three books.
+
+200
+19:50.560 --> 19:56.370
+With Author1, author2. Now to demonstrate that this is only visible to this session.
+
+201
+19:56.370 --> 20:00.990
+We can create a new query here; and try and view this.
+
+202
+20:01.020 --> 20:08.070
+So this is simulating another user; and that user can't see the #TempBooks table.
+
+203
+20:08.070 --> 20:15.710
+So it's useful for working memory; something that you just want to work on; and then throw away afterwards.
+
+204
+20:16.530 --> 20:18.180
+So hope that made sense
+
+205
+20:21.040 --> 20:29.360
+sp_help and sp_helptext;  sp_help and sp_helptext are system
+
+206
+20:29.360 --> 20:32.360
+provided SQL statements.
+
+207
+20:32.360 --> 20:38.160
+These can be used to view the contents or schema of database objects like tables; stored procedures; views
+
+208
+20:38.180 --> 20:43.990
+triggers; user defined functions; etc. that could be used as follows; 
+
+209
+20:43.980 --> 20:48.690
+sp_help 'table'
+
+210
+20:52.290 --> 20:59.220
+video demonstration. Here we will demonstrate how to use the user interface and the sp_help
+
+211
+21:00.070 --> 21:09.810
+or sp_helptext commands to view: tables; views; stored procedures; triggers; and user defined functions.
+
+212
+21:09.810 --> 21:16.730
+Here we are going to demonstrate the user interface using the sp_help in sp_helptext commands
+
+213
+21:16.740 --> 21:21.720
+to view; tables; views; stored procedures; triggers; and user defined functions.
+
+214
+21:21.720 --> 21:24.290
+So let's start with tables.
+
+215
+21:24.870 --> 21:29.110
+Simply navigate to your database.
+
+216
+21:29.130 --> 21:30.120
+Expand out tables.
+
+217
+21:30.130 --> 21:31.920
+Let's have a look at the author table.
+
+218
+21:31.950 --> 21:41.140
+You can expand out the table, to see columns; keys and so forth.
+
+219
+21:41.250 --> 21:50.710
+Or if you want to use the command line you can use: sp_help author
+
+220
+21:50.750 --> 21:59.210
+This will give you some information about for instance what columns are in the table
+
+221
+21:59.210 --> 22:00.120
+To do the same with a view:
+
+222
+22:00.350 --> 22:05.400
+We can expand views for instance overdueloans.
+
+223
+22:05.440 --> 22:14.810
+There is the columns of our overdueLoans view; and if you want to view the contents of this you can right
+
+224
+22:14.810 --> 22:24.460
+click and go; script view as; create to new query editor and you can see the select statement used to
+
+225
+22:24.460 --> 22:28.580
+create this view or if you want it you can go.
+
+226
+22:28.580 --> 22:34.420
+sp_helptext overdueloans
+
+227
+22:37.720 --> 22:39.920
+execute
+
+228
+22:40.150 --> 22:41.650
+This is in a grid view.
+
+229
+22:41.650 --> 22:46.280
+You can actually view this as text by pressing control and T
+
+230
+22:49.010 --> 22:59.750
+That might make a little bit more useful, to go back to the previous grid view press control D ; execute.
+
+231
+23:00.440 --> 23:04.980
+So it's really personal preference some types of data it's easier to see in the grid and sometimes
+
+232
+23:04.980 --> 23:07.750
+it's easier to see as text.
+
+233
+23:08.190 --> 23:19.450
+So let's see store procedures; expand out programability ; stored procedures; There is withdrawBook.
+
+234
+23:19.970 --> 23:30.000
+A shortcut if you want to not retype it;  you can actually drag it from the side, and use sp_helptext
+
+235
+23:33.260 --> 23:41.120
+to view withdrawbook; The square brackets are rather irrelevant in this case it really just 
+
+236
+23:41.190 --> 23:48.770
+If you have an object that has like a space in the middle of it you can use square brackets to enclose it
+
+237
+23:49.150 --> 23:54.920
+So there is our withdrawBook stored procedure.
+
+238
+23:55.080 --> 24:00.300
+Triggers; Once again you navigate to the table expand out triggers.
+
+239
+24:00.390 --> 24:02.450
+There's our triggers.
+
+240
+24:02.690 --> 24:05.120
+We can have a look at them using sp_helptext
+
+241
+24:10.230 --> 24:17.230
+This gives us an idea of what is in that particular trigger; and finally user defined functions which
+
+242
+24:17.230 --> 24:23.840
+are once again under programability;  functions.
+
+243
+24:23.840 --> 24:29.380
+And it was a scalar valued function; we use sp_helptext
+
+244
+24:33.490 --> 24:36.980
+To view that particular user defined function.
+
+245
+24:37.870 --> 24:45.180
+So that's a quick view of how you can see various schema objects of the database.
+
+246
+24:46.190 --> 24:49.880
+You'll get the hang of that very quickly; 
+
+247
+24:51.790 --> 24:57.790
+And it's over to you; For this exercise I'd like you to write a stored procedure to handle a book being returned.
+
+248
+24:57.790 --> 24:59.590
+It should perform the following.
+
+249
+24:59.890 --> 25:06.340
+Create a transaction; update the book loans table date return column with the current date.
+
+250
+25:07.890 --> 25:15.720
+Add update the book table with the supplied bookshelf ID and finally commit to transaction
+
+251
+25:15.750 --> 25:17.880
+So pause this video now and give it a go.
+
+252
+25:18.420 --> 25:27.430
+Once you've tried; resume the video and see how you got on. 
+
+253
+25:27.440 --> 25:29.060
+I hope you've given this exercise a go before looking the solution.
+
+254
+25:29.160 --> 25:30.800
+But this is the solution.
+
+255
+25:30.860 --> 25:35.660
+So we want to create a stored procedure that does the opposite of a withdrawbook.
+
+256
+25:35.810 --> 25:39.420
+It will return a book to the library.
+
+257
+25:39.830 --> 25:41.580
+So let's have a look at our bookLoans table
+
+258
+25:45.800 --> 25:59.790
+What we want to do is update the bookloan table.
+
+259
+26:00.450 --> 26:00.800
+update bookloan set DateReturned = getDate() where BookID=@BookId
+
+260
+26:03.540 --> 26:05.890
+update bookloan set DateReturned = getDate() where BookID=@BookId
+
+261
+26:09.210 --> 26:17.650
+and then we want to update the books table so look at the books table.
+
+262
+26:19.220 --> 26:25.790
+update books set BookShelfId = @BookShelfID where id=@bookID
+
+263
+26:28.070 --> 26:28.960
+update books set BookShelfId = @BookShelfID where id=@bookID
+
+264
+26:33.380 --> 26:38.540
+update books set BookShelfId = @BookShelfID where id=@bookID
+
+265
+26:41.800 --> 26:47.430
+so this will need to be wrapped in a transaction so we shall just type in .
+
+266
+26:48.310 --> 26:48.900
+Begin Transaction
+
+267
+26:53.120 --> 26:53.990
+commit transaction
+
+268
+26:58.010 --> 27:06.630
+and then the whole thing is within the stored procedure so create procedure returnBook.
+
+269
+27:07.320 --> 27:09.330
+It will take two parameters.
+
+270
+27:09.410 --> 27:16.030
+The @bookID int and the @bookshelfID
+
+271
+27:16.280 --> 27:17.350
+Which is also an int
+
+272
+27:22.070 --> 27:23.860
+as
+
+273
+27:23.930 --> 27:30.090
+So this is the store procedure written; execute
+
+274
+27:33.840 --> 27:38.040
+That should be an ID there, not bookID
+
+275
+27:38.350 --> 27:45.410
+Okay so let's put this to the test; And we shall have a look at one of the bookLoans
+
+276
+27:45.450 --> 27:48.180
+select * from bookloan
+
+277
+27:50.210 --> 27:58.160
+And we shall return book ID 1 to bookshelf 1;  
+
+278
+28:04.250 --> 28:06.470
+ReturnBook 1,1
+
+279
+28:06.480 --> 28:08.700
+And so this is this book here.
+
+280
+28:09.530 --> 28:13.130
+So return the book.
+
+281
+28:13.430 --> 28:17.140
+Have a look at the bookloan table; the datereturn is now set;
+
+282
+28:17.160 --> 28:19.670
+That date will be different for you.
+
+283
+28:20.020 --> 28:21.500
+And we shall also have a look at our books table
+
+284
+28:26.890 --> 28:29.750
+and you can see a book ID 1 has now a bookshelf ID of 1
+
+285
+28:29.790 --> 28:31.460
+That's back on the shelf.
+
+286
+28:32.160 --> 28:32.480
+Okay.
+
+287
+28:32.570 --> 28:34.430
+Well I hope you've got that solution.
+
+288
+28:34.880 --> 28:36.870
+Good luck with the next video.

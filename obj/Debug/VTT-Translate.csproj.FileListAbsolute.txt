@@ -1,0 +1,8 @@
+C:\projects\VTT-Translate\bin\Debug\VTT-Translate.exe.config
+C:\projects\VTT-Translate\bin\Debug\VTT-Translate.exe
+C:\projects\VTT-Translate\bin\Debug\VTT-Translate.pdb
+C:\projects\VTT-Translate\bin\Debug\Newtonsoft.Json.dll
+C:\projects\VTT-Translate\bin\Debug\Newtonsoft.Json.xml
+C:\projects\VTT-Translate\obj\Debug\VTT-Translate.csprojResolveAssemblyReference.cache
+C:\projects\VTT-Translate\obj\Debug\VTT-Translate.exe
+C:\projects\VTT-Translate\obj\Debug\VTT-Translate.pdb

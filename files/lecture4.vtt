@@ -1,0 +1,977 @@
+WEBVTT
+
+0
+00:01.110 --> 00:10.260
+More advanced queries; diving deeper into the select statement. 
+
+1
+00:10.260 --> 00:12.520
+And / or if you want to return data that satisfies more than one criteria.
+
+2
+00:12.900 --> 00:20.460
+You can use the armed operator to specify that both criteria are met or to specify that one criteria
+
+3
+00:20.520 --> 00:21.500
+is met.
+
+4
+00:21.660 --> 00:26.340
+Perhaps a bank might want to look for unusual account balances with queries such as:
+
+5
+00:26.340 --> 00:31.740
+select * from bankAccount where balance > 1000000 and age<12
+
+6
+00:31.740 --> 00:33.440
+or; select * from bankaccount where age⟨1 or age >100
+
+7
+00:33.490 --> 00:38.430
+video demonstration.
+
+8
+00:38.430 --> 00:42.620
+Here we will demonstrate and or clauses to achieve the following.
+
+9
+00:42.780 --> 00:45.670
+Find students with the name Mary Smith.
+
+10
+00:45.930 --> 00:51.160
+Find students named Peter or with the surname Smith.
+
+11
+00:51.570 --> 00:55.720
+OK so here we are back in SQL server management studio.
+
+12
+00:55.760 --> 01:01.850
+Our task is to find students named Mary Smith or to find students named Peter or with a surname Smith.
+
+13
+01:02.600 --> 01:03.820
+So let's have a look at our students.
+
+14
+01:12.040 --> 01:18.980
+So in order to find students named Mary and Smith we need to query the first name column and the surname
+
+15
+01:19.000 --> 01:32.460
+column the letter where clause firstname = 'Mary' and surname = 'smith'
+
+16
+01:32.760 --> 01:34.870
+This returns one row as expected.
+
+17
+01:36.360 --> 01:44.130
+Our second task is to find students named Peter or with the surname Smith so; select * from students
+
+18
+01:45.420 --> 01:55.240
+where firstname='Peter' or surname='Smith'
+
+19
+01:58.440 --> 02:03.090
+this returns two Rows the first row because a surname is Smith.
+
+20
+02:03.180 --> 02:07.220
+Second row because the first name is Peter.
+
+21
+02:07.550 --> 02:10.230
+More than less than equal or not equal.
+
+22
+02:11.090 --> 02:16.540
+You can use the following operators to compare things more than, less than, equal, or not equal.
+
+23
+02:16.580 --> 02:23.210
+When applied to text, the more than and less than operator will refer to the dictionary order of words, i.e.  dog would appear after cat
+
+24
+02:23.210 --> 02:26.680
+video demonstration.
+
+25
+02:26.690 --> 02:33.410
+Here will demonstrate equality and comparison operators to find books with more than 450 pages, 
+
+26
+02:33.410 --> 02:41.300
+less than 400 pages, exactly 413 pages, or do not have 413 pages.
+
+27
+02:41.310 --> 02:43.940
+Here we are going to demonstrate some comparison operators.
+
+28
+02:44.090 --> 02:50.180
+So we want to look for books more than 400 pages, less than 400 pages, exactly 413, 
+
+29
+02:50.870 --> 02:51.530
+and do not have 413 pages
+
+30
+02:52.250 --> 02:54.470
+So we select from books table
+
+31
+02:59.110 --> 03:04.690
+and we can simply say where pages more than 400
+
+32
+03:09.380 --> 03:15.070
+returns that,  not less than 400 returns the other book
+
+33
+03:17.850 --> 03:21.810
+equals 413
+
+34
+03:21.810 --> 03:27.420
+or not equal to 413, returns these two books
+
+35
+03:30.860 --> 03:36.930
+like operator;  When comparing text you can use the like operator to compare text patterns using the percentage
+
+36
+03:36.930 --> 03:42.620
+sign place holder to indicate missing text for example to a list of students where Mary is part of their
+
+37
+03:42.620 --> 03:43.230
+name.
+
+38
+03:43.310 --> 03:46.070
+So just Mary and Mary Jane, and Amaryah.
+
+39
+03:46.340 --> 03:51.050
+This will be written as; select * from students where firstname like '%Mary%'
+
+40
+03:51.050 --> 03:56.610
+video demonstration.
+
+41
+03:56.850 --> 04:01.820
+Here we'll demonstrate the use of the like operator to achieve the following list of students whose
+
+42
+04:01.830 --> 04:10.090
+name begins with the letter M and list all books that contain Harry Potter and the title.
+
+43
+04:10.210 --> 04:13.570
+This is where it will demonstrate the use of the like operator.
+
+44
+04:13.660 --> 04:19.610
+We list all students whose name begins with the letter M and then we list all books that contain
+
+45
+04:19.610 --> 04:20.410
+Harry Potter in the title.
+
+46
+04:21.050 --> 04:22.960
+Let us look at our students table
+
+47
+04:29.630 --> 04:40.440
+so there are two students beginning with M. Both marys. where firstname like 'M%' 
+
+48
+04:41.050 --> 04:45.050
+So we start with the letter M followed by anything else.
+
+49
+04:45.070 --> 04:51.810
+Therefore we have the two Mary's. Books that contain Harry Potter in the title, 
+
+50
+04:51.950 --> 04:52.420
+select * from books 
+
+51
+04:58.810 --> 05:01.510
+it does not necessarily have to start with the word Harry Potter.
+
+52
+05:01.780 --> 05:08.860
+So we say; 
+
+53
+05:09.190 --> 05:11.090
+where bookname like '%Harry Potter%'
+
+54
+05:11.230 --> 05:12.070
+where bookname like '%Harry Potter%'
+
+55
+05:12.100 --> 05:17.200
+So that means Harry Potter can appear anywhere in the book name
+
+56
+05:23.280 --> 05:29.490
+select distinct operator if you want to move exact duplicates from a query result we can use to select
+
+57
+05:29.490 --> 05:30.750
+distinct operator.
+
+58
+05:31.110 --> 05:35.920
+For example if you want to see all unique birthdates of students it will be;
+
+59
+05:35.930 --> 05:41.030
+select distinct DateOfBirth from students
+
+60
+05:41.060 --> 05:47.230
+Will demonstrate the use of select distinct operator to achieve the following list;
+
+61
+05:47.230 --> 05:51.440
+list all student's first names excluding duplicates.
+
+62
+05:51.830 --> 05:57.710
+Here we demonstrate SELECT DISTINCT by listing all students first names excluding duplicates.
+
+63
+05:57.780 --> 05:59.430
+So let's have a look at our students table
+
+64
+06:06.030 --> 06:08.700
+that specifically look after the first name.
+
+65
+06:09.980 --> 06:14.700
+column
+
+66
+06:14.950 --> 06:17.660
+You can see we have two Marys and a Peter, so I say;
+
+67
+06:17.710 --> 06:22.300
+SELECT DISTINCT.
+
+68
+06:22.360 --> 06:25.260
+Then we get one Mary and Peter.
+
+69
+06:25.330 --> 06:31.450
+Now you might be curious as to why I specified first name instead of doing select star.
+
+70
+06:32.310 --> 06:39.550
+I see that this does not have any effect because there are other columns that are unique such as a surname
+
+71
+06:39.610 --> 06:45.190
+or the I.D. So the correct solution is select distinct the first name from students
+
+72
+06:47.840 --> 06:55.160
+Sorting data: By default data returned to by select statement is no guaranteed order. To order by one
+
+73
+06:55.160 --> 07:03.980
+column in ascending order use order by and for descending order use order by DESC for a random shuffle.
+
+74
+07:04.080 --> 07:13.310
+Use order by newid() so to order students by surname use 
+
+75
+07:13.310 --> 07:18.480
+select * from students order by surname
+
+76
+07:18.480 --> 07:23.370
+So putting all the past topics together we shall demonstrate a complex query that returns a list of
+
+77
+07:23.370 --> 07:31.350
+book names that are either written by Dhonielle Clayton or are over 400 pages in length and or bring the results
+
+78
+07:31.500 --> 07:34.670
+alphabetically.
+
+79
+07:35.460 --> 07:41.690
+OK so by combining what we've learned so far we're going to write a complex query that list book names
+
+80
+07:41.690 --> 07:49.070
+that are either written by Danielle Clayton or over 400 pages of length, and we want to order the result
+
+81
+07:49.080 --> 07:49.650
+alphabetically.
+
+82
+07:51.130 --> 07:54.510
+So let's look at our books table
+
+83
+07:59.570 --> 08:10.090
+in order to get the author to join that on the book author and authors table.
+
+84
+08:12.510 --> 08:22.620
+join bookAuthor ba on ba.bookid = b.id join author a on a.id = ba.authorid
+
+85
+08:23.090 --> 08:24.390
+All right.
+
+86
+08:24.590 --> 08:29.390
+From the earlier lesson you should remember the many to many relationship that we have between books
+
+87
+08:29.420 --> 08:40.800
+and book authors so therefore we've now got book names and author names I want to limit this to authors
+
+88
+08:43.760 --> 08:46.670
+named "Dhonielle Clayton"
+
+89
+08:53.030 --> 09:02.820
+or pages more than 400.
+
+90
+09:02.930 --> 09:05.120
+Now we have a duplicate in the list.
+
+91
+09:05.390 --> 09:08.740
+So all we're interested in is the book names.
+
+92
+09:14.950 --> 09:19.610
+two books but one duplicate key to the multiple author
+
+93
+09:20.270 --> 09:21.500
+So you select distinct
+
+94
+09:27.110 --> 09:32.090
+and to order this alphabetically you say order by bookname
+
+95
+09:41.180 --> 09:48.350
+Date operations; Certain operations are specific to the date or datetime data types such as; Day(): the day part of the date
+
+96
+09:48.350 --> 09:50.330
+month(): the month part of the date
+
+97
+09:50.370 --> 09:54.030
+year(): the year part of the date.
+
+98
+09:54.640 --> 09:59.090
+And for more flexible operation; is datepart which accepts two parameters.
+
+99
+09:59.090 --> 10:06.230
+The interval, and the date; and this will return a part of the date specified by the interval. 
+
+100
+10:06.500 --> 10:08.210
+The interval can be day, month, year,
+
+101
+10:08.240 --> 10:11.810
+hour, minute, dayOfYear, weekday and so forth.
+
+102
+10:13.090 --> 10:22.560
+To get today's date you can write select getdate()
+
+103
+10:22.910 --> 10:27.480
+Here we demonstrate some date operations; getting today's date.
+
+104
+10:27.770 --> 10:34.860
+Getting the current month; getting the current date; and getting the number of days since the start of the
+
+105
+10:34.860 --> 10:35.130
+year.
+
+106
+10:38.100 --> 10:41.170
+Here will demonstrate some date operations; getting today's date.
+
+107
+10:41.220 --> 10:45.690
+Getting the current month; getting the current day; and getting the number of days since the start of the
+
+108
+10:45.690 --> 10:46.830
+year.
+
+109
+10:46.890 --> 10:52.380
+This video is being prepared on the 20th of November 2019.
+
+110
+10:52.680 --> 10:54.820
+Your results will be obviously in the future.
+
+111
+10:56.020 --> 10:56.930
+select getdate()
+
+112
+11:01.200 --> 11:03.240
+this returns today's current date.
+
+113
+11:06.060 --> 11:18.000
+The current month which would be a november 11th month, the day with is the 20th returns 20 and to return
+
+114
+11:18.000 --> 11:19.930
+the number of days since the start of the year.
+
+115
+11:19.950 --> 11:25.880
+We used the word datepart and dayofyear.
+
+116
+11:25.950 --> 11:34.190
+Operator and this returns 324 because that's the number of days since the 1st of January.
+
+117
+11:35.740 --> 11:44.830
+Text operations; certain operations are specific to char, varchar and nvarchar data types such as;
+
+118
+11:45.250 --> 11:51.690
+reverse() - reverses the order of characters; Len() - gets the length of given text; substring() - extract some text from larger text
+
+119
+11:51.760 --> 11:59.320
+charindex() - find some text in the larger text; and many other operations 
+
+120
+11:59.320 --> 12:01.240
+I recommend looking at the Microsoft website for the full list
+
+121
+12:04.130 --> 12:05.690
+video demonstration.
+
+122
+12:05.690 --> 12:13.240
+Here we demonstrate some text operations; reversing a piece of text; getting the length of some text
+
+123
+12:13.240 --> 12:21.200
+return a list of students as first initial followed by surname; list the Harry Potter books by subtitle only
+
+124
+12:24.070 --> 12:30.750
+here we will demonstrate a couple of text operations specifically; reversing a piece of text; getting the length
+
+125
+12:30.750 --> 12:36.390
+of some text; return all students first initial followed by surname and list the Harry Potter books
+
+126
+12:36.390 --> 12:37.380
+by subtitle only
+
+127
+12:38.340 --> 12:54.390
+So first let's have a look at a simple one; select reverse('lived') backwards spells devil; length of text;
+
+128
+12:55.650 --> 12:59.080
+len('hello') is a five letter word.
+
+129
+12:59.180 --> 13:03.260
+Now a list of students first initial followed by surname; let's look at our student table
+
+130
+13:08.040 --> 13:18.160
+we want the first initial which we use substring command first name the first parameter is the number
+
+131
+13:18.250 --> 13:22.680
+of characters in from the left; one.
+
+132
+13:22.780 --> 13:31.580
+How many characters you want to take which is one; So that gives an M for Mary and a P for Peter.
+
+133
+13:32.590 --> 13:36.020
+Add a dot,  space and the surname
+
+134
+13:40.740 --> 13:50.220
+so that makes an M Smith from Mary Smith and a P Murphy from Peter Murphy; now lets look at Harry Potter
+
+135
+13:50.220 --> 13:51.550
+books by subtitle only.
+
+136
+13:51.720 --> 13:53.010
+So let's look at our books
+
+137
+13:58.750 --> 14:00.610
+so we only want Harry Potter books.
+
+138
+14:00.610 --> 14:07.330
+So say where bookname like 'Harry Potter%'
+
+139
+14:11.750 --> 14:12.390
+now.
+
+140
+14:12.550 --> 14:17.480
+The subtitle here will be Chamber of Secrets for this book Prisoner of Azkaban for this book.
+
+141
+14:18.830 --> 14:23.450
+So we need to find the location of that text within the book name.
+
+142
+14:24.620 --> 14:29.980
+Which case I'm actually going to look for the word and the because it is common to both of these.
+
+143
+14:30.140 --> 14:31.880
+So we use the charindex
+
+144
+14:34.540 --> 14:40.460
+the bit of text we are looking for and space and the bookname.
+
+145
+14:40.750 --> 14:41.620
+Which is the column.
+
+146
+14:43.180 --> 14:51.050
+If we run this we'll see that the subtitle appears on the 14th character across the book.
+
+147
+14:52.210 --> 14:55.510
+So we shall combine this with the word substring
+
+148
+14:58.580 --> 15:12.410
+bookname the position which will be 14 and the length which we shall take maximum 400.
+
+149
+15:12.560 --> 15:18.680
+So as we run this We can see that it's actually returned and the Chamber of Secrets.
+
+150
+15:18.680 --> 15:26.450
+Perhaps if we didn't want them to appear we can add a plus Len('and the ')
+
+151
+15:29.340 --> 15:29.830
+once again.
+
+152
+15:31.060 --> 15:39.620
+So now we have a column with the subtitles in there.
+
+153
+15:40.490 --> 15:45.380
+When you write a query where the column in the SELECT statement is a computed value the column will
+
+154
+15:45.380 --> 15:46.560
+not have a name.
+
+155
+15:46.910 --> 15:50.330
+You can assign it one by writing AS then a column name
+
+156
+15:50.420 --> 15:56.720
+For example if we wanted one column with the full name of the student we could write 
+
+157
+15:56.760 --> 16:04.850
+select firstname + ' ' + surname as fullname from students 
+
+158
+16:04.850 --> 16:09.540
+you can also assign a new name to a column using a column alias if this makes more sense in context for example.
+
+159
+16:09.560 --> 16:17.840
+SELECT DISTINCT surname as a familyname from student 
+
+160
+16:17.840 --> 16:27.780
+we will demonstrate a column alias by returning a list of students with a combined first and surname onto the column name full name.
+
+161
+16:28.170 --> 16:33.690
+So now to demonstrate COLUMN ALIAS we like to return a list of students with combined first name and
+
+162
+16:33.690 --> 16:37.390
+surname under  the column fullname
+
+163
+16:42.440 --> 16:53.850
+We will combine their firstname and surname.
+
+164
+16:53.960 --> 16:55.800
+Notice that this has no column name yet.
+
+165
+16:56.600 --> 16:59.450
+So we call it as full name
+
+166
+17:02.910 --> 17:05.120
+and again you can see the column now has a name.
+
+167
+17:06.900 --> 17:14.140
+Sub queries; sometimes you need to have a query filter on results from another query.
+
+168
+17:14.220 --> 17:17.040
+These type of select queries are in the following form.
+
+169
+17:17.070 --> 17:24.470
+SELECT * from Table1 where X in ( select Y from table2 )
+
+170
+17:24.480 --> 17:29.310
+This would mean that you want to see all rows from table 1 or column X is equal to one of the values
+
+171
+17:30.030 --> 17:32.600
+of Y from table 2.
+
+172
+17:32.820 --> 17:35.990
+You can use not in to inverse the function of in
+
+173
+17:39.000 --> 17:40.790
+video demonstration.
+
+174
+17:41.130 --> 17:50.330
+Here we demonstrate sub query; return to list of book loans for any books in the Harry Potter series.
+
+175
+17:50.560 --> 17:56.780
+Here will demonstrate a sub query; return a list of book loans for any books in the Harry Potter series.
+
+176
+17:56.920 --> 17:59.470
+So let's have a look at our books.
+
+177
+18:06.060 --> 18:06.530
+Um.
+
+178
+18:06.690 --> 18:09.290
+We want to limit this to Harry Potter books.
+
+179
+18:09.390 --> 18:15.340
+Book name like Harry Potter.
+
+180
+18:20.590 --> 18:25.050
+When you're writing a sub query you should return only one column.
+
+181
+18:25.990 --> 18:34.880
+So in this case I want to return the id.
+
+182
+18:35.190 --> 18:41.130
+So this will return the ids associated with both Harry Potter books.
+
+183
+18:41.140 --> 18:43.150
+Now let's have a look at our books loans table.
+
+184
+18:50.180 --> 19:00.400
+And if we were to limit this to books which are contained in the subsequent query we would use;
+
+185
+19:00.400 --> 19:06.040
+where bookId in (
+
+186
+19:06.330 --> 19:07.080
+Second query
+
+187
+19:10.790 --> 19:19.260
+execute this; so we are now looking at book loans where the book is in the list of books.
+
+188
+19:19.260 --> 19:29.450
+By Harry Potter; we can reverse this by saying "not in" in order to get zero results; but this is our answer.
+
+189
+19:33.370 --> 19:40.090
+Union; if you were to write to select statements and wanted to combine them both into one result you can
+
+190
+19:40.090 --> 19:46.750
+use the Union statement; select X from table union select Y from table.
+
+191
+19:46.750 --> 19:51.850
+This would mean that you wanted both column X and column y in one column in the result.
+
+192
+19:51.850 --> 19:58.760
+You may need to make sure that the number and type of the columns match. 
+
+193
+19:58.760 --> 20:07.200
+Here we demonstrate in union; return a list of authors combined with a list of students or by name
+
+194
+20:07.200 --> 20:12.810
+Here we will demonstrate a union; where we select a list of authors and a list of students.
+
+195
+20:12.960 --> 20:15.380
+Combine them together and order them by name.
+
+196
+20:16.140 --> 20:21.720
+Let's have a look at our authors.
+
+197
+20:21.790 --> 20:28.790
+Let's just take the author's name from here.
+
+198
+20:29.000 --> 20:30.110
+Let's have a look at our students
+
+199
+20:35.210 --> 20:36.250
+and
+
+200
+20:36.680 --> 20:38.420
+Let's combine the first name and surname
+
+201
+20:49.650 --> 20:50.690
+to combine them together;
+
+202
+20:51.030 --> 21:00.220
+We can write union for this now returns the authors and the students.
+
+203
+21:00.230 --> 21:07.190
+Now if we wish to order this; we can say order by authorname
+
+204
+21:11.920 --> 21:13.670
+and finally it's over to you.
+
+205
+21:14.450 --> 21:18.360
+So based on what you've learned in this lesson here's a test 
+
+206
+21:18.410 --> 21:26.680
+List authors who share the same first letter of their surname you can pause this video now and resume it once
+
+207
+21:26.680 --> 21:33.510
+you've attempted this test.
+
+208
+21:33.590 --> 21:35.880
+OK so I hope you've given that a go.
+
+209
+21:35.970 --> 21:37.120
+And if you haven't yet.
+
+210
+21:37.120 --> 21:41.050
+Then you can pause this video now and resume it once you've attempted this test.
+
+211
+21:42.580 --> 21:44.550
+OK so here we are.
+
+212
+21:44.640 --> 21:50.890
+We want to list authors who share the same first letter of their surname with another author.
+
+213
+21:50.970 --> 21:53.280
+So if we have a look at the authors table
+
+214
+21:59.300 --> 22:05.690
+we can see that these two authors share the same first letter of their surname but will need to extract
+
+215
+22:05.690 --> 22:10.810
+those in order to extract the first letter of the surname.
+
+216
+22:10.880 --> 22:18.230
+What we'll need to do is find the space between the first name and surname and extract the letter that
+
+217
+22:18.230 --> 22:19.900
+immediately follows the space.
+
+218
+22:20.870 --> 22:24.070
+So in order to find the space we should use the charIndex.
+
+219
+22:24.090 --> 22:24.450
+All right
+
+220
+22:32.970 --> 22:39.360
+so this now returns the position of the space we now want the letter that immediately follows the space.
+
+221
+22:39.360 --> 22:46.560
+So we use a plus one that will be the location of the first letter of the surname in order to extract
+
+222
+22:46.560 --> 22:48.360
+the first letter of the surname.
+
+223
+22:48.360 --> 22:55.940
+We should use the substring; authorname; charIndex so forth
+
+224
+23:02.120 --> 23:02.760
+One character
+
+225
+23:05.860 --> 23:15.990
+this now returns R for Rowling, C etc. So in the second query as I mentioned earlier he should only
+
+226
+23:15.990 --> 23:17.530
+return one column.
+
+227
+23:18.510 --> 23:21.690
+So this now returns all of the
+
+228
+23:25.180 --> 23:28.450
+first letters of the surnames of the authors.
+
+229
+23:28.720 --> 23:32.470
+So that will form the basis of our sub query.
+
+230
+23:32.470 --> 23:39.040
+Now let's have a look at our main query.
+
+231
+23:39.350 --> 23:40.990
+Now our main query
+
+232
+23:43.570 --> 23:51.010
+will once again compare the first letter of the surname with that of the same query.
+
+233
+23:51.010 --> 23:52.080
+So we shall take it.
+
+234
+23:52.150 --> 23:55.330
+This expression used the operator
+
+235
+23:59.010 --> 24:02.530
+and compare it against the subquery.
+
+236
+24:02.630 --> 24:10.250
+Now before I run this I should point out that since the sub query returns every author's first letter
+
+237
+24:10.250 --> 24:20.580
+of the surname and evidently this query will return every author since every also would match this criteria.
+
+238
+24:20.830 --> 24:28.570
+So therefore I will need to make a distinction between the author referred to in the main query and the
+
+239
+24:28.630 --> 24:36.330
+author table referred to in the sub query which case I can use a table alias a1 and a2
+
+240
+24:41.380 --> 24:48.910
+in which case I can now make a distinction within the sub query that I want a different author to the
+
+241
+24:48.910 --> 24:58.350
+one referred to in the parent query; so I can say: a1.id <> a2.id
+
+242
+24:58.580 --> 25:09.180
+So if I now run this all thats's returned are these two authors because the first letter of their
+
+243
+25:09.180 --> 25:10.050
+surname matches.

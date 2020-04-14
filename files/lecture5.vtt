@@ -1,0 +1,482 @@
+WEBVTT
+
+0
+00:00.930 --> 00:09.570
+Aggregate data; Grouping data; Aggregate data queries; Data sometimes naturally falls into groups where many
+
+1
+00:09.570 --> 00:15.340
+rows may share the same characteristics; if you kept a database that included people's details you would
+
+2
+00:15.340 --> 00:20.830
+see that data points like name and address may be reasonably unique where nationality and gender would
+
+3
+00:20.830 --> 00:28.560
+be shared between many individuals; aggregate data queries acts upon group of data that share a common characteristic
+
+4
+00:28.590 --> 00:33.830
+count, sum, max, min and statistics.
+
+5
+00:33.830 --> 00:38.820
+There are many scalar valued functions that act upon a group with either a return 1 value per group.
+
+6
+00:39.050 --> 00:44.930
+These include: Count - return the number of rows in a group or table. Sum - add up all of the values in a group
+
+7
+00:44.930 --> 00:52.850
+or table; Max - find the maximum value in a group or table; Min - find a minimum value in a group or table,
+
+8
+00:52.940 --> 00:55.840
+AVG - find the average value in a group per table.
+
+9
+00:55.980 --> 01:00.900
+STDEV - Find the standard deviation in a group or table; video demonstration.
+
+10
+01:01.160 --> 01:05.320
+He will demonstrate a selection of statistical functions mentioned in the previous slide.
+
+11
+01:07.800 --> 01:13.090
+Okay here we're going to demonstrate some of the scalar value functions in SQL server.
+
+12
+01:13.200 --> 01:15.180
+So let's start with count
+
+13
+01:15.370 --> 01:16.360
+Let's look at our books table
+
+14
+01:20.710 --> 01:29.450
+and see just three books in that table so we can use count(*) to tell the number of rows in the table.
+
+15
+01:29.500 --> 01:29.800
+Three
+
+16
+01:34.300 --> 01:43.390
+we can find; use sum() to find the total number of pages in all the books in our library.
+
+17
+01:43.450 --> 01:44.410
+sum(pages)
+
+18
+01:48.030 --> 01:50.140
+1177
+
+19
+01:50.360 --> 01:56.230
+You can find the maximum number of pages in any book in our library.
+
+20
+01:56.240 --> 02:01.100
+438;  or the shortest book in our library - 
+
+21
+02:01.290 --> 02:14.110
+by using Min;  326; the average book length in our library 392; or the standard deviation of the
+
+22
+02:14.110 --> 02:15.440
+pages in our library.
+
+23
+02:15.440 --> 02:16.270
+Would be 58
+
+24
+02:19.960 --> 02:25.720
+Group by is a clause that separates a table into groups of data so that scalar valued functions can be
+
+25
+02:25.720 --> 02:27.910
+used against each group of data.
+
+26
+02:27.970 --> 02:34.630
+For example a bank could use "group by" to determine the average bank balance by zip code / postcode
+
+27
+02:35.260 --> 02:42.160
+select zipcode,avg(balance) from BankAccounts group by zipCode
+
+28
+02:42.160 --> 02:46.840
+video demonstration.
+
+29
+02:47.170 --> 02:53.520
+Here we will demonstrate the group by clause to; list the number of books written by each author.
+
+30
+02:53.770 --> 03:01.080
+Find the number of pages written by each author, ordered by pages;  
+
+31
+03:01.080 --> 03:02.030
+Here I'm going to demonstrate the group by clause.
+
+32
+03:02.130 --> 03:07.140
+Firstly to list the number of books written by each author and secondly to list the number of pages
+
+33
+03:07.140 --> 03:09.380
+written by each author ordered by pages.
+
+34
+03:10.170 --> 03:17.190
+So we're going to group by on the author name and then use count in the first instance to find the number
+
+35
+03:17.190 --> 03:23.220
+of books and sum in the second instance to add up all the pages.
+
+36
+03:23.340 --> 03:25.100
+So first let's write our basic query
+
+37
+03:29.280 --> 03:31.760
+select * from author ; to get our authors.
+
+38
+03:31.840 --> 03:41.500
+We now need to join this on the bookauthor table;
+join BookAuthor ba on ba.authorId = a.id
+
+39
+03:46.880 --> 03:49.420
+and to group this on the author name
+
+40
+03:53.310 --> 03:55.190
+now before I run this query.
+
+41
+03:55.190 --> 04:03.590
+It'll cause an error unless you change the star to the one column grouping by; to demonstrate the error.
+
+42
+04:03.610 --> 04:14.190
+If I try and run this; it says that it is invalid in the select list; so if I just say authorname instead
+
+43
+04:14.190 --> 04:18.130
+of Star I get the authorname.
+
+44
+04:18.750 --> 04:22.350
+Now I can add scalar value functions such as Count
+
+45
+04:26.710 --> 04:29.660
+it now shows me that J.K. Rowling has written two books.
+
+46
+04:30.140 --> 04:43.820
+Dhonielle has written one; and Sona has has written one; so if we now wants to sum our pages we can change - 
+
+47
+04:44.060 --> 04:46.160
+But first we have to join on the books table
+
+48
+04:51.600 --> 04:53.510
+join books b on b.id = ba.bookid
+
+49
+04:53.920 --> 04:55.520
+join books b on b.id = ba.bookid
+
+50
+04:55.770 --> 04:57.350
+join books b on b.id = ba.bookid
+
+51
+05:00.900 --> 05:01.800
+quick look at that.
+
+52
+05:11.690 --> 05:15.280
+So here we have all the table un-grouped
+
+53
+05:15.450 --> 05:17.110
+We want to group on this.
+
+54
+05:17.210 --> 05:20.890
+Well to sum on the pages table and group by the author name
+
+55
+05:24.090 --> 05:35.280
+group by authorName ... sum(pages)
+
+56
+05:35.520 --> 05:43.100
+And the last part of this is to order by the pages you can type simply; order by sum(pages)
+
+57
+05:49.050 --> 05:52.900
+and this list is now ordered by total pages.
+
+58
+05:54.860 --> 05:57.650
+To make this more concise we can give this a column alias
+
+59
+06:01.900 --> 06:12.870
+and include the column alias in the order by; and we now have a name for that column. 
+
+60
+06:13.020 --> 06:15.630
+Having clause; Is similar to the where clause operates on groups.
+
+61
+06:16.470 --> 06:21.930
+So if a bank wanted to list zip codes only where the average bank account balance was over a million
+
+62
+06:21.930 --> 06:28.200
+dollars then they could use; select zipcode, avg(balance) from bankAccounts
+
+63
+06:28.860 --> 06:37.720
+group by zipcode having avg(balance)>1000000
+
+64
+06:37.910 --> 06:43.210
+Here is a demonstration of the having clause; where will you show list authors who have written at least
+
+65
+06:43.210 --> 06:45.630
+two books.
+
+66
+06:45.860 --> 06:52.290
+Okay here we go to demonstrate that having clause; by listing authors who have written at least two books.
+
+67
+06:52.400 --> 06:58.100
+So once again we're going to select from the authors table joined on the book authors table and we're
+
+68
+06:58.100 --> 07:06.730
+going to run a count on each author; select * from authors
+
+69
+07:10.800 --> 07:12.160
+join on the bookauthor table
+
+70
+07:22.330 --> 07:33.880
+we now want to group only the author name, and include a count
+
+71
+07:34.140 --> 07:40.320
+Now nothing can appear in the select list unless it's in the group by clause or if it's a scalar function.
+
+72
+07:44.630 --> 07:53.210
+Include a count.
+
+73
+07:53.320 --> 07:58.190
+Now we have all authors and the number of books that I've written.
+
+74
+07:58.290 --> 08:02.220
+Now you want to limit this to all those that are written at least two books.
+
+75
+08:02.310 --> 08:04.620
+So I can say having count(*)>=2
+
+76
+08:13.410 --> 08:14.870
+and it returns J.K. Rowling
+
+77
+08:18.230 --> 08:23.870
+system global variables; There are certain variables that are available system wide on SQL server
+
+78
+08:24.150 --> 08:26.230
+and are not dependent on database context.
+
+79
+08:26.270 --> 08:32.260
+These include @@connections to number of database connections to startup; @@identity the last identity
+
+80
+08:32.410 --> 08:40.070
+column inserted; @@CPU_Busy the amount of milliseconds see SQL Server has used the CPU..
+
+81
+08:40.100 --> 08:45.400
+@@Language - The language currently in use by SQL Server. @@RowCount the number of rows effected by the last SQL statement
+
+82
+08:46.070 --> 08:51.290
+@@SERVERNAME  The name of the SQL server;  @@VERSION the version of SQL server.
+
+83
+08:53.150 --> 08:58.960
+Video demonstration; Here will demonstrate some system global variables to generate a simple diagnostic
+
+84
+08:58.960 --> 09:01.410
+report for another developer.
+
+85
+09:01.720 --> 09:08.500
+We want to report the exact SQL Server version to a developer and you want to check for excessive connections
+
+86
+09:08.620 --> 09:12.150
+or CPU usage.
+
+87
+09:12.320 --> 09:15.790
+Okay here we are going to demonstrate some system global variables.
+
+88
+09:16.420 --> 09:19.910
+So we want to report the exact SQL server version to developer.
+
+89
+09:19.930 --> 09:22.350
+So let's these simply select the current version
+
+90
+09:25.540 --> 09:27.740
+now this is truncated.
+
+91
+09:27.800 --> 09:32.850
+So perhaps you would like to see this as text rather than a grid.
+
+92
+09:32.920 --> 09:36.590
+Which case we can go results to text.
+
+93
+09:38.820 --> 09:43.510
+And that's our complete SQL server version
+
+94
+09:45.270 --> 09:52.560
+Let's have a look; for instance; our number of connections OK.
+
+95
+09:52.570 --> 09:54.680
+We have two hundred and ninety nine.
+
+96
+09:54.700 --> 09:56.100
+That's quite a lot.
+
+97
+09:56.110 --> 10:03.070
+Let's see what happens when we reset SQL Server and run this query again so let's right click
+
+98
+10:16.870 --> 10:24.330
+and let's rerun this; and we are back down.
+
+99
+10:24.510 --> 10:25.320
+Now it's over to you.
+
+100
+10:25.740 --> 10:27.380
+Let's see if you can apply what you've learned.
+
+101
+10:28.290 --> 10:33.690
+Write a query that will show how many students we born on each month of the year.
+
+102
+10:34.050 --> 10:40.590
+You can pause this video now and give this query a try.
+
+103
+10:41.130 --> 10:41.580
+OK.
+
+104
+10:41.590 --> 10:46.540
+So we're going to write a query that will show how many students were born in each month of the year.
+
+105
+10:46.540 --> 10:51.850
+I hope you've given this a try first to be haven't you can pause this video now and give it a go.
+
+106
+10:52.380 --> 10:54.160
+OK so here's the solution.
+
+107
+10:54.200 --> 11:03.250
+We want to see our students table.
+
+108
+11:03.460 --> 11:12.190
+We need a function to determine the month of the date of birth which I shall use month(dateOfBirth)
+
+109
+11:17.250 --> 11:19.650
+3 for March 1 for January.
+
+110
+11:20.990 --> 11:22.130
+Let's give it a name.
+
+111
+11:22.290 --> 11:25.670
+MonthOfBirth using a column Alias
+
+112
+11:31.290 --> 11:41.190
+we can't use a * because we want to use a group by clause now. Group by monthOf birth; so this will return
+
+113
+11:42.170 --> 11:51.950
+two rows one for March one for January January March and now we want to know how many students in each
+
+114
+11:51.950 --> 11:54.060
+group we just used.
+
+115
+11:54.230 --> 11:54.560
+Count
+
+116
+12:02.100 --> 12:06.010
+got one for January to March.
+
+117
+12:06.080 --> 12:06.710
+Give us a name.
+
+118
+12:14.100 --> 12:15.330
+And that's the solution.
+
+119
+12:16.160 --> 12:16.680
+Hope you go.

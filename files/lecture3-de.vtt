@@ -1,0 +1,1361 @@
+WEBVTT
+
+0
+00:04.930 --> 00:10.070
+Datenbeziehungen. Primär- und Fremdschlüssel.
+
+1
+00:10.070 --> 00:12.380
+Grundlagen der Datenbeziehungen.
+
+2
+00:12.380 --> 00:18.110
+Einer der wichtigsten Grundsätze relationaler Datenbanken ist, dass die Daten in einer Tabelle irgendwie mit Daten verknüpft sein können.
+
+3
+00:18.150 --> 00:20.210
+in einer anderen Tabelle.
+
+4
+00:20.210 --> 00:26.150
+Wenn wir eine Datenbank für eine Bank entwerfen würden und jedes Bankkonto in einer Tabelle und jede Transaktion
+
+5
+00:26.480 --> 00:34.450
+auf jedem Bankkonto in einem anderen Tisch sein würde, und es wäre von entscheidender Bedeutung, dass wir wussten,
+
+6
+00:34.450 --> 00:37.690
+Transaktion auf welches Bankkonto bezogen ist.
+
+7
+00:37.690 --> 00:47.730
+Wir tun dies mit Beziehungen, z.B. hier die Spalte Bankkonto I.D. in der Tabelle Buchungen
+
+8
+00:48.720 --> 00:50.650
+würde mit einem I.D. übereinstimmen.
+
+9
+00:51.820 --> 00:53.590
+Aus der Bankkontotabelle
+
+10
+00:58.160 --> 01:06.380
+Beziehungsintegrität, die Beziehungen explizit in der Datenbank definiert, erzwingt die Beziehungsintegrität.
+
+11
+01:06.380 --> 01:11.660
+Dies würde bedeuten, dass die Datenbank im vorherigen Beispiel verhindern würde, dass ein Benutzer ein Bankkonto löscht.
+
+12
+01:11.840 --> 01:14.930
+die Transaktionen zugeordnet waren.
+
+13
+01:15.170 --> 01:20.780
+Es wäre kein Problem, ein Bankkonto zu löschen, das keine Buchungen hatte, oder eine Transaktion zu löschen.
+
+14
+01:22.740 --> 01:29.370
+Wir definieren die in der übergeordneten übergeordneten Tabelle verwendete ID als Primärschlüssel und die ID in der untergeordneten Tabelle
+
+15
+01:29.610 --> 01:30.390
+als Fremdschlüssel
+
+16
+01:33.830 --> 01:35.520
+Arten von Beziehungen.
+
+17
+01:35.660 --> 01:39.560
+Drei Arten von Beziehungen eins zu eins.
+
+18
+01:39.860 --> 01:45.710
+Hier entspricht ein Datensatz in einer Tabelle nur einem Datensatz in einer anderen Tabelle.
+
+19
+01:45.800 --> 01:52.640
+Zum Beispiel hat eine Person nur einen Reisepass.
+Eins zu viele.
+
+20
+01:52.640 --> 01:58.620
+Hier entspricht ein Datensatz in einer Tabelle mehreren Datensätzen in einer anderen Tabelle.
+
+21
+01:58.760 --> 02:09.230
+Beispielsweise hat ein Bankkonto viele Transaktionen. Viele zu viele: Viele Rekorde in einer Tabelle entsprechen vielen
+
+22
+02:09.230 --> 02:16.490
+Datensätze in einer anderen Tabelle, z. B. können Schüler mehrere Klassen besuchen, und Klassen haben mehrere Schüler.
+
+23
+02:19.920 --> 02:21.810
+Eine Eins-zu-Eins-Beziehung.
+
+24
+02:21.810 --> 02:25.670
+Dies ähnelt dem Erweitern einer Tabelle mit zusätzlichen Spalten.
+
+25
+02:25.860 --> 02:32.190
+Aber vielleicht möchten Sie die Daten logisch getrennt in unserem Bibliotheksprojekt in der vorherigen
+
+26
+02:32.190 --> 02:40.310
+Lektion haben wir das Konzept eines Bibliotheks-Mitgliedsausweises eingeführt.
+
+27
+02:40.310 --> 02:44.710
+Jedem Schüler ist ein und nur ein Bibliotheksmitgliedsausweis gestattet.
+
+28
+02:46.670 --> 02:56.720
+In dieser Demo erstellen wir die Bibliotheks-Mitgliedschaftskartentabelle mit spaltennamenID, studentID
+
+29
+02:57.210 --> 02:59.910
+und expiryDate.
+
+30
+02:59.990 --> 03:04.790
+Wir sollten I.D. als Primärschlüssel in der Tabelle der Schüler definieren.
+
+31
+03:04.970 --> 03:11.120
+Wir definieren Student I.D. als Fremdschlüssel in der Bibliotheks-Mitgliedskartentabelle definieren die Beziehung
+
+32
+03:11.120 --> 03:18.770
+zwischen I.D. und Student I.D. und dann werden wir Beziehungsintegrität nachweisen, indem wir versuchen,
+
+33
+03:18.830 --> 03:28.190
+Hinzufügen mehrerer Bibliotheksmitgliedschaftskarten oder Löschen eines Kursteilnehmers mit einer Bibliotheksmitgliedschaftskarte
+
+34
+03:28.310 --> 03:29.210
+damit verbunden sind.
+
+35
+03:30.410 --> 03:30.800
+Okay.
+
+36
+03:30.820 --> 03:38.090
+Hier wollen wir also eine Eins-zu-Eins-Beziehung mit dem Bibliotheks-Mitgliedsausweis demonstrieren,
+
+37
+03:38.090 --> 03:41.980
+Schüler können einen und nur einen Bibliotheksmitgliedsausweis haben.
+
+38
+03:42.890 --> 03:59.820
+TabellenbibliothekerstellenMembershipCard (Id int identity(1,1), 
+
+39
+03:59.820 --> 04:03.150
+und wir werden dies als Primärschlüssel definieren
+
+40
+04:07.080 --> 04:10.810
+Fügen Sie dann den Studentenausweis hinzu.
+
+41
+04:12.510 --> 04:20.970
+Dies wird der Fremdschlüssel sein, und ich werde dies als einzigartig definieren, so dass ich nur einer sein kann
+
+42
+04:22.800 --> 04:37.150
+Zeile in dieser Tabelle mit dem gleichen Schüler I.D. Ich werde das Ablaufdatum als Datum hinzufügen, das angibt, wann
+
+43
+04:37.150 --> 04:38.430
+das
+
+44
+04:38.530 --> 04:40.110
+Bibliotheks-Mitgliedskarte würde ablaufen
+
+45
+04:43.610 --> 04:45.750
+Ich habe diese Tabelle erstellt.
+
+46
+04:45.740 --> 04:51.380
+Wenn wir daraus auswählen. Ich erwarte keine Daten
+
+47
+04:56.800 --> 05:05.170
+Wir können die Beziehung zwischen Student und Bibliotheksmitgliedschaftskarte über die Benutzeroberfläche erstellen.
+
+48
+05:07.120 --> 05:13.650
+Sie können es auch durch Code definieren, aber ich werde zuerst die Benutzeroberfläche durch diese Verwenden der Datenbank verwenden
+
+49
+05:13.650 --> 05:21.500
+Diagramme > Option > neues Datenbankdiagramm.
+
+50
+05:21.980 --> 05:25.880
+Hier werden wir hinzufügen .. (Lassen Sie uns aktualisieren)
+
+51
+05:25.880 --> 05:32.420
+Hier werden wir alle drei Tabellenbücher, Bibliotheks-Mitgliedskarte und Studenten hinzufügen.
+
+52
+05:39.420 --> 05:50.370
+Und wir wollen eine Beziehung zwischen Student und Student I.D. so Studenten die I.D. in den Studenten zu machen
+
+53
+05:50.370 --> 05:57.850
+Tabelle mit der Schüler-ID und der Bibliotheks-Mitgliedschaftskartentabelle einen Namen für die Beziehung.
+
+54
+05:59.280 --> 06:08.390
+Okay und dies ist jetzt eine Eins-zu-eins-Beziehung zwischen Student I.D. und der Bibliotheksmitgliedschaft geschaffen
+
+55
+06:08.390 --> 06:08.780
+Karte.
+
+56
+06:10.040 --> 06:11.150
+So sollte es speichern, dass
+
+57
+06:17.020 --> 06:17.920
+jetzt.
+
+58
+06:18.230 --> 06:25.250
+Wir werden jetzt die Integrität dieser Beziehung demonstrieren, indem wir versuchen, sie zu brechen.
+
+59
+06:27.350 --> 06:29.730
+Also zuerst sollten wir eine Zeile in die hinzufügen.
+
+60
+06:29.810 --> 06:31.730
+Bibliotheks-Mitgliedschaftskartentabelle.
+
+61
+06:34.310 --> 06:36.070
+Also wählen wir * von Studenten
+
+62
+06:40.580 --> 06:44.990
+Also sollten wir Peter Murphy I.D. 3 einen Bibliotheks-Mitgliedsausweis geben.
+
+63
+06:51.750 --> 06:56.130
+Beachten Sie, dass Sie nicht in die I.D.-Spalte einfügen müssen, da diese automatisch generiert wird.
+
+64
+06:56.160 --> 06:58.290
+In der Tat sollten Sie nicht.
+
+65
+06:58.320 --> 06:59.790
+Die Datenbank erlaubt es Ihnen nicht,
+
+66
+07:04.330 --> 07:08.280
+Schüler-ID 3, das ist Peter Murphy.
+
+67
+07:08.960 --> 07:12.860
+Ablauf im 2025-01-01
+
+68
+07:37.580 --> 07:39.590
+hier haben wir eine
+
+69
+07:42.810 --> 07:47.610
+Bibliotheks-Mitgliedskarte für Studenten-ID 3 eingerichtet
+
+70
+07:47.690 --> 07:51.580
+Sehen wir uns nun an, was passiert, wenn wir versuchen, Student I.D. zu löschen.
+
+71
+07:51.590 --> 07:51.900
+Drei
+
+72
+08:00.210 --> 08:11.080
+hier haben wir einen Fehler, der besagt, dass der Fremdschlüssel uns davon abgehalten hat, die Schüler-ID 3 zu löschen, weil
+
+73
+08:11.170 --> 08:13.380
+es gibt eine Reihe.
+
+74
+08:13.450 --> 08:17.210
+Es gibt eine Zeile in der Bibliotheks-Mitgliedschaftskartentabelle.
+
+75
+08:17.750 --> 08:24.520
+Und ist die eins zu eins Beziehung, so dass es bedeutet, dass wir keine zweite Bibliothek Sertheimkarte für
+
+76
+08:24.520 --> 08:25.240
+derselbe Student
+
+77
+08:29.580 --> 08:34.350
+Wir dürfen dies aufgrund dieses eindeutigen Bezeichners nicht tun
+
+78
+08:37.280 --> 08:43.720
+So definieren Sie die Beziehung mithilfe der Benutzeroberfläche.
+
+79
+08:43.740 --> 08:46.690
+Sehen wir uns nun an, ob wir dasselbe mit Code tun können.
+
+80
+08:46.710 --> 08:50.280
+Also sollte ich zurück zum Diagramm gehen, um die Beziehung zu löschen
+
+81
+08:56.830 --> 09:03.870
+und jetzt werde ich wieder eine Beziehung erstellen, aber dieses Mal mit Code
+
+82
+09:15.320 --> 09:21.200
+so wird der Befehl 
+
+83
+09:28.950 --> 09:29.960
+Ändern der Tabellenbibliothekmembershipcard Hinzufügen von Einschränkung
+
+84
+09:34.330 --> 09:35.590
+der Name der Beziehung
+
+85
+09:48.140 --> 09:49.300
+der Name des Fremdschlüssels
+
+86
+10:03.050 --> 10:03.740
+Verweise
+
+87
+10:11.850 --> 10:12.440
+Studenten
+
+88
+10:15.970 --> 10:16.770
+der Primärschlüssel
+
+89
+10:22.930 --> 10:31.070
+wird nun erstellt, bis wir erneut überprüfen, ob wir die Studenten-ID 3 löschen können und
+
+90
+10:34.110 --> 10:39.660
+So erstellen Sie dies mit der Benutzeroberfläche und über Code in dieser speziellen Instanz ist es wahrscheinlich
+
+91
+10:39.720 --> 10:42.330
+einfachere Verwendung der Benutzeroberfläche
+
+92
+10:47.350 --> 10:54.640
+eine eins zu viele Beziehung. hier stellen wir einen Tisch namens Bücherregal vor.
+
+93
+10:54.910 --> 11:02.470
+Dadurch wird der Speicherort eines Buches in einer Bibliothek angezeigt, in dem ein Bücherregal viele Bücher in diesem
+
+94
+11:02.470 --> 11:02.790
+Demo.
+
+95
+11:02.800 --> 11:06.140
+Wir erstellen einen Bücherregaltisch mit einer ID.
+
+96
+11:06.280 --> 11:10.150
+Primärschlüssel und Standort.
+
+97
+11:10.150 --> 11:19.540
+Wir werden Bücherregal I.D. als Spalte die Büchertabelle hinzufügen und wir werden Bücherregal-ID als die fremde definieren
+
+98
+11:19.540 --> 11:26.290
+Schlüssel definieren wir die Beziehung zwischen ID in der Bücherregaltabelle und Bücherregal-ID in den Büchern
+
+99
+11:26.290 --> 11:27.510
+Tabelle.
+
+100
+11:28.060 --> 11:35.140
+Und dann werden wir Beziehungsintegrität demonstrieren, indem wir versuchen, ein Bücherregal zu löschen, das Bücher hat
+
+101
+11:35.140 --> 11:37.200
+darauf.
+
+102
+11:37.240 --> 11:44.870
+Wir werden eine eins zu viele Beziehung mit der Bücherregal Analogie zeigen.
+
+103
+11:46.110 --> 11:52.810
+So werden wir zuerst einen Tisch namens Bücherregale erstellen.
+
+104
+11:57.300 --> 12:00.310
+Tabellenbuchregal erstellen ( id int identity(1,1),
+
+105
+12:04.880 --> 12:05.500
+Primärschlüssel.
+
+106
+12:07.590 --> 12:12.890
+Das heißt, dass die Idee der Hauptschlüssel des Bücherregaltisches sein wird.
+
+107
+12:13.360 --> 12:24.600
+Und ich werde Location als varchar(max) verwenden, um den Ort des Buches zu beschreiben.
+
+108
+12:24.940 --> 12:27.910
+Geben wir ihm also einige Beispieldaten.
+
+109
+12:28.090 --> 12:35.300
+Ins Bücherregal einfügen (Standort) 
+
+110
+12:35.440 --> 12:40.000
+Erneut ist es nicht notwendig, in die ID-Spalte einzufügen.
+
+111
+12:41.530 --> 12:45.770
+Werte ('Shelf neben Fenster')
+
+112
+12:50.260 --> 12:52.320
+Also, wenn wir jetzt einen Blick auf unseren Regaltisch werfen.
+
+113
+12:58.160 --> 13:01.430
+Wir haben jetzt eine Reihe namens "Regal neben dem Fenster"
+
+114
+13:03.050 --> 13:04.890
+Werfen wir also einen Blick auf unsere Büchertabelle.
+
+115
+13:06.620 --> 13:12.370
+Wir fügen dieser Büchertabelle eine Spalte mit der Bezeichnung Bücherregal-ID hinzu.
+
+116
+13:15.980 --> 13:25.490
+Ändern von Tabellenbüchern hinzufügen bookshelfID int
+
+117
+13:31.710 --> 13:34.720
+schauen Sie sich die Büchertabelle an.
+
+118
+13:34.790 --> 13:37.430
+Sie werden feststellen, dass die bookShelfID NULL enthält
+
+119
+13:37.970 --> 13:40.550
+Dies bedeutet, dass keine Daten
+
+120
+13:44.400 --> 13:54.000
+Wir werden beide Bücher derselben Bücherregal-ID zuordnen
+
+121
+13:54.290 --> 13:55.130
+Aktualisieren Bücher set bookShelfID=1
+
+122
+13:58.180 --> 13:59.300
+Schauen wir uns unsere Büchertabelle noch einmal an.
+
+123
+14:00.710 --> 14:04.400
+Jetzt stehen also beide Bücher im BücherregalID
+
+124
+14:04.430 --> 14:04.670
+Eine
+
+125
+14:07.540 --> 14:13.210
+Um die Beziehung zwischen diesen beiden Tabellen zu definieren, sollten Sie daher in unsere Datenbank zurückkehren
+
+126
+14:13.210 --> 14:13.710
+Diagramm
+
+127
+14:18.400 --> 14:20.470
+Hinzufügen des Tabellenbuchregals
+
+128
+14:24.900 --> 14:27.150
+und ich werde definieren
+
+129
+14:30.220 --> 14:35.420
+Was ich bemerkt habe, ist, dass die ID in der Büchertabelle kein Primärschlüssel ist.
+
+130
+14:35.430 --> 14:40.000
+Wird dort den Primärschlüssel setzen und wir werden
+
+131
+14:43.580 --> 14:49.790
+eine Freundschaft zwischen der Bücherregal-ID und dem Büchertisch und der ID im ibookshelf herstellen
+
+132
+14:49.790 --> 14:51.310
+Tabelle wie folgt
+
+133
+14:55.740 --> 14:56.440
+wir speichern dies
+
+134
+15:00.320 --> 15:06.510
+So ist dies eine eins zu viele Beziehung können Sie sehen, dass dies die eins zu eins ist und dies ist eine eins zu viel
+
+135
+15:08.100 --> 15:15.390
+Konzept ist, dass ich mehr als ein Buch im selben Bücherregal sein kann, aber nur ein Student kann ein
+
+136
+15:15.810 --> 15:19.680
+Bibliotheks-Mitgliedskarte.
+
+137
+15:20.130 --> 15:27.190
+Dies hat also erneut die Daten und die Tabelle nicht geändert, aber die Datenintegrität erzwungen.
+
+138
+15:27.690 --> 15:35.430
+Wenn ich also z. B. versuche, das Bücherregal zu löschen, werden diese beiden Bücher in der Datenbank
+
+139
+15:35.430 --> 15:36.170
+stoppen Sie mich.
+
+140
+15:46.570 --> 15:51.190
+Ich habe versucht, es zu löschen.  Die Datenbank hat mich angehalten, wenn ich die Bücherregaltabelle überprüfe, ist das Bücherregal
+
+141
+15:51.190 --> 15:51.920
+immer noch da.
+
+142
+15:59.510 --> 16:01.990
+Eine Beziehung zu vielen.
+
+143
+16:02.030 --> 16:08.180
+Hier stellen wir einen Tisch mit dem Namen Buchverleih vor, der anzeigt, welche Studenten welche Bücher gemietet haben.
+
+144
+16:09.560 --> 16:10.840
+ein Student kann ausleihen
+
+145
+16:10.910 --> 16:16.850
+Viele Bücher über ein Buch können von vielen Studenten in dieser Tabelle ausgeliehen werden
+
+146
+16:16.870 --> 16:19.770
+Wir erstellen einen Buch-Leihtisch mit einem Ausweis.
+
+147
+16:19.780 --> 16:30.190
+Primary Key Studentenausweis, Fremdschlüssel Buch ID Fremdschlüssel und die Daten wie Datum zurückgezogen Datum
+
+148
+16:30.190 --> 16:40.490
+Zurück-Datum zurückgegeben. Wir werden die Beziehung zwischen I.D. und Student I.D. von den Studenten definieren
+
+149
+16:40.490 --> 16:41.570
+Tabelle.
+
+150
+16:41.850 --> 16:46.320
+Und dann werden wir die Beziehung zwischen I.D. und Buch bereit in der Büchertabelle definieren.
+
+151
+16:47.090 --> 16:55.040
+Und dann werden wir Beziehungsintegrität demonstrieren, indem wir versuchen, einen Schüler zu löschen, der eine Zeile hat
+
+152
+16:55.060 --> 17:03.430
+in der Tabelle "Buchausleihe" oder löschen Sie ein Buch, das eine Zeile in der Tabelle "Buchausleihe" enthält. 
+
+153
+17:03.430 --> 17:07.140
+Die dritte Art der Beziehung ist viele zu vielen Beziehung.
+
+154
+17:07.410 --> 17:13.740
+Wir werden zeigen, was eine Beziehung für viele zu vielen ist, wie das Erstellen eines Buchkredittischs. 
+
+155
+17:13.740 --> 17:22.150
+Ein Buchverleih, der angibt, wann ein Schüler ein Buch herausgenommen hat, kann ein Student viele Bücher und ein Buch herausnehmen
+
+156
+17:22.180 --> 17:24.450
+kann von vielen Schülern herausgenommen werden.
+
+157
+17:24.460 --> 17:26.710
+Das ist es, was viele für viele gemeint haben.
+
+158
+17:26.850 --> 17:27.140
+Beitreten
+
+159
+17:30.000 --> 17:31.670
+so werden wir die Buch-Darlehenstabelle erstellen
+
+160
+17:37.790 --> 17:41.980
+id int identity(1,1), 
+
+161
+17:42.010 --> 17:42.690
+Der Primärschlüssel
+
+162
+17:46.380 --> 17:51.570
+erstellen wir eine Spalte für die Schüler-ID (int)
+
+163
+17:54.920 --> 17:56.750
+eine Buch-ID
+
+164
+18:01.320 --> 18:06.140
+und ein paar Termine wie Datum zurückgezogen
+
+165
+18:13.010 --> 18:18.460
+Datum zurückgegeben dann Fälligkeitsdatum
+
+166
+18:24.120 --> 18:29.800
+Dies würde also anzeigen, wann ein Schüler das Buch in der Bibliothek mitgenommen hat, wenn es fällig ist.
+
+167
+18:29.800 --> 18:46.660
+Und wenn es zu einem bestimmten Zeitpunkt in der Zukunft zurückgegeben wurde ausführen. zurück zu unserem Diagramm , fügen Sie Tabelle Bookloan
+
+168
+18:47.100 --> 18:58.180
+Jetzt müssen wir zwei Beziehungen zwischen dem Studentenausweis und dem Studentenausweis schaffen.
+
+169
+18:58.180 --> 19:02.950
+ziehen Sie von hier nach dort und erstellen Sie dies.
+
+170
+19:03.830 --> 19:06.990
+Versuchen Sie also einfach, dieses Diagramm neu zu organisieren.
+
+171
+19:09.680 --> 19:18.280
+Möchten Sie nun dieselbe Beziehung zwischen der Buch-ID-Spalte und der Bookloan-Tabelle mit der ID erstellen.
+
+172
+19:18.310 --> 19:22.610
+Spalte in der Büchertabelle. Wir schleppen von dort nach dort.
+
+173
+19:22.990 --> 19:23.920
+Akzeptieren, Akzeptieren
+
+174
+19:26.810 --> 19:33.120
+Hier haben wir also eine Eins-zu-eins-Beziehung zwischen Studenten und Bibliotheks-Mitgliedskarte.
+
+175
+19:33.160 --> 19:39.660
+Wir wollen viele Beziehung zwischen Buchleihe und Studenten und die eine zu viele Beziehung zwischen Bookloan
+
+176
+19:39.660 --> 19:41.190
+Bücher zusammen.
+
+177
+19:41.240 --> 19:46.240
+Das macht viele zu viele Beziehungen. Also speichern wir diese
+
+178
+19:51.130 --> 19:52.610
+und ich werde versuchen, zu demonstrieren
+
+179
+19:55.180 --> 19:58.180
+die Beziehungsintegrität.
+
+180
+19:58.180 --> 20:01.480
+Werfen wir also zuerst einen Blick auf unsere Schüler.
+
+181
+20:06.540 --> 20:10.590
+Also ist Peter Murphy wieder Student 3.
+
+182
+20:10.620 --> 20:11.610
+Nehmen wir ein davon.
+
+183
+20:13.290 --> 20:14.400
+Werfen wir einen Blick auf die Bücher
+
+184
+20:22.840 --> 20:26.880
+und wir werden sagen, das erste Harry Potter Buch ist ID 1
+
+185
+20:30.980 --> 20:36.170
+Möglicherweise wird hier auf dem SQL-Server ein Fehler hervorgehoben, da es sich nicht um SQL handelt.
+
+186
+20:36.170 --> 20:39.340
+Es ist nur Text, der verwendet wird, um einen Kommentar zu machen.
+
+187
+20:39.430 --> 20:41.020
+Sie drücken die Bindestrichtaste zweimal
+
+188
+20:46.320 --> 20:50.920
+Sie werden nun in den Buchkredittisch einfügen.
+
+189
+20:51.120 --> 21:01.030
+Die Tatsache, dass Peter Murphy dieses Harry Potter Buch so in Bookloan eingefügt hat, 
+
+190
+21:01.080 --> 21:07.130
+fügen Sie die ID-Spalte erneut nicht ein
+
+191
+21:07.830 --> 21:12.720
+(Studentid,BookID,DateWithdrawn,DateDue)
+
+192
+21:12.840 --> 21:15.110
+(Studentid,BookID,DateWithdrawn,DateDue)
+
+193
+21:15.500 --> 21:22.500
+Dieses Buch wurde noch nicht zurückgegeben, also werden wir diese Kolumne weglassen. 
+
+194
+21:22.500 --> 21:29.860
+Student ID 3 das ist Peter Murphy, BookID 1 das ist ein Harry Potter Buch Kammer der Geheimnisse 
+
+195
+21:30.150 --> 21:48.830
+Datum zurückgezogen, Wir werden sagen, es ist 2020-01-01 und ist fällig zurück 2020-30-01
+
+196
+21:48.920 --> 21:50.990
+Das wäre also der 30. Januar
+
+197
+21:55.250 --> 21:56.690
+Einfügen in den Buchkredittisch
+
+198
+21:57.080 --> 21:59.310
+Wenn wir also jetzt aus der Buchkredittabelle auswählen
+
+199
+22:02.390 --> 22:08.880
+wir können sehen, dass wir Student I.D. 3 hat Buch ID 1 an diesem Datum herausgenommen und war fällig zurück
+
+200
+22:08.880 --> 22:12.880
+an diesem Tag. Nun, um die beziehungsnahe Integrität zu demonstrieren.
+
+201
+22:12.900 --> 22:14.960
+Ich werde versuchen, die Studenten-ID 3 zu löschen
+
+202
+22:27.810 --> 22:30.260
+Und die Datenbank hat mich gestoppt.
+
+203
+22:30.360 --> 22:32.930
+Was ist, wenn ich versucht habe, Buch 1 zu löschen
+
+204
+22:38.920 --> 22:45.050
+wieder einmal hat mich die Datenbank gestoppt und beide Bücher sind immer noch vorhanden.
+
+205
+22:45.050 --> 22:46.340
+Alle Studenten sind noch anwesend.
+
+206
+22:51.140 --> 23:00.140
+Verknüpfungen : Um eine select-Anweisung zu schreiben, die Daten aus zwei Tabellen gleichzeitig basierend auf einer Datenbeziehung zurückgibt.
+
+207
+23:00.140 --> 23:09.050
+Select * von Studenten beitreten LibraryMembershipCard auf Students.id = LibraryMembershipCard.studentID
+
+208
+23:09.140 --> 23:11.920
+Select * von Studenten beitreten LibraryMembershipCard auf Students.id = LibraryMembershipCard.studentID
+
+209
+23:11.990 --> 23:12.740
+Select * von Studenten beitreten LibraryMembershipCard auf Students.id = LibraryMembershipCard.studentID
+
+210
+23:16.480 --> 23:24.280
+Linker Join: Standardmäßig filtert eine Verknüpfung Zeilen heraus, in denen keine Beziehung vorhanden ist, wenn Sie möchten
+
+211
+23:24.280 --> 23:27.670
+, um alle Zeilen zurückzugeben, aber die Daten leer zu lassen.
+
+212
+23:28.150 --> 23:33.610
+D.h. NULL, wenn keine Beziehung gefunden wurde und Sie eine linke Verknüpfung verwenden können, um die Ergebnisse aus dem
+
+213
+23:33.610 --> 23:41.170
+Vorherige Abfrage bei Verwendung der linken Verknüpfung
+
+214
+23:41.350 --> 23:48.860
+Select * fron-Studenten, die die LibraryMembershipCard auf students.id = LibraryMembershipCard.studentId verlassen haben
+
+215
+23:48.860 --> 23:50.960
+Das Schreiben von Verknüpfungen kann sehr ausführlich werden.
+
+216
+23:51.050 --> 23:57.090
+Hier ist also ein Kurzschlusstrick, um Ihre SQL-Anweisungen mithilfe von Tabellenaliasen zu kürzen.
+
+217
+23:57.090 --> 24:07.170
+Wählen Sie * aus der Teilnahme der Studenten an LibraryMembershipCard L auf S.id = L.studentID
+
+218
+24:07.180 --> 24:11.760
+Und hier ist ein Video, das diese Aussagen zeigt, die
+
+219
+24:15.930 --> 24:24.240
+Wenn wir eine Beziehungseinrichtung durchgeführt haben, können wir das Join-Schlüsselwort in SQL verwenden, um ausgewählte Anweisungen zu schreiben
+
+220
+24:24.690 --> 24:33.120
+Daten aus mehr als einer Tabelle zurückgeben, also lassen Sie uns demonstrieren, dass beim ersten Typ das 1:1
+
+221
+24:33.180 --> 24:34.610
+Beziehung.
+
+222
+24:35.120 --> 24:55.380
+Wählen Sie * von Studenten beitreten bibliothekMembershipcard für Studenten. Id = librarymembershipcard.studentID
+
+223
+24:58.220 --> 25:00.160
+Wählen Sie * von Studenten beitreten bibliothekMembershipcard für Studenten. Id = librarymembershipcard.studentID
+
+224
+25:03.460 --> 25:04.160
+Wählen Sie * von Studenten beitreten bibliothekMembershipcard für Studenten. Id = librarymembershipcard.studentID
+
+225
+25:07.070 --> 25:09.990
+und führen Sie diese Anweisung aus.
+
+226
+25:10.090 --> 25:18.370
+Hier können Sie also die Ergebnisse sehen, wo wir Daten aus der ersten Tabelle Studenten kombiniert mit Daten haben
+
+227
+25:18.430 --> 25:30.680
+von der zweiten Tabellenbibliothek Mitgliedskarte jetzt habe ich eine Standard-Join hier getan, die zurück
+
+228
+25:30.920 --> 25:41.600
+nur die Zeilen, in denen die Daten übereinstimmen. Sie können auch eine linke Verknüpfung verwenden, die auch Zeilen zurückgibt,
+
+229
+25:41.660 --> 25:51.260
+Die Daten stimmten nicht überein. Nun können Sie also den Unterschied sehen, wo die Zeilen 1 und 2 nun zurückgegeben wurden.
+
+230
+25:51.260 --> 25:57.110
+Mary Smith, Mary Reid jedoch die Daten aus der zweiten Tabelle ist NULL, weil sie nicht vorhanden sind.
+
+231
+25:57.920 --> 26:07.940
+Das ist also unsere Wahl zwischen dem linker Join und dem ist ein Standard-Join, also jetzt werfen wir einen Blick
+
+232
+26:08.240 --> 26:17.150
+bei der zweiten Art von Beziehung, die eine eins zu viele Beziehung ist, die unsere Bücherregale ist.
+
+233
+26:17.150 --> 26:17.890
+Schauen wir uns also um.
+
+234
+26:18.920 --> 26:19.860
+Select * aus Büchern verbinden Bücherregal auf books.bookshelfID = bookshelf.id
+
+235
+26:25.880 --> 26:27.440
+Select * aus Büchern verbinden Bücherregal auf books.bookshelfID = bookshelf.id
+
+236
+26:27.480 --> 26:27.860
+Select * aus Büchern verbinden Bücherregal auf books.bookshelfID = bookshelf.id
+
+237
+26:27.890 --> 26:29.050
+Select * aus Büchern verbinden Bücherregal auf books.bookshelfID = bookshelf.id
+
+238
+26:32.300 --> 26:47.040
+wenn nun Daten aus beiden Tabellen zurückgegeben werden
+
+239
+26:50.650 --> 26:55.520
+Die dritte Art von Join ist die viele bis viele
+
+240
+26:58.510 --> 27:02.190
+den Buchkredittisch.
+
+241
+27:02.290 --> 27:09.000
+Wir wollen an zwei Tischen jetzt den Schülertisch und den Büchertisch verbinden.
+
+242
+27:09.030 --> 27:14.750
+Select * aus bookloan join students on students.id = bookloan.studentID
+
+243
+27:17.650 --> 27:20.670
+Select * aus bookloan join students on students.id = bookloan.studentID
+
+244
+27:20.930 --> 27:28.250
+Select * aus bookloan join students on students.id = bookloan.studentID
+
+245
+27:28.250 --> 27:40.310
+Das ist also auf dem Studententisch verbunden, aber wir wollen auch auf dem Büchertisch mitmachen. So können wir jetzt
+
+246
+27:41.140 --> 27:41.560
+Buch über books.id = bookloan.bookid beitreten
+
+247
+27:41.890 --> 27:42.310
+Buch über books.id = bookloan.bookid beitreten
+
+248
+27:45.910 --> 27:57.660
+Dadurch werden nun Daten aus allen drei Tabellen, der Buchleihtabelle, der Schülertabelle und der Buchtabelle zurückgegeben.
+
+249
+27:57.990 --> 28:03.810
+Jetzt können Sie feststellen, dass diese Join-Anweisungen beginnen, ein wenig ausführlich zu werden.
+
+250
+28:03.810 --> 28:13.380
+Was Sie also tun können, ist Tabellenaliase hinzuzufügen, was einfach ein kürzerer Name für jede Tabelle ist.
+
+251
+28:14.160 --> 28:20.400
+Also verwende ich S B und erserneue diese
+
+252
+28:31.080 --> 28:37.500
+die gleiche Abfrage nur prägnanter.
+
+253
+28:37.500 --> 28:46.580
+Und wenn wir zum Beispiel nur die Daten aus der Tabelle der Schüler und Bücher sehen wollten, können wir sagen, 
+
+254
+28:46.590 --> 28:52.040
+S.* , B.*
+
+255
+28:53.010 --> 29:01.570
+Das sind also die Schüler und die Bücher.
+
+256
+29:01.890 --> 29:09.720
+Also zu euch; jetzt als Test haben wir bücher vorher definiert, um nur einen Autor zu haben.
+
+257
+29:09.840 --> 29:13.240
+Aber es gibt Bücher, die mehr als einen Autor haben können.
+
+258
+29:13.350 --> 29:20.690
+Wie können wir also den Datenbankentwurf so ändern, dass Bücher unterstützt werden, die mehr als einen Autor haben, und
+
+259
+29:20.700 --> 29:23.190
+diese Beziehung.
+
+260
+29:23.190 --> 29:26.480
+Starten Sie also dieses Video und wenn Sie gefragt werden.
+
+261
+29:26.610 --> 29:30.420
+Drücken Sie eine Pause und geben Sie dies selbst.
+
+262
+29:30.420 --> 29:34.890
+Sobald Sie ihnen einen Go-Vorgang das Video fortgesetzt haben und sehen, wie Sie
+
+263
+29:41.390 --> 29:42.550
+in dieser Übung.
+
+264
+29:42.560 --> 29:46.630
+Wir werden hier ein echtes Problem ansprechen.
+
+265
+29:46.640 --> 29:49.440
+Es gibt ein Problem mit unserem Datenbankdesign.
+
+266
+29:49.580 --> 29:55.640
+Wir gehen davon aus, dass es für jedes Buch nur einen Autor geben kann.
+
+267
+29:55.670 --> 30:02.070
+Es ist jedoch durchaus möglich, dass ein Buch mehr als einen Autor haben kann.
+
+268
+30:02.200 --> 30:08.380
+Zum Beispiel wurde dieses Buch kleine Dinge von zwei verschiedenen Autoren geschrieben.
+
+269
+30:09.250 --> 30:16.820
+Daher möchte ich, dass Sie den Datenbankentwurf anpassen, um mehrere Autoren pro Buch zu unterstützen.
+
+270
+30:19.040 --> 30:20.700
+Machen Sie es mit.
+
+271
+30:20.960 --> 30:23.140
+Sie können dieses Video jetzt anhalten.
+
+272
+30:23.210 --> 30:24.440
+Beginnen Sie erneut.
+
+273
+30:24.440 --> 30:26.040
+Sobald Sie es ausprobiert haben.
+
+274
+30:27.290 --> 30:28.100
+Halten Sie das Video jetzt an
+
+275
+30:32.420 --> 30:44.600
+Okay, mal sehen, wie Sie weitergekommen sind; dies ist eine Beziehung von vielen zu vielen, weil ein Buch jetzt die Möglichkeit hat,
+
+276
+30:44.600 --> 30:51.770
+mehrere Autoren zu haben, aber natürlich kann ein Autor auch mehrere Bücher schreiben, daher
+
+277
+30:51.830 --> 31:00.690
+zwei neue Tabellen, eine für den Autor und eine zum Speichern der Beziehung zwischen Büchern und Autoren.
+
+278
+31:00.690 --> 31:05.400
+Also werden wir diesen Buchautor nennen. 
+
+279
+31:05.530 --> 31:23.570
+Wir beginnen mit der Autorentabelle: CREATE TABLE author( id int identity (1,1) Primärschlüssel, Authorname
+
+280
+31:26.290 --> 31:27.750
+varchar(max)
+
+281
+31:33.140 --> 31:44.320
+und jetzt die Tabelle, um unsere Beziehung zwischen Autoren und Büchern als eine Viele zu viele Beziehung zu speichern
+
+282
+31:50.100 --> 31:51.440
+id int identity(1,1),
+
+283
+31:54.470 --> 31:55.580
+Primärschlüssel
+
+284
+31:59.200 --> 32:09.590
+authorID int, BookID int
+
+285
+32:11.590 --> 32:19.440
+In dieser Tabelle sind keine weiteren Daten erforderlich. Lassen Sie uns unsere drei Autoren erstellen, die J.K. Rowling für unsere
+
+286
+32:19.440 --> 32:20.630
+bestehenden Büchern.
+
+287
+32:20.880 --> 32:26.390
+Nur um Ihren Speicher zu aktualisieren.
+
+288
+32:26.490 --> 32:29.810
+Zwei Bücher von J.K. Rowling mindestens zwei neue Autoren
+
+289
+32:47.940 --> 32:48.600
+J.K. Rowling
+
+290
+32:54.580 --> 32:58.770
+und J.K. Rowling.
+
+291
+32:59.180 --> 33:01.610
+Und ich will auch diese beiden Autoren hier
+
+292
+33:18.710 --> 33:19.470
+werfen wir einen Blick auf unsere Autorentabelle.
+
+293
+33:27.320 --> 33:29.600
+wir haben drei Autoren; Richtig.
+
+294
+33:29.770 --> 33:31.040
+Werfen wir einen Blick auf die Büchertabelle
+
+295
+33:37.830 --> 33:38.140
+jetzt.
+
+296
+33:38.410 --> 33:41.880
+Wir brauchen die Autorenspalte in dieser Büchertabelle nicht mehr.
+
+297
+33:41.950 --> 33:54.630
+Daher können wir den Befehl Drop-Spalte verwenden, um Tabellenbücher Drop-Spalten-Autor zu ändern
+
+298
+33:58.580 --> 34:02.640
+Seien Sie damit noch einmal vorsichtig, da sql Server kein Rückgängigmachen vorliegt.
+
+299
+34:02.660 --> 34:12.630
+Wenn Sie also wichtige Daten in dieser Autorenspalte haben, werden sie gelöscht. 
+
+300
+34:12.680 --> 34:15.390
+Wenn Sie sich die Tabelle "Bücher" ansehen, wird die Autorenspalte nun gelöscht.
+
+301
+34:15.590 --> 34:18.350
+Wir werden kein neues Buch in den Büchertisch einfügen
+
+302
+34:22.170 --> 34:27.410
+Buchname, Seiten und BookshelfId
+
+303
+34:28.890 --> 34:37.770
+Beachten Sie, dass ich die Autoren an dieser Stelle nicht einfüge. Werte ("Kleine schöne Dinge",
+
+304
+34:42.190 --> 34:44.500
+Seiten 438,
+
+305
+34:47.270 --> 34:48.090
+Bücherregal ID 1
+
+306
+34:55.050 --> 34:57.690
+An dieser Stelle haben wir also noch zwei Dinge zu tun.
+
+307
+34:57.690 --> 35:07.800
+Eine besteht darin, unsere Primär- und Fremdschlüssel in unsere Beziehungen einzurichten und die Daten im Buch aufzufüllen.
+
+308
+35:07.920 --> 35:09.440
+Autorentabelle.
+
+309
+35:09.510 --> 35:14.160
+Öffnen wir also unser Datenbankdiagramm und fügen Sie diese beiden neuen Tabellen hinzu.
+
+310
+35:24.620 --> 35:25.610
+Also ein...
+
+311
+35:33.030 --> 35:37.290
+Die Buch-ID ist der ID aus der Tabelle "Bücher" zugeordnet.
+
+312
+35:40.500 --> 35:48.060
+und eine Autoren-ID ist der ID aus der Autorentabelle zugeordnet.
+
+313
+35:48.090 --> 35:52.180
+Zusammen bildet sich dies in vielen bis vielen Beziehungen.
+
+314
+35:55.240 --> 35:55.970
+Das speichern wir jetzt; Speichern
+
+315
+35:56.600 --> 36:06.240
+Ja.
+
+316
+36:06.830 --> 36:13.920
+Werfen wir jetzt einen Blick auf unsere Büchertabelle
+
+317
+36:14.880 --> 36:18.160
+Unsere Autorentabelle ist auch eine Spalte wieder aufgetaucht.
+
+318
+36:18.210 --> 36:31.990
+Also werde ich nur fallen lassen, dass, Jetzt Buch ID 1 und 2 sind von Autor geschrieben
+
+319
+36:31.990 --> 36:32.950
+Nummer eins.
+
+320
+36:33.670 --> 36:45.010
+Also werden wir es tun; In bookAuthor -Werte (authorID, bookID) einfügen (1,1)
+
+321
+36:45.010 --> 36:45.400
+1 das ist J.K. Rowling
+
+322
+36:45.840 --> 36:46.380
+bookID 1
+
+323
+36:46.390 --> 36:46.600
+Ausführen
+
+324
+36:51.470 --> 36:58.160
+zweites Buch, das BookId 2 ist, hat den gleichen Autor.
+
+325
+36:58.870 --> 37:01.780
+Das dritte Buch hat jedoch zwei Autoren
+
+326
+37:04.460 --> 37:14.800
+Die s/die Autoren-ID 2 und die Autoren-ID 3 für Buch-ID 3 ist
+
+327
+37:16.370 --> 37:18.020
+Wenn wir also unsere Buchautorentabelle betrachten
+
+328
+37:24.640 --> 37:25.840
+Sie sollten vier Zeilen sehen
+
+329
+37:28.590 --> 37:29.940
+, um dieses kleine Buch klar zu sehen.
+
+330
+37:29.990 --> 37:30.820
+ermöglicht das Erstellen einer Verknüpfung
+
+331
+37:30.870 --> 37:42.370
+Mit büchern b auf b.id = ba.bookId
+
+332
+37:42.870 --> 37:49.230
+Autor beitreten a on a.id = ba.authorid
+
+333
+37:49.370 --> 37:50.300
+Alles klar.
+
+334
+37:53.200 --> 37:55.570
+Gibt vier Zeilen zurück
+
+335
+37:55.990 --> 37:58.200
+Wenn wir Nur BookID 3 sehen wollten
+
+336
+37:58.220 --> 38:01.830
+wir können sagen; wobei bookID = 3
+
+337
+38:05.000 --> 38:07.160
+und wir können zwei Autoren für das gleiche Buch sehen
+
+338
+38:10.470 --> 38:18.390
+Ich hoffe, Sie haben diese Lektion befolgt und ich hoffe, sie haben ein ähnliches Ergebnis wie ich. 
+
+339
+38:18.480 --> 38:20.5

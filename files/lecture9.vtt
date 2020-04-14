@@ -1,0 +1,1629 @@
+WEBVTT
+
+0
+00:01.380 --> 00:03.420
+SQL server maintenance.
+
+1
+00:03.540 --> 00:12.080
+Keeping your data safe and secure; keeping your data safe; An organization's data is often crucial
+
+2
+00:12.110 --> 00:18.110
+to day to day operations and often can have severe legal implications if data is compromised.
+
+3
+00:19.310 --> 00:25.160
+It is therefore crucial that you run regular backup procedure and keep the backups in a different location
+
+4
+00:25.160 --> 00:27.380
+to your database server.
+
+5
+00:27.380 --> 00:34.470
+You also need to make sure that your database backups are optimized and secure. 
+
+6
+00:34.470 --> 00:36.370
+Creating a backup of a database.
+
+7
+00:36.560 --> 00:41.510
+You can create a backup using the user interface or via SQL script.
+
+8
+00:41.550 --> 00:51.950
+Backup database Library to Disk="c:\temp\Library.bak'
+
+9
+00:54.560 --> 00:56.700
+video demonstration.
+
+10
+00:56.710 --> 01:03.480
+Here we demonstrate how to backup a database using the user interface and via SQL.
+
+11
+01:03.490 --> 01:10.120
+Here we go demonstrate how to backup the database using the user interface and then via SQL
+
+12
+01:10.120 --> 01:13.120
+first via the user interface; right click on the database.
+
+13
+01:13.120 --> 01:20.570
+Press tasks; press backup; in the first window you'll see the location where the backup will go.
+
+14
+01:21.280 --> 01:25.810
+So by default it will be within this path here.
+
+15
+01:25.810 --> 01:33.700
+If you want to change this we can remove this; press add; and select location on disk; I'm going to select
+
+16
+01:33.710 --> 01:41.350
+C:\temp and give it the name of library.bak
+
+17
+01:44.710 --> 01:45.430
+That's okay.
+
+18
+01:45.900 --> 01:46.740
+Okay.
+
+19
+01:47.270 --> 01:48.950
+Okay.
+
+20
+01:49.310 --> 01:52.290
+Executes; press okay.
+
+21
+01:52.720 --> 01:57.780
+And if we go into this folder we can see there is a file created.
+
+22
+01:59.940 --> 02:05.160
+Now let's do the same process using an SQL command.
+
+23
+02:05.180 --> 02:17.810
+So delete the backup and say; backup database library to disk='C:\Temp\Library.bak'
+
+24
+02:18.710 --> 02:22.370
+backup database library to disk='C:\Temp\Library.bak'
+
+25
+02:22.730 --> 02:23.270
+Execute
+
+26
+02:27.240 --> 02:30.700
+and we can see the backup file is created again.
+
+27
+02:34.320 --> 02:40.290
+Restoring an data base; you can restore a database from the previous backup by using user interface
+
+28
+02:40.530 --> 02:47.730
+or by running the script: restore database Library from disk='C:\temp\Library.bak'
+
+29
+02:48.220 --> 02:53.620
+video demonstration.
+
+30
+02:53.620 --> 02:57.540
+Here we'll demonstrate how to restore a database using the user interface, and via SQL. 
+
+31
+02:57.640 --> 03:04.990
+I'm now going to demonstrate how to restore a database using the user interface.
+
+32
+03:04.990 --> 03:07.090
+and then via SQL
+
+33
+03:07.570 --> 03:14.360
+So first I'm going to delete this database in order to restore it.
+
+34
+03:14.740 --> 03:20.510
+Make sure you have a backup before you delete your database; delete.
+
+35
+03:20.630 --> 03:22.210
+Press OK.
+
+36
+03:22.210 --> 03:27.210
+The database is now deleted; you want to restore the database.
+
+37
+03:27.370 --> 03:31.540
+Right click; restore database
+
+38
+03:34.510 --> 03:38.270
+from device; add file
+
+39
+03:41.300 --> 03:52.220
+go to the location, which was c:\temp\library.bak ; OK ; and press OK.
+
+40
+03:56.560 --> 04:02.370
+Now see that our database has been restored again.
+
+41
+04:02.410 --> 04:09.410
+Now let's see if we can do the same procedure using SQL script once again.
+
+42
+04:09.540 --> 04:11.400
+We shall delete our database
+
+43
+04:14.070 --> 04:29.640
+type: restore database Library from disk = 'c:\temp\library.bak'
+
+44
+04:37.490 --> 04:41.000
+refresh; our database is restored
+
+45
+04:44.270 --> 04:51.440
+data files and the transaction log; SQL server stores the data associated with the database in a file
+
+46
+04:51.440 --> 04:57.050
+with the extension MDF and will store transactions applied to the data in a file with the extension
+
+47
+04:57.350 --> 04:59.140
+LDF.
+
+48
+04:59.140 --> 05:07.040
+If the recovery model our database is set to simple then the LDF file is kept to a minimal size whereas
+
+49
+05:07.190 --> 05:15.230
+if the recovery model is set to full then the LDF can grow large; bulk logged as middle ground where
+
+50
+05:15.230 --> 05:18.800
+the LDF will be moderately large.
+
+51
+05:18.800 --> 05:25.460
+The caveat is that simple backups can only recover to one point in time only whereas full backups can
+
+52
+05:25.460 --> 05:33.130
+recover to a specific point in time and offer protection against damaged MDF files. Video demonstration:
+
+53
+05:34.580 --> 05:39.530
+here we'll demonstrate how to shrink a database and how to truncate the log file in order to free up
+
+54
+05:39.530 --> 05:41.530
+more space.
+
+55
+05:42.500 --> 05:47.930
+Here we'll demonstrate how to shrink a database and how to truncate the log file in order to free up more space.
+
+56
+05:47.930 --> 06:01.890
+So to shrink a database; right click; press tasks; shrink first go to database.
+
+57
+06:01.940 --> 06:10.200
+And here we have twenty one percent is available free space so we can in this case save 200 megabytes
+
+58
+06:10.290 --> 06:11.920
+of the size of the database.
+
+59
+06:12.110 --> 06:12.540
+Press OK
+
+60
+07:02.280 --> 07:10.360
+okay once that's complete if you'll also use the shrink option on the files associated with the database
+
+61
+07:12.990 --> 07:26.550
+so in this case the data has nothing I can free there; press log I can free some free log space of 7 megabytes
+
+62
+07:30.840 --> 07:40.220
+OK so the next step is to change the recovery model to simple see if we can free up anything else
+
+63
+07:40.220 --> 07:48.520
+right click properties; options and change recovery model to simple; press OK
+
+64
+07:52.630 --> 07:57.610
+right click; tasks; shrink the database.
+
+65
+07:58.070 --> 08:10.300
+OK nothing more to shrink there; right click; tasks shrink files; to shrink there and we have a little bit
+
+66
+08:10.300 --> 08:12.580
+more we can free up in the log file
+
+67
+08:15.510 --> 08:23.500
+Re-indexing.  Index fragmentation is where the logical order of pages in an index do not match the physical
+
+68
+08:23.500 --> 08:24.910
+order of the data.
+
+69
+08:24.910 --> 08:31.990
+This can lead to slower queries. You can reduce fragmentation by choosing to rebuild or reorganize indexes
+
+70
+08:33.400 --> 08:40.960
+Rebuilding does a thorough defragmentation but takes the index off line during the process.
+
+71
+08:41.020 --> 08:46.730
+Reorganization does a rough defragmentation but the index is online during the process.
+
+72
+08:47.710 --> 08:54.700
+Video demonstration: Here we will demonstrate how to defragment an index both using reorganization and rebuild techniques 
+
+73
+08:54.700 --> 09:03.050
+Here we will demonstrate how to defragment an index using both reorganization and
+
+74
+09:03.050 --> 09:05.530
+rebuild techniques.
+
+75
+09:05.590 --> 09:08.830
+So first let's find an index.
+
+76
+09:08.830 --> 09:12.770
+Here we go; idxAuthors in the allBooks table.
+
+77
+09:12.970 --> 09:21.730
+If we right click properties on the index and we press fragmentation we can see the total fragmentation
+
+78
+09:21.730 --> 09:26.560
+which is at 98 percent which is a really bad level of fragmentation.
+
+79
+09:26.660 --> 09:34.030
+So we're going to try and improve that first by reorganization and then by rebuild. 
+
+80
+09:34.170 --> 09:35.880
+Using reorganization the index will stay online.
+
+81
+09:36.040 --> 09:43.740
+And if this is a live database with live queries coming to it then it won't affect the overall performance.
+
+82
+09:43.750 --> 09:46.240
+We can also press rebuild which will do a
+
+83
+09:46.510 --> 09:54.150
+Much more thorough defragmentation of this index but it will take the index off line which could cause problems
+
+84
+09:54.160 --> 09:56.320
+if this is a live database.
+
+85
+09:56.320 --> 10:03.140
+So first we're going to press reorganize; press OK
+
+86
+10:06.040 --> 10:14.320
+right click; properties; fragmentation and now the total fragmentation has gone from 98 percent down to
+
+87
+10:14.380 --> 10:15.800
+1 percent.
+
+88
+10:15.940 --> 10:20.730
+Now we're want to try and see if we can get even better than not by pressing the rebuild.
+
+89
+10:20.770 --> 10:23.560
+So right click rebuild.
+
+90
+10:24.290 --> 10:25.670
+OK.
+
+91
+10:26.380 --> 10:27.570
+Right click properties
+
+92
+10:30.730 --> 10:31.870
+fragmentation.
+
+93
+10:32.140 --> 10:34.250
+Fragmentation is now at 0 percent.
+
+94
+10:34.330 --> 10:37.430
+So that's perfectly defragmented.
+
+95
+10:37.480 --> 10:43.800
+You can also do this in script by typing 
+
+96
+10:46.210 --> 10:53.310
+alter index all on allBooks reorganize
+
+97
+10:53.400 --> 11:06.270
+Either rebuild or reorganize 
+
+98
+11:06.780 --> 11:11.050
+And this will reorganize all indexes on the allBooks table.
+
+99
+11:11.050 --> 11:15.360
+So for instance this should have a low fragmentation now.
+
+100
+11:15.400 --> 11:18.530
+So yes, fragmentation is 0.38%
+
+101
+11:21.710 --> 11:27.920
+Maintenance plans; using SQL server management studio you can easily set up maintenance plans to
+
+102
+11:27.920 --> 11:34.240
+automatically schedule housekeeping jobs on the database. A video demonstration:
+
+103
+11:34.370 --> 11:39.410
+Here we will demonstrate how to set up a maintenance plan to keep your database backed up and indexes
+
+104
+11:39.410 --> 11:40.600
+running smoothly.
+
+105
+11:42.120 --> 11:46.800
+Here we're going to demonstrate how to set up maintenance plan to keep your database backed up and
+
+106
+11:46.920 --> 11:52.510
+indexes running smoothly; now with SQL Server Express.
+
+107
+11:52.510 --> 11:58.690
+Unfortunately the facility to run a maintenance plan is not available so therefore we'll need to install
+
+108
+11:58.870 --> 12:01.760
+the SQL Server developer edition.
+
+109
+12:02.020 --> 12:07.400
+This is licensed for development purposes only and shouldn't be used as a production database.
+
+110
+12:07.750 --> 12:16.940
+However if we go to Microsoft SQL Server downloads and select the developer edition; press download;
+
+111
+12:16.940 --> 12:17.020
+open the file
+
+112
+12:21.930 --> 12:26.610
+select basic; accept the terms of an agreement and install
+
+113
+12:46.130 --> 12:52.610
+Now you should be able to connect to our newly installed database.
+
+114
+13:04.010 --> 13:09.170
+We now have two versions of SQL server installed on our computer.
+
+115
+13:09.170 --> 13:15.920
+One is SQL server express which has a library database which you've been working on 
+
+116
+13:15.920 --> 13:17.090
+up to this point
+
+117
+13:17.090 --> 13:23.210
+The second is SQL server developer edition which currently does not have a user database.
+
+118
+13:23.270 --> 13:28.980
+We shall select new database and create a new empty database.
+
+119
+13:29.150 --> 13:30.520
+OK.
+
+120
+13:31.010 --> 13:37.480
+We now have an empty database called library within the management node of SQL server developer edition.
+
+121
+13:37.500 --> 13:44.390
+If you'll notice there is a sub node called maintenance plans and the equivalent node of 
+
+122
+13:44.540 --> 13:45.620
+SQL Server express edition,
+
+123
+13:45.680 --> 13:52.910
+There is no maintenance plan node; so therefore you should select maintenance plan; right click;
+
+124
+13:52.910 --> 13:56.490
+maintenance plan wizard; press next.
+
+125
+13:56.500 --> 14:01.400
+And we need to select a schedule for our maintenance plan.
+
+126
+14:01.610 --> 14:09.170
+So for example we want to run it every Sunday at midnight.
+
+127
+14:09.170 --> 14:16.700
+Press Next; we shall say that we want to reorganize our indexes every week.
+
+128
+14:16.700 --> 14:19.590
+Press next; past next.
+
+129
+14:19.670 --> 14:33.850
+Select the database you wish to apply these actions on such as library press next; next; next; finish.
+
+130
+14:34.020 --> 14:43.290
+This means that every week our database will run a maintenance plan which will keep our indexes reorganized
+
+131
+14:46.050 --> 14:49.130
+backing up and restoring raw files.
+
+132
+14:49.170 --> 14:52.670
+You should always use the backup and restore procedure outlined previously.
+
+133
+14:52.680 --> 14:59.790
+Instead of trying to move the underlying MDF and LDF files but in some cases this may be required
+
+134
+14:59.790 --> 15:01.680
+During operation SQL server will lock.
+
+135
+15:01.710 --> 15:05.640
+It's MDF and LDF files to prevent inadvertent deletion.
+
+136
+15:05.670 --> 15:12.870
+However if you detach a database SQL Server will remove this lock and you can move the files; once moved
+
+137
+15:13.050 --> 15:17.370
+you can reattach the MDF and LDF files to gain access to the database again.
+
+138
+15:19.330 --> 15:25.660
+Video demonstration: In this video we will demonstrate how to move the underlying MDF and LDF files for
+
+139
+15:25.660 --> 15:29.830
+a database using the detach and reattach methods.
+
+140
+15:29.830 --> 15:36.430
+In this video we will demonstrate how to move the underlying MDF and LDF files for a database using
+
+141
+15:36.430 --> 15:42.830
+the detach and reattach methods; normally used to backup and restore procedure.
+
+142
+15:42.850 --> 15:48.160
+However in certain circumstances you can also use this procedure.
+
+143
+15:48.160 --> 15:55.450
+So in this example what we're going to do is copy the database from SQL Server Express which has
+
+144
+15:55.570 --> 16:04.810
+a populated library database into SQL Server developer edition which has an empty library database.
+
+145
+16:06.160 --> 16:13.980
+So you want to see where are the underlying MDF and LDF files for this database.
+
+146
+16:13.980 --> 16:28.330
+Press properties; files; scroll across and we can see the path and the file name; so this is the library
+
+147
+16:28.330 --> 16:33.880
+MDF and library LDF files for the SQL server express Edition.
+
+148
+16:35.260 --> 16:38.390
+Let's have a look at the developer edition.
+
+149
+16:38.800 --> 16:53.640
+Press properties; files; similar path but we notice it's MSSQL.15 library MDF LDF 
+
+150
+16:53.640 --> 16:56.730
+Which is here; library.MDF library.LDF
+
+151
+16:56.870 --> 17:06.860
+So we don't need the empty database so we shall delete this.
+
+152
+17:07.220 --> 17:14.210
+Now if you notice that if we were to try and copy this right now.
+
+153
+17:19.230 --> 17:24.640
+Windows will stop us because those files are currently in use by SQL Server.
+
+154
+17:25.020 --> 17:35.400
+We can get SQL Server to unlock those files by pressing tasks; detach; First you close all query windows.
+
+155
+17:35.400 --> 17:38.040
+Once again tasks; detach
+
+156
+17:40.960 --> 17:45.760
+and we have now detached that database and we can
+
+157
+17:49.600 --> 18:04.190
+go into the express edition; Copy these files and paste it into the developer edition.
+
+158
+18:04.250 --> 18:06.110
+Now we shall reattach
+
+159
+18:08.500 --> 18:08.980
+Attach; add
+
+160
+18:12.850 --> 18:14.090
+Library.mdf
+
+161
+18:15.580 --> 18:18.140
+Okay.
+
+162
+18:18.490 --> 18:25.880
+In the developer edition we press attach. add library.MDF; press OK
+
+163
+18:26.240 --> 18:37.240
+So now we have a library database with all our tables in both the express edition and in the
+
+164
+18:38.020 --> 18:38.830
+developer edition.
+
+165
+18:41.740 --> 18:47.620
+Exporting data - if you're going to move data from your database to a third party that is not running
+
+166
+18:47.620 --> 18:52.990
+SQL server then you can export the data to a common format that can be read by all database
+
+167
+18:52.990 --> 18:54.210
+engines.
+
+168
+18:54.370 --> 18:59.550
+A very common format for exchanging data is CSV or comma separated values.
+
+169
+18:59.560 --> 19:04.780
+This is a simple text format that can be read by every database engine and it's even quite human readable.
+
+170
+19:05.590 --> 19:08.430
+However it can only represent one table per file.
+
+171
+19:10.720 --> 19:17.020
+Video demonstration - Here we will demonstrate how to export a table to CSV using the SQL server
+
+172
+19:17.020 --> 19:19.900
+management studio interface.
+
+173
+19:20.220 --> 19:26.670
+Here we will demonstrate how to export a table to CSV using the SQL server management studio user
+
+174
+19:26.670 --> 19:28.450
+interface.
+
+175
+19:28.660 --> 19:36.230
+Exporting to CSV is useful if you are sharing data with a third party that may or may not use SQL Server.
+
+176
+19:36.630 --> 19:39.640
+So let's export the students table for example.
+
+177
+19:39.810 --> 19:46.590
+So right click; tasks; export data; next.
+
+178
+19:47.990 --> 19:50.470
+The data source is your own database.
+
+179
+19:50.470 --> 19:57.570
+So scroll down to SQL Server; make sure the database is Library
+
+180
+19:57.570 --> 20:02.940
+Next; we are exporting to flat file which is CSV.
+
+181
+20:03.210 --> 20:06.140
+We shall put this in the C:\temp folder.
+
+182
+20:09.290 --> 20:18.730
+Call it students.CSV
+
+183
+20:19.760 --> 20:28.700
+The text qualifier is what is used to enclose strings within the CSV
+
+184
+20:28.800 --> 20:38.590
+And I would recommend that you set that to inverted commas; press next; press next;
+
+185
+20:38.590 --> 20:47.300
+Select the table you wish to export; we set it to students; press next; run immediately; press next.;
+
+186
+20:47.300 --> 20:53.800
+Finish; this will export three rows from our student table.
+
+187
+20:53.800 --> 21:00.010
+We can now have a look at our temp folder, C:\temp
+
+188
+21:02.960 --> 21:04.990
+and we can see this.
+
+189
+21:05.150 --> 21:11.840
+Student.CSV which has this very simple format; the first name and dates of birth I.D..
+
+190
+21:11.900 --> 21:17.750
+These are the columns from the students table and this can be sent to any database or in fact can be
+
+191
+21:17.750 --> 21:18.520
+opened in Excel
+
+192
+21:21.380 --> 21:27.830
+Zipping and unzipping data - Database backups tend to compress quite significantly due to the large amount
+
+193
+21:27.830 --> 21:29.030
+of repeated information.
+
+194
+21:30.140 --> 21:36.430
+If your storage space needs to be optimized then you can use a zip utility such as 7zip
+
+195
+21:36.440 --> 21:38.220
+to compress data.
+
+196
+21:38.240 --> 21:40.100
+This can be automated via SQL.
+
+197
+21:40.250 --> 21:43.670
+Using XP_cmdshell
+
+198
+21:44.180 --> 21:49.760
+However there are security implications to this. Video demonstration.
+
+199
+21:49.760 --> 21:56.890
+Here you will demonstrate how to use XP_cmdshell  and 7zip to compress the database backup
+
+200
+21:57.650 --> 21:59.180
+and then how to uncompress it.
+
+201
+22:00.320 --> 22:07.850
+This video will demonstrate how to use xp_cmdshell and 7zip to compress a database
+
+202
+22:07.850 --> 22:16.730
+backup and then to uncompress it. xp_cmdshell will run DOS commands from SQL server
+
+203
+22:17.000 --> 22:24.020
+which is a very powerful tool but evidently is a security risk so therefore by default 
+
+204
+22:24.350 --> 22:32.990
+xp_cmdshell is disabled by default and you will need to enable it by running the script as shown on screen
+
+205
+22:32.990 --> 22:38.230
+To demonstrate what happens without running the script.
+
+206
+22:38.250 --> 22:48.420
+Let's have a look at xp_cmdshell 'dir' ; DIR will list
+
+207
+22:48.600 --> 22:54.480
+the contents of a directory; Execute this and it will give the error message:
+
+208
+22:54.510 --> 22:58.120
+SQL Server blocked access to procedure.
+
+209
+22:58.120 --> 22:59.730
+xp_cmdshell
+
+210
+22:59.730 --> 23:09.000
+So in order to enable it, we run this script here which is:
+
+211
+23:09.120 --> 23:18.720
+exec sp_configure 'show advanced options', '1' ; reconfigure
+
+212
+23:18.840 --> 23:26.160
+exec sp_configure 'xp_cmdshell', '1'
+
+213
+23:26.850 --> 23:29.790
+reconfigure, execute.
+
+214
+23:31.000 --> 23:38.580
+I have confirmation that the execution has completed. We run xp_cmdshell 'dir'
+
+215
+23:39.060 --> 23:48.180
+And we can see that DIR has worked and has returned the directory listing; so let's apply this to something more useful
+
+216
+23:48.180 --> 23:50.350
+we shall use 7Zip
+
+217
+23:50.350 --> 23:56.420
+which is a command line zipping tool for compressing files.
+
+218
+23:57.990 --> 24:10.180
+So go to 7zip.org and download the version of 7Zip appropriate for your computer.
+
+219
+24:10.200 --> 24:14.310
+Note the installation folder; press install
+
+220
+24:19.890 --> 24:26.300
+now, what we're going to do is; let's have a look at the temp folder; we've got a file called 
+
+221
+24:26.310 --> 24:26.820
+library.bak
+
+222
+24:26.850 --> 24:37.230
+We want to compress that to a zip file; so let's go back into SQL Server;
+
+223
+24:38.580 --> 24:51.180
+xp_cmdshell '"c:\Program files\7-Zip\7z" a c:\temp\Library.zip c:\temp\library.bak'
+
+224
+24:51.180 --> 24:53.220
+xp_cmdshell '"c:\Program files\7-Zip\7z" a c:\temp\Library.zip c:\temp\library.bak'
+
+225
+24:53.690 --> 25:03.540
+xp_cmdshell '"c:\Program files\7-Zip\7z" a c:\temp\Library.zip c:\temp\library.bak'
+
+226
+25:07.610 --> 25:08.880
+we shall execute this.
+
+227
+25:44.040 --> 25:50.860
+once complete let's have a look at the temp folder again; we now have a zip file inside this; 
+
+228
+25:50.860 --> 25:59.740
+You can open up the zip file and you can see that there is a bak file within that, so to reverse this procedure
+
+229
+25:59.920 --> 26:11.110
+we're going to delete the decompressed bak file, and reverse the procedure; To reverse the process and
+
+230
+26:11.110 --> 26:22.300
+to unzip library.zip; what we shall do is; make sure that the librar.bak is removed; we type
+
+231
+26:22.380 --> 26:28.030
+xp_cmdshell '"c:\Program files\7-Zip\7z" e c:\temp\Library.zip -oc:\temp\'
+
+232
+26:31.120 --> 26:37.990
+xp_cmdshell '"c:\Program files\7-Zip\7z" e c:\temp\Library.zip -oc:\temp\'
+
+233
+26:38.260 --> 26:38.620
+xp_cmdshell '"c:\Program files\7-Zip\7z" e c:\temp\Library.zip -oc:\temp\'
+
+234
+26:41.410 --> 26:42.580
+and execute this
+
+235
+26:48.590 --> 26:52.660
+and we can now see that library.bak is now back in this folder
+
+236
+26:55.490 --> 27:02.000
+Transferring a backup offsite - arguably the most important part of a backup procedure is to make sure
+
+237
+27:02.000 --> 27:07.340
+that the backup is not in the same location as the database server; if the entire server crashes and
+
+238
+27:07.340 --> 27:13.790
+the backups may be lost also; you could copy the backup to a network hard drive but please even better
+
+239
+27:13.790 --> 27:21.920
+to transfer to a hosting provider such as Microsoft Azure or Amazon Web Services. Video demonstration:
+
+240
+27:22.580 --> 27:28.520
+Here we'll demonstrate the procedure of writing a script that transfers a backup to AWS S3 and Microsoft Azure blob storage.
+
+241
+27:29.120 --> 27:37.350
+Here we will demonstrate the procedure of writing a script that transfers
+
+242
+27:37.360 --> 27:44.210
+a backup from your local machine to a AWS S3 and Microsoft Azure blob storage.
+
+243
+27:44.420 --> 27:46.810
+So let's start with AWS
+
+244
+27:47.900 --> 27:56.090
+So the first thing you'll need to do is install the AWS CLI which stands for command line interface
+
+245
+27:57.440 --> 27:57.890
+so
+
+246
+28:02.660 --> 28:03.910
+Getting started
+
+247
+28:11.300 --> 28:12.020
+installing
+
+248
+28:16.070 --> 28:17.030
+windows
+
+249
+28:21.520 --> 28:23.750
+Install the MSI
+
+250
+28:52.530 --> 28:54.360
+Next; Accept.
+
+251
+28:54.400 --> 28:55.790
+Next.
+
+252
+28:56.030 --> 28:56.350
+Next
+
+253
+29:01.760 --> 29:03.140
+okay.
+
+254
+29:03.290 --> 29:07.280
+Now sign in to your AWS account.
+
+255
+29:07.400 --> 29:12.920
+So I'm already signed in; 
+
+256
+29:12.930 --> 29:27.470
+First we need to create a user for access; so click users, I've selected IAM, and then I'm adding user so 
+
+257
+29:27.470 --> 29:32.720
+I'm going to add a user and I'm calling it sqlserver
+
+258
+29:35.650 --> 29:37.210
+programmatic access
+
+259
+29:49.890 --> 29:52.610
+We shall make it adminstrator; next;
+
+260
+29:56.380 --> 29:59.440
+create.
+
+261
+29:59.960 --> 30:04.880
+So need the access key and the Secret Access Key in a moment.
+
+262
+30:05.210 --> 30:09.890
+So open up a DOS window and type in AWS Configure
+
+263
+30:13.900 --> 30:17.580
+so access key ID; we should copy the access key
+
+264
+30:21.410 --> 30:25.250
+access key secret; we shall call copy access keys secret
+
+265
+30:31.360 --> 30:35.580
+and the default region is EU-WEST-1 which is fine
+
+266
+30:40.460 --> 30:46.400
+now we're going to go back into services; 
+
+267
+30:49.620 --> 30:53.560
+change the zone to EU-WEST-1 which is Ireland
+
+268
+30:57.770 --> 31:08.910
+Go into S3 which is Amazon's general purpose storage we shall create a bucket which we shall call
+
+269
+31:10.450 --> 31:13.170
+sqlserverbackupsexample
+
+270
+31:26.060 --> 31:27.390
+next.
+
+271
+31:27.630 --> 31:28.140
+Create Bucket
+
+272
+31:34.950 --> 31:40.410
+OK; so to check that worked we run "aws s3 ls"
+
+273
+31:43.370 --> 31:46.220
+and this now shows the bucket that we've just created.
+
+274
+31:46.320 --> 31:50.730
+Now what we're going to do is we're going to try and copy a small file up to that folder
+
+275
+31:50.730 --> 32:02.580
+So we're going to use the c:\temp\students.csv which was created earlier
+
+276
+32:02.580 --> 32:02.970
+this file here.
+
+277
+32:05.370 --> 32:09.990
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+278
+32:10.340 --> 32:17.730
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+279
+32:17.780 --> 32:19.810
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+280
+32:20.630 --> 32:26.640
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+281
+32:30.400 --> 32:32.550
+and that's uploaded our CSV
+
+282
+32:32.820 --> 32:38.420
+If we go back into the s3 bucket and press refresh we shall see.
+
+283
+32:38.430 --> 32:40.990
+Students.CSV has now been uploaded to Amazon.
+
+284
+32:42.690 --> 32:49.950
+Now a confusing point is that SQL Server runs under a different user account than what you typically
+
+285
+32:50.040 --> 32:52.670
+run under when you're opening a DOS command prompt.
+
+286
+32:52.680 --> 33:03.540
+So if I were to run "xp_cmdshell 'aws s3 ls'"which worked from DOS will now show an error
+
+287
+33:03.540 --> 33:08.450
+message saying unable to locate credentials you can configure credentials using aws configure.
+
+288
+33:08.640 --> 33:13.560
+However AWS configure it requires an interactive console so it's not going to work here.
+
+289
+33:14.340 --> 33:22.840
+So what you can do is copy the configuration from your own user account into SQL server's user account.
+
+290
+33:22.990 --> 33:30.120
+So to find SQL server's user account or specifically where it's stored.
+
+291
+33:30.570 --> 33:38.760
+write XP_cmdshell 'echo %userprofile%'  
+
+292
+33:38.970 --> 33:44.730
+and this will give you a path to the SQL server's user home directory.
+
+293
+33:45.330 --> 33:48.220
+So let's go there.
+
+294
+33:51.740 --> 33:59.640
+Let's also see our our own user home directory; so c:\users
+
+295
+33:59.870 --> 34:02.310
+Obviously your username will be different to mine.
+
+296
+34:03.190 --> 34:09.730
+If you have turned on show hidden files then you should see a folder called .AWS
+
+297
+34:09.760 --> 34:17.360
+So if I copy this from my own user account to the SQL server user account I should have copied my
+
+298
+34:17.450 --> 34:24.320
+AWS credentials which means I can now run this command from in here and I can see the number of
+
+299
+34:24.320 --> 34:25.250
+S3 Buckets.
+
+300
+34:26.240 --> 34:39.320
+So let's first try and re upload the students.CSV, so we shall delete this; we shall re-upload it from xp_cmdshell.
+
+301
+34:39.350 --> 34:59.260
+xp_cmdshell "aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample"
+
+302
+34:59.600 --> 35:07.070
+xp_cmdshell "aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample"
+
+303
+35:07.320 --> 35:08.580
+We shall run this
+
+304
+35:12.710 --> 35:20.080
+and refresh; once again our students.CSV has now been uploaded.
+
+305
+35:20.190 --> 35:32.510
+Now let's run a larger file and we shall run the actual backup which is C:\temp\library.zip
+
+306
+35:32.520 --> 35:32.980
+That's it.
+
+307
+35:39.470 --> 35:41.590
+And this will take some time to complete.
+
+308
+35:49.200 --> 35:49.770
+OK.
+
+309
+35:49.790 --> 35:53.980
+And once this is completed we should see that if we refresh
+
+310
+35:58.030 --> 36:08.780
+AWS S3; we should see the library once it is present; to do the same procedure using azure what
+
+311
+36:08.790 --> 36:13.090
+we'll need is the azure CLI or command line interface.
+
+312
+36:14.590 --> 36:23.100
+You can get this by Googling Azure CLI; press to download an MSI installer and click here
+
+313
+36:28.520 --> 36:29.220
+press next.
+
+314
+36:29.230 --> 36:37.530
+In my case I've already installed the CLI so I shall cancel out the process first thing you do when
+
+315
+36:37.800 --> 36:45.130
+you install CLI is to run "az login"
+
+316
+36:50.080 --> 36:55.810
+this will open up a log-in screen in your browser and you can log in under the same account that you
+
+317
+36:55.810 --> 36:59.020
+have your azure account with
+
+318
+37:01.840 --> 37:08.730
+so I'm now going to go into Azure and create a storage account.
+
+319
+37:10.470 --> 37:16.910
+Which I'm going to create storage account.
+
+320
+37:17.000 --> 37:24.910
+I'm going to create a new resource group which I'm going to call "databasebackups"
+
+321
+37:29.820 --> 37:34.610
+and I am going to call this "databasebackupsazure"
+
+322
+37:39.820 --> 37:45.740
+select location that's close to you; close to your database; and  press review and create
+
+323
+38:06.630 --> 38:07.960
+wait for the deployment to complete
+
+324
+38:39.430 --> 38:50.860
+press go to resource; press containers; add a container and we'll call this databasebackup
+
+325
+38:57.330 --> 39:00.180
+this container is now currently empty.
+
+326
+39:00.240 --> 39:09.280
+We're not going to see if we can query azure via the CLI using the command line.
+
+327
+39:15.150 --> 39:19.080
+I'm saying: az storage account list
+
+328
+39:19.090 --> 39:28.200
+So give me a list of my storage accounts; so hopefully we shall see databasebackupsazure
+
+329
+39:28.540 --> 39:33.370
+So we have a databasebackupsazure in lots of various
+
+330
+39:33.400 --> 39:33.940
+JSON elements
+
+331
+39:37.110 --> 39:41.880
+now we want to do the same thing via the database server.
+
+332
+39:41.940 --> 39:53.580
+So if we use XP_cmdshell 'az storage account list'
+
+333
+40:01.350 --> 40:06.960
+okay so this is exactly the same situation that we are in with the AWS CLI where we need to copy
+
+334
+40:07.020 --> 40:13.380
+the log in information between the user account and the account used by SQL Server.
+
+335
+40:14.040 --> 40:15.930
+So let's refresh your memory.
+
+336
+40:15.930 --> 40:29.010
+This is the user profile used by SQL Server; so we shall navigate to this; and navigate to your own user account
+
+337
+40:29.110 --> 40:33.020
+which is
+
+338
+40:33.250 --> 40:37.110
+c:\users then your name
+
+339
+40:39.860 --> 40:43.310
+and you want to copy the .Azure folder across
+
+340
+40:49.510 --> 40:52.040
+and now if we run this again
+
+341
+40:56.760 --> 40:58.110
+we get the same JSON.
+
+342
+40:58.110 --> 41:02.140
+So now we have access to Azure from SQL Server.
+
+343
+41:02.940 --> 41:06.030
+So the next thing we want to do is upload a file.
+
+344
+41:06.030 --> 41:11.220
+So we're gonna start once again with the students.csv file because it's a lot smaller
+
+345
+41:11.490 --> 41:14.040
+and it's faster for testing.
+
+346
+41:14.340 --> 41:24.330
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+347
+41:27.590 --> 41:28.550
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+348
+41:31.290 --> 41:32.430
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+349
+41:36.750 --> 41:46.670
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+350
+41:46.670 --> 41:50.330
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+351
+41:53.420 --> 42:00.300
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+352
+42:04.560 --> 42:08.660
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+353
+42:08.720 --> 42:10.870
+az storage blob upload --container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+354
+42:17.310 --> 42:17.830
+okay.
+
+355
+42:17.870 --> 42:26.780
+So if we now navigate into storage accounts; containers; database backup we should see a file called
+
+356
+42:26.930 --> 42:41.080
+Students.csv; so let's copy this command from our command window and we shall execute the same command
+
+357
+42:42.100 --> 42:50.180
+from the database.
+
+358
+42:51.060 --> 42:58.200
+Obviously to test this one to delete the file that we just put here.
+
+359
+42:59.180 --> 43:00.090
+And...
+
+360
+43:00.150 --> 43:01.320
+We should run this
+
+361
+43:10.440 --> 43:11.490
+okay.
+
+362
+43:11.730 --> 43:20.900
+And we shall go back into azure; databasebackupazure; and students.csv is back again
+
+363
+43:22.110 --> 43:34.980
+So let's try with the full file; library.zip - c:\temp\library.zip
+
+364
+43:35.360 --> 43:37.250
+So this is going to take some time to run.
+
+365
+43:38.210 --> 43:40.330
+So bear with me.
+
+366
+43:44.310 --> 43:45.670
+And there we have it.
+
+367
+43:45.670 --> 43:51.070
+The upload should be complete if we go back into azure, refresh this
+
+368
+43:55.180 --> 43:55.840
+you should see.
+
+369
+43:55.840 --> 43:59.140
+We now have students.csv and a library.zip
+
+370
+44:02.570 --> 44:06.220
+and it's over to you to apply what you've learned so far.
+
+371
+44:06.230 --> 44:08.390
+Let's try and do the following using SQL.
+
+372
+44:09.310 --> 44:17.240
+Download a zipped backup from AWS S3 storage, unzip the backup, and restore the backup.
+
+373
+44:17.240 --> 44:21.310
+You can pause this video now and give this procedure go.
+
+374
+44:21.610 --> 44:24.910
+And resume it once you would like to see the solution.
+
+375
+44:26.330 --> 44:26.630
+Okay.
+
+376
+44:26.660 --> 44:32.870
+So I hope you've given this example a go and we're going to step through the points required of downloading
+
+377
+44:32.870 --> 44:37.410
+zipped back up from a AWS S3, unzipping the backup and restoring the backup.
+
+378
+44:38.120 --> 44:44.780
+So let's start with downloading from AWS S3
+
+379
+44:44.790 --> 45:00.390
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+380
+45:03.310 --> 45:04.150
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+381
+45:07.120 --> 45:07.720
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+382
+45:11.820 --> 45:15.650
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+383
+45:16.360 --> 45:17.800
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+384
+45:18.660 --> 45:24.450
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+385
+45:24.810 --> 45:25.100
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+386
+45:29.600 --> 45:30.920
+and we can run this
+
+387
+46:01.500 --> 46:03.910
+[background noises]
+
+388
+46:04.250 --> 46:05.380
+[background noises]
+
+389
+46:06.650 --> 46:08.880
+[background noises]
+
+390
+47:48.810 --> 47:58.370
+Once complete we should have the downloaded file in our temp folder so let's look at that C:\temp.
+
+391
+48:00.540 --> 48:01.660
+and that's there.
+
+392
+48:01.680 --> 48:02.380
+Very good.
+
+393
+48:02.820 --> 48:04.360
+So we're now going to unzip it
+
+394
+48:04.530 --> 48:08.160
+So it's
+
+395
+48:12.250 --> 48:20.010
+xp_cmdshell '"C:\program files\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+396
+48:24.190 --> 48:26.690
+xp_cmdshell '"C:\program files\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+397
+48:27.660 --> 48:29.160
+xp_cmdshell '"C:\program files\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+398
+48:30.390 --> 48:34.200
+xp_cmdshell '"C:\program files\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+399
+48:37.080 --> 48:38.630
+xp_cmdshell '"C:\program files\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+400
+48:40.290 --> 48:40.760
+xp_cmdshell '"C:\program files\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+401
+48:40.810 --> 48:55.180
+xp_cmdshell '"C:\program files\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+402
+48:56.050 --> 49:03.650
+So if we go to c:\temp we should see the library.bak it will just been unzipped.
+
+403
+49:04.930 --> 49:17.650
+And then finally to restore the database it's:
+
+404
+49:17.830 --> 49:26.270
+restore database library from disk = 'c:\temp\library.bak'
+
+405
+49:26.830 --> 49:35.430
+And if we run this; the database is now restored; so I hope you got that,
+
+406
+49:35.750 --> 49:37.280
+and good luck with the next lesson.

@@ -1,0 +1,1362 @@
+WEBVTT
+
+0
+00:04.930 --> 00:10.070
+Data relationships. Primary and foreign keys.
+
+1
+00:10.070 --> 00:12.380
+Basics of data relationships.
+
+2
+00:12.380 --> 00:18.110
+One of the key tenets of relational databases is the data in one table can be somehow related to data
+
+3
+00:18.150 --> 00:20.210
+in another table.
+
+4
+00:20.210 --> 00:26.150
+If we were designing a database for a bank and each bank account would be in one table and each transaction
+
+5
+00:26.480 --> 00:34.450
+on each bank account would be in another table and it would be of vital importance that we knew which
+
+6
+00:34.450 --> 00:37.690
+transaction pertained to which bank account.
+
+7
+00:37.690 --> 00:47.730
+We do this using relationships for example here the bank account I.D. column in the transactions table
+
+8
+00:48.720 --> 00:50.650
+would match an I.D..
+
+9
+00:51.820 --> 00:53.590
+From the bank account table
+
+10
+00:58.160 --> 01:06.380
+relationship integrity defining relationships explicitly in the database enforces relationship integrity.
+
+11
+01:06.380 --> 01:11.660
+This would mean that in previous example the database would prevent a user from deleting a bank account
+
+12
+01:11.840 --> 01:14.930
+that had transactions associated with it.
+
+13
+01:15.170 --> 01:20.780
+There would be no problem deleting a bank account that had no transactions or deleting any transaction
+
+14
+01:22.740 --> 01:29.370
+we define the ID used in the parent parent table as the primary key and the ID in the child table
+
+15
+01:29.610 --> 01:30.390
+as a foreign key
+
+16
+01:33.830 --> 01:35.520
+types of relationships.
+
+17
+01:35.660 --> 01:39.560
+Three types of relationships one to one.
+
+18
+01:39.860 --> 01:45.710
+This is where one record in one table matches only one record in another table.
+
+19
+01:45.800 --> 01:52.640
+For example one person has one passport only.
+One to many.
+
+20
+01:52.640 --> 01:58.620
+This is where one record in one table matches multiple records in another table.
+
+21
+01:58.760 --> 02:09.230
+For example one bank account has many transactions. Many to many: Many records in one table match many
+
+22
+02:09.230 --> 02:16.490
+records in another table for example students may attend multiple classes and classes have multiple students.
+
+23
+02:19.920 --> 02:21.810
+A One to One relationship.
+
+24
+02:21.810 --> 02:25.670
+This is similar to extending one table with extra columns.
+
+25
+02:25.860 --> 02:32.190
+But perhaps you want to keep the data logically separated in our library project introduced in the previous
+
+26
+02:32.190 --> 02:40.310
+lesson we have introduced the concept of a library membership card.
+
+27
+02:40.310 --> 02:44.710
+Each student is allowed one and only one library membership card.
+
+28
+02:46.670 --> 02:56.720
+In this demo we shall create the library membership card table with columns named ID, studentID
+
+29
+02:57.210 --> 02:59.910
+and expiryDate.
+
+30
+02:59.990 --> 03:04.790
+We should define I.D. as the primary key on the students table.
+
+31
+03:04.970 --> 03:11.120
+We shall define student I.D. as the foreign key in the library membership card table define the relationship
+
+32
+03:11.120 --> 03:18.770
+between I.D. and student I.D. and then we shall demonstrate relationship integrity by attempting to
+
+33
+03:18.830 --> 03:28.190
+add multiple library membership cards or deleting  a student which has a library membership card
+
+34
+03:28.310 --> 03:29.210
+associated with it.
+
+35
+03:30.410 --> 03:30.800
+OK.
+
+36
+03:30.820 --> 03:38.090
+So here we want to demonstrate a one to one relationship with the library membership card where one
+
+37
+03:38.090 --> 03:41.980
+student can have one and only one library membership card.
+
+38
+03:42.890 --> 03:59.820
+create table libraryMembershipCard (Id int identity(1,1), 
+
+39
+03:59.820 --> 04:03.150
+and we shall define this as primary key
+
+40
+04:07.080 --> 04:10.810
+you shall then add the student ID.
+
+41
+04:12.510 --> 04:20.970
+This will be the foreign key and I'm going to define this as being unique so that I can only be one
+
+42
+04:22.800 --> 04:37.150
+row in this table with the same student I.D. I'm going to add expiry as a date which will indicate when
+
+43
+04:37.150 --> 04:38.430
+the
+
+44
+04:38.530 --> 04:40.110
+Library membership card would expire
+
+45
+04:43.610 --> 04:45.750
+I created that table.
+
+46
+04:45.740 --> 04:51.380
+If we select from it. I'm not expecting to see any data
+
+47
+04:56.800 --> 05:05.170
+we can create the relationship between student and library membership card using user interface.
+
+48
+05:07.120 --> 05:13.650
+You can also define it through code but I shall first use the user interface through this use the database
+
+49
+05:13.650 --> 05:21.500
+diagrams > option >  new database diagram.
+
+50
+05:21.980 --> 05:25.880
+Here we shall add .. (let's refresh)
+
+51
+05:25.880 --> 05:32.420
+Here we shall add all three tables books, library membership card and students.
+
+52
+05:39.420 --> 05:50.370
+And we want to make a relationship between student and student I.D. so students the I.D. in the students
+
+53
+05:50.370 --> 05:57.850
+table with the student ID and the library membership card table suggest a name for relationship.
+
+54
+05:59.280 --> 06:08.390
+Okay and this is now created a one to one relationship between student I.D. and the library membership
+
+55
+06:08.390 --> 06:08.780
+card.
+
+56
+06:10.040 --> 06:11.150
+So it should save this
+
+57
+06:17.020 --> 06:17.920
+now.
+
+58
+06:18.230 --> 06:25.250
+We're now going to demonstrate the integrity of this relationship by trying to break it.
+
+59
+06:27.350 --> 06:29.730
+So first we should add a row in to the.
+
+60
+06:29.810 --> 06:31.730
+library membership card table.
+
+61
+06:34.310 --> 06:36.070
+So let's select * from students
+
+62
+06:40.580 --> 06:44.990
+So we should give a library membership card to Peter Murphy I.D. 3
+
+63
+06:51.750 --> 06:56.130
+note that you do not need to insert into the I.D. column because this will be auto generated.
+
+64
+06:56.160 --> 06:58.290
+In fact you shouldn't.
+
+65
+06:58.320 --> 06:59.790
+The database will not allow you
+
+66
+07:04.330 --> 07:08.280
+student id 3 which is Peter Murphy.
+
+67
+07:08.960 --> 07:12.860
+Expiry in 2025-01-01
+
+68
+07:37.580 --> 07:39.590
+here we have a
+
+69
+07:42.810 --> 07:47.610
+library membership card set up for student id 3
+
+70
+07:47.690 --> 07:51.580
+Now let's see what happens when we try and delete student I.D..
+
+71
+07:51.590 --> 07:51.900
+Three
+
+72
+08:00.210 --> 08:11.080
+here we've got an error saying that the foreign key has stopped us from deleting student id 3 because
+
+73
+08:11.170 --> 08:13.380
+there is a row.
+
+74
+08:13.450 --> 08:17.210
+There is a row in the library membership card table.
+
+75
+08:17.750 --> 08:24.520
+And is the one to one relationship so it means that we can't add a second library membership card for
+
+76
+08:24.520 --> 08:25.240
+the same student
+
+77
+08:29.580 --> 08:34.350
+we're not allowed to do that because of this unique specifier
+
+78
+08:37.280 --> 08:43.720
+so this is how to define the relationship using the user interface.
+
+79
+08:43.740 --> 08:46.690
+Now let's see if we can do the same thing using code.
+
+80
+08:46.710 --> 08:50.280
+So I should go back to the diagram to delete the relationship
+
+81
+08:56.830 --> 09:03.870
+and now I'm going to create a relationship again but this time using code
+
+82
+09:15.320 --> 09:21.200
+so the command is 
+
+83
+09:28.950 --> 09:29.960
+alter table librarymembershipcard add constraint
+
+84
+09:34.330 --> 09:35.590
+the name of the relationship
+
+85
+09:48.140 --> 09:49.300
+the name of the foreign key
+
+86
+10:03.050 --> 10:03.740
+references
+
+87
+10:11.850 --> 10:12.440
+students
+
+88
+10:15.970 --> 10:16.770
+the Primary Key
+
+89
+10:22.930 --> 10:31.070
+is now created until check again to see if we can delete student ID 3 and we can't
+
+90
+10:34.110 --> 10:39.660
+so that's how to create using the user interface and via code in this particular instance it's probably
+
+91
+10:39.720 --> 10:42.330
+easier to use the user interface
+
+92
+10:47.350 --> 10:54.640
+a one to many relationship. here we shall introduce a table called bookshelf.
+
+93
+10:54.910 --> 11:02.470
+This will indicate the location of a book within a library one bookshelf can contain many books in this
+
+94
+11:02.470 --> 11:02.790
+demo.
+
+95
+11:02.800 --> 11:06.140
+We shall create a bookshelf table with an ID.
+
+96
+11:06.280 --> 11:10.150
+Primary Key and location.
+
+97
+11:10.150 --> 11:19.540
+We shall add bookshelf I.D. as a column the books table and we shall define bookshelf ID  as the foreign
+
+98
+11:19.540 --> 11:26.290
+key we shall define the relationship between ID in the bookshelf table and bookshelf ID in the books
+
+99
+11:26.290 --> 11:27.510
+table.
+
+100
+11:28.060 --> 11:35.140
+And then we shall demonstrate relationship integrity by attempting to delete a bookshelf that has books
+
+101
+11:35.140 --> 11:37.200
+on it.
+
+102
+11:37.240 --> 11:44.870
+We shall demonstrate a one to many relationship using the bookshelf analogy.
+
+103
+11:46.110 --> 11:52.810
+So first we shall create a table called bookshelves\
+
+104
+11:57.300 --> 12:00.310
+create table bookshelf  ( id int identity(1,1),
+
+105
+12:04.880 --> 12:05.500
+primary key.
+
+106
+12:07.590 --> 12:12.890
+This is to say that idea will be the primary key of the bookshelf table.
+
+107
+12:13.360 --> 12:24.600
+And I an going to use location as varchar(max) to describe the location of book.
+
+108
+12:24.940 --> 12:27.910
+So let's give it some sample data.
+
+109
+12:28.090 --> 12:35.300
+Insert into bookshelf (location) 
+
+110
+12:35.440 --> 12:40.000
+Once again there's no need to insert into the ID column.
+
+111
+12:41.530 --> 12:45.770
+values ('Shelf beside window')
+
+112
+12:50.260 --> 12:52.320
+So if we have a look at our shelf table now.
+
+113
+12:58.160 --> 13:01.430
+We now have one row called "shelf beside the window"
+
+114
+13:03.050 --> 13:04.890
+So let's have a look at our books table.
+
+115
+13:06.620 --> 13:12.370
+We're going to add a column to this books table called bookshelf ID
+
+116
+13:15.980 --> 13:25.490
+alter table books add bookshelfID int
+
+117
+13:31.710 --> 13:34.720
+look at the  books table.
+
+118
+13:34.790 --> 13:37.430
+You'll notice that the bookShelfID has NULL in it
+
+119
+13:37.970 --> 13:40.550
+This means that there is no data
+
+120
+13:44.400 --> 13:54.000
+we're going to assign both of these books to the same bookshelfID
+
+121
+13:54.290 --> 13:55.130
+update books set bookShelfID=1
+
+122
+13:58.180 --> 13:59.300
+let's look at our books table again.
+
+123
+14:00.710 --> 14:04.400
+So now both books are on the bookshelfID
+
+124
+14:04.430 --> 14:04.670
+One
+
+125
+14:07.540 --> 14:13.210
+so in order to define the relationship between these two tables should go back into our database
+
+126
+14:13.210 --> 14:13.710
+diagram
+
+127
+14:18.400 --> 14:20.470
+add the table bookshelf
+
+128
+14:24.900 --> 14:27.150
+and I'm going to define
+
+129
+14:30.220 --> 14:35.420
+what I've noticed is that the ID in the books table is not a primary key.
+
+130
+14:35.430 --> 14:40.000
+Will set the primary key there and we shall
+
+131
+14:43.580 --> 14:49.790
+create a friendship between bookshelf ID and the books table and ID in the ibookshelf
+
+132
+14:49.790 --> 14:51.310
+table as follows
+
+133
+14:55.740 --> 14:56.440
+we save this
+
+134
+15:00.320 --> 15:06.510
+so this is a one to many relationship you can see this is the one to one and this is a one too many
+
+135
+15:08.100 --> 15:15.390
+concept being that I can be more than one book on the same bookshelf but only one student can have one
+
+136
+15:15.810 --> 15:19.680
+library membership card.
+
+137
+15:20.130 --> 15:27.190
+So once again this hasn't changed the data and the table but it has enforced the data integrity.
+
+138
+15:27.690 --> 15:35.430
+So for example if I am going to try to delete the bookshelf these two books are on the database will
+
+139
+15:35.430 --> 15:36.170
+stop me.
+
+140
+15:46.570 --> 15:51.190
+I've tried to delete it.  The database has stopped me, if I check the bookshelf table the bookshelf is
+
+141
+15:51.190 --> 15:51.920
+still there.
+
+142
+15:59.510 --> 16:01.990
+A Many to Many relationship.
+
+143
+16:02.030 --> 16:08.180
+Here we shall introduce a table called Book loan which will indicate what students have rented what books
+
+144
+16:09.560 --> 16:10.840
+a student can loan
+
+145
+16:10.910 --> 16:16.850
+Many books on a book can be loaned by many students in this table
+
+146
+16:16.870 --> 16:19.770
+We shall create a book loan table with an ID.
+
+147
+16:19.780 --> 16:30.190
+Primary Key student ID, foreign key book ID foreign key and the dates such as Date withdrawn date to
+
+148
+16:30.190 --> 16:40.490
+back date returned. We shall define the relationship between I.D. and student I.D. from the students
+
+149
+16:40.490 --> 16:41.570
+table.
+
+150
+16:41.850 --> 16:46.320
+And then we shall define the relationship between I.D. and book ready in the books table.
+
+151
+16:47.090 --> 16:55.040
+And then we shall demonstrate relationship integrity by attempting to delete a student that has a row
+
+152
+16:55.060 --> 17:03.430
+in the book loans table or deleting a book that has a row in the book loans table. 
+
+153
+17:03.430 --> 17:07.140
+The third type of relationship is many to many relationship.
+
+154
+17:07.410 --> 17:13.740
+We're going to demonstrate what a many to many relationship is like creating a book loan table. 
+
+155
+17:13.740 --> 17:22.150
+A book loan that indicates when a student has taken out a book a student can take out many books and a book
+
+156
+17:22.180 --> 17:24.450
+can be taken out by many students.
+
+157
+17:24.460 --> 17:26.710
+This is what is meant by many to many.
+
+158
+17:26.850 --> 17:27.140
+join
+
+159
+17:30.000 --> 17:31.670
+so we shall create the book loan table
+
+160
+17:37.790 --> 17:41.980
+id int identity(1,1), 
+
+161
+17:42.010 --> 17:42.690
+The primary key
+
+162
+17:46.380 --> 17:51.570
+we shall create a column for student id (int)
+
+163
+17:54.920 --> 17:56.750
+a book ID
+
+164
+18:01.320 --> 18:06.140
+and a couple of dates such as datewithdrawn
+
+165
+18:13.010 --> 18:18.460
+datereturned then duedate
+
+166
+18:24.120 --> 18:29.800
+so this would indicate when a student has taken the book at the library when it's due back.
+
+167
+18:29.800 --> 18:46.660
+And when it was returned at some point in the future execute. back to our diagram , add table bookloan
+
+168
+18:47.100 --> 18:58.180
+Now we need to create two relationships one between the student ID and the student ID
+
+169
+18:58.180 --> 19:02.950
+drag from here to there and create this.
+
+170
+19:03.830 --> 19:06.990
+So just try and reorganize this diagram.
+
+171
+19:09.680 --> 19:18.280
+Now want to create the same relationship between the book ID  column and bookloan table with the ID
+
+172
+19:18.310 --> 19:22.610
+column in the books table. We drag  from there to there.
+
+173
+19:22.990 --> 19:23.920
+Accept, Accept
+
+174
+19:26.810 --> 19:33.120
+So here we have a one to one relationship between students and library membership card.
+
+175
+19:33.160 --> 19:39.660
+We want many relationship between book loan and students and the one to many relationship between bookloan
+
+176
+19:39.660 --> 19:41.190
+books together.
+
+177
+19:41.240 --> 19:46.240
+This makes a many to many relationship. So we'll save this
+
+178
+19:51.130 --> 19:52.610
+and I'll try and demonstrate
+
+179
+19:55.180 --> 19:58.180
+the relationship integrity.
+
+180
+19:58.180 --> 20:01.480
+So first let's have a look at our students.
+
+181
+20:06.540 --> 20:10.590
+So once again Peter Murphy is student 3.
+
+182
+20:10.620 --> 20:11.610
+Let's take a of that.
+
+183
+20:13.290 --> 20:14.400
+Let's take a look at the books
+
+184
+20:22.840 --> 20:26.880
+and we shall say the first Harry Potter book is ID 1
+
+185
+20:30.980 --> 20:36.170
+may notice that SQL server is highlighting an error here because this is not SQL.
+
+186
+20:36.170 --> 20:39.340
+It's just text used to make a comment.
+
+187
+20:39.430 --> 20:41.020
+You press the hyphen button twice
+
+188
+20:46.320 --> 20:50.920
+so you're now going to insert into the book loan table.
+
+189
+20:51.120 --> 21:01.030
+The fact that Peter Murphy has taken out this Harry Potter book so insert into bookloan, 
+
+190
+21:01.080 --> 21:07.130
+once again, do not insert into the ID column
+
+191
+21:07.830 --> 21:12.720
+(StudentId,BookID,DateWithdrawn,DateDue)
+
+192
+21:12.840 --> 21:15.110
+(StudentId,BookID,DateWithdrawn,DateDue)
+
+193
+21:15.500 --> 21:22.500
+This book hasn't been returned yet so we shall leave out that column. 
+
+194
+21:22.500 --> 21:29.860
+Student ID 3 which is Peter Murphy, BookID 1 which is a Harry Potter book Chamber of Secrets 
+
+195
+21:30.150 --> 21:48.830
+Date Withdrawn, We shall say it is 2020-01-01 and is due back 2020-30-01
+
+196
+21:48.920 --> 21:50.990
+So that would be the 30th of January
+
+197
+21:55.250 --> 21:56.690
+insert into the book loan table
+
+198
+21:57.080 --> 21:59.310
+So if we now select from the book loan table
+
+199
+22:02.390 --> 22:08.880
+we can see that we have student I.D. 3 has taken out book ID 1 on this date and was due back
+
+200
+22:08.880 --> 22:12.880
+on that date. Now to demonstrate relational integrity.
+
+201
+22:12.900 --> 22:14.960
+I'm going to try and delete student ID 3
+
+202
+22:27.810 --> 22:30.260
+And the database has stopped me.
+
+203
+22:30.360 --> 22:32.930
+What about if I tried to delete book 1
+
+204
+22:38.920 --> 22:45.050
+once again the database has stopped me and both books are still present.
+
+205
+22:45.050 --> 22:46.340
+All students are still present.
+
+206
+22:51.140 --> 23:00.140
+Joins : To write a select statement that returns data from two tables at once based on a data relationship.
+
+207
+23:00.140 --> 23:09.050
+select * from students join LibraryMembershipCard on Students.id = LibraryMembershipCard.studentID
+
+208
+23:09.140 --> 23:11.920
+select * from students join LibraryMembershipCard on Students.id = LibraryMembershipCard.studentID
+
+209
+23:11.990 --> 23:12.740
+select * from students join LibraryMembershipCard on Students.id = LibraryMembershipCard.studentID
+
+210
+23:16.480 --> 23:24.280
+left join: By by default a join will filter out rows where a relationship does not exist if you wanted
+
+211
+23:24.280 --> 23:27.670
+to return all rows but leave the data blank.
+
+212
+23:28.150 --> 23:33.610
+I.e. NULL where there is no relationship found and you can use a left join to compare the results from the
+
+213
+23:33.610 --> 23:41.170
+previous query when using left join instead
+
+214
+23:41.350 --> 23:48.860
+select * fron students left join LibraryMembershipCard on students.id = LibraryMembershipCard.studentId
+
+215
+23:48.860 --> 23:50.960
+Writing joins can become very verbose.
+
+216
+23:51.050 --> 23:57.090
+So here's a shorthand trick to shorten your SQL statements by using table aliases
+
+217
+23:57.090 --> 24:07.170
+select * from students s join LibraryMembershipCard L on S.id = L.studentID
+
+218
+24:07.180 --> 24:11.760
+And here is a video showing these statements executing
+
+219
+24:15.930 --> 24:24.240
+when we have done a relationship setup we can use the Join keyword in SQL to write select statements
+
+220
+24:24.690 --> 24:33.120
+that return data from more than one table so let's demonstrate that with the first type the one to one
+
+221
+24:33.180 --> 24:34.610
+relationship.
+
+222
+24:35.120 --> 24:55.380
+Select * from students join librarymembershipcard on students.Id = librarymembershipcard.studentID
+
+223
+24:58.220 --> 25:00.160
+Select * from students join librarymembershipcard on students.Id = librarymembershipcard.studentID
+
+224
+25:03.460 --> 25:04.160
+Select * from students join librarymembershipcard on students.Id = librarymembershipcard.studentID
+
+225
+25:07.070 --> 25:09.990
+and run this statement.
+
+226
+25:10.090 --> 25:18.370
+So here you can see the results where we've got data from the first table students combined with data
+
+227
+25:18.430 --> 25:30.680
+from the second table library membership card now I've done a standard join here which returns
+
+228
+25:30.920 --> 25:41.600
+only the rows where data has matched. You can also use a left join which will also return rows where
+
+229
+25:41.660 --> 25:51.260
+the data hasn't matched. So now you can see the difference where rows 1 and 2 have now returned.
+
+230
+25:51.260 --> 25:57.110
+Mary Smith, Mary Reid however the data from the second table is NULL because it's not existent.
+
+231
+25:57.920 --> 26:07.940
+So that's our choice between that's a left join and this is a standard join, So now let's have a look
+
+232
+26:08.240 --> 26:17.150
+at the second type of relationship which is a one to many relationship which is our bookshelves.
+
+233
+26:17.150 --> 26:17.890
+So let's have a look.
+
+234
+26:18.920 --> 26:19.860
+select * from books join bookshelf on books.bookshelfID = bookshelf.id
+
+235
+26:25.880 --> 26:27.440
+select * from books join bookshelf on books.bookshelfID = bookshelf.id
+
+236
+26:27.480 --> 26:27.860
+select * from books join bookshelf on books.bookshelfID = bookshelf.id
+
+237
+26:27.890 --> 26:29.050
+select * from books join bookshelf on books.bookshelfID = bookshelf.id
+
+238
+26:32.300 --> 26:47.040
+once again if now got data from both tables returning
+
+239
+26:50.650 --> 26:55.520
+The third type of join is the many to many join which is
+
+240
+26:58.510 --> 27:02.190
+the book loan table.
+
+241
+27:02.290 --> 27:09.000
+We want to join on two tables now the student table and the book table.
+
+242
+27:09.030 --> 27:14.750
+select * from bookloan join students on students.id = bookloan.studentID
+
+243
+27:17.650 --> 27:20.670
+select * from bookloan join students on students.id = bookloan.studentID
+
+244
+27:20.930 --> 27:28.250
+select * from bookloan join students on students.id = bookloan.studentID
+
+245
+27:28.250 --> 27:40.310
+So that's joined on the students table so but we also want to join on the books table. So we can now type
+
+246
+27:41.140 --> 27:41.560
+join books on books.id = bookloan.bookid
+
+247
+27:41.890 --> 27:42.310
+join books on books.id = bookloan.bookid
+
+248
+27:45.910 --> 27:57.660
+this now returns data from all three tables the book loan table the student table and the book table.
+
+249
+27:57.990 --> 28:03.810
+Now you may notice that these join statements start becoming a bit verbose.
+
+250
+28:03.810 --> 28:13.380
+So what you can do is add table aliases which is simply a shorter name for each table.
+
+251
+28:14.160 --> 28:20.400
+So I'm using S B and then replacing these
+
+252
+28:31.080 --> 28:37.500
+same query just more concise.
+
+253
+28:37.500 --> 28:46.580
+And for example if we wanted to only see the data from the students and books table we can say 
+
+254
+28:46.590 --> 28:52.040
+S.* , B.*
+
+255
+28:53.010 --> 29:01.570
+So this is the students and the books.
+
+256
+29:01.890 --> 29:09.720
+So over to you; now as a test we previously defined books to have only one author.
+
+257
+29:09.840 --> 29:13.240
+But there are books that can have more than one author.
+
+258
+29:13.350 --> 29:20.690
+So how do we modify the database design to support books that have more than one author and enforce
+
+259
+29:20.700 --> 29:23.190
+this relationship.
+
+260
+29:23.190 --> 29:26.480
+So start this video and when asked.
+
+261
+29:26.610 --> 29:30.420
+Press pause and give this a go yourself.
+
+262
+29:30.420 --> 29:34.890
+Once you've given them a go continue the video and see how you did
+
+263
+29:41.390 --> 29:42.550
+in this exercise.
+
+264
+29:42.560 --> 29:46.630
+We're going to address a real world problem here.
+
+265
+29:46.640 --> 29:49.440
+There is an issue with our database design.
+
+266
+29:49.580 --> 29:55.640
+We've made the assumption that there can only be one author for each book.
+
+267
+29:55.670 --> 30:02.070
+However it's quite possible that a book can have more than one author.
+
+268
+30:02.200 --> 30:08.380
+For example this book tiny pretty things was written by two different authors.
+
+269
+30:09.250 --> 30:16.820
+So I'd like you to adjust the database design to support multiple authors per books.
+
+270
+30:19.040 --> 30:20.700
+Have a go.
+
+271
+30:20.960 --> 30:23.140
+You may pause this video now.
+
+272
+30:23.210 --> 30:24.440
+Start again.
+
+273
+30:24.440 --> 30:26.040
+Once you've given it a try.
+
+274
+30:27.290 --> 30:28.100
+Pause the video now
+
+275
+30:32.420 --> 30:44.600
+Okay let's see how you got on; this is a Many to Many relationship because a book will now have the possibility
+
+276
+30:44.600 --> 30:51.770
+of having multiple authors but of course an author can also write multiple books so therefore we need
+
+277
+30:51.830 --> 31:00.690
+two new tables one for the author and one to store the relationship between books and authors.
+
+278
+31:00.690 --> 31:05.400
+So we're going to call that bookauthor. 
+
+279
+31:05.530 --> 31:23.570
+We'll start with the author table: CREATE TABLE author( id int identity (1,1) primary key, authorname
+
+280
+31:26.290 --> 31:27.750
+varchar(max)
+
+281
+31:33.140 --> 31:44.320
+and now the table to store our relationship between authors and books as a Many to Many relationship
+
+282
+31:50.100 --> 31:51.440
+id int identity(1,1),
+
+283
+31:54.470 --> 31:55.580
+primary key
+
+284
+31:59.200 --> 32:09.590
+authorID int, BookID int
+
+285
+32:11.590 --> 32:19.440
+No more data is needed in that table. Lets create our three authors which will be J.K. Rowling for our
+
+286
+32:19.440 --> 32:20.630
+existing books.
+
+287
+32:20.880 --> 32:26.390
+Just to refresh your memory.
+
+288
+32:26.490 --> 32:29.810
+Two books by J.K. Rowling at least two new authors
+
+289
+32:47.940 --> 32:48.600
+J.K. Rowling
+
+290
+32:54.580 --> 32:58.770
+and J.K. Rowling.
+
+291
+32:59.180 --> 33:01.610
+And I also want these two authors here
+
+292
+33:18.710 --> 33:19.470
+lets have a look at our authors table.
+
+293
+33:27.320 --> 33:29.600
+we have three authors; correct.
+
+294
+33:29.770 --> 33:31.040
+Let's have a look at the books table
+
+295
+33:37.830 --> 33:38.140
+now.
+
+296
+33:38.410 --> 33:41.880
+We shall no longer need the author column in this books table.
+
+297
+33:41.950 --> 33:54.630
+So therefore we can use the drop column command to alter table books drop column author
+
+298
+33:58.580 --> 34:02.640
+once again be careful with this because there is no undo in SQL server.
+
+299
+34:02.660 --> 34:12.630
+So if you have important data in this author column it will be deleted. 
+
+300
+34:12.680 --> 34:15.390
+Looking at the books table the author column is now deleted
+
+301
+34:15.590 --> 34:18.350
+We're not going to insert a new book into the books table
+
+302
+34:22.170 --> 34:27.410
+bookname, pages and BookshelfId
+
+303
+34:28.890 --> 34:37.770
+Notice that I'm not inserting the authors at this point; values ('Tiny pretty things',
+
+304
+34:42.190 --> 34:44.500
+Pages 438,
+
+305
+34:47.270 --> 34:48.090
+Bookshelf ID 1
+
+306
+34:55.050 --> 34:57.690
+so at this point we have two things left to do.
+
+307
+34:57.690 --> 35:07.800
+One is to set up our primary and foreign keys our relationships and to populate the data in the book
+
+308
+35:07.920 --> 35:09.440
+author table.
+
+309
+35:09.510 --> 35:14.160
+So let's open our database diagram and add these two new tables
+
+310
+35:24.620 --> 35:25.610
+So a...
+
+311
+35:33.030 --> 35:37.290
+book ID is associated with the ID from the books table
+
+312
+35:40.500 --> 35:48.060
+and an author ID is associated with the ID from the author table.
+
+313
+35:48.090 --> 35:52.180
+Together this forms in Many to Many relationship.
+
+314
+35:55.240 --> 35:55.970
+We now save this; Save
+
+315
+35:56.600 --> 36:06.240
+Yes.
+
+316
+36:06.830 --> 36:13.920
+Now, lets have a look at our books table
+
+317
+36:14.880 --> 36:18.160
+Our author table are also a column has reappeared.
+
+318
+36:18.210 --> 36:31.990
+So I shall just drop that,  Now book ID 1 and 2 are written by author
+
+319
+36:31.990 --> 36:32.950
+number one.
+
+320
+36:33.670 --> 36:45.010
+So therefore we're going to; insert into bookAuthor (authorID, bookID) values (1,1)
+
+321
+36:45.010 --> 36:45.400
+1 which is J.K. Rowling
+
+322
+36:45.840 --> 36:46.380
+bookID 1
+
+323
+36:46.390 --> 36:46.600
+Execute
+
+324
+36:51.470 --> 36:58.160
+second book which is BookId 2 has the same author.
+
+325
+36:58.870 --> 37:01.780
+The third book however has two authors
+
+326
+37:04.460 --> 37:14.800
+which is author ID 2 , and Author ID 3, for book ID 3
+
+327
+37:16.370 --> 37:18.020
+So if we look at our book author table
+
+328
+37:24.640 --> 37:25.840
+you should see four rows
+
+329
+37:28.590 --> 37:29.940
+to see this little book clearly.
+
+330
+37:29.990 --> 37:30.820
+lets create a join
+
+331
+37:30.870 --> 37:42.370
+Join books b on b.id = ba.bookId
+
+332
+37:42.870 --> 37:49.230
+join author a on a.id = ba.authorid
+
+333
+37:49.370 --> 37:50.300
+All right.
+
+334
+37:53.200 --> 37:55.570
+Returns four rows
+
+335
+37:55.990 --> 37:58.200
+If we wanted to see BookID 3 only
+
+336
+37:58.220 --> 38:01.830
+we can say; where bookID = 3
+
+337
+38:05.000 --> 38:07.160
+and we can see two authors for the same book
+
+338
+38:10.470 --> 38:18.390
+so I hope you followed this lesson and I hope you got a similar result to what I did; 
+
+339
+38:18.480 --> 38:20.540
+thank you very much and enjoy the next lesson.

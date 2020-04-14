@@ -1,0 +1,409 @@
+WEBVTT
+
+0
+00:00.680 --> 00:07.880
+SQL Server jobs; scheduling work. SQL Server jobs.
+
+1
+00:07.980 --> 00:14.490
+SQL Service agent is available for the developer, web, standard and enterprise editions of SQL Server
+
+2
+00:15.000 --> 00:22.440
+but not SQL server express. SQL Server agent allows you to schedule jobs to be run on your database
+
+3
+00:22.590 --> 00:24.590
+server on a regular basis.
+
+4
+00:27.210 --> 00:32.700
+Video demonstration. Here we will demonstrate how to set up a SQL server job to backup your database
+
+5
+00:32.700 --> 00:34.590
+nightly, and compress the backup.
+
+6
+00:36.060 --> 00:42.910
+Ok here we will demonstrate how to setup a SQL server job to backup your database nightly, and compress
+
+7
+00:42.930 --> 00:43.450
+the backup.
+
+8
+00:44.430 --> 00:50.280
+So the first thing we'll do is we'll write the script within the SQL server management studio and then
+
+9
+00:50.280 --> 00:53.330
+we shall create a job from that script.
+
+10
+00:53.460 --> 00:55.760
+So let's get started.
+
+11
+00:55.760 --> 00:58.130
+Now to backup a database.
+
+12
+00:58.290 --> 01:05.670
+So if you've been following previous lessons you may have a backup already in c:\temp
+
+13
+01:05.670 --> 01:09.020
+but let's delete this backup.
+
+14
+01:12.940 --> 01:21.420
+Like so; so the script is: 
+
+15
+01:26.470 --> 01:31.120
+backup database library to disk = 'C:\temp\library.bak'
+
+16
+01:35.660 --> 01:38.790
+Execute; OK.
+
+17
+01:38.900 --> 01:42.940
+We'll check our temp folder and we've got a backup file.
+
+18
+01:42.960 --> 01:50.220
+Now we want to zip this; 
+
+19
+01:50.790 --> 02:00.380
+xp_cmdshell '"C:\program-files\7-zip\7z" a c:\temp\library.zip c:\temp\library.bak'
+
+20
+02:00.390 --> 02:12.300
+xp_cmdshell '"C:\program-files\7-zip\7z" a c:\temp\library.zip c:\temp\library.bak'
+
+21
+02:12.330 --> 02:21.520
+xp_cmdshell '"C:\program-files\7-zip\7z" a c:\temp\library.zip c:\temp\library.bak'
+
+22
+02:22.990 --> 02:30.700
+Okay so once that zip process has completed we can open up the C:\temp
+
+23
+02:30.720 --> 02:37.020
+and we should see two files library.bak and library.zip where the library.zip contains
+
+24
+02:37.020 --> 02:38.070
+library.bak.
+
+25
+02:38.120 --> 02:38.710
+Perfect.
+
+26
+02:39.270 --> 02:39.530
+Okay.
+
+27
+02:39.570 --> 02:44.410
+So the next step is we want to automate this process to run this on a nightly basis.
+
+28
+02:44.610 --> 02:50.490
+So we do that through SQL Service agent, Now SQL server agent will be available on SQL Server developer
+
+29
+02:50.490 --> 02:56.610
+edition, SQL server web edition, standard and enterprise but won't be available on SQL Server Express.
+
+30
+02:56.730 --> 02:59.650
+So make sure you're using the right version of SQL server.
+
+31
+02:59.860 --> 03:05.010
+Now we right click on SQL Server agent; press new job.
+
+32
+03:05.160 --> 03:10.180
+Give the job a name we'll call it a backup.
+
+33
+03:10.860 --> 03:12.570
+Give it a a description.
+
+34
+03:12.570 --> 03:17.720
+This backs up the database every night.
+
+35
+03:18.480 --> 03:23.080
+You can give it a more meaningful description; press steps.
+
+36
+03:23.190 --> 03:23.790
+New step
+
+37
+03:27.170 --> 03:27.520
+step name
+
+38
+03:27.520 --> 03:31.910
+backup database.
+
+39
+03:31.960 --> 03:34.230
+Give it a command which is this
+
+40
+03:37.650 --> 03:39.070
+and...
+
+41
+03:39.590 --> 03:40.060
+Press.
+
+42
+03:40.160 --> 03:41.080
+Okay.
+
+43
+03:41.240 --> 03:43.480
+We create the second step.
+
+44
+03:46.030 --> 03:46.900
+We should use this
+
+45
+03:50.660 --> 03:54.970
+and we'll call it "Zip the backup"
+
+46
+03:55.200 --> 03:56.240
+OK.
+
+47
+03:56.330 --> 04:01.670
+Now if we expand this we can see that each steps has an on on success and on failure.
+
+48
+04:01.670 --> 04:05.790
+This means that if the first step succeeds it will go to the next step.
+
+49
+04:05.840 --> 04:10.630
+If it fails it will quit the job and will not go to the next step.
+
+50
+04:10.640 --> 04:16.340
+There's no point in zipping the backup if the backup has failed it'll be an old backup or an invalid
+
+51
+04:16.340 --> 04:21.040
+backup and the final step.
+
+52
+04:21.050 --> 04:28.250
+We can change this so that it reports success.
+
+53
+04:28.250 --> 04:34.360
+So quit the job reporting success so this means the final step it'll quit the job reporting success.
+
+54
+04:34.400 --> 04:40.480
+Now we should give it a schedule test new and we'll call the schedule nightly.
+
+55
+04:40.880 --> 04:44.150
+So we say it occurs on a daily basis.
+
+56
+04:44.150 --> 04:46.600
+Let's say you want it to run at 1am
+
+57
+04:47.050 --> 04:49.070
+It's the best idea to actually run these jobs.
+
+58
+04:49.130 --> 04:57.120
+At times when your users aren't actively using the database so that you don't slow them down.
+
+59
+04:57.370 --> 04:58.440
+OK.
+
+60
+04:58.590 --> 04:59.340
+And press ok
+
+61
+04:59.390 --> 05:07.110
+OK now once you've created the job it's a good idea to test it to make sure it works.
+
+62
+05:07.130 --> 05:13.670
+So what we're gonna do is we're going to delete the backups and zip so go into the temp folder again
+
+63
+05:14.560 --> 05:17.120
+delete the backup and zip.
+
+64
+05:17.120 --> 05:21.850
+Now we're going to run the job.
+
+65
+05:22.190 --> 05:26.300
+You could of course wait until 1 a.m. in the morning but let's do it straight away.
+
+66
+05:27.650 --> 05:28.730
+So let's run
+
+67
+05:32.580 --> 05:34.880
+we've got reported success.
+
+68
+05:35.190 --> 05:41.700
+We can close this window and check our temp folder and we can see that these two files have not been
+
+69
+05:41.700 --> 05:42.360
+recreated.
+
+70
+05:42.390 --> 05:44.480
+Which is perfect.
+
+71
+05:44.700 --> 05:51.330
+Managing SQL server jobs; You can use the SQL server management studio interface to view the history
+
+72
+05:51.330 --> 05:56.940
+of jobs from via SQL server agent can also disable and delete jobs from the interface if you no
+
+73
+05:56.940 --> 05:59.690
+longer need them.
+
+74
+05:59.770 --> 06:03.780
+Video demonstration: Here we will view the history of the job we've just created.
+
+75
+06:05.220 --> 06:13.560
+Okay here we will view the history of the job we just created so we can right click on the job;
+
+76
+06:14.000 --> 06:23.610
+press view history and you can expand at this to see what has happened so we can see the date and time the
+
+77
+06:23.640 --> 06:25.260
+job was run.
+
+78
+06:25.350 --> 06:29.660
+We can see the green arrows means that it was successful; step succeeded.
+
+79
+06:29.700 --> 06:32.240
+We have more information there.
+
+80
+06:34.900 --> 06:41.350
+For instance we can expand this and we can see the information returned from 7zip
+
+81
+06:44.660 --> 06:50.280
+we can also right click on the job and select disable.
+
+82
+06:50.370 --> 06:57.330
+If we do not want the jobs to run tonight for some reason and enable it again when you want the job
+
+83
+06:57.340 --> 07:02.400
+to run; and that's all there is to it. And it's over to you.
+
+84
+07:03.090 --> 07:09.150
+Let's see if we can use a SQL server job history to diagnose the problem first uninstall 7zip
+
+85
+07:09.160 --> 07:15.210
+from your computer and re-run the job then you SQL server job history to diagnose the problem
+
+86
+07:15.210 --> 07:17.390
+fix it; and verify the fix.
+
+87
+07:17.460 --> 07:23.270
+You can pause this video now and resume it when you wish to view the solution.
+
+88
+07:23.600 --> 07:29.970
+Okay for this task we're going to cause a problem then diagnose and fix it again.
+
+89
+07:31.410 --> 07:40.220
+So what we're going to do is delete 7zip; so we right click on the7Zip folder; click on the uninstall program
+
+90
+07:40.860 --> 07:45.860
+and this will uninstall 7zip.
+
+91
+07:46.760 --> 07:53.410
+We'll also delete our backup.
+
+92
+07:53.600 --> 07:55.980
+Now let's run the nightly backup job.
+
+93
+08:03.680 --> 08:04.620
+Says success.
+
+94
+08:04.680 --> 08:07.730
+However if we look in the temp folder we have library that back.
+
+95
+08:07.740 --> 08:09.240
+But there is no library.zip.
+
+96
+08:11.070 --> 08:20.280
+So if we right click on this view history and the latest one
+
+97
+08:23.260 --> 08:26.810
+this says the step succeeded but it didn't.
+
+98
+08:26.820 --> 08:30.540
+So we should just reinstall 7Zip
+
+99
+08:38.670 --> 08:46.060
+Default location; and re-run the job
+
+100
+08:54.480 --> 08:54.980
+OK.
+
+101
+08:55.030 --> 09:01.000
+Once complete check the temp folder and those files are now there; perfect.

@@ -1,0 +1,373 @@
+WEBVTT
+
+0
+00:00.680 --> 00:07.880
+SQL Server-Aufträge; Planungsarbeiten. SQL Server-Aufträge.
+
+1
+00:07.980 --> 00:14.490
+SQL Service Agent ist für die Entwickler-, Web-, Standard- und Enterprise-Editionen von SQL Server verfügbar
+
+2
+00:15.000 --> 00:22.440
+sql Server Express. Mit dem SQL Server-Agent können Sie die Ausführung von Aufträgen in Ihrer Datenbank planen
+
+3
+00:22.590 --> 00:24.590
+Server regelmäßig.
+
+4
+00:27.210 --> 00:32.700
+Video-Demonstration. Hier erfahren Sie, wie Sie einen SQL-Serverauftrag zum Sichern Ihrer Datenbank einrichten.
+
+5
+00:32.700 --> 00:34.590
+und komprimieren Sie die Sicherung.
+
+6
+00:36.060 --> 00:42.910
+Hier finden Sie informationen, wie Sie einen SQL-Serverauftrag einrichten, um Ihre Datenbank nächtlich zu sichern, und komprimieren
+
+7
+00:42.930 --> 00:43.450
+die Sicherung.
+
+8
+00:44.430 --> 00:50.280
+Das erste, was wir tun werden, ist, dass wir das Skript im SQL Server Management Studio schreiben und dann
+
+9
+00:50.280 --> 00:53.330
+wir werden aus diesem Skript einen Job schaffen.
+
+10
+00:53.460 --> 00:55.760
+Also lasst uns loslegen.
+
+11
+00:55.760 --> 00:58.130
+Nun, um eine Datenbank zu sichern.
+
+12
+00:58.290 --> 01:05.670
+Wenn Sie also die vorherigen Lektionen befolgt haben, haben Sie möglicherweise bereits eine Sicherungskopie in c:-temp
+
+13
+01:05.670 --> 01:09.020
+Aber löschen wir diese Sicherung.
+
+14
+01:12.940 --> 01:21.420
+So ist es; das Skript lautet also: 
+
+15
+01:26.470 --> 01:31.120
+Sicherungsdatenbankbibliothek auf den Datenträger = 'C:'temp'library.bak'
+
+16
+01:35.660 --> 01:38.790
+Ausführen; Okay.
+
+17
+01:38.900 --> 01:42.940
+Wir überprüfen unseren temporären Ordner und wir haben eine Sicherungsdatei.
+
+18
+01:42.960 --> 01:50.220
+Jetzt wollen wir das zippen; 
+
+19
+01:50.790 --> 02:00.380
+xp_cmdshell '"C:'programm-dateien'7-zip'7z" a c:'temp'library.zip c:'temp'library.bak''
+
+20
+02:00.390 --> 02:12.300
+xp_cmdshell '"C:'programm-dateien'7-zip'7z" a c:'temp'library.zip c:'temp'library.bak''
+
+21
+02:12.330 --> 02:21.520
+xp_cmdshell '"C:'programm-dateien'7-zip'7z" a c:'temp'library.zip c:'temp'library.bak''
+
+22
+02:22.990 --> 02:30.700
+Okay, sobald der ZIP-Prozess abgeschlossen ist, können wir die C:-Temp-Datei öffnen.
+
+23
+02:30.720 --> 02:37.020
+und wir sollten zwei Dateien library.bak und library.zip sehen, wo die library.zip enthält
+
+24
+02:37.020 --> 02:38.070
+library.bak.
+
+25
+02:38.120 --> 02:38.710
+perfekt.
+
+26
+02:39.270 --> 02:39.530
+Okay.
+
+27
+02:39.570 --> 02:44.410
+Der nächste Schritt ist also, dass wir diesen Prozess automatisieren wollen, um diesen auf einer nächtlichen Basis auszuführen.
+
+28
+02:44.610 --> 02:50.490
+Also tun wir dies über SQL Service Agent, Jetzt SQL Server-Agent wird auf SQL Server-Entwickler verfügbar sein
+
+29
+02:50.490 --> 02:56.610
+EDITION, SQL Server Web Edition, Standard und Enterprise, ist aber in SQL Server Express nicht verfügbar.
+
+30
+02:56.730 --> 02:59.650
+Stellen Sie also sicher, dass Sie die richtige Version von SQL Server verwenden.
+
+31
+02:59.860 --> 03:05.010
+Jetzt klicken wir mit der rechten Maustaste auf SQL Server-Agent; neue Aufgabe zu drücken.
+
+32
+03:05.160 --> 03:10.180
+Geben Sie dem Auftrag einen Namen, den wir als Backup bezeichnen.
+
+33
+03:10.860 --> 03:12.570
+Geben Sie ihm eine Beschreibung.
+
+34
+03:12.570 --> 03:17.720
+Dadurch wird die Datenbank jede Nacht gespeichert.
+
+35
+03:18.480 --> 03:23.080
+Sie können ihm eine aussagekräftigere Beschreibung geben; Schritt drücken.
+
+36
+03:23.190 --> 03:23.790
+Neuer Schritt
+
+37
+03:27.170 --> 03:27.520
+Schrittname
+
+38
+03:27.520 --> 03:31.910
+Backup-Datenbank.
+
+39
+03:31.960 --> 03:34.230
+Geben Sie ihm einen Befehl, der
+
+40
+03:37.650 --> 03:39.070
+Und...
+
+41
+03:39.590 --> 03:40.060
+Presse.
+
+42
+03:40.160 --> 03:41.080
+Okay.
+
+43
+03:41.240 --> 03:43.480
+Wir erstellen den zweiten Schritt.
+
+44
+03:46.030 --> 03:46.900
+Wir sollten diese
+
+45
+03:50.660 --> 03:54.970
+und wir nennen es "Zip the backup"
+
+46
+03:55.200 --> 03:56.240
+Okay.
+
+47
+03:56.330 --> 04:01.670
+Wenn wir dies nun erweitern, können wir sehen, dass jeder Schritt auf Erfolg und Misserfolg einist.
+
+48
+04:01.670 --> 04:05.790
+Dies bedeutet, dass, wenn der erste Schritt erfolgreich ist, es zum nächsten Schritt gehen wird.
+
+49
+04:05.840 --> 04:10.630
+Wenn er fehlschlägt, wird der Auftrag beendet und nicht zum nächsten Schritt übergehen.
+
+50
+04:10.640 --> 04:16.340
+Es hat keinen Sinn, die Sicherung zu zippen, wenn die Sicherung fehlgeschlagen ist, es handelt sich um eine alte Sicherung oder um eine ungültige Sicherung.
+
+51
+04:16.340 --> 04:21.040
+Backup und den letzten Schritt.
+
+52
+04:21.050 --> 04:28.250
+Wir können dies ändern, so dass es Erfolg meldet.
+
+53
+04:28.250 --> 04:34.360
+Beenden Sie also den Erfolg der Jobberichterstattung, sodass dies den letzten Schritt bedeutet, dass der Erfolg der Jobberichterstattung beendet wird.
+
+54
+04:34.400 --> 04:40.480
+Jetzt sollten wir ihm einen Neuen Zeitplantest geben und wir rufen den Zeitplan nächtlich an.
+
+55
+04:40.880 --> 04:44.150
+Wir sagen also, dass es täglich geschieht.
+
+56
+04:44.150 --> 04:46.600
+Angenommen, Sie möchten, dass es um 1 Uhr morgens läuft
+
+57
+04:47.050 --> 04:49.070
+Es ist die beste Idee, diese Jobs tatsächlich zu betreiben.
+
+58
+04:49.130 --> 04:57.120
+In Zeiten, in denen Ihre Benutzer die Datenbank nicht aktiv verwenden, damit Sie sie nicht verlangsamen.
+
+59
+04:57.370 --> 04:58.440
+Okay.
+
+60
+04:58.590 --> 04:59.340
+Und drücken Sie ok
+
+61
+04:59.390 --> 05:07.110
+OK jetzt, nachdem Sie den Auftrag erstellt haben, ist es eine gute Idee, ihn zu testen, um sicherzustellen, dass es funktioniert.
+
+62
+05:07.130 --> 05:13.670
+Also, was wir tun werden, ist, dass wir die Backups löschen und zip, so gehen Sie in den temporären Ordner wieder
+
+63
+05:14.560 --> 05:17.120
+die Sicherung und den ZIP löschen.
+
+64
+05:17.120 --> 05:21.850
+Jetzt werden wir den Job ausführen.
+
+65
+05:22.190 --> 05:26.300
+Sie könnten natürlich bis 1 Uhr morgens warten, aber lassen Sie es uns sofort tun.
+
+66
+05:27.650 --> 05:28.730
+Also lasst uns laufen
+
+67
+05:32.580 --> 05:34.880
+wir haben Erfolg gemeldet.
+
+68
+05:35.190 --> 05:41.700
+Wir können dieses Fenster schließen und unseren temporären Ordner überprüfen und wir können sehen, dass diese beiden Dateien nicht
+
+69
+05:41.700 --> 05:42.360
+Neu.
+
+70
+05:42.390 --> 05:44.480
+Was perfekt ist.
+
+71
+05:44.700 --> 05:51.330
+Verwalten von SQL-Serveraufträgen; Sie können die SQL Server-Verwaltungsstudio-Schnittstelle verwenden, um den Verlauf
+
+72
+05:51.330 --> 05:56.940
+von Aufträgen von über SQL Server Agent kann auch Aufträge deaktivieren und von der Schnittstelle löschen, wenn Sie
+
+73
+05:56.940 --> 05:59.690
+länger brauchen.
+
+74
+05:59.770 --> 06:03.780
+Video-Demonstration: Hier sehen wir die Geschichte des Jobs, den wir gerade erstellt haben.
+
+75
+06:05.220 --> 06:13.560
+Okay, hier werden wir die Geschichte des Jobs sehen, den wir gerade erstellt haben, damit wir mit der rechten Maustaste auf den Job klicken können;
+
+76
+06:14.000 --> 06:23.610
+Presseansicht Geschichte und Sie können an dieser erweitern, um zu sehen, was passiert ist, so dass wir das Datum und die Uhrzeit der
+
+77
+06:23.640 --> 06:25.260
+Auftrag ausgeführt wurde.
+
+78
+06:25.350 --> 06:29.660
+Wir können sehen, dass die grünen Pfeile bedeutet, dass es erfolgreich war; Schritt erfolgreich.
+
+79
+06:29.700 --> 06:32.240
+Wir haben dort mehr Informationen.
+
+80
+06:34.900 --> 06:41.350
+Zum Beispiel können wir dies erweitern und wir können die Informationen sehen, die von 7zip zurückgegeben werden
+
+81
+06:44.660 --> 06:50.280
+Wir können auch mit der rechten Maustaste auf den Job klicken und deaktivieren auswählen.
+
+82
+06:50.370 --> 06:57.330
+Wenn wir nicht wollen, dass die Aufträge heute Abend aus irgendeinem Grund ausgeführt werden, und aktivieren Sie es erneut, wenn Sie den Job wollen
+
+83
+06:57.340 --> 07:02.400
+zu laufen; und das ist alles, was es dazu gibt. Und es ist an dir vorbei.
+
+84
+07:03.090 --> 07:09.150
+Sehen wir uns an, ob wir einen SQL Server-Auftragsverlauf verwenden können, um das Problem zuerst zu deinstallieren 7zip
+
+85
+07:09.160 --> 07:15.210
+Von Ihrem Computer aus und führen Sie den Auftrag erneut aus, dann führen Sie den SQL Server-Auftragsverlauf aus, um das Problem zu diagnostizieren
+
+86
+07:15.210 --> 07:17.390
+es zu beheben; und überprüfen Sie die Korrektur.
+
+87
+07:17.460 --> 07:23.270
+Sie können dieses Video jetzt anhalten und fortsetzen, wenn Sie die Lösung anzeigen möchten.
+
+88
+07:23.600 --> 07:29.970
+Okay für diese Aufgabe werden wir ein Problem verursachen, dann diagnostizieren und wieder beheben.
+
+89
+07:31.410 --> 07:40.220
+Was wir also tun werden, ist 7zip zu löschen; so klicken wir mit der rechten Maustaste auf den Ordner7Zip; Klicken Sie auf das Deinstallationsprogramm
+
+90
+07:40.860 --> 07:45.860
+und dies wird 7zip deinstallieren.
+
+91
+07:46.760 --> 07:53.410
+Wir löschen auch unser Backup.
+
+92
+07:53.600 --> 07:55.980
+Führen wir nun den nächtlichen Sicherungsauftrag a

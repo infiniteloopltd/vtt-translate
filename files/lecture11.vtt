@@ -1,0 +1,1418 @@
+WEBVTT
+
+0
+00:01.640 --> 00:05.300
+SQL Server security; Data on a need-to-know basis.
+
+1
+00:06.870 --> 00:09.960
+Windows versus SQL Server authentication.
+
+2
+00:10.200 --> 00:16.560
+Users of SQL server can be authenticated via Microsoft Windows or via SQL Server directly using a
+
+3
+00:16.560 --> 00:18.390
+username and password.
+
+4
+00:18.390 --> 00:25.080
+Typically if your client; beit management studio or .NET  application; is on the same machine or local
+
+5
+00:25.080 --> 00:32.040
+network as your database server you will use Microsoft Windows authentication; if your client is; or could
+
+6
+00:32.040 --> 00:37.740
+be located elsewhere on the internet then you would typically use SQL Server authentication using
+
+7
+00:37.740 --> 00:38.930
+a username and password.
+
+8
+00:41.170 --> 00:48.940
+Users and roles; SQL server roles define a level of access to the database and multiple users can
+
+9
+00:48.940 --> 00:52.280
+be assigned to a role or multiple roles.
+
+10
+00:52.460 --> 00:56.420
+There are certain system defined roles which allow full access.
+
+11
+00:56.510 --> 00:59.910
+For example sysadmin or virtually no access.
+
+12
+00:59.990 --> 01:06.500
+For example public; you can define your own database role if you need more granular access to your database
+
+13
+01:08.600 --> 01:15.480
+video demonstration - Here you will demonstrate both windows authentication and SQL server authentication.
+
+14
+01:15.620 --> 01:21.890
+We will also demonstrate how to define a custom role which will allow access to book information but
+
+15
+01:21.890 --> 01:24.370
+not student information.
+
+16
+01:24.380 --> 01:29.000
+Here will demonstrate both windows authentication and SQL Server authentication.
+
+17
+01:29.030 --> 01:33.560
+We also demonstrate how to define a custom role which will allow access to book information but not
+
+18
+01:33.560 --> 01:35.780
+student information.
+
+19
+01:35.780 --> 01:40.670
+Up to now we've been using Windows authentication which means that we've been authenticating ourselves
+
+20
+01:40.670 --> 01:45.470
+against SQL server using Windows built-in user system.
+
+21
+01:45.470 --> 01:47.050
+This is really good.
+
+22
+01:47.060 --> 01:54.140
+It's secure but if we want to create multiple log ins that have different roles then perhaps you wouldn't
+
+23
+01:54.140 --> 01:56.260
+want to create new Windows users.
+
+24
+01:56.300 --> 02:03.260
+Every time we want to do this; so we're going to first enable mixed mode authentication which means both
+
+25
+02:03.260 --> 02:12.620
+Windows and SQL Server authentication; so to do so right click on your server; click properties;
+
+26
+02:12.680 --> 02:20.360
+click security; click SQL Server and Windows authentication mode under server authentication.
+
+27
+02:20.360 --> 02:26.750
+This will allow us to authenticate using the Windows user system and also use usernames and passwords
+
+28
+02:26.990 --> 02:28.950
+as defined by SQL Server.
+
+29
+02:29.150 --> 02:36.030
+So press OK; it is now asking for SQL Server to be restarted which you can simply do by clicking on
+
+30
+02:36.030 --> 02:37.250
+the server.
+
+31
+02:37.830 --> 02:45.120
+Press the restart and press yes; it should restart quickly.
+
+32
+02:49.450 --> 02:55.290
+And we can now use SQL Server authentication to log in as well as windows authentication.
+
+33
+02:55.690 --> 03:05.020
+So in order to create a new log in; first we're going to expand security plugins; right click;  new login
+
+34
+03:05.020 --> 03:10.360
+you're gonna give it a name; which I'm going to call it bookreader
+
+35
+03:14.450 --> 03:15.710
+SQL Server authentication.
+
+36
+03:15.710 --> 03:20.430
+We're going to give it a password which I'm going to just give it the numbers one to nine.
+
+37
+03:20.460 --> 03:22.850
+Please give a much stronger password than this
+
+38
+03:27.300 --> 03:31.880
+1,2,3,4,5,6,7,8,9.
+
+39
+03:31.990 --> 03:33.480
+Press OK.
+
+40
+03:34.160 --> 03:44.290
+Now I'm now going to demonstrate how to connect to SQL server using this new user so connect; and change
+
+41
+03:44.730 --> 03:50.450
+Windows Authentication to SQL Server authentication the login is bookreader
+
+42
+03:53.480 --> 03:59.510
+And the password is 123456789 press connect.
+
+43
+03:59.530 --> 04:03.700
+It's prompting to change the password and I'm going to leave it to us 1 to 9
+
+44
+04:10.410 --> 04:10.800
+press OK
+
+45
+04:10.830 --> 04:19.080
+so now we have logged into our database in two ways via the windows authentication.
+
+46
+04:19.840 --> 04:22.990
+and SQL server authentication.
+
+47
+04:23.080 --> 04:31.510
+Now when we have SQL server authentication you'll notice that this has literally no access to the database.
+
+48
+04:31.510 --> 04:37.590
+This is because we've not assigned bookreader to any roles.
+
+49
+04:37.660 --> 04:42.280
+So what we're going to do now is using Windows authentication.
+
+50
+04:42.280 --> 04:45.520
+We're going to define both a role.
+
+51
+04:45.520 --> 04:48.160
+We're going to create a new user.
+
+52
+04:48.160 --> 04:56.180
+We're going to assign the user to a role and then we're going to give that role some permissions 
+
+53
+04:56.200 --> 04:59.230
+i.e. to read the books table but not the students table.
+
+54
+04:59.890 --> 05:09.130
+So let's start with expanding out our database; expand out security; expand out roles; database roles; and
+
+55
+05:09.130 --> 05:14.590
+we should create new database role which we should call bookreader role.
+
+56
+05:19.200 --> 05:20.190
+and press OK
+
+57
+05:20.250 --> 05:37.470
+we're going to create a user; New user which I'll call the bookreaderuser; log in name must be
+
+58
+05:37.860 --> 05:38.220
+bookreader
+
+59
+05:41.770 --> 05:43.050
+and we can press.
+
+60
+05:43.050 --> 05:43.430
+OK.
+
+61
+05:45.030 --> 05:55.630
+So we now have a role and a user; and this user should be a member of the role; so we click membership
+
+62
+05:56.350 --> 05:59.870
+and add the user to the role.
+
+63
+05:59.910 --> 06:05.730
+Still we haven't given this role or user any permissions yet so they will not have any access to the
+
+64
+06:05.730 --> 06:07.320
+database.
+
+65
+06:07.320 --> 06:14.640
+So we're going to expand out tables and we're going to right click on books and we're going to click
+
+66
+06:15.090 --> 06:15.660
+properties.
+
+67
+06:18.180 --> 06:20.330
+Permissions.
+
+68
+06:20.610 --> 06:24.090
+I'm going to search for the bookreaderrole
+
+69
+06:29.190 --> 06:30.300
+and I'm going to....
+
+70
+06:30.390 --> 06:36.570
+These are the various permissions so that user could have; so they could delete the table; 
+
+71
+06:36.570 --> 06:37.280
+insert into the table.
+
+72
+06:37.470 --> 06:45.020
+But let's say we just want to press select; so they can read this table; only so really minimal access.
+
+73
+06:45.540 --> 06:48.030
+So we're going to press OK here.
+
+74
+06:48.610 --> 06:57.290
+Now let's go back into the second connection which is using SQL server authentication and.
+
+75
+06:57.300 --> 07:03.630
+Create a new query window using this user.
+
+76
+07:03.630 --> 07:08.300
+In the title bar you can see the name of the user being used which is bookreader.
+
+77
+07:08.550 --> 07:17.250
+So if I do a select from the students table first; I need to check if I have access to have access to
+
+78
+07:17.250 --> 07:18.730
+the library.
+
+79
+07:18.810 --> 07:21.330
+Select the library
+
+80
+07:28.100 --> 07:32.910
+so I have no access to the students table even though it does exist.
+
+81
+07:33.240 --> 07:38.390
+But if I do "select * from books" then I can see the books table.
+
+82
+07:38.660 --> 07:45.090
+If I were to do the same thing using the windows authentication select * from the books.
+
+83
+07:45.560 --> 07:50.090
+Select the correct database; so I can see the books table
+
+84
+07:54.660 --> 08:01.650
+I can also see the students table but the bookreader can't see the students table but can't see the 
+
+85
+08:01.650 --> 08:03.880
+books table.
+
+86
+08:04.440 --> 08:06.810
+So this is an ideal way to set up a system.
+
+87
+08:06.900 --> 08:10.990
+If you want to lock down particular access to particular clients.
+
+88
+08:11.070 --> 08:20.110
+So if you had a website that perhaps would connect into this database but is read only purposes
+
+89
+08:20.160 --> 08:24.120
+only where you'd like to help people find books in a library.
+
+90
+08:24.120 --> 08:28.800
+Then you can limit that access to reading only from the library.
+
+91
+08:28.800 --> 08:38.670
+So even if your username is compromised or that Web site has a security flaw SQL Server will limit the
+
+92
+08:38.670 --> 08:42.450
+damage that that particular application can do.
+
+93
+08:43.950 --> 08:45.810
+So hopefully this makes sense, We shall move on.
+
+94
+08:45.930 --> 08:50.760
+Securing SQL server using a firewall.
+
+95
+08:51.030 --> 08:56.130
+If you have SQL server connected to the internet then it is likely that malicious parties will
+
+96
+08:56.130 --> 09:00.330
+try to gain access to it by trying to guess your password.
+
+97
+09:00.330 --> 09:05.820
+One of the first lines of defence is to use Windows firewall to block down Port TCP.
+
+98
+09:05.910 --> 09:13.320
+1433 to allow only access from known IP addresses.
+
+99
+09:13.330 --> 09:14.730
+Video demonstration.
+
+100
+09:14.730 --> 09:20.400
+Here will demonstrate how to configure SQL server to control access from remote IPs or
+
+101
+09:20.400 --> 09:24.480
+where it is necessary to use a firewall to limit the IPs that will have access to it.
+
+102
+09:26.820 --> 09:32.550
+Here we will demonstrate how to configure SQL Server to control access from remote IPs or where it
+
+103
+09:32.550 --> 09:33.360
+is necessary.
+
+104
+09:33.360 --> 09:36.540
+Use a firewall to limit the IPs that will have access to it.
+
+105
+09:37.600 --> 09:43.690
+For best security you should try and keep your client and your SQL server on the same machine and use
+
+106
+09:43.810 --> 09:46.680
+local connections via Windows authentication only.
+
+107
+09:47.260 --> 09:53.830
+However it's quite likely that a real world situation will have the SQL server on a different location
+
+108
+09:53.860 --> 09:54.580
+to the client.
+
+109
+09:55.510 --> 10:02.150
+So here we're going to try and demonstrate a local connection via the Internet.
+
+110
+10:03.270 --> 10:10.770
+So to simulate this type of connection on one machine what we'll need to do is get our local IP address
+
+111
+10:11.460 --> 10:22.530
+to do so open up a command prompt type IPconfig and you'll notice you'll have your own local IP address.
+
+112
+10:22.530 --> 10:29.430
+This typically will have the format 192.168 followed by two numbers.
+
+113
+10:29.520 --> 10:40.260
+In my case it's 0.147; so to demonstrate that currently my local server will not allow connections
+
+114
+10:40.260 --> 10:41.400
+via remote IPs.
+
+115
+10:41.430 --> 10:49.650
+We're going to try and connect to the bookreader account using this IP address as a server name 
+
+116
+10:49.650 --> 10:52.110
+so we enter in our secure password again.
+
+117
+10:52.110 --> 11:02.870
+Of 1 to 9; 123456789; connect; and this will hang and eventually it will fail.
+
+118
+11:05.300 --> 11:09.370
+As you can see it's not working so cancel out.
+
+119
+11:09.380 --> 11:15.900
+Now when you check 2 things in order to make sure that our server can connect from remote IPs.
+
+120
+11:15.900 --> 11:25.120
+The first is we select properties; click connections; and make sure that this box allow remote connections
+
+121
+11:25.140 --> 11:29.480
+the server is ticked; which is perfect.
+
+122
+11:29.970 --> 11:37.590
+The next thing we need change is in another program called SQL Server Management configuration so
+
+123
+11:37.590 --> 11:45.250
+we type in SQL server configuration manager.
+
+124
+11:45.920 --> 11:54.200
+We expand out SQL server network; configuration protocols for MS SQL server; we right click on TCP/IP
+
+125
+11:54.970 --> 12:06.480
+Click enable;  we now need to restart our local SQL server restart; press yes; allow it to restart
+
+126
+12:11.980 --> 12:16.860
+and now as I try to connect using the IP address and the password
+
+127
+12:19.930 --> 12:23.270
+now it allows me to connect via an IP address.
+
+128
+12:23.270 --> 12:28.390
+Now this IP address is on my local machine but it could potentially be anywhere on the Internet.
+
+129
+12:29.590 --> 12:35.980
+Now once you open up your SQL server to the Internet it's very likely that somebody somewhere will
+
+130
+12:35.980 --> 12:41.980
+discover that you have a live SQL server and we'll try and break into it using brute force password
+
+131
+12:42.580 --> 12:44.050
+or some other type of attack.
+
+132
+12:45.100 --> 12:54.490
+So typically your client or clients will have known IP addresses you can use Windows firewall or other
+
+133
+12:54.490 --> 13:08.110
+firewall products to limit the access to given IP addresses so open up windows firewall; press new rule;
+
+134
+13:08.150 --> 13:13.050
+select port; because we know the port is 1433
+
+135
+13:13.070 --> 13:18.550
+Press Next; it's TCP; Type in 1433.
+
+136
+13:19.370 --> 13:22.140
+We allow the connection.
+
+137
+13:22.310 --> 13:23.870
+Next.
+
+138
+13:23.910 --> 13:25.730
+Give it a name that's SQL server
+
+139
+13:28.370 --> 13:29.830
+finished.
+
+140
+13:29.980 --> 13:33.370
+Now to limit this right click on the new rule.
+
+141
+13:33.380 --> 13:40.090
+Press properties; press scope; and then you can choose
+
+142
+13:43.260 --> 13:50.760
+a remote IP address; is this IP address; press add and then we can type in the IP address of our trusted
+
+143
+13:50.760 --> 13:52.190
+client.
+
+144
+13:52.310 --> 14:00.300
+Now in this example if the client has an IP address of 8.8.8.8 which happens to be Google then the
+
+145
+14:01.230 --> 14:05.640
+client will be allowed if it is anywhere else it will be disconnected.
+
+146
+14:06.030 --> 14:08.040
+General Data Protection Regulation.
+
+147
+14:08.250 --> 14:14.580
+GDPR; if you hold personally identifiable data on EU citizens then you'll be subject to the GDPR
+
+148
+14:14.580 --> 14:18.090
+regulation regardless of where you or your company is based.
+
+149
+14:19.560 --> 14:25.290
+In very broad strokes this law requires you to; allow users to delete their own data.
+
+150
+14:25.290 --> 14:30.890
+Allow users to view or update their own data; to keep their data safe and inform them.
+
+151
+14:30.900 --> 14:34.160
+Who else has their data.
+
+152
+14:34.230 --> 14:41.100
+Other countries with GDPR - like laws; Other countries enforce laws similar to GDPR such as Brazil
+
+153
+14:41.340 --> 14:46.130
+Australia, California, Japan, South Korea and Thailand.
+
+154
+14:46.170 --> 14:49.500
+You should make yourself aware of any laws that may apply to your data.
+
+155
+14:51.210 --> 14:52.340
+Storing passwords.
+
+156
+14:52.980 --> 14:58.230
+If you store usernames and passwords in your database you should never store them as plaintext.
+
+157
+14:58.290 --> 15:04.800
+The most common way to encrypt passwords is called hashing which is a one way encryption mechanism.
+
+158
+15:04.830 --> 15:12.090
+All you need to do is check that the hash of the user supplied passwords matches the hash in the database
+
+159
+15:12.740 --> 15:20.460
+and you can be sure the password is correct without storing the password itself 
+
+160
+15:20.730 --> 15:27.660
+Strong hashes; There are a number of different hashing algorithms but it is recommended to use either SHA2_256 or SHA2_512
+
+161
+15:27.660 --> 15:34.100
+To increase the strength of a hash,
+
+162
+15:34.150 --> 15:40.270
+You can add an arbitrary string to the password being hashed and the same string to the user provided
+
+163
+15:40.270 --> 15:41.580
+password.
+
+164
+15:41.590 --> 15:44.520
+This is called salting.
+
+165
+15:44.680 --> 15:52.270
+You can use the command hashbytes to perform hashing in SQL server such as 
+
+166
+15:52.510 --> 15:57.220
+select hashbytes('SHA2_256','this is my password')
+
+167
+15:57.220 --> 15:57.880
+select hashbytes('SHA2_256','this is my password')
+
+168
+15:57.880 --> 16:01.960
+select hashbytes('SHA2_256','this is my password')
+
+169
+16:04.130 --> 16:10.460
+Video demonstration: Here we'll demonstrate how to store password hashes in a database and how to verify
+
+170
+16:10.490 --> 16:12.210
+if the password matches.
+
+171
+16:12.380 --> 16:16.550
+We will further demonstrate how to increase the level of security by using salting.
+
+172
+16:17.880 --> 16:23.600
+OK here will demonstrate how to store password hashes in a database and how to verify if the password
+
+173
+16:23.600 --> 16:30.350
+matches; will further demonstrate how to increase the level of security by using salting.
+
+174
+16:30.500 --> 16:37.250
+So make sure that you're logged into the database using your windows authentication user; rather than
+
+175
+16:37.250 --> 16:43.250
+the bookreader or user because the bookreader user will have too little access to the database to
+
+176
+16:43.250 --> 16:45.780
+actually proceed to the demonstration.
+
+177
+16:45.830 --> 17:00.060
+So first let's create a user's table so; 
+
+178
+17:02.810 --> 17:10.040
+create table users ( id int identity(1,1) not null, username varchar(100),
+
+179
+17:10.180 --> 17:16.060
+Now instead of saving the password as a varchar and allowing anybody who has access to the database
+
+180
+17:16.090 --> 17:23.020
+to actually read this password we're gonna store as varbinary and the length of the hash will always
+
+181
+17:23.020 --> 17:24.550
+be 256.
+
+182
+17:24.610 --> 17:29.670
+If we use SHA2_ 256 so we can use varbinary(256).
+
+183
+17:31.820 --> 17:34.150
+So create that table.
+
+184
+17:35.320 --> 17:44.430
+Now when creating a user in this user table we're going to type in;
+
+185
+17:45.420 --> 17:48.370
+insert into users (username,password) values ('
+
+186
+17:48.570 --> 17:51.130
+The username can be...
+
+187
+17:51.360 --> 17:59.010
+John as a user name and instead of giving it plaintext as the password we're going to use hashbytes
+
+188
+18:00.510 --> 18:10.510
+we're going to provide an algorithm which you can use SHA2_256 and the password.
+
+189
+18:10.530 --> 18:12.270
+We're just gonna call my password
+
+190
+18:15.060 --> 18:15.830
+now.
+
+191
+18:16.020 --> 18:18.480
+We run on this.
+
+192
+18:18.510 --> 18:19.220
+Let's have a look.
+
+193
+18:19.230 --> 18:20.790
+How do you use your table now.
+
+194
+18:25.320 --> 18:31.590
+So you can see the username in plaintext but the password is encrypted.
+
+195
+18:31.590 --> 18:32.830
+It's one way encrypted.
+
+196
+18:32.830 --> 18:38.160
+There's no way to get from this long hex value back to the word.
+
+197
+18:38.220 --> 18:39.050
+"My password"
+
+198
+18:40.030 --> 18:41.640
+But how do we actually use this?
+
+199
+18:41.640 --> 18:44.240
+Well our login will be something like this:
+
+200
+18:44.340 --> 18:52.520
+select top 1 * from users where username='john' and
+
+201
+18:53.640 --> 18:58.860
+password=hashbytes('SHA2_256','my password')
+
+202
+18:58.980 --> 19:02.540
+password=hashbytes('SHA2_256','my password')
+
+203
+19:04.220 --> 19:16.110
+If the same password was provided; "my password"; then 
+
+204
+19:16.130 --> 19:22.940
+You can run this; and we can get our user I.D. back.
+
+205
+19:22.940 --> 19:31.820
+If the wrong password was provided then evidently this will return zero rows as there is no matching user.
+
+206
+19:33.380 --> 19:41.260
+So that's a quick demonstration of how to use hashing to encrypt a password in the database.
+
+207
+19:41.540 --> 19:48.860
+And that means that even a database administrator can't see user's passwords.
+
+208
+19:49.290 --> 19:54.710
+We've taken great steps now to secure the password value in the database.
+
+209
+19:54.840 --> 20:00.760
+However we can do one better and make this hash even more secure.
+
+210
+20:00.870 --> 20:10.140
+But before I can explain how we can make this more secure I can have to demonstrate how there is a security
+
+211
+20:10.140 --> 20:12.460
+flaw in what we've done so far.
+
+212
+20:12.840 --> 20:23.050
+So in this example I'm going to imagine that our user has selected a very very insecure password a really
+
+213
+20:23.050 --> 20:28.420
+obvious password and the most obvious one I can possibly think of is the word "password" which you should
+
+214
+20:28.420 --> 20:30.360
+never use as a password.
+
+215
+20:30.400 --> 20:37.710
+Now in this case our user; John has selected "password" as a password.
+
+216
+20:37.750 --> 20:43.400
+This will give the hash value of this 0x5E....
+
+217
+20:43.480 --> 20:44.950
+Etc., etc.
+
+218
+20:45.160 --> 20:48.100
+Which appears to be very secure.
+
+219
+20:48.250 --> 20:53.280
+However the problem is that this is probably a very well known hash.
+
+220
+20:53.380 --> 20:56.830
+So if I simply google this hash
+
+221
+20:59.780 --> 21:05.930
+click on the first result something and stack overflow and somebody is talking about this saying if
+
+222
+21:05.930 --> 21:10.840
+I s encrypt the word password blah I get this value.
+
+223
+21:10.850 --> 21:19.070
+Therefore somebody with a quick Google search or perhaps with more sophisticated tools such as rainbow
+
+224
+21:19.070 --> 21:24.830
+tables could break these hashes very quickly especially if the user uses something very very simple
+
+225
+21:24.830 --> 21:26.390
+like this.
+
+226
+21:26.710 --> 21:34.520
+Now the solution to this problem is what's called salting where you add a known arbitrary string to
+
+227
+21:34.520 --> 21:38.600
+the end of the password to be hashed.
+
+228
+21:38.600 --> 21:46.610
+So in this case we shall pick a long and complex
+
+229
+21:49.350 --> 21:58.120
+Let's see I'm just pressing random buttons up here but I'm going to remember this for later; we run this and
+
+230
+21:58.120 --> 21:59.200
+we get a different hash
+
+231
+22:02.660 --> 22:08.420
+if I Google this hash then there'll be no results because it's adequately strong.
+
+232
+22:09.740 --> 22:20.420
+Therefore if we add this random string which is called the salt to the password and also add it to the
+
+233
+22:21.660 --> 22:28.350
+login script then we shall create "John2"
+
+234
+22:32.100 --> 22:38.130
+so insert users John2 should go in here.
+
+235
+22:38.260 --> 22:51.210
+If I now use that password John2 is returned, even if John2 has used a very insecure password
+
+236
+22:51.810 --> 22:53.660
+it still will pass this test.
+
+237
+22:54.450 --> 22:57.010
+So hopefully that makes sense and we'll move on.
+
+238
+22:59.460 --> 23:05.340
+SQL server injection; if your SQL server is connected to an application that accepts user input
+
+239
+23:05.670 --> 23:10.710
+you must be aware that this input may contain malicious SQL statements.
+
+240
+23:10.830 --> 23:15.570
+For example if you have an SQL command but is written as such.
+
+241
+23:15.750 --> 23:21.660
+select * from books where name='[some user input]'
+
+242
+23:21.660 --> 23:26.880
+Then perhaps you may not expect the user input to be 
+
+243
+23:26.890 --> 23:31.560
+'; drop table books; --
+
+244
+23:31.680 --> 23:35.120
+You should remove or escape apostrophes from the user input
+
+245
+23:38.620 --> 23:41.820
+transparent data encryption (TDE).
+
+246
+23:43.150 --> 23:48.520
+You may have access to your database locked down but if an unauthorized user has physical access to
+
+247
+23:48.520 --> 23:56.730
+your server then they could potentially analyze the MDF file to extract sensitive information.
+
+248
+23:56.870 --> 24:06.600
+TDE Encryption protects your underlying MDF from this type of unauthorized access.
+
+249
+24:06.600 --> 24:13.380
+Here we will demonstrate how to apply TDE  to your SQL server database.
+
+250
+24:13.410 --> 24:15.370
+Here we'll demonstrate how to apply.
+
+251
+24:15.420 --> 24:18.660
+TDE to your SQL Server database.
+
+252
+24:18.660 --> 24:31.560
+So to start with you need to make sure you're in the master database; so; use master.
+
+253
+24:32.370 --> 24:40.990
+Now you need to create a master key so the command is;
+
+254
+24:46.090 --> 24:52.150
+CREATE MASTER KEY ENCRYPTION
+BY PASSWORD='123456789';
+
+255
+24:52.370 --> 24:53.430
+CREATE MASTER KEY ENCRYPTION
+BY PASSWORD='123456789';
+
+256
+24:53.690 --> 25:03.810
+I'm going to use 1 to 9 which is not very strong but it'll work.
+
+257
+25:03.870 --> 25:07.340
+We should run this now.
+
+258
+25:07.650 --> 25:09.530
+We need to create a certificate.
+
+259
+25:11.980 --> 25:15.910
+CREATE CERTIFICATE TDE_Certificate
+WITH 
+SUBJECT='Certificate for TDE';
+
+260
+25:19.240 --> 25:23.170
+CREATE CERTIFICATE TDE_Certificate
+WITH 
+SUBJECT='Certificate for TDE';
+
+261
+25:24.260 --> 25:25.120
+CREATE CERTIFICATE TDE_Certificate
+WITH 
+SUBJECT='Certificate for TDE';
+
+262
+25:29.000 --> 25:32.310
+CREATE CERTIFICATE TDE_Certificate
+WITH 
+SUBJECT='Certificate for TDE';
+
+263
+25:33.690 --> 25:38.800
+This will be a self signed certificate by the database.
+
+264
+25:43.700 --> 25:50.070
+Now we then select the database that we wish to encrypt ; which is the library database.
+
+265
+25:50.080 --> 25:59.100
+So use library; and the next step is to create a database encryption key which we must make sure we're
+
+266
+25:59.100 --> 26:01.230
+on the library database
+
+267
+26:04.540 --> 26:11.250
+and we type:
+
+268
+26:16.870 --> 26:21.550
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE TDE_Certificate;
+
+269
+26:24.190 --> 26:26.710
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE TDE_Certificate;
+
+270
+26:26.710 --> 26:28.600
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE TDE_Certificate;
+
+271
+26:28.600 --> 26:34.510
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE TDE_Certificate;
+
+272
+26:34.790 --> 26:35.330
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE TDE_Certificate;
+
+273
+26:38.710 --> 26:41.800
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE TDE_Certificate;
+
+274
+26:44.870 --> 26:51.170
+CREATE DATABASE ENCRYPTION KEY
+WITH ALGORITHM = AES_256
+ENCRYPTION BY SERVER CERTIFICATE TDE_Certificate;
+
+275
+26:54.070 --> 26:59.990
+It's given me a warning saying you should always back up your database encryption key.
+
+276
+27:00.060 --> 27:03.890
+This is quite important because if you lose it; then you'll lose access to your database
+
+277
+27:06.510 --> 27:07.090
+and...
+
+278
+27:07.120 --> 27:17.980
+Then finally we shall type;
+
+279
+27:18.160 --> 27:18.420
+ALTER DATABASE LIBRARY
+SET ENCRYPTION ON;
+
+280
+27:23.170 --> 27:27.530
+and execute.
+
+281
+27:27.820 --> 27:32.860
+This will return immediately although it may take a few seconds for the encryption to actually run through
+
+282
+27:32.860 --> 27:37.200
+your database.
+
+283
+27:37.210 --> 27:43.160
+Now the warning that appeared earlier saying that you should backup your encryption key if you do this.
+
+284
+27:43.210 --> 27:46.540
+So we are going to type:
+
+285
+27:53.090 --> 27:58.940
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+286
+28:03.380 --> 28:06.050
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+287
+28:13.250 --> 28:23.630
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+288
+28:23.660 --> 28:24.110
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+289
+28:28.910 --> 28:30.470
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+290
+28:37.450 --> 28:43.410
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+291
+28:43.410 --> 28:43.760
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+292
+28:46.970 --> 28:50.160
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+293
+28:55.750 --> 28:57.030
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+294
+29:05.310 --> 29:08.700
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+295
+29:08.700 --> 29:09.270
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+296
+29:09.350 --> 29:09.900
+BACKUP CERTIFICATE TDE_Certificate
+TO FILE = 'C:\temp\TDE_Certificate.cer'
+WITH PRIVATE KEY (file='C:\temp\TDE_Certificate.pvk',
+ENCRYPTION BY PASSWORD='123456789') 
+
+297
+29:09.900 --> 29:23.490
+Execute this and hopefully we should have our backups in our C:\temp folder.
+
+298
+29:27.660 --> 29:28.390
+There we go.
+
+299
+29:28.400 --> 29:31.700
+This is our backups; the CER and the PVK.
+
+300
+29:31.700 --> 29:36.620
+You should keep these safe because if you lose these; then you'll lose access to your database
+
+301
+29:39.490 --> 29:48.120
+OK so that is TDE encryption; and it keeps your data safe from anybody who may have physical access
+
+302
+29:48.120 --> 29:48.690
+to your server
+
+303
+29:52.580 --> 29:56.580
+And over to you; if your user forgets their passwords -
+
+304
+29:56.810 --> 29:58.880
+And it's hashed in your database.
+
+305
+29:58.880 --> 30:02.490
+You can't recover it from them but you can reset it.
+
+306
+30:02.690 --> 30:10.490
+So write a stored procedure to reset a hashed password using the same salt as before; 
+
+307
+30:10.490 --> 30:13.730
+You can pause this video now and resume it when you'd like to see the solution.
+
+308
+30:15.960 --> 30:16.310
+OK.
+
+309
+30:16.340 --> 30:18.000
+So here's the solution.
+
+310
+30:18.140 --> 30:24.200
+We wanted you to write a stored procedure to reset a hash password using the same salt as before.
+
+311
+30:24.200 --> 30:27.110
+Now the thing about hashing is it's a one way encryption.
+
+312
+30:27.110 --> 30:34.670
+There's no way to actually reverse the encryption to determine the original plaintext from the cipher
+
+313
+30:34.670 --> 30:35.170
+text.
+
+314
+30:35.780 --> 30:38.780
+However you can compare cipher texts.
+
+315
+30:38.880 --> 30:46.020
+So in the case of a user who has forgotten their password and needs to reset it with a new password.
+
+316
+30:46.020 --> 30:48.330
+Now; we need to overwrite the old password.
+
+317
+30:49.070 --> 30:53.310
+So let's start
+
+318
+30:55.230 --> 30:59.440
+create procedure sp_resetPassword (
+
+319
+30:59.560 --> 31:01.720
+This will take parameters; the user name
+
+320
+31:06.090 --> 31:13.510
+which should be a varchar(100) matching the maximum value of the table; varchar(100) and
+
+321
+31:13.740 --> 31:14.270
+password
+
+322
+31:16.880 --> 31:26.140
+which we'll varchar(100) as well; 100 characters is quite generous for a password.
+
+323
+31:26.360 --> 31:40.760
+update users set password=hashbytes('SHA2_256',@password + 
+
+324
+31:41.370 --> 31:46.760
+And you want to replace that with the passed in parameter
+
+325
+31:46.760 --> 31:49.170
+This was the salt that we used before.
+
+326
+31:49.610 --> 32:02.840
+It's a bit of a random text; but strong is good; where username=@username.
+
+327
+32:03.880 --> 32:08.200
+Okay so let's put this to the test; and let's have a look at our users table
+
+328
+32:18.000 --> 32:21.700
+Oh! make sure you're in the right database
+
+329
+32:24.310 --> 32:26.410
+so look at our users table.
+
+330
+32:26.410 --> 32:29.110
+So we have this John and John2.
+
+331
+32:29.190 --> 32:38.200
+Let's imagine we want to reset John's password so sp_resetPassword 'john','....
+
+332
+32:38.260 --> 32:42.900
+which is called "Let me in" and it is also a very bad password.
+
+333
+32:43.380 --> 32:45.500
+Right.
+
+334
+32:45.640 --> 32:54.960
+So once again it's encrypted but let's check if we can get in using this.
+
+335
+32:55.750 --> 32:56.550
+"Let me in"
+
+336
+32:56.810 --> 33:03.440
+So this is once again our script to see if we can log in; and this returns "John".
+
+337
+33:04.310 --> 33:04.720
+OK.
+
+338
+33:04.780 --> 33:06.590
+I hope we've got that we can move on.

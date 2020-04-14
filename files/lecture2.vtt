@@ -1,0 +1,934 @@
+WEBVTT
+
+0
+00:00.090 --> 00:05.660
+Now on to basic data manipulation, create read update and delete
+
+1
+00:08.190 --> 00:14.190
+creating a table, a database server may contain multiple databases.
+
+2
+00:14.190 --> 00:22.200
+Each database will contain multiple tables and each table has multiple rows and columns, a bit like a spreadsheet
+
+3
+00:23.250 --> 00:24.810
+however before jumping in.
+
+4
+00:24.930 --> 00:34.320
+Let's have a look at the common data types used for columns within SQL Server tables data types.
+
+5
+00:34.320 --> 00:43.090
+A column in a table can contain different types of data common data could be text numbers or dates and
+
+6
+00:43.120 --> 00:49.350
+need to tell the database in advance what type of data we're going to put in that column so that we
+
+7
+00:49.350 --> 00:59.490
+can efficiently store and process it later. Text is one of the most common types of data, to store text
+
+8
+00:59.580 --> 01:02.300
+such as someone's name you can use:
+
+9
+01:02.310 --> 01:11.970
+Char, Varchar, or NVarchar. Varchar standing for variable character. Char is used only if the text
+
+10
+01:12.000 --> 01:12.650
+is fixed.
+
+11
+01:12.650 --> 01:15.780
+and never varies.
+
+12
+01:16.050 --> 01:24.870
+Varchar is used if the text is variable length, you can specify a maximum length such as verchar(50) or you
+
+13
+01:24.870 --> 01:30.390
+can make is unlimited by specifying varchar(max)  the following example.
+
+14
+01:30.390 --> 01:39.400
+We should use varchar(max) for somebodies' name.  Varchar is  similar to NVarchar but only used
+
+15
+01:39.520 --> 01:49.200
+if you intend to store non Latin text like Russian, hebrew, Chinese,  Japanese Arabic so forth.
+
+16
+01:49.210 --> 01:56.050
+In many production environments it might just be safer to use nVarchar in case someday you have a
+
+17
+01:56.050 --> 01:56.930
+Russian customer.
+
+18
+02:01.400 --> 02:04.180
+Numbers. To store numbers in SQL server.
+
+19
+02:04.190 --> 02:05.760
+There are a few options.
+
+20
+02:06.020 --> 02:09.030
+The two most common are int and float.
+
+21
+02:09.560 --> 02:17.120
+Int is used to store whole numbers such as one two three float is used to store numbers of decimal points
+
+22
+02:17.330 --> 02:24.680
+such as three point four five (PI).  However float does have a side effect.
+
+23
+02:24.680 --> 02:32.270
+It may not always represent the number precisely so the number may vary by a tiny fraction which could
+
+24
+02:32.270 --> 02:35.230
+lead to unintended results.
+
+25
+02:35.240 --> 02:44.840
+So for example instead of storing three point one for 1 5 6 9 7 8 it might be three point 1 4 1 5 6
+
+26
+02:44.840 --> 02:48.690
+9 7 7.
+
+27
+02:48.790 --> 02:56.170
+You can use the data type money to represent fractions exactly but this is limited to four decimal points
+
+28
+03:00.290 --> 03:01.880
+dates. To store dates 
+
+29
+03:01.910 --> 03:05.880
+You can use the date or datetime data types. Use date
+
+30
+03:05.930 --> 03:08.390
+If you're storing the data only, use date time
+
+31
+03:08.390 --> 03:10.110
+If you're storing both date and time.
+
+32
+03:13.460 --> 03:19.820
+Creating a table you can create a table in SQL server using the user interface in SQL Server Management
+
+33
+03:19.820 --> 03:22.540
+studio or using code.
+
+34
+03:22.610 --> 03:25.630
+This next video shows both approaches.
+
+35
+03:25.970 --> 03:31.210
+What we're going to setup now is a database that represents a library.
+
+36
+03:31.220 --> 03:40.290
+The library at its heart will have students who rent books books which are rented by students.
+
+37
+03:40.290 --> 03:49.670
+So we shall create two tables one for students and for books. So "connect"
+
+38
+03:52.510 --> 03:58.800
+the first table for students we shall create using the user interface.
+
+39
+03:59.810 --> 04:08.660
+Second table you should create using code. Select your database tables, right click.
+
+40
+04:08.990 --> 04:09.410
+Table
+
+41
+04:12.180 --> 04:13.900
+table consists of columns.
+
+42
+04:13.920 --> 04:15.580
+Each column has a name.
+
+43
+04:15.630 --> 04:24.290
+Each column has a data type so a student we shall represent as having a first name surname and the date
+
+44
+04:24.290 --> 04:24.850
+of birth.
+
+45
+04:29.340 --> 04:31.390
+To enter a column name first name
+
+46
+04:35.290 --> 04:37.390
+and when I tab to the data type.
+
+47
+04:37.390 --> 04:39.660
+We have a list of data types.
+
+48
+04:39.670 --> 04:47.680
+This may seem daunting at first but effectively what we need to tell the database engine is what type
+
+49
+04:47.680 --> 04:51.240
+of data will a first name be.
+
+50
+04:51.850 --> 04:52.510
+Will it be
+
+51
+04:55.710 --> 04:58.720
+and BigInt to which is an integer which is a number.
+
+52
+04:58.720 --> 05:01.450
+So the first name of the student will not be a number.
+
+53
+05:01.480 --> 05:15.020
+It will be a string of characters what sequence ever calls this is called an nvarchar or varchar
+
+54
+05:15.070 --> 05:17.190
+Here we have close to the end.
+
+55
+05:17.470 --> 05:24.980
+A varchar field. a varchar stands for variable character.
+
+56
+05:24.970 --> 05:32.570
+The number after it 50 indicates the maximum length of the first name can be.
+
+57
+05:32.570 --> 05:39.940
+You can also choose varchar(Max) which will give you limited length.
+
+58
+05:41.430 --> 05:45.260
+This is our choice.
+
+59
+05:48.710 --> 05:51.170
+The surname of the student
+
+60
+05:53.960 --> 06:02.470
+will also be of type varchar(max) which is variable character string of unlimited length.
+
+61
+06:05.290 --> 06:07.390
+And finally date of birth.
+
+62
+06:12.490 --> 06:16.270
+This could also be of type varchar.
+
+63
+06:17.350 --> 06:29.760
+But there is another data type that is more applicable which is the date type which plenty of other
+
+64
+06:29.760 --> 06:38.240
+data types there such as ints for numbers and floats floating point number, datetime.
+
+65
+06:38.330 --> 06:43.630
+If I wanted to specify the date time as well as the date but let's keep things simple for a moment.
+
+66
+06:45.760 --> 06:51.850
+When I say this it ask for a name for the table I shall call this students
+
+67
+07:07.900 --> 07:10.740
+and I press refresh.
+
+68
+07:10.900 --> 07:13.150
+I can see a table named students
+
+69
+07:16.190 --> 07:20.700
+if I were to look in the table I would see that there is no data available.
+
+70
+07:27.570 --> 07:35.820
+Using the user interface is a great way for novices to use the SQL Server engine in order to design
+
+71
+07:35.820 --> 07:48.890
+tables however more and more we depend upon the code window to write more complex queries.
+
+72
+07:49.070 --> 07:52.500
+You should press the query button to enter the code window.
+
+73
+07:57.110 --> 08:02.280
+It is important that the database selected is library.
+
+74
+08:02.350 --> 08:07.420
+There are other databases available on the server which you don't want to change.
+
+75
+08:10.250 --> 08:15.120
+The command for creating a new table is create table
+
+76
+08:21.420 --> 08:22.890
+and uses this syntax.
+
+77
+08:24.550 --> 08:29.990
+We enter in the name of the table which in this case will be books.
+
+78
+08:34.510 --> 08:39.970
+A book will have a book name an author and number of pages
+
+79
+08:42.500 --> 08:47.960
+so we type in book name, the data type.
+
+80
+08:49.210 --> 08:50.940
+Which is
+
+81
+08:51.190 --> 08:51.760
+varchar(Max)
+
+82
+08:54.950 --> 08:55.300
+Author
+
+83
+08:58.060 --> 09:00.230
+varchar(Max)
+
+84
+09:02.660 --> 09:10.530
+and the number of pages which is an integer, that is a full number of pages.
+
+85
+09:10.620 --> 09:15.630
+You want to say a book may have 300 but it won't have three hundred point five pages
+
+86
+09:19.300 --> 09:20.090
+we select.
+
+87
+09:20.150 --> 09:25.330
+The SQL that we're going to execute and press the execute button.
+
+88
+09:27.960 --> 09:32.650
+Command successfully completed now.
+
+89
+09:32.800 --> 09:40.470
+If I were to press refresh we can see a second table has been created.
+
+90
+09:42.560 --> 09:43.520
+If I press select
+
+91
+09:46.520 --> 09:53.900
+you can see once again that there is no data yet in this table but we shall get back to that later
+
+92
+09:57.720 --> 10:06.180
+C.R.U.D. The four basic operations in a database are create read update and delete.
+
+93
+10:06.510 --> 10:13.580
+Given the acronym CRUD. You can carry out these operations using the user interface in management
+
+94
+10:13.580 --> 10:17.580
+studio or via SQL code.
+
+95
+10:17.840 --> 10:26.750
+Here we show both approaches for all four operations once we've created two tables.
+
+96
+10:26.770 --> 10:30.240
+Next step is to put some data inside these tables.
+
+97
+10:30.700 --> 10:36.740
+First I shall demonstrate how to do this using the user interface and secondly I shall demonstrate how
+
+98
+10:36.740 --> 10:44.390
+to do this using code so firstly using the user interface.
+
+99
+10:44.390 --> 10:49.220
+Right click on the students table click edit.
+
+100
+10:49.240 --> 10:54.270
+Now if you type in some information for students John Doe
+
+101
+10:58.930 --> 11:03.450
+dataof birth should follow the year.
+
+102
+11:03.490 --> 11:11.580
+month day format you can enter Michael Doe.
+
+103
+11:20.120 --> 11:30.040
+We've now entered two rows into the database under the students table and Delete
+
+104
+11:30.210 --> 11:33.290
+Note that there is no undo option on SQL Server.
+
+105
+11:33.320 --> 11:34.250
+So be careful
+
+106
+11:39.270 --> 11:40.980
+using the user interface.
+
+107
+11:40.980 --> 11:44.150
+It's very easy to enter small amounts of data.
+
+108
+11:44.430 --> 11:55.830
+However if we wanted to write more complex queries or to input large amounts of data we used the code.
+
+109
+11:56.100 --> 12:00.620
+Again when dealing with a database.
+
+110
+12:00.770 --> 12:11.270
+There is four basic operations which are given the acronym C.R.U.D. which is create read update and delete
+
+111
+12:11.300 --> 12:18.030
+So the first of those operations is create.
+
+112
+12:18.030 --> 12:30.760
+So if I wanted to create a new student I use the insert command: Type insert into students
+
+113
+12:34.500 --> 12:47.900
+now using the brackets I must list the columns which I wish to insert into which are firstname, surname
+
+114
+12:52.410 --> 13:01.900
+and date of birth and I follow this with the word values single apostrophe
+
+115
+13:05.160 --> 13:06.540
+which I should call "Mary"
+
+116
+13:11.100 --> 13:11.760
+surname "Reid"
+
+117
+13:16.950 --> 13:21.290
+date of birth in year month day format.
+
+118
+13:21.620 --> 13:22.310
+1980-03-03
+
+119
+13:29.540 --> 13:39.490
+I select the SQL that I'm going to execute and press the execute 1 Row affected.
+
+120
+13:39.590 --> 13:52.170
+If I now right click on this select I can see there's two rows in this.
+
+121
+13:52.170 --> 13:57.450
+The first was entered via the user interface and the second was via a code
+
+122
+14:03.530 --> 14:08.470
+has demonstrated a basic example of creating
+
+123
+14:12.310 --> 14:25.700
+the next operation is to read it may have seen this briefly is the select statement so it can either
+
+124
+14:25.710 --> 14:29.130
+select * from students
+
+125
+14:35.130 --> 14:43.950
+execute. This has returned all of the data in the students table.
+
+126
+14:43.970 --> 14:53.030
+Now you may be curious what the star means,
+star in this example indicates all columns.
+
+127
+14:54.260 --> 15:01.140
+We can modify this statement to say first name and surname only.
+
+128
+15:01.140 --> 15:01.760
+type:
+
+129
+15:08.530 --> 15:10.540
+Select firstname, surname from students
+
+130
+15:14.430 --> 15:18.990
+this now only returns the first name and surname of the student
+
+131
+15:23.570 --> 15:24.450
+now.
+
+132
+15:24.740 --> 15:31.220
+In this case we only have two students but oftentimes in databases there may be thousands of students
+
+133
+15:32.530 --> 15:39.270
+so let's say we're curious about seeing all students with the surname doe.
+
+134
+15:39.850 --> 15:41.270
+Which case I type in.
+
+135
+15:41.440 --> 15:50.210
+SELECT * from students where surname = 'Doe'
+
+136
+15:56.580 --> 15:58.890
+SELECT * from students where surname = 'Doe'
+
+137
+16:01.790 --> 16:03.200
+execute.
+
+138
+16:03.670 --> 16:16.130
+This now returns all columns from students where the surname matches Doe. If for example I wanted to say this
+
+139
+16:16.240 --> 16:18.920
+name is not doe do I use
+
+140
+16:22.640 --> 16:32.790
+the less than sign followed by the more than sign to indicate not equal to execute and I can see a list of students
+
+141
+16:32.790 --> 16:34.450
+where the surname is not Doe
+
+142
+16:45.720 --> 16:55.520
+the next two operations are update and delete so let's have a look at our student table again.
+
+143
+17:05.110 --> 17:09.590
+Now let's imagine that Mary Reid gets married and changes her surname
+
+144
+17:09.700 --> 17:17.330
+We're going to change it to Mary Smith So the command is:
+
+145
+17:21.640 --> 17:27.550
+update students set surname='Smith'
+
+146
+17:30.830 --> 17:34.570
+now this on its own will change every surname to Smith.
+
+147
+17:35.330 --> 17:37.060
+So we need to add a where clause
+
+148
+17:41.550 --> 17:44.300
+where surname='Reid'
+
+149
+17:47.220 --> 17:48.540
+in this particular example.
+
+150
+17:48.540 --> 17:52.430
+There is only one student with the surname Reid.
+
+151
+17:52.450 --> 17:58.780
+However this would effectively change every student with a surname Reid to Smith this case is fine.
+
+152
+17:58.810 --> 18:03.880
+But we would want to know that that's exactly what we wish to do.
+
+153
+18:05.730 --> 18:09.610
+Execute. One row affected.
+
+154
+18:09.870 --> 18:11.580
+Now look at our students table again
+
+155
+18:19.990 --> 18:23.730
+we can see that Mary Reid has now changed to 
+
+156
+18:23.730 --> 18:24.320
+Mary Smith
+
+157
+18:27.330 --> 18:29.550
+the final operation is delete
+
+158
+18:33.930 --> 18:42.130
+delete from students where firstname='john'
+
+159
+18:45.420 --> 18:49.150
+delete from students where firstname='john'
+
+160
+18:49.220 --> 18:53.330
+Bear in mind that there is no undo option in SQL server.
+
+161
+18:53.390 --> 19:02.550
+So therefore once you run this query,  this record of John Doe shall be deleted forever, so the
+
+162
+19:02.630 --> 19:03.470
+press excuse.
+
+163
+19:05.980 --> 19:09.830
+Now if we type, select * from students
+
+164
+19:14.010 --> 19:16.410
+we should only see one record Mary Smith
+
+165
+19:20.780 --> 19:26.930
+modifying a table parent mind you should always try and correctly design your table before you add data
+
+166
+19:26.930 --> 19:27.290
+to it.
+
+167
+19:27.620 --> 19:31.970
+Since changing and table afterwards can be problematic.
+
+168
+19:31.970 --> 19:41.300
+This next example would she had to add an id column to an existing table, in the previous example in
+
+169
+19:41.300 --> 19:48.130
+order to update or delete records needed to refer to either a first name surname date of birth.
+
+170
+19:48.200 --> 19:56.170
+We could also refer to multiple of these however it's quite possible in a large school but there may
+
+171
+19:56.170 --> 20:01.740
+be a second student with the same first name surname and date of birth as another student.
+
+172
+20:01.870 --> 20:09.160
+In which case it would make it impossible for us to delete or update that given student without affecting
+
+173
+20:09.650 --> 20:13.130
+an unrelated student which happened to have the same details.
+
+174
+20:13.900 --> 20:22.770
+Let's create that situation by creating a second Mary Smith with the same date of birth.
+
+175
+20:23.520 --> 20:59.120
+insert into students (firstname, surname, dateofbirth) values ('Mary','Smith','1980-03-03')
+
+176
+20:59.280 --> 21:05.880
+Now we have two students in our database both called Mary Smith both with the same date of
+
+177
+21:05.880 --> 21:07.660
+birth.
+
+178
+21:07.980 --> 21:16.650
+In this situation it makes it impossible for us to update one of these two Mary Smiths without affecting
+
+179
+21:16.720 --> 21:20.780
+the other two Mary Smith's in this situation.
+
+180
+21:22.300 --> 21:32.110
+And needless to say actually in all tables it is recommended that you have a unique identifier which
+
+181
+21:32.590 --> 21:41.570
+simply a number which counts up one two three four or five depending on the record number in order to
+
+182
+21:41.570 --> 21:42.100
+do this.
+
+183
+21:42.110 --> 21:51.080
+We shall add a new column called ID this ID column will have an auto generated number which will
+
+184
+21:51.200 --> 21:58.860
+automatically count up as we add remove records from this database.
+
+185
+21:58.860 --> 22:02.030
+So in order to do so I'm going to alter the table students
+
+186
+22:06.630 --> 22:15.370
+add an ID should be of data type int which is an integer which means it is a whole number one two three
+
+187
+22:15.370 --> 22:17.210
+four five.
+
+188
+22:17.230 --> 22:24.250
+Not one point two but three by four which will be a floating point in order to have it auto increment.
+
+189
+22:24.280 --> 22:25.810
+I'm going to use the word identity
+
+190
+22:31.730 --> 22:38.720
+the (1, 1) indicates that the identity should start at the number 1 and increment by 1 for every
+
+191
+22:38.720 --> 22:41.670
+record.
+
+192
+22:42.030 --> 22:51.370
+As I execute this and look again at the students table I can see a new column called ID which is set
+
+193
+22:51.700 --> 23:00.770
+which is set to 1 4 1 Mary Smith 2 for the second Mary Smith now for instance I can update the students
+
+194
+23:00.770 --> 23:13.720
+table and set surname to Reid where the ID is 2
+
+195
+23:14.050 --> 23:17.500
+And this will update only this record but not this record.
+
+196
+23:21.610 --> 23:27.690
+Select again and we can see what we've been able to indicate.
+
+197
+23:27.850 --> 23:32.580
+One of the two rows rather than the other.
+
+198
+23:32.620 --> 23:41.760
+Now you will also see that this ID will be maintained as we add more students so
+
+199
+23:41.800 --> 23:42.360
+insert into students (firstname,surname, DateOfBirth) values ('Peter', 'Murphy','1980-01-01')
+
+200
+23:45.960 --> 23:48.960
+insert into students (firstname,surname, DateOfBirth) values ('Peter', 'Murphy','1980-01-01')
+
+201
+23:49.350 --> 23:53.230
+insert into students (firstname,surname, DateOfBirth) values ('Peter', 'Murphy','1980-01-01')
+
+202
+23:53.440 --> 23:53.850
+insert into students (firstname,surname, DateOfBirth) values ('Peter', 'Murphy','1980-01-01')
+
+203
+24:04.720 --> 24:06.170
+insert into students (firstname,surname, DateOfBirth) values ('Peter', 'Murphy','1980-01-01')
+
+204
+24:07.980 --> 24:11.560
+Execute. Select students.
+
+205
+24:11.550 --> 24:17.730
+And the ID has been auto generated for us as number three based on what you've learned so far.
+
+206
+24:18.150 --> 24:19.890
+Here's a quick exercise.
+
+207
+24:19.970 --> 24:21.260
+Pause the video when prompted.
+
+208
+24:21.950 --> 24:23.850
+And try it out on your own computer.
+
+209
+24:23.850 --> 24:29.410
+Best of luck.
+
+210
+24:29.800 --> 24:36.910
+So it's now over to you and see if you can do some of the tasks that have been demonstrated already
+
+211
+24:36.910 --> 24:38.930
+so far in this video.
+
+212
+24:39.130 --> 24:46.750
+So I want you to create two books in the books table - Harry Potter and the chamber of secrets, JK Rowling, 326 pages
+
+213
+24:47.780 --> 24:50.110
+and a second book Harry Potter and the prisoner of Azkaban
+
+214
+24:50.120 --> 24:58.240
+J.K. Rowling 413 pages once those two books are added, I'd like you to add an ID column
+
+215
+24:58.600 --> 25:04.220
+with an identity set to (1 1) so you can pause this video.
+
+216
+25:04.220 --> 25:10.200
+Now try to see how you get on and restart the video.
+
+217
+25:10.280 --> 25:11.990
+to see the solution.
+
+218
+25:11.990 --> 25:14.770
+Pause now.
+
+219
+25:15.090 --> 25:16.700
+Okay so let's see how you got on.
+
+220
+25:17.970 --> 25:21.990
+So first thing you do is let's have a look at the books table.
+
+221
+25:28.160 --> 25:28.860
+Tables empty.
+
+222
+25:28.920 --> 25:29.830
+As expected.
+
+223
+25:30.000 --> 25:35.050
+So we insert two books now.
+
+224
+25:39.900 --> 25:41.960
+insert into books (BookName, Author, Pages) values ('
+
+225
+25:45.200 --> 25:46.540
+copy and paste to save time
+
+226
+25:57.430 --> 26:04.210
+you may notice that the three values are in the same order as the column names.
+
+227
+26:04.840 --> 26:05.370
+First row, second row
+
+228
+26:18.650 --> 26:19.870
+let's look at the books table again.
+
+229
+26:22.950 --> 26:31.730
+Now let's add the id column.  alter table books add id int identity(1,1)
+
+230
+26:37.080 --> 26:38.920
+look at the books table again.
+
+231
+26:39.360 --> 26:39.960
+And now we have it
+
+232
+26:40.670 --> 26:44.930
+So hopefully you followed along and you got that solution yourself.

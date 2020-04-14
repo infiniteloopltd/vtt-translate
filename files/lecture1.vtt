@@ -1,0 +1,517 @@
+WEBVTT
+
+0
+00:00.900 --> 00:02.090
+Hi there!
+
+1
+00:02.220 --> 00:05.070
+This is our Udemy course on Microsoft SQL Server
+
+2
+00:05.070 --> 00:13.640
+Microsoft SQL server is the most popular relational database system for the Microsoft
+
+3
+00:13.730 --> 00:14.550
+operating system.
+
+4
+00:15.920 --> 00:26.150
+So without further ado, let's get started and install SQL Server and SQL management studio.
+
+5
+00:26.550 --> 00:33.690
+This is a Udemy course about Microsoft SQL server; I'm firstly going to demonstrate how to download
+
+6
+00:33.690 --> 00:42.240
+and install SQL Server and SQL Server Management studio which will need to access SQL Server.
+
+7
+00:42.910 --> 00:46.850
+So do a google search for Microsoft SQL Server express edition.
+
+8
+00:46.870 --> 00:49.850
+This is a free version that will get you started.
+
+9
+00:50.950 --> 00:55.930
+This is the home page on Microsoft and we shall just go ahead and press the download button.
+
+10
+01:08.380 --> 01:16.110
+We want to go for a basic installation; accept the agreement ; install to the default location
+
+11
+01:19.280 --> 01:21.890
+and we're now going to wait for the download to complete
+
+12
+01:35.450 --> 01:39.350
+Once SQL Server Express edition is installed.
+
+13
+01:39.410 --> 01:47.330
+We're going to go ahead and install SSMS or SQL Server Management studio; by pressing this button
+
+14
+01:47.510 --> 01:50.450
+which will link to the download page on Microsoft
+
+15
+01:53.220 --> 01:54.300
+Press the download button.
+
+16
+01:58.840 --> 02:01.210
+And we shall wait for that to download.
+
+17
+02:01.400 --> 02:01.970
+Five minutes
+
+18
+02:06.230 --> 02:11.810
+Once SQL Server Management studio is downloaded; open the executable to begin the installation
+
+19
+02:24.910 --> 02:33.010
+to open SQL Server Management studio; go to the search bar; and type in SQL; The best match should be
+
+20
+02:33.220 --> 02:35.890
+Microsoft SQL Server Management studio; click this
+
+21
+02:39.930 --> 02:47.400
+once opened your server name should be prefilled in this box; leave authentication as windows authentication
+
+22
+02:47.490 --> 02:56.470
+and press connect. At the moment this database sever has no databases; I'm now going to create a new database
+
+23
+02:57.630 --> 02:59.170
+and I want to call it library
+
+24
+03:02.500 --> 03:15.280
+press OK; and our new database is now created. This database is empty; it has no tables or any data inside it but
+
+25
+03:15.280 --> 03:16.770
+we're going to leave it like that for the moment
+
+26
+03:19.580 --> 03:28.490
+another option instead of installing SQL server locally on your computer is to use Microsoft Azure
+
+27
+03:28.490 --> 03:38.540
+platform; so you can setup an SQL server instance on Microsoft Azure. Using Microsoft's cloud
+
+28
+03:38.540 --> 03:46.800
+platform would allow you to scale your database as you grow however this step requires you to have an
+
+29
+03:46.830 --> 03:55.490
+active Microsoft Azure account and may incur costs; you can skip this step if you do not wish to use
+
+30
+03:56.000 --> 03:57.140
+Microsoft Azure
+
+31
+04:00.240 --> 04:06.450
+The next demonstration I'm going to do is how to setup the same SQL Server database; but this time hosted on
+
+32
+04:06.690 --> 04:15.450
+Azure which is Microsoft's cloud platform offering; so using cloud platforms you don't need to install
+
+33
+04:15.450 --> 04:16.370
+software locally.
+
+34
+04:17.550 --> 04:27.300
+So we should set up the same database; click on SQL Server databases. Create SQL database
+
+35
+04:32.940 --> 04:37.930
+In here we enter the name of the database in which we are going to call it library.
+
+36
+04:38.150 --> 04:38.850
+As before
+
+37
+04:42.120 --> 04:44.580
+we press review and create
+
+38
+04:51.780 --> 04:53.630
+This will take a few seconds to create
+
+39
+05:02.710 --> 05:09.010
+so once the database is created; first thing I'm going to do is set the password; 
+
+40
+05:09.010 --> 05:09.990
+So click on the server name here.
+
+41
+05:12.430 --> 05:18.860
+I want to press reset password; now in order to generate a strong password.
+
+42
+05:18.890 --> 05:21.450
+You can type whatever you want.
+
+43
+05:22.700 --> 05:25.430
+If it follows those rules.
+
+44
+05:26.780 --> 05:30.530
+What I like using is a website called strong password generator.
+
+45
+05:32.910 --> 05:34.080
+Generate password.
+
+46
+05:34.720 --> 05:40.500
+And this is a strong password which I can use; paste it into both boxes
+
+47
+05:43.100 --> 05:57.180
+and press save.
+
+48
+06:00.030 --> 06:03.360
+You should have SQL Server Management studio open from earlier.
+
+49
+06:04.330 --> 06:08.130
+And I'm going to enter in the server name.
+
+50
+06:08.220 --> 06:08.600
+Copy
+
+51
+06:11.850 --> 06:14.900
+change windows authentication to SQL server authentication.
+
+52
+06:17.580 --> 06:19.870
+Login should be the server admin here.
+
+53
+06:20.120 --> 06:23.120
+It would be different for your account.
+
+54
+06:23.160 --> 06:29.730
+The password will be from whatever you typed in or from this Web site.
+
+55
+06:29.730 --> 06:34.390
+The secure password generator and press connect.
+
+56
+06:41.590 --> 06:43.300
+We now expand this.
+
+57
+06:43.340 --> 06:52.780
+We should see database setup with the database library accessible.
+
+58
+06:52.840 --> 06:58.250
+This has no tables associated with it. But this is hosted on Azure
+
+59
+07:01.960 --> 07:03.360
+once you're finished with this.
+
+60
+07:04.180 --> 07:10.750
+And if you do not want to continue using Azure since there are certain costs associated with using
+
+61
+07:10.900 --> 07:14.730
+Microsoft Azure, you can delete your database afterwards.
+
+62
+07:14.980 --> 07:22.970
+Click on SQL databases; click on your database; and press DELETE button, type the word yes, and delete.
+
+63
+07:30.280 --> 07:39.450
+An alternative to using Microsoft Azure is Amazon's Web Services so if you'd prefer to use Amazon's cloud
+
+64
+07:39.450 --> 07:46.530
+platform or AWS short for Amazon Web Services then you can also set up an SQL server instance
+
+65
+07:46.920 --> 07:49.750
+on the AWS platform.
+
+66
+07:50.940 --> 07:58.790
+As before this step requires you to have an active AWS account and may incur costs.
+
+67
+07:58.790 --> 08:02.390
+You can skip the step if you didn't wish to use AWS
+
+68
+08:10.840 --> 08:20.380
+another cloud platform for hosting SQL Server databases is Amazon's AWS or Amazon Web Services.
+
+69
+08:20.440 --> 08:24.340
+This is an alternative to Azure but is rather similar to it.
+
+70
+08:25.930 --> 08:34.480
+So to get started log into the AWS management console search for RDS which is 
+
+71
+08:35.200 --> 08:36.040
+managed relational database service
+
+72
+08:44.520 --> 08:45.070
+now.
+
+73
+08:45.270 --> 08:46.980
+If you press create database
+
+74
+08:49.690 --> 08:56.420
+you can select different types of databases here but we're going for the Microsoft SQL server
+
+75
+08:56.420 --> 09:01.010
+going for the express addition; once again for cost reasons.
+
+76
+09:02.090 --> 09:03.320
+Select free tier
+
+77
+09:06.560 --> 09:09.340
+I'm going to call the database "library"
+
+78
+09:15.050 --> 09:20.110
+the username "admin" is fine; for the master password.
+
+79
+09:20.110 --> 09:25.920
+I'm going to once again go to the passwords generator.net Web site.
+
+80
+09:25.940 --> 09:30.090
+You can obviously type in your own password here.
+
+81
+09:30.290 --> 09:37.650
+I've selected to exclude symbols and this option copy the password.
+
+82
+09:39.620 --> 09:41.880
+And that is the master password.
+
+83
+09:41.910 --> 09:42.630
+Confirm it.
+
+84
+09:45.230 --> 09:49.160
+You shall accept the default settings for everything else.
+
+85
+09:55.020 --> 09:56.830
+This case I had to select library2
+
+86
+10:02.850 --> 10:11.040
+this is creating; it will stay in the state for a few minutes so make yourself a cup of coffee and come
+
+87
+10:11.040 --> 10:11.280
+back.
+
+88
+10:15.870 --> 10:22.860
+Now our database is now created but we have to make two changes in order to make this database publicly
+
+89
+10:22.860 --> 10:25.110
+accessible.
+
+90
+10:25.110 --> 10:28.460
+Click on the database; click on modify;
+
+91
+10:34.180 --> 10:35.590
+scroll down this page
+
+92
+10:38.480 --> 10:42.130
+until you see public accessibility.
+
+93
+10:42.140 --> 10:47.580
+This allows the database to be connected to from outside of the Amazon Network so we press
+
+94
+10:47.600 --> 10:48.600
+Yes.
+
+95
+10:49.070 --> 10:55.520
+Scroll to the bottom of the page and press continue, and modify
+
+96
+10:59.830 --> 11:06.710
+after the status returns from the modifying state to the available state.
+
+97
+11:08.590 --> 11:18.580
+We can now update the database so that it will accept connections from outside of the Amazon Network.
+
+98
+11:18.580 --> 11:21.880
+To do this we need to update the firewall associated with database
+
+99
+11:24.450 --> 11:27.410
+security; VPC security groups.
+
+100
+11:27.450 --> 11:28.380
+Click this link here
+
+101
+11:32.510 --> 11:43.230
+now select the Inbound tab; now you need to edit the rules; add a rule
+
+102
+11:44.140 --> 11:44.770
+All traffic
+
+103
+11:49.050 --> 11:53.530
+from my IP; press save
+
+104
+11:58.540 --> 11:59.890
+turning back to the database.
+
+105
+12:04.820 --> 12:15.200
+Once we have enabled public access and modified the firewall to allow access from this IP address we
+
+106
+12:15.200 --> 12:16.050
+can now connect to it.
+
+107
+12:17.150 --> 12:19.980
+Click on the database once again.
+
+108
+12:20.360 --> 12:28.700
+Copy the endpoint; open your local copy of Microsoft SQL server management studio.
+
+109
+12:28.840 --> 12:32.440
+Paste the end point into the server name address; 
+
+110
+12:32.520 --> 12:37.180
+Log in as admin as earlier; password was the password we chose earlier.
+
+111
+12:40.930 --> 12:43.720
+Now I'm expecting an issue here.
+
+112
+12:43.750 --> 12:47.210
+When I try to connect; I shall demonstrate the problem.
+
+113
+12:49.800 --> 12:58.380
+When trying to connect it's giving me this rather horrible message saying that the SSL certificate has
+
+114
+12:58.380 --> 13:01.140
+not been trusted.
+
+115
+13:01.460 --> 13:03.110
+There's nothing to worry about.
+
+116
+13:03.680 --> 13:06.430
+The SSL cert can be trusted.
+
+117
+13:06.890 --> 13:10.340
+You just need to change an option here.
+
+118
+13:10.430 --> 13:16.990
+Press options; press trust server certificates; and that press connect.
+
+119
+13:21.190 --> 13:24.940
+Now we're connected.
+
+120
+13:25.240 --> 13:32.470
+We have a database server with no databases in it; but as before we can select new database
+
+121
+13:38.830 --> 13:40.180
+and we shall call it library
+
+122
+13:58.970 --> 14:05.490
+and now we have a library database which we use as if it was on our local machine.
+
+123
+14:05.520 --> 14:11.960
+But this is hosted on Amazon AWS
+
+124
+14:11.970 --> 14:16.470
+Both Amazon and Azure can incur costs.
+
+125
+14:16.620 --> 14:23.670
+So if you don't intend to use the database I would recommend that you delete it afterwards.
+
+126
+14:23.880 --> 14:32.350
+So go back to your database; select the database; press actions and delete
+
+127
+14:37.610 --> 14:42.180
+final snapshot is not required; I acknowledge.
+
+128
+14:42.190 --> 14:53.690
+Type in delete me into the box provided press delete on this database will be deleted pretty shortly.

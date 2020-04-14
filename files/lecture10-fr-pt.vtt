@@ -1,0 +1,409 @@
+WEBVTT
+
+0
+00:00.680 --> 00:07.880
+Servidor Emplois SQL; travail d'horaire. Servidor Emplois SQL.
+
+1
+00:07.980 --> 00:14.490
+L'agent de service SQL est disponible pour les éditions développeur, Web, standard et entreprise de SQL Server
+
+2
+00:15.000 --> 00:22.440
+mais pas SQL serveur express. L'agent SQL Server vous permet de planifier des travaux à exécuter dans votre base de données
+
+3
+00:22.590 --> 00:24.590
+serveur sur une base régulière.
+
+4
+00:27.210 --> 00:32.700
+Démonstration vidéo. Ici, nous allons démontrer comment configurer un travail serveur SQL pour sauvegarder votre base de données
+
+5
+00:32.700 --> 00:34.590
+nuit, et comprimer la sauvegarde.
+
+6
+00:36.060 --> 00:42.910
+Ok ici, nous allons démontrer comment configurer un travail de serveur SQL pour sauvegarder votre base de données tous les soirs, et compresser
+
+7
+00:42.930 --> 00:43.450
+la sauvegarde.
+
+8
+00:44.430 --> 00:50.280
+Donc, la première escolheu que nous allons faire est d'écrire le script dans le studio de gestion du serveur SQL, puis
+
+9
+00:50.280 --> 00:53.330
+nous allons créer un emploi à partir de ce script.
+
+10
+00:53.460 --> 00:55.760
+Commençons.
+
+11
+00:55.760 --> 00:58.130
+Maintenant, despeje sauvegarder une base de données.
+
+12
+00:58.290 --> 01:05.670
+Donc, si vous avez suivi les leçons précédentes, vous pouvez avoir une sauvegarde déjà en c:'temp
+
+13
+01:05.670 --> 01:09.020
+mais supprimons cette sauvegarde.
+
+14
+01:12.940 --> 01:21.420
+Comme ça; donc le script est: 
+
+15
+01:26.470 --> 01:31.120
+bibliothèque de base de données de sauvegarde à disque 'C:'temp'library.bak'
+
+16
+01:35.660 --> 01:38.790
+Exécuter; D'accord.
+
+17
+01:38.900 --> 01:42.940
+Nous allons vérifier notre dossier temporaire et nous avons un fichier de sauvegarde.
+
+18
+01:42.960 --> 01:50.220
+Maintenant, nous voulons zip ce; 
+
+19
+01:50.790 --> 02:00.380
+xp_cmdshell 'C:'arquivos de programa'7-zip'7z" a c: 'temp'library.zip c: 'temp'library.bak'
+
+20
+02:00.390 --> 02:12.300
+xp_cmdshell 'C:'arquivos de programa'7-zip'7z" a c: 'temp'library.zip c: 'temp'library.bak'
+
+21
+02:12.330 --> 02:21.520
+xp_cmdshell 'C:'arquivos de programa'7-zip'7z" a c: 'temp'library.zip c: 'temp'library.bak'
+
+22
+02:22.990 --> 02:30.700
+Bon donc une fois que le processus zip a terminé, nous pouvons ouvrir le C:temp
+
+23
+02:30.720 --> 02:37.020
+et nous devrions voir deux fichiers library.bak et library.zip où la library.zip contient
+
+24
+02:37.020 --> 02:38.070
+bibliothèque.bak.
+
+25
+02:38.120 --> 02:38.710
+Parfait.
+
+26
+02:39.270 --> 02:39.530
+d'accord.
+
+27
+02:39.570 --> 02:44.410
+Donc, la prochaine étape est que nous voulons automatiser ce processus pour exécuter ce sur une base nocturne.
+
+28
+02:44.610 --> 02:50.490
+Donc, nous le faisons par l'intermédiaire de SQL Agent de service, maintenant agent serveur SQL sera disponible sur le développeur SQL Server
+
+29
+02:50.490 --> 02:56.610
+édition, édition web du serveur SQL, standard et entreprise, mais ne sera pas disponible sur SQL Server Express.
+
+30
+02:56.730 --> 02:59.650
+Assurez-vous donc d'utiliser la bonne versão du serveur SQL.
+
+31
+02:59.860 --> 03:05.010
+Maintenant, nous avons juste cliquez sur SQL Server agent; presse nouvel emploi.
+
+32
+03:05.160 --> 03:10.180
+Donnez au travail un nom que nous apelações ça une sauvegarde.
+
+33
+03:10.860 --> 03:12.570
+Descrição de Donnez-lui une.
+
+34
+03:12.570 --> 03:17.720
+Cela soutient la base de données tous les soirs.
+
+35
+03:18.480 --> 03:23.080
+Vous pouvez lui donner une descrição mais significativo; les mesures de presse.
+
+36
+03:23.190 --> 03:23.790
+Nouvelle étape
+
+37
+03:27.170 --> 03:27.520
+nom de l'étape
+
+38
+03:27.520 --> 03:31.910
+base de données de sauvegarde.
+
+39
+03:31.960 --> 03:34.230
+Donnez-lui une commande qui est cette
+
+40
+03:37.650 --> 03:39.070
+Et...
+
+41
+03:39.590 --> 03:40.060
+Appuyez sur.
+
+42
+03:40.160 --> 03:41.080
+d'accord.
+
+43
+03:41.240 --> 03:43.480
+Nous créons la deuxième étape.
+
+44
+03:46.030 --> 03:46.900
+Nous devrions utiliser ce
+
+45
+03:50.660 --> 03:54.970
+et nous l'appellerons "Zip la sauvegarde"
+
+46
+03:55.200 --> 03:56.240
+D'accord.
+
+47
+03:56.330 --> 04:01.670
+Maintenant, si nous élargissons cela, nous pouvons voir que chaque étape a un sur le succès et sur l'échec.
+
+48
+04:01.670 --> 04:05.790
+Cela signifie que si la première étape réussit, elle passera à l'étape suivante.
+
+49
+04:05.840 --> 04:10.630
+S'il échoue, il quittera son emploi et n'ira pas à l'étape suivante.
+
+50
+04:10.640 --> 04:16.340
+Il ne sert à rien de zipper la sauvegarde si la sauvegarde a échoué, ce sera une vieille sauvegarde ou un invalide
+
+51
+04:16.340 --> 04:21.040
+sauvegarde et la dernière étape.
+
+52
+04:21.050 --> 04:28.250
+Nous pouvons changer cela afin qu'il signale le succès.
+
+53
+04:28.250 --> 04:34.360
+Donc, quitter le succès de déclaration d'emploi de sorte que cela signifie que la dernière étape, il va quitter le succès de déclaration d'emploi.
+
+54
+04:34.400 --> 04:40.480
+Maintenant, nous devrions lui donner un test d'horaire nouveau et nous allons appeler l'horaire tous les soirs.
+
+55
+04:40.880 --> 04:44.150
+Nous dis-le donc sur une base quotidienne.
+
+56
+04:44.150 --> 04:46.600
+Disons que vous voulez qu'il se déroule à 1h du matin
+
+57
+04:47.050 --> 04:49.070
+C'est la meilleure idée de diriger ces emplois.
+
+58
+04:49.130 --> 04:57.120
+Dans les moments où vos utilisateurs n'utilisent pas activement la base de données afin de ne pas les ralentir.
+
+59
+04:57.370 --> 04:58.440
+D'accord.
+
+60
+04:58.590 --> 04:59.340
+Et appuyez sur ok
+
+61
+04:59.390 --> 05:07.110
+OK maintenant une fois que vous avez créé le travail c'est une bonne idée de le tester pour s'assurer que cela fonctionne.
+
+62
+05:07.130 --> 05:13.670
+Donc, ce que nous allons faire, c'est supprimer les sauvegardes et zip alors allez dans le dossier temp à nouveau
+
+63
+05:14.560 --> 05:17.120
+supprimer la sauvegarde et la fermeture éclair.
+
+64
+05:17.120 --> 05:21.850
+Maintenant, nous allons faire le travail.
+
+65
+05:22.190 --> 05:26.300
+Vous pourriez bien sûr attendre jusqu'à 1 h du matin, mais faisons-le tout de suite.
+
+66
+05:27.650 --> 05:28.730
+Alors courons
+
+67
+05:32.580 --> 05:34.880
+nous avons signalé le succès.
+
+68
+05:35.190 --> 05:41.700
+Nous pouvons fermer cette fenêtre et vérifier notre dossier temp et nous pouvons voir que ces deux fichiers n'ont pas été
+
+69
+05:41.700 --> 05:42.360
+O Recréé.
+
+70
+05:42.390 --> 05:44.480
+Ce qui est parfait.
+
+71
+05:44.700 --> 05:51.330
+Gérer les emplois de serveur SQL; Vous pouvez utiliser l'interface du studio de gestion de serveur SQL pour afficher l'historique
+
+72
+05:51.330 --> 05:56.940
+des travaux de l'intermédiaire de l'agent serveur SQL peut également désactiver et supprimer des emplois de l'interface si vous n'avez pas
+
+73
+05:56.940 --> 05:59.690
+mais besoin d'eux.
+
+74
+05:59.770 --> 06:03.780
+Démonstration vidéo : Nous allons ici voir l'histoire du travail que nous venons de créer.
+
+75
+06:05.220 --> 06:13.560
+Bon ici, nous allons voir l'histoire du travail que nous venons de créer afin que nous puissions cliquer sur le travail;
+
+76
+06:14.000 --> 06:23.610
+presse voir l'histoire et vous pouvez développer à ce sujet pour voir ce qui s'est passé afin que nous puissions voir la date et l'heure de la
+
+77
+06:23.640 --> 06:25.260
+emploi a été exécuté.
+
+78
+06:25.350 --> 06:29.660
+Nous pouvons voir les flèches vertes signifie qu'il a été couronné de succès; étape a réussi.
+
+79
+06:29.700 --> 06:32.240
+Nous avons mais d'informations là-bas.
+
+80
+06:34.900 --> 06:41.350
+Par exemple, nous pouvons étendre cela et nous pouvons voir l'information retournée de 7zip
+
+81
+06:44.660 --> 06:50.280
+nous pouvons également cliquer à droite sur le travail et sélectionner désactiver.
+
+82
+06:50.370 --> 06:57.330
+Si nous ne voulons pas que les emplois fonctionnent ce soir pour une raison quelconque et le permettre à nouveau quand vous voulez le travail
+
+83
+06:57.340 --> 07:02.400
+à courir; et c'est tout ce qu'il y a à faire. Et c'est à toi de le faire.
+
+84
+07:03.090 --> 07:09.150
+Voyons si nous pouvons utiliser un historique de travail serveur SQL pour diagnostiquer le problème d'abord désinstaller 7zip
+
+85
+07:09.160 --> 07:15.210
+à partir de votre ordinateur et ré-exécuter le travail, puis vous SQL historique de travail serveur pour diagnostiquer le problème
+
+86
+07:15.210 --> 07:17.390
+le réparer; et vérifier le correctif.
+
+87
+07:17.460 --> 07:23.270
+Vous pouvez mettre cette vidéo en pause dès maintenant et la reprendre lorsque vous souhaitez voir la solution.
+
+88
+07:23.600 --> 07:29.970
+Ok pour cette tâche, nous allons causer un problème, puis diagnostiquer et le résoudre à nouveau.
+
+89
+07:31.410 --> 07:40.220
+Donc, ce que nous allons faire est de supprimer 7zip; donc nous avons à droite cliquez sur le dossier7Zip; cliquez sur le programa de desinstalação
+
+90
+07:40.860 --> 07:45.860
+et cela va désinstaller 7zip.
+
+91
+07:46.760 --> 07:53.410
+Nous supprimerons également notre sauvegarde.
+
+92
+07:53.600 --> 07:55.980
+Maintenant, faisons le travail de secours tous les soirs.
+
+93
+08:03.680 --> 08:04.620
+Dit le succès.
+
+94
+08:04.680 --> 08:07.730
+Cependant, si nous regardons dans le dossier temporaire, nous avons la bibliothèque que le dos.
+
+95
+08:07.740 --> 08:09.240
+Mais il n'y a pas de library.zip.
+
+96
+08:11.070 --> 08:20.280
+Donc, si nous avons raison cliquez sur cette historique de vue et le dernier
+
+97
+08:23.260 --> 08:26.810
+cela dit que l'étape a réussi, mais il n'a pas.
+
+98
+08:26.820 --> 08:30.540
+Donc, nous devrions juste réinstaller 7Zip
+
+99
+08:38.670 --> 08:46.060
+Emplacement par défaut; et re-exécuter le travail
+
+100
+08:54.480 --> 08:54.980
+D'accord.
+
+101
+08:55.030 --> 09:01.000
+Une fois terminé vérifier le dossier temporaire et ces fichiers sont maintenant là; Parfait.

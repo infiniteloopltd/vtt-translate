@@ -1,0 +1,517 @@
+WEBVTT
+
+0
+00:00.900 --> 00:02.090
+Oi!
+
+1
+00:02.220 --> 00:05.070
+Este é o nosso curso de Udemy no Microsoft SQL Server
+
+2
+00:05.070 --> 00:13.640
+O servidor Microsoft SQL é o sistema de banco de dados relacional mais popular para a Microsoft
+
+3
+00:13.730 --> 00:14.550
+Sistema Operacional.
+
+4
+00:15.920 --> 00:26.150
+Então, sem mais delongas, vamos começar e instalar o SQL Server e o estúdio de gerenciamento SQL.
+
+5
+00:26.550 --> 00:33.690
+Este é um curso da Udemy sobre o servidor Microsoft SQL; Eu vou primeiro demonstrar como baixar
+
+6
+00:33.690 --> 00:42.240
+e instalar o sql server e o estúdio SQL Server Management, que precisarão acessar o SQL Server.
+
+7
+00:42.910 --> 00:46.850
+Então faça uma pesquisa no Google para o Microsoft SQL Server express edition.
+
+8
+00:46.870 --> 00:49.850
+Esta é uma versão gratuita que vai começar.
+
+9
+00:50.950 --> 00:55.930
+Esta é a página inicial da Microsoft e vamos em frente e pressionamos o botão de download.
+
+10
+01:08.380 --> 01:16.110
+Queremos ir para uma instalação básica; aceitar o acordo; instalar no local padrão
+
+11
+01:19.280 --> 01:21.890
+e agora vamos esperar o download para completar
+
+12
+01:35.450 --> 01:39.350
+Uma vez que a edição SQL Server Express seja instalada.
+
+13
+01:39.410 --> 01:47.330
+Vamos em frente e instalamos o ssms ou o estúdio sql server management; pressionando este botão
+
+14
+01:47.510 --> 01:50.450
+que se ligará à página de download na Microsoft
+
+15
+01:53.220 --> 01:54.300
+Pressione o botão de download.
+
+16
+01:58.840 --> 02:01.210
+E vamos esperar que isso seja baixado.
+
+17
+02:01.400 --> 02:01.970
+Cinco minutos.
+
+18
+02:06.230 --> 02:11.810
+Uma vez que o estúdio SQL Server Management é baixado; abrir o executável para começar a instalação
+
+19
+02:24.910 --> 02:33.010
+para abrir o estúdio SQL Server Management; ir para a barra de pesquisa; e digitar SQL; O melhor jogo deve ser
+
+20
+02:33.220 --> 02:35.890
+Estúdio de gerenciamento de servidores Microsoft SQL; clique neste
+
+21
+02:39.930 --> 02:47.400
+uma vez aberto o nome do servidor deve ser pré-preenchido nesta caixa; deixar autenticação como autenticação de janelas
+
+22
+02:47.490 --> 02:56.470
+e pressione conectar. No momento, esse banco de dados não tem bancos de dados; Agora vou criar um novo banco de dados
+
+23
+02:57.630 --> 02:59.170
+e eu quero chamá-lo de biblioteca
+
+24
+03:02.500 --> 03:15.280
+pressione OK; e nosso novo banco de dados foi criado agora. Este banco de dados está vazio; ele não tem tabelas ou quaisquer dados dentro dele, mas
+
+25
+03:15.280 --> 03:16.770
+vamos deixá-lo assim para o momento
+
+26
+03:19.580 --> 03:28.490
+outra opção em vez de instalar o servidor SQL localmente em seu computador é usar o Microsoft Azure
+
+27
+03:28.490 --> 03:38.540
+plataforma; para que você possa configurar uma instância de servidor SQL no Microsoft Azure. Usando a nuvem da Microsoft
+
+28
+03:38.540 --> 03:46.800
+plataforma permitiria que você escalar o seu banco de dados à medida que você cresce no entanto, este passo exige que você tenha um
+
+29
+03:46.830 --> 03:55.490
+conta ativa do Microsoft Azure e pode incorrer em custos; você pode pular este passo se você não deseja usar
+
+30
+03:56.000 --> 03:57.140
+Microsoft Azure
+
+31
+04:00.240 --> 04:06.450
+A próxima demonstração que vou fazer é como configurar o mesmo banco de dados do SQL Server; mas desta vez hospedado em
+
+32
+04:06.690 --> 04:15.450
+Azure que é a oferta de plataforma em nuvem da Microsoft; então usando plataformas em nuvem você não precisa instalar
+
+33
+04:15.450 --> 04:16.370
+software localmente.
+
+34
+04:17.550 --> 04:27.300
+Então devemos configurar o mesmo banco de dados; clique nos bancos de dados do SQL Server. Criar banco de dados SQL
+
+35
+04:32.940 --> 04:37.930
+Aqui inserimos o nome do banco de dados no qual vamos chamá-lo de biblioteca.
+
+36
+04:38.150 --> 04:38.850
+Como antes
+
+37
+04:42.120 --> 04:44.580
+pressionamos revisão e criar
+
+38
+04:51.780 --> 04:53.630
+Isso vai levar alguns segundos para criar
+
+39
+05:02.710 --> 05:09.010
+assim, uma vez que o banco de dados é criado; a primeira coisa que vou fazer é definir a senha; 
+
+40
+05:09.010 --> 05:09.990
+Então clique no nome do servidor aqui.
+
+41
+05:12.430 --> 05:18.860
+Quero pressionar a senha de redefinição; agora, a fim de gerar uma senha forte.
+
+42
+05:18.890 --> 05:21.450
+Você pode digitar o que quiser.
+
+43
+05:22.700 --> 05:25.430
+Se seguir essas regras.
+
+44
+05:26.780 --> 05:30.530
+O que eu gosto de usar é um site chamado gerador de senhaforte.
+
+45
+05:32.910 --> 05:34.080
+Gerar senha.
+
+46
+05:34.720 --> 05:40.500
+E esta é uma senha forte que eu posso usar; colar em ambas as caixas
+
+47
+05:43.100 --> 05:57.180
+e pressione salvar.
+
+48
+06:00.030 --> 06:03.360
+Você deve ter o estúdio SQL Server Management aberto de antes.
+
+49
+06:04.330 --> 06:08.130
+E eu vou inserir o nome do servidor.
+
+50
+06:08.220 --> 06:08.600
+Cópia
+
+51
+06:11.850 --> 06:14.900
+alterar a autenticação do windows para autenticação do servidor SQL.
+
+52
+06:17.580 --> 06:19.870
+O login deve ser o assistente do servidor aqui.
+
+53
+06:20.120 --> 06:23.120
+Seria diferente para sua conta.
+
+54
+06:23.160 --> 06:29.730
+A senha será de qualquer coisa digitada ou deste site.
+
+55
+06:29.730 --> 06:34.390
+O gerador de senha seguro e a conexão de pressão.
+
+56
+06:41.590 --> 06:43.300
+Agora expandimos isso.
+
+57
+06:43.340 --> 06:52.780
+Devemos ver a configuração do banco de dados com a biblioteca do banco de dados acessível.
+
+58
+06:52.840 --> 06:58.250
+Isso não tem tabelas associadas a ele. Mas isso está hospedado no Azure
+
+59
+07:01.960 --> 07:03.360
+uma vez que você está acabado com isso.
+
+60
+07:04.180 --> 07:10.750
+E se você não quiser continuar usando o Azure, uma vez que há certos custos associados ao uso
+
+61
+07:10.900 --> 07:14.730
+Microsoft Azure, você pode excluir seu banco de dados depois.
+
+62
+07:14.980 --> 07:22.970
+Clique em bancos de dados SQL; clique em seu banco de dados; e pressione o botão DELETE, digite a palavra sim e exclua.
+
+63
+07:30.280 --> 07:39.450
+Uma alternativa para usar o Microsoft Azure são os Web Services da Amazon, então se você preferir usar a nuvem da Amazon
+
+64
+07:39.450 --> 07:46.530
+plataforma ou AWS abreviação para Amazon Web Services, então você também pode configurar uma instância de servidor SQL
+
+65
+07:46.920 --> 07:49.750
+na plataforma AWS.
+
+66
+07:50.940 --> 07:58.790
+Como antes desta etapa exige que você tenha uma conta AWS ativa e pode incorrer em custos.
+
+67
+07:58.790 --> 08:02.390
+Você pode pular o passo se você não desejar usar a AWS
+
+68
+08:10.840 --> 08:20.380
+outra plataforma em nuvem para hospedagem de bancos de dados SQL Server é o AWS da Amazon ou o Amazon Web Services.
+
+69
+08:20.440 --> 08:24.340
+Esta é uma alternativa ao Azure, mas é bastante semelhante a ele.
+
+70
+08:25.930 --> 08:34.480
+Então, para começar a entrar na pesquisa do console de gerenciamento AWS para RDS que é 
+
+71
+08:35.200 --> 08:36.040
+serviço de banco de dados relacional gerenciado
+
+72
+08:44.520 --> 08:45.070
+Nwo.
+
+73
+08:45.270 --> 08:46.980
+Se você pressionar criar banco de dados
+
+74
+08:49.690 --> 08:56.420
+você pode selecionar diferentes tipos de bancos de dados aqui, mas estamos indo para o servidor Microsoft SQL
+
+75
+08:56.420 --> 09:01.010
+indo para a adição expressa; mais uma vez por razões de custo.
+
+76
+09:02.090 --> 09:03.320
+Selecione o nível livre
+
+77
+09:06.560 --> 09:09.340
+Vou chamar o banco de dados de "biblioteca"
+
+78
+09:15.050 --> 09:20.110
+o nome de usuário "admin" está bem; para a senha mestre.
+
+79
+09:20.110 --> 09:25.920
+Vou mais uma vez para as senhas generator.net site.
+
+80
+09:25.940 --> 09:30.090
+Você pode obviamente digitar sua própria senha aqui.
+
+81
+09:30.290 --> 09:37.650
+Selecionei para excluir símbolos e esta opção copiar a senha.
+
+82
+09:39.620 --> 09:41.880
+E essa é a senha principal.
+
+83
+09:41.910 --> 09:42.630
+Confirme isso.
+
+84
+09:45.230 --> 09:49.160
+Você deve aceitar as configurações padrão para todo o resto.
+
+85
+09:55.020 --> 09:56.830
+Este caso eu tive que selecionar biblioteca2
+
+86
+10:02.850 --> 10:11.040
+isso está criando; ele vai ficar no estado por alguns minutos para fazer-se uma xícara de café e vir
+
+87
+10:11.040 --> 10:11.280
+Voltar.
+
+88
+10:15.870 --> 10:22.860
+Agora nosso banco de dados foi criado, mas temos que fazer duas mudanças para tornar esse banco de dados publicamente
+
+89
+10:22.860 --> 10:25.110
+Acessível.
+
+90
+10:25.110 --> 10:28.460
+Clique no banco de dados; clique em modificar;
+
+91
+10:34.180 --> 10:35.590
+rolar para baixo esta página
+
+92
+10:38.480 --> 10:42.130
+até que você veja a acessibilidade pública.
+
+93
+10:42.140 --> 10:47.580
+Isso permite que o banco de dados seja conectado de fora da Rede Amazônica para que pressionemos
+
+94
+10:47.600 --> 10:48.600
+Sim.
+
+95
+10:49.070 --> 10:55.520
+Role até a parte inferior da página e pressione continuar e modificar
+
+96
+10:59.830 --> 11:06.710
+após o status retornar do estado modificador para o estado disponível.
+
+97
+11:08.590 --> 11:18.580
+Agora podemos atualizar o banco de dados para que ele aceite conexões de fora da Rede Amazônica.
+
+98
+11:18.580 --> 11:21.880
+Para fazer isso, precisamos atualizar o firewall associado ao banco de dados
+
+99
+11:24.450 --> 11:27.410
+segurança; Grupos de segurança VPC.
+
+100
+11:27.450 --> 11:28.380
+Clique neste link aqui
+
+101
+11:32.510 --> 11:43.230
+agora selecione a guia Entrada; agora você precisa editar as regras; adicionar uma regra
+
+102
+11:44.140 --> 11:44.770
+Todo o tráfego
+
+103
+11:49.050 --> 11:53.530
+do meu IP; salvar imprensa
+
+104
+11:58.540 --> 11:59.890
+voltando para o banco de dados.
+
+105
+12:04.820 --> 12:15.200
+Uma vez que tenhamos ativado o acesso público e modificado o firewall para permitir o acesso a partir deste endereço IP nós
+
+106
+12:15.200 --> 12:16.050
+agora pode se conectar a ele.
+
+107
+12:17.150 --> 12:19.980
+Clique no banco de dados mais uma vez.
+
+108
+12:20.360 --> 12:28.700
+Copiar o ponto final; abra sua cópia local do microsoft SQL server management studio.
+
+109
+12:28.840 --> 12:32.440
+Cole o ponto final no endereço do nome do servidor; 
+
+110
+12:32.520 --> 12:37.180
+Faça login como admin como anteriormente; senha foi a senha que escolhemos anteriormente.
+
+111
+12:40.930 --> 12:43.720
+Agora estou esperando um problema aqui.
+
+112
+12:43.750 --> 12:47.210
+Quando tento me conectar; Vou demonstrar o problema.
+
+113
+12:49.800 --> 12:58.380
+Ao tentar conectar está me dando esta mensagem bastante horrível dizendo que o certificado SSL tem
+
+114
+12:58.380 --> 13:01.140
+não era confiável.
+
+115
+13:01.460 --> 13:03.110
+Não há nada com que se preocupar.
+
+116
+13:03.680 --> 13:06.430
+O cert SSL pode ser confiável.
+
+117
+13:06.890 --> 13:10.340
+Você só precisa mudar uma opção aqui.
+
+118
+13:10.430 --> 13:16.990
+Opções de imprensa; pressionar certificados de servidor de confiança; e que a imprensa se conecta.
+
+119
+13:21.190 --> 13:24.940
+Agora estamos conectados.
+
+120
+13:25.240 --> 13:32.470
+Temos um servidor de banco de dados sem bancos de dados nele; mas como antes podemos selecionar novo banco de dados
+
+121
+13:38.830 --> 13:40.180
+e vamos chamá-lo de biblioteca
+
+122
+13:58.970 --> 14:05.490
+e agora temos um banco de dados de biblioteca que usamos como se estivesse em nossa máquina local.
+
+123
+14:05.520 --> 14:11.960
+Mas isso está hospedado na Amazon AWS
+
+124
+14:11.970 --> 14:16.470
+Tanto a Amazon quanto o Azure podem incorrer em custos.
+
+125
+14:16.620 --> 14:23.670
+Então, se você não pretende usar o banco de dados eu recomendo que você excluí-lo depois.
+
+126
+14:23.880 --> 14:32.350
+Então volte ao seu banco de dados; selecionar o banco de dados; ações de imprensa e excluir
+
+127
+14:37.610 --> 14:42.180
+o instantâneo final não é necessário; Eu reconheço.
+
+128
+14:42.190 --> 14:53.690
+Digite-me excluir-me na caixa desde que a exclusão de imprensa neste banco de dados será excluído muito em breve.

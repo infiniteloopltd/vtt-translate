@@ -1,0 +1,409 @@
+WEBVTT
+
+0
+00:00.680 --> 00:07.880
+Vagas no SQL Server; trabalho de agendamento. Empregos no SQL Server.
+
+1
+00:07.980 --> 00:14.490
+O agente SQL Service está disponível para as edições desenvolvedor, web, standard e enterprise do SQL Server
+
+2
+00:15.000 --> 00:22.440
+mas não o SQL server express. O agente sql server permite que você agende trabalhos a serem executados em seu banco de dados
+
+3
+00:22.590 --> 00:24.590
+servidor regularmente.
+
+4
+00:27.210 --> 00:32.700
+Demonstração de vídeo. Aqui vamos demonstrar como configurar um trabalho de servidor SQL para fazer backup do seu banco de dados
+
+5
+00:32.700 --> 00:34.590
+noturno, e comprimir o backup.
+
+6
+00:36.060 --> 00:42.910
+Ok aqui vamos demonstrar como configurar um trabalho de servidor SQL para fazer backup do seu banco de dados noturno, e compactar
+
+7
+00:42.930 --> 00:43.450
+o backup.
+
+8
+00:44.430 --> 00:50.280
+Então a primeira coisa que vamos fazer é escrever o script dentro do estúdio de gerenciamento de servidor SQL e, em seguida,
+
+9
+00:50.280 --> 00:53.330
+vamos criar um trabalho a partir desse script.
+
+10
+00:53.460 --> 00:55.760
+Então vamos começar.
+
+11
+00:55.760 --> 00:58.130
+Agora, para fazer backup de um banco de dados.
+
+12
+00:58.290 --> 01:05.670
+Então, se você está seguindo lições anteriores, você pode ter um backup já em c:\temp
+
+13
+01:05.670 --> 01:09.020
+mas vamos excluir esse backup.
+
+14
+01:12.940 --> 01:21.420
+Assim; então o script é: 
+
+15
+01:26.470 --> 01:31.120
+biblioteca de banco de dados de backup para disco = 'C:\temp\library.bak'
+
+16
+01:35.660 --> 01:38.790
+Executar; Okey.
+
+17
+01:38.900 --> 01:42.940
+Vamos verificar nossa pasta temporária e temos um arquivo de backup.
+
+18
+01:42.960 --> 01:50.220
+Agora queremos fechar isso; 
+
+19
+01:50.790 --> 02:00.380
+xp_cmdshell 'C:\program-files\7-zip\7z" a c:\temp\library.zip c:\temp\library.bak'
+
+20
+02:00.390 --> 02:12.300
+xp_cmdshell 'C:\program-files\7-zip\7z" a c:\temp\library.zip c:\temp\library.bak'
+
+21
+02:12.330 --> 02:21.520
+xp_cmdshell 'C:\program-files\7-zip\7z" a c:\temp\library.zip c:\temp\library.bak'
+
+22
+02:22.990 --> 02:30.700
+Ok, então uma vez que o processo zip tenha concluído, podemos abrir a temperatura C:\
+
+23
+02:30.720 --> 02:37.020
+e devemos ver dois arquivos library.bak e library.zip onde a biblioteca.zip contém
+
+24
+02:37.020 --> 02:38.070
+library.bak.
+
+25
+02:38.120 --> 02:38.710
+Perfeito.
+
+26
+02:39.270 --> 02:39.530
+OKEY.
+
+27
+02:39.570 --> 02:44.410
+Então, o próximo passo é quequeremos automatizar esse processo para executar isso em uma base noturna.
+
+28
+02:44.610 --> 02:50.490
+Então fazemos isso através do agente sql service, agora o agente de servidor SQL estará disponível no desenvolvedor do SQL Server
+
+29
+02:50.490 --> 02:56.610
+edição, edição web do servidor SQL, padrão e corporativo, mas não estará disponível no SQL Server Express.
+
+30
+02:56.730 --> 02:59.650
+Portanto, certifique-se de que você está usando a versão certa do servidor SQL.
+
+31
+02:59.860 --> 03:05.010
+Agora, clicamos com o botão direito do mouse no agente do SQL Server; imprensa novo trabalho.
+
+32
+03:05.160 --> 03:10.180
+Dê um nome ao trabalho que chamaremos de backup.
+
+33
+03:10.860 --> 03:12.570
+Dê-lhe uma descrição.
+
+34
+03:12.570 --> 03:17.720
+Isso adia o banco de dados todas as noites.
+
+35
+03:18.480 --> 03:23.080
+Você pode dar-lhe uma descrição mais significativa; passos de imprensa.
+
+36
+03:23.190 --> 03:23.790
+Novo passo
+
+37
+03:27.170 --> 03:27.520
+nome passo
+
+38
+03:27.520 --> 03:31.910
+banco de dados de backup.
+
+39
+03:31.960 --> 03:34.230
+Dê-lhe um comando que é este
+
+40
+03:37.650 --> 03:39.070
+E...
+
+41
+03:39.590 --> 03:40.060
+Imprensa.
+
+42
+03:40.160 --> 03:41.080
+OKEY.
+
+43
+03:41.240 --> 03:43.480
+Criamos o segundo passo.
+
+44
+03:46.030 --> 03:46.900
+Devemos usar isso.
+
+45
+03:50.660 --> 03:54.970
+e vamos chamá-lo de "Zip o backup"
+
+46
+03:55.200 --> 03:56.240
+Okey.
+
+47
+03:56.330 --> 04:01.670
+Agora, se expandirmos isso, podemos ver que cada passo tem um sobre o sucesso e sobre o fracasso.
+
+48
+04:01.670 --> 04:05.790
+Isso significa que, se o primeiro passo for bem sucedido, ele irá para o próximo passo.
+
+49
+04:05.840 --> 04:10.630
+Se falhar, deixará o emprego e não irá para o próximo passo.
+
+50
+04:10.640 --> 04:16.340
+Não há nenhum ponto em fechar o backup se o backup falhou será um backup antigo ou um inválido
+
+51
+04:16.340 --> 04:21.040
+backup e o passo final.
+
+52
+04:21.050 --> 04:28.250
+Podemos mudar isso para que ele reporte sucesso.
+
+53
+04:28.250 --> 04:34.360
+Então, deixe o trabalho relatando sucesso, então isso significa que o passo final vai sair do trabalho relatando sucesso.
+
+54
+04:34.400 --> 04:40.480
+Agora devemos dar um novo teste de horário e vamos chamar a programação todas as noites.
+
+55
+04:40.880 --> 04:44.150
+Então dizemos que ocorre diariamente.
+
+56
+04:44.150 --> 04:46.600
+Digamos que você quer que ele corra à 1h da manhã.
+
+57
+04:47.050 --> 04:49.070
+É a melhor idéia para realmente executar esses trabalhos.
+
+58
+04:49.130 --> 04:57.120
+Às vezes, quando seus usuários não estão usando ativamente o banco de dados para que você não os desacelere.
+
+59
+04:57.370 --> 04:58.440
+Okey.
+
+60
+04:58.590 --> 04:59.340
+E pressione ok
+
+61
+04:59.390 --> 05:07.110
+Ok, agora, uma vez que você criou o trabalho é uma boa idéia testá-lo para ter certeza de que ele funciona.
+
+62
+05:07.130 --> 05:13.670
+Então o que vamos fazer é excluir os backups e zip então vá para a pasta temporária novamente
+
+63
+05:14.560 --> 05:17.120
+excluir o backup e zip.
+
+64
+05:17.120 --> 05:21.850
+Agora vamos fazer o trabalho.
+
+65
+05:22.190 --> 05:26.300
+Você pode esperar até uma da manhã, mas vamos fazer isso imediatamente.
+
+66
+05:27.650 --> 05:28.730
+Então vamos correr
+
+67
+05:32.580 --> 05:34.880
+temos sucesso relatado.
+
+68
+05:35.190 --> 05:41.700
+Podemos fechar esta janela e verificar nossa pasta temporária e podemos ver que esses dois arquivos não foram
+
+69
+05:41.700 --> 05:42.360
+Recriado.
+
+70
+05:42.390 --> 05:44.480
+O que é perfeito.
+
+71
+05:44.700 --> 05:51.330
+Gerenciamento de empregos em servidores SQL; Você pode usar a interface do estúdio de gerenciamento de servidor SQL para visualizar o histórico
+
+72
+05:51.330 --> 05:56.940
+de trabalhos de via agente servidor SQL também pode desativar e excluir trabalhos da interface se você não
+
+73
+05:56.940 --> 05:59.690
+mais precisa deles.
+
+74
+05:59.770 --> 06:03.780
+Demonstração de vídeo: Aqui vamos ver a história do trabalho que acabamos de criar.
+
+75
+06:05.220 --> 06:13.560
+Ok aqui vamos ver a história do trabalho que acabamos de criar para que possamos clicar com o botão direito do mouse no trabalho;
+
+76
+06:14.000 --> 06:23.610
+histórico de visualização de imprensa e você pode expandir para ver o que aconteceu para que possamos ver a data e a hora do
+
+77
+06:23.640 --> 06:25.260
+trabalho foi executado.
+
+78
+06:25.350 --> 06:29.660
+Podemos ver que as setas verdes significa que foi bem sucedido; passo conseguiu.
+
+79
+06:29.700 --> 06:32.240
+Temos mais informações lá.
+
+80
+06:34.900 --> 06:41.350
+Por exemplo, podemos expandir isso e podemos ver as informações devolvidas do 7zip
+
+81
+06:44.660 --> 06:50.280
+também podemos clicar com o botão direito do mouse no trabalho e selecionar desativar.
+
+82
+06:50.370 --> 06:57.330
+Se não queremos que os empregos correm hoje à noite por alguma razão e habilitá-lo novamente quando você quiser o trabalho
+
+83
+06:57.340 --> 07:02.400
+para executar; e isso é tudo o que há para ele. E acabou para você.
+
+84
+07:03.090 --> 07:09.150
+Vamos ver se podemos usar um histórico de trabalho do servidor SQL para diagnosticar o problema primeiro desinstalar 7zip
+
+85
+07:09.160 --> 07:15.210
+do seu computador e reexecutar o trabalho, então você sql histórico de trabalho servidor para diagnosticar o problema
+
+86
+07:15.210 --> 07:17.390
+corrigi-lo; e verificar a correção.
+
+87
+07:17.460 --> 07:23.270
+Você pode pausar este vídeo agora e retomá-lo quando quiser ver a solução.
+
+88
+07:23.600 --> 07:29.970
+Certo, para esta tarefa vamos causar um problema, em seguida, diagnosticar e corrigi-lo novamente.
+
+89
+07:31.410 --> 07:40.220
+Então o que vamos fazer é deletar 7zip; então nós clicamos com o botão direito na pasta7Zip; clique no programa de desinstalar
+
+90
+07:40.860 --> 07:45.860
+e isso vai desinstalar o 7zip.
+
+91
+07:46.760 --> 07:53.410
+Também excluiremos nosso backup.
+
+92
+07:53.600 --> 07:55.980
+Agora vamos executar o trabalho de backup noturno.
+
+93
+08:03.680 --> 08:04.620
+Diz sucesso.
+
+94
+08:04.680 --> 08:07.730
+No entanto, se olharmos na pasta temporária temos biblioteca que de volta.
+
+95
+08:07.740 --> 08:09.240
+Mas não há biblioteca.
+
+96
+08:11.070 --> 08:20.280
+Então, se clicarmos com o botão direito do mouse neste histórico de visualização e o mais recente
+
+97
+08:23.260 --> 08:26.810
+isso diz que o passo foi bem sucedido, mas não conseguiu.
+
+98
+08:26.820 --> 08:30.540
+Então devemos apenas reinstalar 7Zip
+
+99
+08:38.670 --> 08:46.060
+Localização padrão; e reexecutar o trabalho
+
+100
+08:54.480 --> 08:54.980
+Okey.
+
+101
+08:55.030 --> 09:01.000
+Uma vez completa verificar a pasta temporária e esses arquivos estão agora lá; Perfeito.

@@ -1,0 +1,517 @@
+WEBVTT
+
+0
+00:00.900 --> 00:02.090
+Salut!
+
+1
+00:02.220 --> 00:05.070
+C'est notre cours Udemy sur Microsoft SQL Server
+
+2
+00:05.070 --> 00:13.640
+Le serveur SQL microsoft est le système de base de données relationnel le plus populaire pour microsoft
+
+3
+00:13.730 --> 00:14.550
+Système d'exploitation.
+
+4
+00:15.920 --> 00:26.150
+Donc, sans plus tarder, nous allons startr et installer SQL Server et SQL studio de gestion.
+
+5
+00:26.550 --> 00:33.690
+Il s'agit d'un cours Udemy sur le serveur Microsoft SQL; Je vais d'abord démontrer comentário télécharger
+
+6
+00:33.690 --> 00:42.240
+et installer SQL Server et SQL Server Management studio qui devra accéder à SQL Server.
+
+7
+00:42.910 --> 00:46.850
+Il en va de même pour une recherche Google pour Microsoft SQL Server édition express.
+
+8
+00:46.870 --> 00:49.850
+Il s'agit d'une versão gratuite qui vous fera démarrer.
+
+9
+00:50.950 --> 00:55.930
+C'est la page d'accueil sur Microsoft et nous allons juste aller de l'avant et appuyez sur le bouton de téléchargement.
+
+10
+01:08.380 --> 01:16.110
+Nous voulons aller pour une instalação de base; aceitador l'accord; instalador à l'emplacement par défaut
+
+11
+01:19.280 --> 01:21.890
+et nous allons maintenant attendre que le téléchargement se termine
+
+12
+01:35.450 --> 01:39.350
+Une fois l'édition SQL Server Express installée.
+
+13
+01:39.410 --> 01:47.330
+Nous allons aller de l'avant et installer SSMS ou SQL Server Management studio; en appuyant sur ce bouton
+
+14
+01:47.510 --> 01:50.450
+qui sera lier à la page de téléchargement sur Microsoft
+
+15
+01:53.220 --> 01:54.300
+Appuyez sur le bouton de téléchargement.
+
+16
+01:58.840 --> 02:01.210
+Et nous attendrons que cela soit téléchargé.
+
+17
+02:01.400 --> 02:01.970
+Minutos cinq
+
+18
+02:06.230 --> 02:11.810
+Une fois que le studio SQL Server Management est téléchargé; ouvrir l'exécutable pour commencer l'installation
+
+19
+02:24.910 --> 02:33.010
+d'ouvrir le studio SQL Server Management; aller à la barre de recherche; et tapez dans SQL; Le meilleur match devrait être
+
+20
+02:33.220 --> 02:35.890
+Estúdio de gerenciamento de servidores Microsoft SQL; cliquez sur ce
+
+21
+02:39.930 --> 02:47.400
+une fois ouvert votre nom de serveur doit être préremmmé dans cette boîte; laisser l'authentification comme authentification des fenêtres
+
+22
+02:47.490 --> 02:56.470
+et appuyez sur connecter. Pour le moment, cette section de base de données n'a pas de bases de données; Je vais maintenant créer une nouvelle base de données
+
+23
+02:57.630 --> 02:59.170
+et je veux l'appeler bibliothèque
+
+24
+03:02.500 --> 03:15.280
+appuyez sur OK; et notre nouvelle base de données est maintenant créée. Cette base de données est vide; il n'a pas de tableaux ou de données à l'intérieur, mais
+
+25
+03:15.280 --> 03:16.770
+allus allons le laisser comme ça pour le momento
+
+26
+03:19.580 --> 03:28.490
+une autre opção au lieu d'installer le serveur SQL localement sur votre ordinateur est d'utiliser Microsoft Azure
+
+27
+03:28.490 --> 03:38.540
+placa-forme; afin que vous puissiez configurer une instance de serveur SQL sur Microsoft Azure. Utilização du cloud da Microsoft
+
+28
+03:38.540 --> 03:46.800
+plate-forme vous permettrait d'échelle de votre base de données que vous développez quelle que soit cette étape vous oblige à avoir un
+
+29
+03:46.830 --> 03:55.490
+compte Microsoft Azure actif et peut engager des coûts; vous pouvez sauter cette étape si vous ne souhaitez pas utiliser
+
+30
+03:56.000 --> 03:57.140
+Microsoft Azure
+
+31
+04:00.240 --> 04:06.450
+La prochaine démonstration que je vais faire est de savoir comment configurer la même base de données SQL Server; mais cette fois hébergé sur
+
+32
+04:06.690 --> 04:15.450
+Azure qui est l'offre de plate-forme cloud de Microsoft; donc en utilisant des placas-formes nuvem que vous n'avez pas besoin d'installer
+
+33
+04:15.450 --> 04:16.370
+localização lógica.
+
+34
+04:17.550 --> 04:27.300
+Nous devrions donc mettre en place la même base de données; cliquez sur les bases de données SQL Server. Créer une base de données SQL
+
+35
+04:32.940 --> 04:37.930
+Ici, nous entrons le nom de la base de données dans laquelle nous allons l'appeler bibliothèque.
+
+36
+04:38.150 --> 04:38.850
+Comme avant
+
+37
+04:42.120 --> 04:44.580
+pressões nous l'examen et créons
+
+38
+04:51.780 --> 04:53.630
+Cela prendra quelques secondes pour créer
+
+39
+05:02.710 --> 05:09.010
+donc une fois la base de données créée; la première escolheu que je vais faire est de définir le mot de passe; 
+
+40
+05:09.010 --> 05:09.990
+Cliquez donc sur le nom du serveur ici.
+
+41
+05:12.430 --> 05:18.860
+Je veux appuyer sur le mot de passe de réinitialisation; maintenant afin de générer un mot de passe fort.
+
+42
+05:18.890 --> 05:21.450
+Vous pouvez taper ce que vous voulez.
+
+43
+05:22.700 --> 05:25.430
+S'vai servir ces règles.
+
+44
+05:26.780 --> 05:30.530
+Ce que j'aime utiliser est un site web appelé générateur de mot de passe fort.
+
+45
+05:32.910 --> 05:34.080
+Générer un mot de passe.
+
+46
+05:34.720 --> 05:40.500
+Et c'est un mot de passe fort que je peux utiliser; coller dans les deux boîtes
+
+47
+05:43.100 --> 05:57.180
+et appuyez sur sauver.
+
+48
+06:00.030 --> 06:03.360
+Vous devriez avoir SQL Server Management estúdio ouvert à partir de plus tôt.
+
+49
+06:04.330 --> 06:08.130
+Et je vais entrer dans le nom du serveur.
+
+50
+06:08.220 --> 06:08.600
+Copiar
+
+51
+06:11.850 --> 06:14.900
+modificador l'authentification des fenêtres vers l'authentification du serveur SQL.
+
+52
+06:17.580 --> 06:19.870
+Connexion devrait être l'administrateur serveur ici.
+
+53
+06:20.120 --> 06:23.120
+Ce serait différent pour votre compte.
+
+54
+06:23.160 --> 06:29.730
+Le mot de passe sera de tout ce que vous avez tapé dans ou à partir de ce site Web.
+
+55
+06:29.730 --> 06:34.390
+Le générateur de mot de passe sécurisé et la presse se connectent.
+
+56
+06:41.590 --> 06:43.300
+Nous élargissons maintenant cette pergunta.
+
+57
+06:43.340 --> 06:52.780
+Nous devrions voir la configuration de base de données avec la bibliothèque de base de données acessível.
+
+58
+06:52.840 --> 06:58.250
+Cela n'a pas de tables qui y sont associées. Mais cela est hébergé sur Azure
+
+59
+07:01.960 --> 07:03.360
+une fois que vous avez fini avec cela.
+
+60
+07:04.180 --> 07:10.750
+Et si vous ne voulez pas continuer à utiliser Azure car il ya certains coûts associés à l'utilisation
+
+61
+07:10.900 --> 07:14.730
+Microsoft Azure, vous pouvez supprimer votre base de données par la suite.
+
+62
+07:14.980 --> 07:22.970
+Cliquez sur les bases de données SQL; cliquez sur votere base de données; et appuyez sur le bouton DELETE, tapez le mot oui et supprimez.
+
+63
+07:30.280 --> 07:39.450
+Une alternativa à l'utilisation de Microsoft Azure est les services Web d'Amazon, donc si vous préférez utiliser le cloud d'Amazon
+
+64
+07:39.450 --> 07:46.530
+plate-forme ou AWS court pour Amazon Web Services, alors vous pouvez également configurer une instance serveur SQL
+
+65
+07:46.920 --> 07:49.750
+sur la plate-forme AWS.
+
+66
+07:50.940 --> 07:58.790
+Comme avant cette étape vous oblige à avoir un compte AWS actif et peut encourir des coûts.
+
+67
+07:58.790 --> 08:02.390
+Vous pouvez sauter l'étape si vous ne souhaitez pas utiliser AWS
+
+68
+08:10.840 --> 08:20.380
+une autre plate-forme cloud pour héberger les bases de données SQL Server est AWS d'Amazon ou Amazon Web Services.
+
+69
+08:20.440 --> 08:24.340
+Il s'agit d'une alternativa à Azure, mais est assez similaire à elle.
+
+70
+08:25.930 --> 08:34.480
+Donc, pour commencer à se connecter à la recherche de console de gestion AWS pour RDS qui est 
+
+71
+08:35.200 --> 08:36.040
+serviço de base de données relationnelle géré
+
+72
+08:44.520 --> 08:45.070
+Maintenant.
+
+73
+08:45.270 --> 08:46.980
+Si vous appuyez sur créer une base de données
+
+74
+08:49.690 --> 08:56.420
+vous pouvez sélectionner différents tipos de bases de données ici, mais nous allons pour le serveur Microsoft SQL
+
+75
+08:56.420 --> 09:01.010
+aller pour l'ajout express; une fois de plus pour des raisons de coût.
+
+76
+09:02.090 --> 09:03.320
+Sélectionnez le niveau gratuit
+
+77
+09:06.560 --> 09:09.340
+Je vais appeler la base de données "bibliothèque"
+
+78
+09:15.050 --> 09:20.110
+le nom d'utilisateur "admin" est très bien; pour le mot de passe principal.
+
+79
+09:20.110 --> 09:25.920
+Je vais une fois de plus aller aux mots de passe generator.net site.
+
+80
+09:25.940 --> 09:30.090
+Vous pouvez évidemment taper votre propre mot de passe ici.
+
+81
+09:30.290 --> 09:37.650
+J'ai choisi d'exclure les symboles et cette option copie le mot de passe.
+
+82
+09:39.620 --> 09:41.880
+Et c'est le mot de passe principal.
+
+83
+09:41.910 --> 09:42.630
+Confirmez-le.
+
+84
+09:45.230 --> 09:49.160
+Vous accepterez les paramètres par défaut pour tout le reste.
+
+85
+09:55.020 --> 09:56.830
+Ce cas, j'ai dû sélectionner la bibliothèque2
+
+86
+10:02.850 --> 10:11.040
+cela crée; il restera dans l'état pendente quelques minutos alors faites-vous une tasse de café et venez
+
+87
+10:11.040 --> 10:11.280
+Précédent.
+
+88
+10:15.870 --> 10:22.860
+Maintenant, notre base de données est maintenant créée, mais nous devons apporter deux changements afin de rendre cette base de données publiquement
+
+89
+10:22.860 --> 10:25.110
+Acessível.
+
+90
+10:25.110 --> 10:28.460
+Cliquez sur la base de données; cliquez sur modificador;
+
+91
+10:34.180 --> 10:35.590
+faire défiler cette página
+
+92
+10:38.480 --> 10:42.130
+jusqu'à ce que vous voyiez l'accessibilité du public.
+
+93
+10:42.140 --> 10:47.580
+Cela permet à la base de données d'être connectée à partir de l'extérieur du réseau Amazon afin que nous appuyons
+
+94
+10:47.600 --> 10:48.600
+Oui.
+
+95
+10:49.070 --> 10:55.520
+Faites défiler vers le bas de la page et appuyez sur continuer, et modificador
+
+96
+10:59.830 --> 11:06.710
+après que le statut retourne de l'état de modification à l'état disponible.
+
+97
+11:08.590 --> 11:18.580
+Nous pouvons maintenant mettre à jour la base de données afin qu'elle accepte les connexions de l'extérieur du réseau Amazon.
+
+98
+11:18.580 --> 11:21.880
+Pour ce faire, nous devons mettre à jour le pare-feu associé à la base de données
+
+99
+11:24.450 --> 11:27.410
+sécurité; Groupes de sécurité VPC.
+
+100
+11:27.450 --> 11:28.380
+Cliquez sur ce lien ici
+
+101
+11:32.510 --> 11:43.230
+sélectionnez maintenant l'onglet Entrant; maintenant vous devez modificador les règles; ajouter une règle
+
+102
+11:44.140 --> 11:44.770
+Tout le trafic
+
+103
+11:49.050 --> 11:53.530
+de ma propriété intellectuelle; appuyez sur enregistrer
+
+104
+11:58.540 --> 11:59.890
+retour à la base de données.
+
+105
+12:04.820 --> 12:15.200
+Une fois que nous avons permis l'accès du public et modifié le pare-feu pour permettre l'accès à partir de cette adresse IP, nous
+
+106
+12:15.200 --> 12:16.050
+peut maintenant s'y conector.
+
+107
+12:17.150 --> 12:19.980
+Cliquez une fois de plus sur la base de données.
+
+108
+12:20.360 --> 12:28.700
+Copiadora le point de terminaison; ouvrez votre copiar locale du studio de gestion de serveur Microsoft SQL.
+
+109
+12:28.840 --> 12:32.440
+Coller le point final dans l'adresse nom du serveur; 
+
+110
+12:32.520 --> 12:37.180
+Connectez-vous comme administrateur comme plus tôt; mot de passe était le mot de passe que nous avons choisi plus tôt.
+
+111
+12:40.930 --> 12:43.720
+Maintenant, je m'attends à un problème ici.
+
+112
+12:43.750 --> 12:47.210
+Quand j'essaie de me connecter; Je vais démontrer le problème.
+
+113
+12:49.800 --> 12:58.380
+Lorsque vous essayez de se connecter, il me donne ce mensagem plutôt horrível en disant que le certificat SSL a
+
+114
+12:58.380 --> 13:01.140
+em n'a pas fait confiance.
+
+115
+13:01.460 --> 13:03.110
+Il n'y a pas de quoi s'inquiéter.
+
+116
+13:03.680 --> 13:06.430
+Em peut faire confiance au cert SSL.
+
+117
+13:06.890 --> 13:10.340
+Vous avez juste besoin de changer une option ici.
+
+118
+13:10.430 --> 13:16.990
+Opções de presse; certificats de serveur de fiducie de presse; et cette pressione se connecter.
+
+119
+13:21.190 --> 13:24.940
+Maintenant, nous sommes connectés.
+
+120
+13:25.240 --> 13:32.470
+Nous avons un serveur de base de données sans bases de données en elle; mais comme avant, nous pouvons sélectionner une nouvelle base de données
+
+121
+13:38.830 --> 13:40.180
+et nous l'appellerons bibliothèque
+
+122
+13:58.970 --> 14:05.490
+et maintenant nous avons une base de données de bibliothèque que nous utilisons comme si elle était sur notre machine locale.
+
+123
+14:05.520 --> 14:11.960
+Mais cela est hébergé sur Amazon AWS
+
+124
+14:11.970 --> 14:16.470
+Amazon et Azure peuvent encourir des coûts.
+
+125
+14:16.620 --> 14:23.670
+Donc, si vous n'avez pas l'intention d'utiliser la base de données, je vous recommande de le supprimer par la suite.
+
+126
+14:23.880 --> 14:32.350
+Alors retournez à votre base de données; sélectionner la base de données; les ações de presse et de supprimer
+
+127
+14:37.610 --> 14:42.180
+l'instantané final n'est pas nécessaire; Je reconnais.
+
+128
+14:42.190 --> 14:53.690
+Tapez-moi supprimer dans la boîte à condição que la presse supprime sur cette base de données sera supprimée assez bientôt.

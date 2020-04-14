@@ -13,7 +13,7 @@ namespace VTT_Translate
     {
         static void Main(string[] args)
         {
-            const string language = "fr"; // french
+            const string language = "pt"; // french
             const string path = @"C:\projects\VTT-Translate\files\";
             var inputFiles = Directory.GetFiles(path);
             foreach (var inputFile in inputFiles)

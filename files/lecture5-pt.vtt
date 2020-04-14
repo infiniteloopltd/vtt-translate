@@ -1,0 +1,482 @@
+WEBVTT
+
+0
+00:00.930 --> 00:09.570
+Dados agregados; Agrupamento de dados; Consultas de dados agregados; Dados às vezes naturalmente cai em grupos onde muitos
+
+1
+00:09.570 --> 00:15.340
+as linhas podem compartilhar as mesmas características; se você mantivesse um banco de dados que incluísse detalhes das pessoas que você faria
+
+2
+00:15.340 --> 00:20.830
+ver que pontos de dados como nome e endereço pode ser razoavelmente único onde nacionalidade e gênero seria
+
+3
+00:20.830 --> 00:28.560
+ser compartilhado entre muitos indivíduos; consultas de dados agregados age sobre grupo de dados que compartilham uma característica comum
+
+4
+00:28.590 --> 00:33.830
+contagem, soma, máximo, min e estatísticas.
+
+5
+00:33.830 --> 00:38.820
+Existem muitas funções de valor escalonado que atuam sobre um grupo com um valor de retorno de 1 por grupo.
+
+6
+00:39.050 --> 00:44.930
+Estes incluem: Contagem - retornar o número de linhas em um grupo ou tabela. Soma - somar todos os valores em um grupo
+
+7
+00:44.930 --> 00:52.850
+ou tabela; Max - encontrar o valor máximo em um grupo ou tabela; Min - encontre um valor mínimo em um grupo ou tabela,
+
+8
+00:52.940 --> 00:55.840
+AVG - encontre o valor médio em um grupo por tabela.
+
+9
+00:55.980 --> 01:00.900
+STDEV - Encontrar o desvio padrão em um grupo ou tabela; demonstração de vídeo.
+
+10
+01:01.160 --> 01:05.320
+Ele demonstrará uma seleção de funções estatísticas mencionadas no slide anterior.
+
+11
+01:07.800 --> 01:13.090
+Ok aqui vamos demonstrar algumas das funções de valor escalar no servidor SQL.
+
+12
+01:13.200 --> 01:15.180
+Então vamos começar com a contagem
+
+13
+01:15.370 --> 01:16.360
+Vamos olhar nossa mesa de livros
+
+14
+01:20.710 --> 01:29.450
+e ver apenas três livros nessa tabela para que possamos usar a contagem(*) para dizer o número de linhas na tabela.
+
+15
+01:29.500 --> 01:29.800
+Três
+
+16
+01:34.300 --> 01:43.390
+podemos encontrar; usar soma() para encontrar o número total de páginas em todos os livros em nossa biblioteca.
+
+17
+01:43.450 --> 01:44.410
+soma (páginas)
+
+18
+01:48.030 --> 01:50.140
+1177
+
+19
+01:50.360 --> 01:56.230
+Você pode encontrar o número máximo de páginas em qualquer livro em nossa biblioteca.
+
+20
+01:56.240 --> 02:01.100
+438;  ou o livro mais curto de nossa biblioteca - 
+
+21
+02:01.290 --> 02:14.110
+usando Min;  326; o comprimento médio do livro em nossa biblioteca 392; ou o desvio padrão do
+
+22
+02:14.110 --> 02:15.440
+páginas em nossa biblioteca.
+
+23
+02:15.440 --> 02:16.270
+Seriam 58.
+
+24
+02:19.960 --> 02:25.720
+Grupo por é uma cláusula que separa uma tabela em grupos de dados para que funções mais valiosas possam ser
+
+25
+02:25.720 --> 02:27.910
+usado contra cada grupo de dados.
+
+26
+02:27.970 --> 02:34.630
+Por exemplo, um banco poderia usar "grupo por" para determinar o saldo bancário médio por CEP / código postal
+
+27
+02:35.260 --> 02:42.160
+selecionar cep,avg(saldo) do grupo Contas bancárias por cep
+
+28
+02:42.160 --> 02:46.840
+demonstração de vídeo.
+
+29
+02:47.170 --> 02:53.520
+Aqui vamos demonstrar o grupo por cláusula para; listar o número de livros escritos por cada autor.
+
+30
+02:53.770 --> 03:01.080
+Encontre o número de páginas escritas por cada autor, ordenadas por páginas;  
+
+31
+03:01.080 --> 03:02.030
+Aqui eu vou demonstrar o grupo por cláusula.
+
+32
+03:02.130 --> 03:07.140
+Em primeiro lugar, listar o número de livros escritos por cada autor e, em segundo lugar, listar o número de páginas
+
+33
+03:07.140 --> 03:09.380
+escrito por cada autor ordenado por páginas.
+
+34
+03:10.170 --> 03:17.190
+Então vamos agrupar o nome do autor e, em seguida, usar a contagem em primeira instância para encontrar o número
+
+35
+03:17.190 --> 03:23.220
+de livros e soma na segunda instância para somar todas as páginas.
+
+36
+03:23.340 --> 03:25.100
+Então, primeiro vamos escrever nossa consulta básica
+
+37
+03:29.280 --> 03:31.760
+selecionar * do autor; para obter nossos autores.
+
+38
+03:31.840 --> 03:41.500
+Agora precisamos nos juntar a isso na tabela de autor de livros;
+participar de BookAuthor ba em ba.authorId = a.id
+
+39
+03:46.880 --> 03:49.420
+e agrupar isso no nome do autor
+
+40
+03:53.310 --> 03:55.190
+agora antes de executar esta consulta.
+
+41
+03:55.190 --> 04:03.590
+Causará um erro a menos que você mude a estrela para uma coluna agrupada por; para demonstrar o erro.
+
+42
+04:03.610 --> 04:14.190
+Se eu tentar executar isso; diz que é inválido na lista de seleção; por isso, se eu apenas dizer nome autor, em vez
+
+43
+04:14.190 --> 04:18.130
+de Star eu recebo o nome autor.
+
+44
+04:18.750 --> 04:22.350
+Agora eu posso adicionar funções de valor escalar, como contar
+
+45
+04:26.710 --> 04:29.660
+Agora me mostra que J.K. Rowling escreveu dois livros.
+
+46
+04:30.140 --> 04:43.820
+Dhonielle escreveu um; e Sona escreveu um; então se agora quisermos resumir nossas páginas podemos mudar - 
+
+47
+04:44.060 --> 04:46.160
+Mas primeiro temos que nos juntar à mesa dos livros
+
+48
+04:51.600 --> 04:53.510
+juntar livros b em b.id = ba.bookid
+
+49
+04:53.920 --> 04:55.520
+juntar livros b em b.id = ba.bookid
+
+50
+04:55.770 --> 04:57.350
+juntar livros b em b.id = ba.bookid
+
+51
+05:00.900 --> 05:01.800
+olhar rápido para isso.
+
+52
+05:11.690 --> 05:15.280
+Então aqui temos toda a tabela desagrupada
+
+53
+05:15.450 --> 05:17.110
+Queremos nos agrupar nisso.
+
+54
+05:17.210 --> 05:20.890
+Bem para resumir na tabela de páginas e grupo pelo nome do autor
+
+55
+05:24.090 --> 05:35.280
+grupo por autorName ... soma (páginas)
+
+56
+05:35.520 --> 05:43.100
+E a última parte disso é encomendar pelas páginas que você pode digitar simplesmente; ordem por soma (páginas)
+
+57
+05:49.050 --> 05:52.900
+e essa lista agora é encomendada por páginas totais.
+
+58
+05:54.860 --> 05:57.650
+Para tornar isso mais conciso, podemos dar a esta uma coluna alias
+
+59
+06:01.900 --> 06:12.870
+e incluir o alias da coluna na ordem por; e agora temos um nome para essa coluna. 
+
+60
+06:13.020 --> 06:15.630
+Ter cláusula; É semelhante à cláusula onde a cláusula opera em grupos.
+
+61
+06:16.470 --> 06:21.930
+Então, se um banco queria listar CEP apenas onde o saldo médio da conta bancária era de mais de um milhão
+
+62
+06:21.930 --> 06:28.200
+dólares, então eles poderiam usar; selecionar cep, avg (saldo) de contas bancárias
+
+63
+06:28.860 --> 06:37.720
+grupo por CEP tendo avg (equilíbrio)>1000000
+
+64
+06:37.910 --> 06:43.210
+Aqui está uma demonstração da cláusula de ter; onde você vai mostrar autores lista que escreveram pelo menos
+
+65
+06:43.210 --> 06:45.630
+dois livros.
+
+66
+06:45.860 --> 06:52.290
+Ok aqui vamos nós para demonstrar que ter cláusula; listando autores que escreveram pelo menos dois livros.
+
+67
+06:52.400 --> 06:58.100
+Então, mais uma vez, vamos selecionar a partir da tabela de autores unidos na tabela de autores do livro e estamos
+
+68
+06:58.100 --> 07:06.730
+vai executar uma contagem em cada autor; selecione * de autores
+
+69
+07:10.800 --> 07:12.160
+participar na tabela autor bookauthor
+
+70
+07:22.330 --> 07:33.880
+agora queremos agrupar apenas o nome do autor, e incluir uma contagem
+
+71
+07:34.140 --> 07:40.320
+Agora nada pode aparecer na lista de seleção a menos que esteja no grupo por cláusula ou se é uma função escalar.
+
+72
+07:44.630 --> 07:53.210
+Inclua uma contagem.
+
+73
+07:53.320 --> 07:58.190
+Agora temos todos os autores e o número de livros que escrevi.
+
+74
+07:58.290 --> 08:02.220
+Agora você quer limitar isso a todos aqueles que estão escritos pelo menos dois livros.
+
+75
+08:02.310 --> 08:04.620
+Então eu posso dizer que ter contagem(*)>=2
+
+76
+08:13.410 --> 08:14.870
+e retorna J.K. Rowling
+
+77
+08:18.230 --> 08:23.870
+variáveis globais do sistema; Existem certas variáveis que estão disponíveis em todo o sistema no servidor SQL
+
+78
+08:24.150 --> 08:26.230
+e não dependem do contexto do banco de dados.
+
+79
+08:26.270 --> 08:32.260
+Isso inclui @@connections ao número de conexões de banco de dados para inicialização; @@identity a última identidade
+
+80
+08:32.410 --> 08:40.070
+coluna inserida; @@CPU_Busy a quantidade de milissegundos ver SQL Server usou a CPU..
+
+81
+08:40.100 --> 08:45.400
+@@Language - O idioma atualmente em uso pelo SQL Server. @@RowCount o número de linhas efetuadas pela última declaração SQL
+
+82
+08:46.070 --> 08:51.290
+@@SERVERNAME O nome do servidor SQL;  @@VERSION a versão do servidor SQL.
+
+83
+08:53.150 --> 08:58.960
+Demonstração de vídeo; Aqui vai demonstrar algumas variáveis globais do sistema para gerar um diagnóstico simples
+
+84
+08:58.960 --> 09:01.410
+relatório para outro desenvolvedor.
+
+85
+09:01.720 --> 09:08.500
+Queremos reportar a versão exata do SQL Server a um desenvolvedor e você quer verificar se há conexões excessivas
+
+86
+09:08.620 --> 09:12.150
+ou uso de CPU.
+
+87
+09:12.320 --> 09:15.790
+Ok aqui vamos demonstrar algumas variáveis globais do sistema.
+
+88
+09:16.420 --> 09:19.910
+Então queremos relatar a versão exata do servidor SQL para o desenvolvedor.
+
+89
+09:19.930 --> 09:22.350
+Então vamos estes simplesmente selecionar a versão atual
+
+90
+09:25.540 --> 09:27.740
+agora isso é truncado.
+
+91
+09:27.800 --> 09:32.850
+Então, talvez você gostaria de ver isso como texto em vez de uma grade.
+
+92
+09:32.920 --> 09:36.590
+Em caso de que podemos ir resultados para texto.
+
+93
+09:38.820 --> 09:43.510
+E essa é a nossa versão completa do servidor SQL
+
+94
+09:45.270 --> 09:52.560
+Vamos dar uma olhada. por exemplo; nosso número de conexões OK.
+
+95
+09:52.570 --> 09:54.680
+Temos duzentos e noventa e nove.
+
+96
+09:54.700 --> 09:56.100
+Isso é bastante.
+
+97
+09:56.110 --> 10:03.070
+Vamos ver o que acontece quando redefinimos o SQL Server e executamos esta consulta novamente, então vamos clicar com o botão direito do mouse
+
+98
+10:16.870 --> 10:24.330
+e vamos reprisar isso; e estamos de volta para baixo.
+
+99
+10:24.510 --> 10:25.320
+Agora acabou para você.
+
+100
+10:25.740 --> 10:27.380
+Vamos ver se você pode aplicar o que aprendeu.
+
+101
+10:28.290 --> 10:33.690
+Escreva uma consulta que mostrará quantos alunos nascemos em cada mês do ano.
+
+102
+10:34.050 --> 10:40.590
+Você pode pausar este vídeo agora e dar uma chance a esta consulta.
+
+103
+10:41.130 --> 10:41.580
+Okey.
+
+104
+10:41.590 --> 10:46.540
+Então, vamos escrever uma consulta que mostrará quantos alunos nasceram em cada mês do ano.
+
+105
+10:46.540 --> 10:51.850
+Espero que você tenha dado uma chance primeiro para ser você não pode pausar este vídeo agora e dar-lhe uma chance.
+
+106
+10:52.380 --> 10:54.160
+Ok, então aqui está a solução.
+
+107
+10:54.200 --> 11:03.250
+Queremos ver a mesa dos nossos alunos.
+
+108
+11:03.460 --> 11:12.190
+Precisamos de uma função para determinar o mês da data de nascimento que usarei mês (dataOfBirth)
+
+109
+11:17.250 --> 11:19.650
+3 para 1 º de março para janeiro.
+
+110
+11:20.990 --> 11:22.130
+Vamos dar um nome.
+
+111
+11:22.290 --> 11:25.670
+MonthOfBirth usando uma coluna Alias
+
+112
+11:31.290 --> 11:41.190
+não podemos usar um * porque queremos usar um grupo por cláusula agora. Grupo por mêsDe nascimento; então isso vai voltar
+
+113
+11:42.170 --> 11:51.950
+duas linhas um para março de janeiro janeiro março e agora queremos saber quantos alunos em cada
+
+114
+11:51.950 --> 11:54.060
+grupo que acabamos de usar.
+
+115
+11:54.230 --> 11:54.560
+Contar
+
+116
+12:02.100 --> 12:06.010
+tem um para janeiro a março.
+
+117
+12:06.080 --> 12:06.710
+Dê-nos um nome.
+
+118
+12:14.100 --> 12:15.330
+E essa é a solução.
+
+119
+12:16.160 --> 12:16.680
+Espero que você vá.

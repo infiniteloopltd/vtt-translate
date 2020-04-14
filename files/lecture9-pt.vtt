@@ -1,0 +1,1629 @@
+WEBVTT
+
+0
+00:01.380 --> 00:03.420
+Manutenção do servidor SQL.
+
+1
+00:03.540 --> 00:12.080
+Manter seus dados seguros e seguros; manter seus dados seguros; Os dados de uma organização são muitas vezes cruciais
+
+2
+00:12.110 --> 00:18.110
+às operações do dia-a-dia e, muitas vezes, podem ter sérias implicações legais se os dados forem comprometidos.
+
+3
+00:19.310 --> 00:25.160
+Portanto, é crucial que você execute o procedimento de backup regular e mantenha os backups em um local diferente
+
+4
+00:25.160 --> 00:27.380
+para o seu servidor de banco de dados.
+
+5
+00:27.380 --> 00:34.470
+Você também precisa ter certeza de que seus backups de banco de dados são otimizados e seguros. 
+
+6
+00:34.470 --> 00:36.370
+Criando um backup de um banco de dados.
+
+7
+00:36.560 --> 00:41.510
+Você pode criar um backup usando a interface do usuário ou via script SQL.
+
+8
+00:41.550 --> 00:51.950
+Biblioteca de banco de dados de backup para Disk="c:\temp\Library.bak'
+
+9
+00:54.560 --> 00:56.700
+demonstração de vídeo.
+
+10
+00:56.710 --> 01:03.480
+Aqui demonstramos como fazer backup de um banco de dados usando a interface do usuário e via SQL.
+
+11
+01:03.490 --> 01:10.120
+Aqui vamos demonstrar como fazer backup do banco de dados usando a interface do usuário e, em seguida, via SQL
+
+12
+01:10.120 --> 01:13.120
+primeiro através da interface do usuário; clique com o botão direito do mouse no banco de dados.
+
+13
+01:13.120 --> 01:20.570
+Tarefas de imprensa; pressionar backup; na primeira janela você verá o local para onde o backup irá.
+
+14
+01:21.280 --> 01:25.810
+Então, por padrão, ele estará dentro deste caminho aqui.
+
+15
+01:25.810 --> 01:33.700
+Se você quiser mudar isso, podemos remover isso; pressionar adicionar; e selecionar o local no disco; Eu vou selecionar
+
+16
+01:33.710 --> 01:41.350
+C:\temp e dar-lhe o nome de library.bak
+
+17
+01:44.710 --> 01:45.430
+Não faz mal, não faz mal.
+
+18
+01:45.900 --> 01:46.740
+OKEY.
+
+19
+01:47.270 --> 01:48.950
+OKEY.
+
+20
+01:49.310 --> 01:52.290
+Executa; pressione ok.
+
+21
+01:52.720 --> 01:57.780
+E se entrarmos nesta pasta, podemos ver que há um arquivo criado.
+
+22
+01:59.940 --> 02:05.160
+Agora vamos fazer o mesmo processo usando um comando SQL.
+
+23
+02:05.180 --> 02:17.810
+Então exclua o backup e diga: biblioteca de banco de dados de backup para disk='C:\Temp\Library.bak'
+
+24
+02:18.710 --> 02:22.370
+biblioteca de banco de dados de backup para disk='C:\Temp\Library.bak'
+
+25
+02:22.730 --> 02:23.270
+Executar
+
+26
+02:27.240 --> 02:30.700
+e podemos ver que o arquivo de backup foi criado novamente.
+
+27
+02:34.320 --> 02:40.290
+Restaurando uma base de dados; você pode restaurar um banco de dados do backup anterior usando interface de usuário
+
+28
+02:40.530 --> 02:47.730
+ou executando o script: restaurar biblioteca de banco de dados a partir de disk='C:\temp\Library.bak'
+
+29
+02:48.220 --> 02:53.620
+demonstração de vídeo.
+
+30
+02:53.620 --> 02:57.540
+Aqui vamos demonstrar como restaurar um banco de dados usando a interface do usuário, e via SQL. 
+
+31
+02:57.640 --> 03:04.990
+Agora vou demonstrar como restaurar um banco de dados usando a interface do usuário.
+
+32
+03:04.990 --> 03:07.090
+e, em seguida, via SQL
+
+33
+03:07.570 --> 03:14.360
+Então, primeiro eu vou excluir este banco de dados a fim de restaurá-lo.
+
+34
+03:14.740 --> 03:20.510
+Certifique-se de ter um backup antes de excluir seu banco de dados; Excluir.
+
+35
+03:20.630 --> 03:22.210
+Pressione OK.
+
+36
+03:22.210 --> 03:27.210
+O banco de dados agora é excluído; você quer restaurar o banco de dados.
+
+37
+03:27.370 --> 03:31.540
+Clique com o botão direito do mouse; restaurar banco de dados
+
+38
+03:34.510 --> 03:38.270
+do dispositivo; adicionar arquivo
+
+39
+03:41.300 --> 03:52.220
+ir para o local, que era c:\temp\library.bak ; OK; e pressione OK.
+
+40
+03:56.560 --> 04:02.370
+Agora veja que nosso banco de dados foi restaurado novamente.
+
+41
+04:02.410 --> 04:09.410
+Agora vamos ver se podemos fazer o mesmo procedimento usando script SQL mais uma vez.
+
+42
+04:09.540 --> 04:11.400
+Vamos excluir nosso banco de dados
+
+43
+04:14.070 --> 04:29.640
+tipo: restaurar biblioteca de banco de dados do disco = 'c:\temp\library.bak'
+
+44
+04:37.490 --> 04:41.000
+atualizar; nosso banco de dados é restaurado
+
+45
+04:44.270 --> 04:51.440
+arquivos de dados e o registro de transações; O servidor SQL armazena os dados associados ao banco de dados em um arquivo
+
+46
+04:51.440 --> 04:57.050
+com a extensão MDF e armazenará transações aplicadas aos dados em um arquivo com a extensão
+
+47
+04:57.350 --> 04:59.140
+Ldf.
+
+48
+04:59.140 --> 05:07.040
+Se o modelo de recuperação do nosso banco de dados for definido como simples, então o arquivo LDF será mantido em um tamanho mínimo, enquanto
+
+49
+05:07.190 --> 05:15.230
+se o modelo de recuperação estiver definido como completo, então o LDF pode crescer muito; volume registrado como meio termo onde
+
+50
+05:15.230 --> 05:18.800
+o LDF será moderadamente grande.
+
+51
+05:18.800 --> 05:25.460
+A ressalva é que backups simples só podem se recuperar a um ponto no tempo, enquanto backups completos podem
+
+52
+05:25.460 --> 05:33.130
+recuperar para um ponto específico no tempo e oferecer proteção contra arquivos MDF danificados. Demonstração de vídeo:
+
+53
+05:34.580 --> 05:39.530
+aqui vamos demonstrar como encolher um banco de dados e como truncar o arquivo de log, a fim de liberar
+
+54
+05:39.530 --> 05:41.530
+mais espaço.
+
+55
+05:42.500 --> 05:47.930
+Aqui vamos demonstrar como encolher um banco de dados e como truncar o arquivo de log, a fim de liberar mais espaço.
+
+56
+05:47.930 --> 06:01.890
+Então, para encolher um banco de dados; clique com o botão direito; tarefas de imprensa; encolher primeiro ir para o banco de dados.
+
+57
+06:01.940 --> 06:10.200
+E aqui temos 21% está disponível espaço livre para que possamos, neste caso, salvar 200 megabytes
+
+58
+06:10.290 --> 06:11.920
+do tamanho do banco de dados.
+
+59
+06:12.110 --> 06:12.540
+Pressione OK
+
+60
+07:02.280 --> 07:10.360
+tudo bem uma vez que está completo se você também vai usar a opção de encolher nos arquivos associados com o banco de dados
+
+61
+07:12.990 --> 07:26.550
+então, neste caso, os dados não tem nada que eu possa libertar lá; registro de imprensa eu posso liberar algum espaço de log grátis de 7 megabytes
+
+62
+07:30.840 --> 07:40.220
+OK então o próximo passo é mudar o modelo de recuperação para simples ver se podemos liberar qualquer outra coisa
+
+63
+07:40.220 --> 07:48.520
+propriedades de clique direito; opções e alterar modelo de recuperação para simples; pressione OK
+
+64
+07:52.630 --> 07:57.610
+clique com o botão direito; tarefas; encolher o banco de dados.
+
+65
+07:58.070 --> 08:10.300
+OK nada mais para encolher lá; clique com o botão direito; tarefas encolher arquivos; para encolher lá e temos um pouco
+
+66
+08:10.300 --> 08:12.580
+mais podemos liberar no arquivo de registro
+
+67
+08:15.510 --> 08:23.500
+Reindexando.  Fragmentação de índice é onde a ordem lógica das páginas em um índice não corresponde ao físico
+
+68
+08:23.500 --> 08:24.910
+ordem dos dados.
+
+69
+08:24.910 --> 08:31.990
+Isso pode levar a consultas mais lentas. Você pode reduzir a fragmentação escolhendo reconstruir ou reorganizar índices
+
+70
+08:33.400 --> 08:40.960
+A reconstrução faz uma desfragmentação completa, mas tira o índice de linha durante o processo.
+
+71
+08:41.020 --> 08:46.730
+A reorganização faz uma desfragmentação brusca, mas o índice está on-line durante o processo.
+
+72
+08:47.710 --> 08:54.700
+Demonstração de vídeo: Aqui vamos demonstrar como desfragmentar um índice usando técnicas de reorganização e reconstrução 
+
+73
+08:54.700 --> 09:03.050
+Aqui vamos demonstrar como desfragmentar um índice usando tanto a reorganização quanto
+
+74
+09:03.050 --> 09:05.530
+técnicas de reconstrução.
+
+75
+09:05.590 --> 09:08.830
+Então, primeiro vamos encontrar um índice.
+
+76
+09:08.830 --> 09:12.770
+Aqui vamos nós; idxAuthors na tabela allBooks.
+
+77
+09:12.970 --> 09:21.730
+Se clicarmos com o botão direito do mouse nas propriedades do índice e pressionarmos a fragmentação, podemos ver a fragmentação total
+
+78
+09:21.730 --> 09:26.560
+que está em 98%, o que é um nível muito ruim de fragmentação.
+
+79
+09:26.660 --> 09:34.030
+Então vamos tentar melhorar isso primeiro pela reorganização e depois pela reconstrução. 
+
+80
+09:34.170 --> 09:35.880
+Usando a reorganização, o índice permanecerá on-line.
+
+81
+09:36.040 --> 09:43.740
+E se este é um banco de dados ao vivo com consultas ao vivo chegando, então não afetará o desempenho geral.
+
+82
+09:43.750 --> 09:46.240
+Também podemos pressionar a reconstrução que fará um
+
+83
+09:46.510 --> 09:54.150
+Desfragmentação muito mais completa deste índice, mas vai tirar o índice da linha, o que pode causar problemas
+
+84
+09:54.160 --> 09:56.320
+se este é um banco de dados ao vivo.
+
+85
+09:56.320 --> 10:03.140
+Então, primeiro vamos pressionar a reorganização; pressione OK
+
+86
+10:06.040 --> 10:14.320
+clique com o botão direito; propriedades; fragmentação e agora a fragmentação total passou de 98 por cento para baixo para
+
+87
+10:14.380 --> 10:15.800
+1%.
+
+88
+10:15.940 --> 10:20.730
+Agora queremos tentar ver se podemos ficar ainda melhores do que não pressionando a reconstrução.
+
+89
+10:20.770 --> 10:23.560
+Então clique com o botão direito do mouse na reconstrução.
+
+90
+10:24.290 --> 10:25.670
+Okey.
+
+91
+10:26.380 --> 10:27.570
+Propriedades do clique direito
+
+92
+10:30.730 --> 10:31.870
+Fragmentação.
+
+93
+10:32.140 --> 10:34.250
+A fragmentação está agora em 0%.
+
+94
+10:34.330 --> 10:37.430
+Então isso é perfeitamente desfragmentado.
+
+95
+10:37.480 --> 10:43.800
+Você também pode fazer isso no script digitando 
+
+96
+10:46.210 --> 10:53.310
+alterar índice tudo em allBooks reorganizar
+
+97
+10:53.400 --> 11:06.270
+Reconstruir ou reorganizar 
+
+98
+11:06.780 --> 11:11.050
+E isso vai reorganizar todos os índices na tabela allBooks.
+
+99
+11:11.050 --> 11:15.360
+Então, por exemplo, isso deve ter uma baixa fragmentação agora.
+
+100
+11:15.400 --> 11:18.530
+Então, sim, a fragmentação é 0,38%
+
+101
+11:21.710 --> 11:27.920
+Planos de manutenção; usando o estúdio de gerenciamento de servidores SQL, você pode facilmente configurar planos de manutenção para
+
+102
+11:27.920 --> 11:34.240
+agendar automaticamente trabalhos de limpeza no banco de dados. Uma demonstração de vídeo:
+
+103
+11:34.370 --> 11:39.410
+Aqui vamos demonstrar como configurar um plano de manutenção para manter seu banco de dados de backup e índices
+
+104
+11:39.410 --> 11:40.600
+funcionando sem problemas.
+
+105
+11:42.120 --> 11:46.800
+Aqui vamos demonstrar como configurar o plano de manutenção para manter seu banco de dados backup e
+
+106
+11:46.920 --> 11:52.510
+índices funcionando sem problemas; agora com SQL Server Express.
+
+107
+11:52.510 --> 11:58.690
+Infelizmente, a instalação para executar um plano de manutenção não está disponível, então, portanto, vamos precisar instalar
+
+108
+11:58.870 --> 12:01.760
+a edição de desenvolvedor do SQL Server.
+
+109
+12:02.020 --> 12:07.400
+Este é licenciado apenas para fins de desenvolvimento e não deve ser usado como um banco de dados de produção.
+
+110
+12:07.750 --> 12:16.940
+No entanto, se formos aos downloads do Microsoft SQL Server e selecionarmos a edição do desenvolvedor; download de imprensa;
+
+111
+12:16.940 --> 12:17.020
+abrir o arquivo
+
+112
+12:21.930 --> 12:26.610
+selecionar básico; aceitar os termos de um acordo e instalar
+
+113
+12:46.130 --> 12:52.610
+Agora você deve ser capaz de se conectar ao nosso banco de dados recém-instalado.
+
+114
+13:04.010 --> 13:09.170
+Agora temos duas versões do servidor SQL instaladas em nosso computador.
+
+115
+13:09.170 --> 13:15.920
+Um deles é o SQL server express, que tem um banco de dados de biblioteca no qual você está trabalhando 
+
+116
+13:15.920 --> 13:17.090
+até este ponto
+
+117
+13:17.090 --> 13:23.210
+A segunda é a edição de desenvolvedor de servidor SQL que atualmente não possui um banco de dados de usuários.
+
+118
+13:23.270 --> 13:28.980
+Vamos selecionar um novo banco de dados e criar um novo banco de dados vazio.
+
+119
+13:29.150 --> 13:30.520
+Okey.
+
+120
+13:31.010 --> 13:37.480
+Agora temos um banco de dados vazio chamado biblioteca dentro do nó de gerenciamento da edição de desenvolvedor de servidor SQL.
+
+121
+13:37.500 --> 13:44.390
+Se você notar que há um sub nó chamado planos de manutenção e o nó equivalente de 
+
+122
+13:44.540 --> 13:45.620
+Edição expressa do SQL Server,
+
+123
+13:45.680 --> 13:52.910
+Não há nó de plano de manutenção; portanto, você deve selecionar o plano de manutenção; clique com o botão direito;
+
+124
+13:52.910 --> 13:56.490
+assistente de plano de manutenção; pressione em seguida.
+
+125
+13:56.500 --> 14:01.400
+E precisamos selecionar um cronograma para nosso plano de manutenção.
+
+126
+14:01.610 --> 14:09.170
+Então, por exemplo, queremos executá-lo todos os domingos à meia-noite.
+
+127
+14:09.170 --> 14:16.700
+Pressione em seguida; vamos dizer que queremos reorganizar nossos índices a cada semana.
+
+128
+14:16.700 --> 14:19.590
+Pressione em seguida; passado em seguida.
+
+129
+14:19.670 --> 14:33.850
+Selecione o banco de dados que deseja aplicar essas ações, como pressionar a biblioteca em seguida; em seguida, e, em seguida, em seguida, e, em seguida, Terminar.
+
+130
+14:34.020 --> 14:43.290
+Isso significa que toda semana nosso banco de dados executará um plano de manutenção que manterá nossos índices reorganizados
+
+131
+14:46.050 --> 14:49.130
+fazendo backup e restaurando arquivos brutos.
+
+132
+14:49.170 --> 14:52.670
+Você deve sempre usar o procedimento de backup e restauração descrito anteriormente.
+
+133
+14:52.680 --> 14:59.790
+Em vez de tentar mover os arquivos MDF e LDF subjacentes, mas em alguns casos isso pode ser necessário
+
+134
+14:59.790 --> 15:01.680
+Durante a operação, o servidor SQL será travado.
+
+135
+15:01.710 --> 15:05.640
+São arquivos MDF e LDF para evitar exclusão inadvertida.
+
+136
+15:05.670 --> 15:12.870
+No entanto, se você desvincular um banco de dados SQL Server removerá esse bloqueio e você poderá mover os arquivos; uma vez movido
+
+137
+15:13.050 --> 15:17.370
+você pode reanexar os arquivos MDF e LDF para ter acesso ao banco de dados novamente.
+
+138
+15:19.330 --> 15:25.660
+Demonstração de vídeo: Neste vídeo vamos demonstrar como mover os arquivos MDF e LDF subjacentes para
+
+139
+15:25.660 --> 15:29.830
+um banco de dados usando os métodos de desapego e reconexão.
+
+140
+15:29.830 --> 15:36.430
+Neste vídeo, vamos demonstrar como mover os arquivos MDF e LDF subjacentes para um banco de dados usando
+
+141
+15:36.430 --> 15:42.830
+os métodos de desapegar e reconectar; normalmente usado para fazer backup e restaurar o procedimento.
+
+142
+15:42.850 --> 15:48.160
+No entanto, em certas circunstâncias, você também pode usar este procedimento.
+
+143
+15:48.160 --> 15:55.450
+Então, neste exemplo, o que vamos fazer é copiar o banco de dados do SQL Server Express que tem
+
+144
+15:55.570 --> 16:04.810
+um banco de dados de biblioteca preenchido na edição de desenvolvedor do SQL Server, que tem um banco de dados de biblioteca vazio.
+
+145
+16:06.160 --> 16:13.980
+Então você quer ver onde estão os arquivos MDF e LDF subjacentes para este banco de dados.
+
+146
+16:13.980 --> 16:28.330
+Propriedades de imprensa; arquivos; rolar e podemos ver o caminho e o nome do arquivo; então esta é a biblioteca
+
+147
+16:28.330 --> 16:33.880
+Arquivos MDF e LDF de biblioteca para o SQL server express Edition.
+
+148
+16:35.260 --> 16:38.390
+Vamos dar uma olhada na edição do desenvolvedor.
+
+149
+16:38.800 --> 16:53.640
+Propriedades de imprensa; arquivos; caminho semelhante, mas notamos que é MSSQL.15 biblioteca MDF LDF 
+
+150
+16:53.640 --> 16:56.730
+Que é aqui; Biblioteca. Biblioteca MDF. Ldf
+
+151
+16:56.870 --> 17:06.860
+Então não precisamos do banco de dados vazio, então vamos excluir isso.
+
+152
+17:07.220 --> 17:14.210
+Agora, se você notar que se nós tentarmos copiar isso agora.
+
+153
+17:19.230 --> 17:24.640
+O Windows vai nos parar porque esses arquivos estão atualmente em uso pelo SQL Server.
+
+154
+17:25.020 --> 17:35.400
+Podemos obter sql server para desbloquear esses arquivos pressionando tarefas; desapego; Primeiro você fecha todas as janelas de consulta.
+
+155
+17:35.400 --> 17:38.040
+Mais uma vez tarefas; Desanexar
+
+156
+17:40.960 --> 17:45.760
+e agora temos destacado esse banco de dados e podemos
+
+157
+17:49.600 --> 18:04.190
+entrar na edição expressa; Copie esses arquivos e cole-os na edição do desenvolvedor.
+
+158
+18:04.250 --> 18:06.110
+Agora vamos recolocar
+
+159
+18:08.500 --> 18:08.980
+Anexar; Adicionar
+
+160
+18:12.850 --> 18:14.090
+Biblioteca.mdf
+
+161
+18:15.580 --> 18:18.140
+OKEY.
+
+162
+18:18.490 --> 18:25.880
+Na edição do desenvolvedor nós pressionamos anexo. adicionar biblioteca. MDF; pressione OK
+
+163
+18:26.240 --> 18:37.240
+Então agora temos um banco de dados de biblioteca com todas as nossas tabelas tanto na edição expressa quanto no
+
+164
+18:38.020 --> 18:38.830
+edição de desenvolvedor.
+
+165
+18:41.740 --> 18:47.620
+Exportação de dados - se você vai mover dados do seu banco de dados para um terceiro que não está executando
+
+166
+18:47.620 --> 18:52.990
+SQL servidor, então você pode exportar os dados para um formato comum que pode ser lido por todos os bancos de dados
+
+167
+18:52.990 --> 18:54.210
+Motores.
+
+168
+18:54.370 --> 18:59.550
+Um formato muito comum para a troca de dados são os valores separados por CSV ou comma.
+
+169
+18:59.560 --> 19:04.780
+Este é um formato de texto simples que pode ser lido por todos os mecanismos de banco de dados e é até bastante humano legível.
+
+170
+19:05.590 --> 19:08.430
+No entanto, ele só pode representar uma tabela por arquivo.
+
+171
+19:10.720 --> 19:17.020
+Demonstração de vídeo - Aqui vamos demonstrar como exportar uma tabela para CSV usando o servidor SQL
+
+172
+19:17.020 --> 19:19.900
+interface de estúdio de gestão.
+
+173
+19:20.220 --> 19:26.670
+Aqui vamos demonstrar como exportar uma tabela para o CSV usando o usuário do estúdio de gerenciamento de servidor SQL
+
+174
+19:26.670 --> 19:28.450
+Interface.
+
+175
+19:28.660 --> 19:36.230
+Exportar para csv é útil se você estiver compartilhando dados com terceiros que podem ou não usar o SQL Server.
+
+176
+19:36.630 --> 19:39.640
+Então vamos exportar a tabela dos alunos, por exemplo.
+
+177
+19:39.810 --> 19:46.590
+Então clique com o botão direito do mouse; tarefas; dados de exportação; Próximo.
+
+178
+19:47.990 --> 19:50.470
+A fonte de dados é seu próprio banco de dados.
+
+179
+19:50.470 --> 19:57.570
+Então, desça até o SQL Server; certifique-se de que o banco de dados é Biblioteca
+
+180
+19:57.570 --> 20:02.940
+Em seguida, e eu não posso fazer estamos exportando para arquivo plano que é CSV.
+
+181
+20:03.210 --> 20:06.140
+Colocaremos isso na pasta C:\temp.
+
+182
+20:09.290 --> 20:18.730
+Chame de estudantes. Csv
+
+183
+20:19.760 --> 20:28.700
+O qualificador de texto é o que é usado para fechar strings dentro do CSV
+
+184
+20:28.800 --> 20:38.590
+E eu recomendo que você definir isso para vírgulas invertidas; pressione em seguida; pressione em seguida;
+
+185
+20:38.590 --> 20:47.300
+Selecione a tabela que deseja exportar; definimos isso para os alunos; pressione em seguida; executar imediatamente; pressione em seguida.;
+
+186
+20:47.300 --> 20:53.800
+Acabamento; isso vai exportar três linhas de nossa tabela estudantil.
+
+187
+20:53.800 --> 21:00.010
+Agora podemos dar uma olhada em nossa pasta temporária, C:\temp
+
+188
+21:02.960 --> 21:04.990
+e podemos ver isso.
+
+189
+21:05.150 --> 21:11.840
+Student.CSV que tem esse formato muito simples; o primeiro nome e datas de nascimento.
+
+190
+21:11.900 --> 21:17.750
+Estas são as colunas da tabela de alunos e isso pode ser enviado para qualquer banco de dados ou de fato pode ser
+
+191
+21:17.750 --> 21:18.520
+aberto no Excel
+
+192
+21:21.380 --> 21:27.830
+Dados de zipping e descompactação - Backups de banco de dados tendem a comprimir bastante significativamente devido à grande quantidade
+
+193
+21:27.830 --> 21:29.030
+de informações repetidas.
+
+194
+21:30.140 --> 21:36.430
+Se o seu espaço de armazenamento precisa ser otimizado, então você pode usar um utilitário zip como 7zip
+
+195
+21:36.440 --> 21:38.220
+para compactar dados.
+
+196
+21:38.240 --> 21:40.100
+Isso pode ser automatizado via SQL.
+
+197
+21:40.250 --> 21:43.670
+Usando XP_cmdshell
+
+198
+21:44.180 --> 21:49.760
+No entanto, há implicações de segurança para isso. Demonstração de vídeo.
+
+199
+21:49.760 --> 21:56.890
+Aqui você vai demonstrar como usar XP_cmdshell e 7zip para compactar o backup do banco de dados
+
+200
+21:57.650 --> 21:59.180
+e, em seguida, como descomprimi-lo.
+
+201
+22:00.320 --> 22:07.850
+Este vídeo demonstrará como usar xp_cmdshell e 7zip para compactar um banco de dados
+
+202
+22:07.850 --> 22:16.730
+backup e, em seguida, descompactá-lo. xp_cmdshell executará comandos DOS do servidor SQL
+
+203
+22:17.000 --> 22:24.020
+que é uma ferramenta muito poderosa, mas, evidentemente, é um risco de segurança, portanto, por padrão 
+
+204
+22:24.350 --> 22:32.990
+xp_cmdshell está desativado por padrão e você precisará habilitá-lo executando o script como mostrado na tela
+
+205
+22:32.990 --> 22:38.230
+Para demonstrar o que acontece sem executar o script.
+
+206
+22:38.250 --> 22:48.420
+Vamos dar uma olhada em xp_cmdshell 'dir'; DIR listará
+
+207
+22:48.600 --> 22:54.480
+o conteúdo de um diretório; Execute isso e ele dará a mensagem de erro:
+
+208
+22:54.510 --> 22:58.120
+O SQL Server bloqueou o acesso ao procedimento.
+
+209
+22:58.120 --> 22:59.730
+Xp_cmdshell
+
+210
+22:59.730 --> 23:09.000
+Então, para habilitá-lo, executamos este script aqui que é:
+
+211
+23:09.120 --> 23:18.720
+executivo sp_configure 'mostrar opções avançadas', '1' ; Reconfigurar
+
+212
+23:18.840 --> 23:26.160
+executivo sp_configure 'xp_cmdshell', '1'
+
+213
+23:26.850 --> 23:29.790
+reconfigurar, executar.
+
+214
+23:31.000 --> 23:38.580
+Tenho confirmação de que a execução foi concluída. Nós corremos xp_cmdshell 'dir'
+
+215
+23:39.060 --> 23:48.180
+E podemos ver que a DIR funcionou e retornou a listagem do diretório; então vamos aplicar isso a algo mais útil
+
+216
+23:48.180 --> 23:50.350
+vamos usar 7Zip
+
+217
+23:50.350 --> 23:56.420
+que é uma ferramenta de zipping de linha de comando para compactar arquivos.
+
+218
+23:57.990 --> 24:10.180
+Então vá para 7zip.org e baixe a versão do 7Zip apropriado para o seu computador.
+
+219
+24:10.200 --> 24:14.310
+Observe a pasta de instalação; pressionar instalar
+
+220
+24:19.890 --> 24:26.300
+agora, o que vamos fazer é; vamos dar uma olhada na pasta temporária; temos um arquivo chamado 
+
+221
+24:26.310 --> 24:26.820
+library.bak
+
+222
+24:26.850 --> 24:37.230
+Queremos comprimir isso em um arquivo zip; então vamos voltar para o SQL Server;
+
+223
+24:38.580 --> 24:51.180
+xp_cmdshell '"c:\Arquivos do programa\7-Zip\7z" a c:\temp\Library.zip c:\temp\library.bak'
+
+224
+24:51.180 --> 24:53.220
+xp_cmdshell '"c:\Arquivos do programa\7-Zip\7z" a c:\temp\Library.zip c:\temp\library.bak'
+
+225
+24:53.690 --> 25:03.540
+xp_cmdshell '"c:\Arquivos do programa\7-Zip\7z" a c:\temp\Library.zip c:\temp\library.bak'
+
+226
+25:07.610 --> 25:08.880
+vamos executar isso.
+
+227
+25:44.040 --> 25:50.860
+uma vez completavamos, vamos dar uma olhada na pasta temporária novamente; agora temos um arquivo zip dentro deste; 
+
+228
+25:50.860 --> 25:59.740
+Você pode abrir o arquivo zip e você pode ver que há um arquivo bak dentro disso, de modo a reverter este procedimento
+
+229
+25:59.920 --> 26:11.110
+vamos excluir o arquivo bak descomprimido e reverter o procedimento; Para reverter o processo e
+
+230
+26:11.110 --> 26:22.300
+para descompactar library.zip; o que vamos fazer é; certifique-se de que o librar.bak seja removido; nós digitamos
+
+231
+26:22.380 --> 26:28.030
+xp_cmdshell '"c:\Arquivos do programa\7-Zip\7z" e c:\temp\Library.zip -oc:\temp\'
+
+232
+26:31.120 --> 26:37.990
+xp_cmdshell '"c:\Arquivos do programa\7-Zip\7z" e c:\temp\Library.zip -oc:\temp\'
+
+233
+26:38.260 --> 26:38.620
+xp_cmdshell '"c:\Arquivos do programa\7-Zip\7z" e c:\temp\Library.zip -oc:\temp\'
+
+234
+26:41.410 --> 26:42.580
+e executar isso
+
+235
+26:48.590 --> 26:52.660
+e agora podemos ver que library.bak está agora de volta nesta pasta
+
+236
+26:55.490 --> 27:02.000
+Transferir um backup fora do local - sem dúvida a parte mais importante de um procedimento de backup é ter certeza
+
+237
+27:02.000 --> 27:07.340
+que o backup não está no mesmo local que o servidor de banco de dados; se todo o servidor falhar e
+
+238
+27:07.340 --> 27:13.790
+os backups também podem ser perdidos; você poderia copiar o backup para um disco rígido de rede, mas por favor, ainda melhor
+
+239
+27:13.790 --> 27:21.920
+para transferir para um provedor de hospedagem, como o Microsoft Azure ou o Amazon Web Services. Demonstração de vídeo:
+
+240
+27:22.580 --> 27:28.520
+Aqui vamos demonstrar o procedimento de escrever um script que transfere um backup para o armazenamento blob AWS S3 e Microsoft Azure.
+
+241
+27:29.120 --> 27:37.350
+Aqui vamos demonstrar o procedimento de escrever um script que transfere
+
+242
+27:37.360 --> 27:44.210
+um backup de sua máquina local para um armazenamento aws s3 e microsoft azure blob.
+
+243
+27:44.420 --> 27:46.810
+Então vamos começar com AWS
+
+244
+27:47.900 --> 27:56.090
+Então a primeira coisa que você precisa fazer é instalar a Cli AWS que significa interface de linha de comando
+
+245
+27:57.440 --> 27:57.890
+Então
+
+246
+28:02.660 --> 28:03.910
+Começando
+
+247
+28:11.300 --> 28:12.020
+Instalar
+
+248
+28:16.070 --> 28:17.030
+Windows
+
+249
+28:21.520 --> 28:23.750
+Instale o MSI
+
+250
+28:52.530 --> 28:54.360
+Em seguida, e eu não posso fazer Aceitar.
+
+251
+28:54.400 --> 28:55.790
+Próximo.
+
+252
+28:56.030 --> 28:56.350
+Próximo
+
+253
+29:01.760 --> 29:03.140
+OKEY.
+
+254
+29:03.290 --> 29:07.280
+Agora faça login na sua conta AWS.
+
+255
+29:07.400 --> 29:12.920
+Então, eu já estou assinado; 
+
+256
+29:12.930 --> 29:27.470
+Primeiro precisamos criar um usuário para acesso; então clique nos usuários, eu selecionei iam, e então eu estou adicionando usuário para 
+
+257
+29:27.470 --> 29:32.720
+Eu vou adicionar um usuário e eu estou chamando de sqlserver
+
+258
+29:35.650 --> 29:37.210
+acesso programático
+
+259
+29:49.890 --> 29:52.610
+Vamos torná-lo adminstrator; em seguida, e, em seguida,
+
+260
+29:56.380 --> 29:59.440
+Criar.
+
+261
+29:59.960 --> 30:04.880
+Então precisa da chave de acesso e da chave de acesso secreto em um momento.
+
+262
+30:05.210 --> 30:09.890
+Então abra uma janela DOS e digite em AWS Configure
+
+263
+30:13.900 --> 30:17.580
+para que acesse o ID da chave; devemos copiar a chave de acesso
+
+264
+30:21.410 --> 30:25.250
+acessar o segredo-chave; vamos chamar cópia chaves de acesso segredo
+
+265
+30:31.360 --> 30:35.580
+e a região padrão é UE-WEST-1, o que é bom
+
+266
+30:40.460 --> 30:46.400
+agora vamos voltar aos serviços; 
+
+267
+30:49.620 --> 30:53.560
+mudar a zona para UE-WEST-1 que é a Irlanda
+
+268
+30:57.770 --> 31:08.910
+Vá para a S3, que é o armazenamento de propósito geral da Amazon, vamos criar um balde que chamaremos
+
+269
+31:10.450 --> 31:13.170
+sqlserverbackupsexemplo
+
+270
+31:26.060 --> 31:27.390
+Próximo.
+
+271
+31:27.630 --> 31:28.140
+Criar balde
+
+272
+31:34.950 --> 31:40.410
+Ok, eu não posso. então para verificar que funcionou nós executamos "aws s3 ls"
+
+273
+31:43.370 --> 31:46.220
+e isso agora mostra o balde que acabamos de criar.
+
+274
+31:46.320 --> 31:50.730
+Agora o que vamos fazer é que vamos tentar copiar um pequeno arquivo até essa pasta
+
+275
+31:50.730 --> 32:02.580
+Então vamos usar o c:\temp\students.csv que foi criado anteriormente
+
+276
+32:02.580 --> 32:02.970
+este arquivo aqui.
+
+277
+32:05.370 --> 32:09.990
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+278
+32:10.340 --> 32:17.730
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+279
+32:17.780 --> 32:19.810
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+280
+32:20.630 --> 32:26.640
+aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample
+
+281
+32:30.400 --> 32:32.550
+e isso é carregado nosso CSV
+
+282
+32:32.820 --> 32:38.420
+Se voltarmos para o balde s3 e pressionarmos a atualização veremos.
+
+283
+32:38.430 --> 32:40.990
+Students.CSV foi agora carregado para a Amazon.
+
+284
+32:42.690 --> 32:49.950
+Agora, um ponto confuso é que o SQL Server é executado sob uma conta de usuário diferente do que você normalmente
+
+285
+32:50.040 --> 32:52.670
+executar sob quando você está abrindo um prompt de comando DOS.
+
+286
+32:52.680 --> 33:03.540
+Então, se eu fosse executar "xp_cmdshell 'aws s3 ls'", que funcionou a partir de DOS agora mostrará um erro
+
+287
+33:03.540 --> 33:08.450
+mensagem dizendo que não é possível localizar credenciais você pode configurar credenciais usando aws configurar.
+
+288
+33:08.640 --> 33:13.560
+No entanto, a AWS configurá-lo requer um console interativo para que ele não vai funcionar aqui.
+
+289
+33:14.340 --> 33:22.840
+Então o que você pode fazer é copiar a configuração da sua própria conta de usuário na conta de usuário do servidor SQL.
+
+290
+33:22.990 --> 33:30.120
+Então, para encontrar a conta de usuário do servidor SQL ou especificamente onde ele está armazenado.
+
+291
+33:30.570 --> 33:38.760
+escrever XP_cmdshell 'eco %userprofile%'  
+
+292
+33:38.970 --> 33:44.730
+e isso lhe dará um caminho para o diretório inicial do servidor SQL.
+
+293
+33:45.330 --> 33:48.220
+Então vamos lá.
+
+294
+33:51.740 --> 33:59.640
+Vamos também ver nosso próprio diretório de casa de usuário; então c:\users
+
+295
+33:59.870 --> 34:02.310
+Obviamente seu nome de usuário será diferente do meu.
+
+296
+34:03.190 --> 34:09.730
+Se você ligou mostrar arquivos ocultos, então você deve ver uma pasta chamada . Aws
+
+297
+34:09.760 --> 34:17.360
+Então, se eu copiar isso da minha própria conta de usuário para a conta de usuário do servidor SQL eu deveria ter copiado o meu
+
+298
+34:17.450 --> 34:24.320
+Credenciais AWS, o que significa que agora eu posso executar este comando a partir daqui e eu posso ver o número de
+
+299
+34:24.320 --> 34:25.250
+Baldes S3.
+
+300
+34:26.240 --> 34:39.320
+Então vamos primeiro tentar fazer o upload dos alunos. CSV, por isso vamos excluir isso; vamos recarregá-lo de xp_cmdshell.
+
+301
+34:39.350 --> 34:59.260
+xp_cmdshell "aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample"
+
+302
+34:59.600 --> 35:07.070
+xp_cmdshell "aws s3 cp C:\temp\students.csv s3://sqlserverbackupsexample"
+
+303
+35:07.320 --> 35:08.580
+Vamos executar isso
+
+304
+35:12.710 --> 35:20.080
+e refrescar; mais uma vez nossos alunos. CSV já foi carregado.
+
+305
+35:20.190 --> 35:32.510
+Agora vamos executar um arquivo maior e vamos executar o backup real que é C:\temp\library.zip
+
+306
+35:32.520 --> 35:32.980
+É isso, é isso.
+
+307
+35:39.470 --> 35:41.590
+E isso vai levar algum tempo para ser concluído.
+
+308
+35:49.200 --> 35:49.770
+Okey.
+
+309
+35:49.790 --> 35:53.980
+E uma vez que isso é concluído, devemos ver que se atualizar
+
+310
+35:58.030 --> 36:08.780
+AWS S3; devemos ver a biblioteca uma vez que está presente; para fazer o mesmo procedimento usando azul o que
+
+311
+36:08.790 --> 36:13.090
+vamos precisar é o azure CLI ou interface de linha de comando.
+
+312
+36:14.590 --> 36:23.100
+Você pode obter isso pelo Googling Azure CLI; pressione para baixar um instalador MSI e clique aqui
+
+313
+36:28.520 --> 36:29.220
+pressione em seguida.
+
+314
+36:29.230 --> 36:37.530
+No meu caso eu já instalei a CLI então eu vou cancelar o processo primeira coisa que você faz quando
+
+315
+36:37.800 --> 36:45.130
+você instala cli é executar "az login"
+
+316
+36:50.080 --> 36:55.810
+isso abrirá uma tela de login no seu navegador e você pode fazer login na mesma conta que você
+
+317
+36:55.810 --> 36:59.020
+ter a sua conta azul com
+
+318
+37:01.840 --> 37:08.730
+então agora eu vou entrar no Azure e criar uma conta de armazenamento.
+
+319
+37:10.470 --> 37:16.910
+Que eu vou criar conta de armazenamento.
+
+320
+37:17.000 --> 37:24.910
+Vou criar um novo grupo de recursos que vou chamar de "backups de banco de dados"
+
+321
+37:29.820 --> 37:34.610
+e eu vou chamar isso de "banco de dadosbackupsazure"
+
+322
+37:39.820 --> 37:45.740
+selecionar o local que está perto de você; perto do seu banco de dados; e revisão de imprensa e criar
+
+323
+38:06.630 --> 38:07.960
+esperar a implantação para completar
+
+324
+38:39.430 --> 38:50.860
+pressione ir para recurso; recipientes de imprensa; adicionar um contêiner e vamos chamar este banco de dadosbackup
+
+325
+38:57.330 --> 39:00.180
+este recipiente está agora vazio.
+
+326
+39:00.240 --> 39:09.280
+Não vamos ver se podemos consultar o azure através da CLI usando a linha de comando.
+
+327
+39:15.150 --> 39:19.080
+Estou dizendo: lista de contas de armazenamento az
+
+328
+39:19.090 --> 39:28.200
+Então me dê uma lista das minhas contas de armazenamento; então espero que vejamos banco de dadosbackupsazure
+
+329
+39:28.540 --> 39:33.370
+Então, temos um banco de dadosbackupsazure em muitos dos vários
+
+330
+39:33.400 --> 39:33.940
+Elementos JSON
+
+331
+39:37.110 --> 39:41.880
+agora queremos fazer a mesma coisa através do servidor de banco de dados.
+
+332
+39:41.940 --> 39:53.580
+Então, se usarmos XP_cmdshell 'lista de contas de armazenamento az'
+
+333
+40:01.350 --> 40:06.960
+tudo bem, então esta é exatamente a mesma situação que estamos com a Cli AWS onde precisamos copiar
+
+334
+40:07.020 --> 40:13.380
+as informações de login entre a conta de usuário e a conta usada pelo SQL Server.
+
+335
+40:14.040 --> 40:15.930
+Então vamos refrescar sua memória.
+
+336
+40:15.930 --> 40:29.010
+Este é o perfil de usuário usado pelo SQL Server; por isso vamos navegar para isso; e navegar para sua própria conta de usuário
+
+337
+40:29.110 --> 40:33.020
+que é
+
+338
+40:33.250 --> 40:37.110
+c:\usuários, então seu nome
+
+339
+40:39.860 --> 40:43.310
+e você quer copiar o . Pasta azure em todo
+
+340
+40:49.510 --> 40:52.040
+e agora se executar isso novamente
+
+341
+40:56.760 --> 40:58.110
+temos o mesmo JSON.
+
+342
+40:58.110 --> 41:02.140
+Então agora temos acesso ao Azure do SQL Server.
+
+343
+41:02.940 --> 41:06.030
+Então a próxima coisa que queremos fazer é carregar um arquivo.
+
+344
+41:06.030 --> 41:11.220
+Então, vamos começar mais uma vez com o arquivo students.csv porque é muito menor
+
+345
+41:11.490 --> 41:14.040
+e é mais rápido para testes.
+
+346
+41:14.340 --> 41:24.330
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+347
+41:27.590 --> 41:28.550
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+348
+41:31.290 --> 41:32.430
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+349
+41:36.750 --> 41:46.670
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+350
+41:46.670 --> 41:50.330
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+351
+41:53.420 --> 42:00.300
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+352
+42:04.560 --> 42:08.660
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+353
+42:08.720 --> 42:10.870
+az storage blob upload ---container-name databasebackup --name students.csv --file c:\temp\students.csv --account-name databasebackupsazure
+
+354
+42:17.310 --> 42:17.830
+OKEY.
+
+355
+42:17.870 --> 42:26.780
+Então, se agora navegarmos em contas de armazenamento; contêineres; backup banco de dados devemos ver um arquivo chamado
+
+356
+42:26.930 --> 42:41.080
+Students.csv; então vamos copiar este comando de nossa janela de comando e vamos executar o mesmo comando
+
+357
+42:42.100 --> 42:50.180
+do banco de dados.
+
+358
+42:51.060 --> 42:58.200
+Obviamente para testar este para excluir o arquivo que acabamos de colocar aqui.
+
+359
+42:59.180 --> 43:00.090
+E...
+
+360
+43:00.150 --> 43:01.320
+Nós deveríamos executar isso
+
+361
+43:10.440 --> 43:11.490
+OKEY.
+
+362
+43:11.730 --> 43:20.900
+E vamos voltar para o azul; banco de dadosbackupazure; e students.csv está de volta novamente
+
+363
+43:22.110 --> 43:34.980
+Então vamos tentar com o arquivo completo; library.zip - c:\temp\library.zip
+
+364
+43:35.360 --> 43:37.250
+Então isso vai levar algum tempo para correr.
+
+365
+43:38.210 --> 43:40.330
+Então tenha paciência comigo.
+
+366
+43:44.310 --> 43:45.670
+E aí está.
+
+367
+43:45.670 --> 43:51.070
+O upload deve ser completo se voltarmos para o azul, atualizar este
+
+368
+43:55.180 --> 43:55.840
+você deveria ver.
+
+369
+43:55.840 --> 43:59.140
+Agora temos alunos.csv e uma biblioteca.zip
+
+370
+44:02.570 --> 44:06.220
+e cabe a você aplicar o que aprendeu até agora.
+
+371
+44:06.230 --> 44:08.390
+Vamos tentar fazer o seguinte usando SQL.
+
+372
+44:09.310 --> 44:17.240
+Baixe um backup fechado do armazenamento AWS S3, descompacte o backup e restaure o backup.
+
+373
+44:17.240 --> 44:21.310
+Você pode pausar este vídeo agora e dar este procedimento ir.
+
+374
+44:21.610 --> 44:24.910
+E retomá-lo uma vez que você gostaria de ver a solução.
+
+375
+44:26.330 --> 44:26.630
+OKEY.
+
+376
+44:26.660 --> 44:32.870
+Então, eu espero que você tenha dado este exemplo um ir e nós vamos passar pelos pontos necessários de download
+
+377
+44:32.870 --> 44:37.410
+fechou de volta de um AWS S3, descompactando o backup e restaurando o backup.
+
+378
+44:38.120 --> 44:44.780
+Então vamos começar com o download do AWS S3
+
+379
+44:44.790 --> 45:00.390
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+380
+45:03.310 --> 45:04.150
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+381
+45:07.120 --> 45:07.720
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+382
+45:11.820 --> 45:15.650
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+383
+45:16.360 --> 45:17.800
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+384
+45:18.660 --> 45:24.450
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+385
+45:24.810 --> 45:25.100
+xp_cmdshell 'aws s3 cp s3://sqlserverbackupsexample/Library.zip c:\temp\'
+
+386
+45:29.600 --> 45:30.920
+e podemos executar isso
+
+387
+46:01.500 --> 46:03.910
+[ruídos de fundo]
+
+388
+46:04.250 --> 46:05.380
+[ruídos de fundo]
+
+389
+46:06.650 --> 46:08.880
+[ruídos de fundo]
+
+390
+47:48.810 --> 47:58.370
+Uma vez concluído, devemos ter o arquivo baixado em nossa pasta temporária, então vamos olhar para esse C:\temp.
+
+391
+48:00.540 --> 48:01.660
+e isso está lá.
+
+392
+48:01.680 --> 48:02.380
+Muito bom.
+
+393
+48:02.820 --> 48:04.360
+Então, agora vamos descompactá-lo
+
+394
+48:04.530 --> 48:08.160
+Então é
+
+395
+48:12.250 --> 48:20.010
+xp_cmdshell '"C:\arquivos do programa\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+396
+48:24.190 --> 48:26.690
+xp_cmdshell '"C:\arquivos do programa\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+397
+48:27.660 --> 48:29.160
+xp_cmdshell '"C:\arquivos do programa\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+398
+48:30.390 --> 48:34.200
+xp_cmdshell '"C:\arquivos do programa\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+399
+48:37.080 --> 48:38.630
+xp_cmdshell '"C:\arquivos do programa\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+400
+48:40.290 --> 48:40.760
+xp_cmdshell '"C:\arquivos do programa\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+401
+48:40.810 --> 48:55.180
+xp_cmdshell '"C:\arquivos do programa\7-Zip\7z" e c:\temp\library.zip -oc:\temp\" 
+
+402
+48:56.050 --> 49:03.650
+Então, se formos para c:\temp devemos ver a biblioteca.bak ele será apenas descompactado.
+
+403
+49:04.930 --> 49:17.650
+E então, finalmente, para restaurar o banco de dados é:
+
+404
+49:17.830 --> 49:26.270
+restaurar biblioteca de banco de dados do disco = 'c:\temp\library.bak'
+
+405
+49:26.830 --> 49:35.430
+E se nós executar isso; o banco de dados está agora restaurado; Então eu espero que você tenha isso,
+
+406
+49:35.750 --> 49:37.280
+e boa sorte com a próxima lição.

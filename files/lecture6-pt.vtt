@@ -1,0 +1,1002 @@
+WEBVTT
+
+0
+00:01.390 --> 00:03.370
+Transações e gatilhos.
+
+1
+00:03.370 --> 00:04.950
+Mantendo seus dados consistentes.
+
+2
+00:06.690 --> 00:07.610
+Transações.
+
+3
+00:07.800 --> 00:13.050
+As transações são a maneira da SQL de impor uma abordagem tudo ou nada para alterar seus dados.
+
+4
+00:13.050 --> 00:18.480
+Eles oferecem uma maneira de reverter ou desfazer uma operação em caso de erro ou falha.
+
+5
+00:20.500 --> 00:26.050
+O exemplo clássico é se você fosse um banco e você está executando em transferência de dinheiro entre duas contas
+
+6
+00:26.350 --> 00:30.520
+mas há o risco de uma súbita queda de energia que quebraria seus sistemas.
+
+7
+00:30.520 --> 00:35.440
+Sabendo da sua sorte a queda de energia aconteceria apenas naquele instante entre debitar a fonte
+
+8
+00:35.440 --> 00:38.350
+conta e creditando a conta de destino.
+
+9
+00:38.470 --> 00:44.020
+Neste caso, você prefere reverter a transferência de dinheiro para que ela possa ser re-tentada em vez de
+
+10
+00:44.020 --> 00:46.080
+ter o dinheiro perdido.
+
+11
+00:46.270 --> 00:48.720
+Transações Aja como uma rede de segurança para este fim.
+
+12
+00:51.330 --> 00:53.540
+Transações implícitas.
+
+13
+00:53.540 --> 00:59.270
+Cada operação de declaração em SQL é implicitamente envolvida em uma transação.
+
+14
+00:59.270 --> 01:05.210
+Isso significa que se você executar uma grande atualização e no meio da operação o servidor caiu.
+
+15
+01:05.210 --> 01:09.380
+Uma vez que você restaurou a energia, pareceria que a atualização nunca foi executada.
+
+16
+01:09.410 --> 01:11.480
+Em vez de ver uma operação meio concluída
+
+17
+01:14.350 --> 01:20.940
+Demonstração de vídeo; Aqui adicionar uma nova linha à tabela de estante indicando um estado onde o livro é
+
+18
+01:20.940 --> 01:26.210
+retirado e não na biblioteca; ao adicionar uma linha à tabela de empréstimo do livro.
+
+19
+01:26.220 --> 01:31.530
+Também atualizaremos a tabela de livros para indicar que o livro não está mais na biblioteca.
+
+20
+01:31.650 --> 01:38.180
+Usaremos transações para proteger contra duas eventualidades; uma falha de conexão no meio da operação
+
+21
+01:39.230 --> 01:43.570
+ou um erro em que uma data inválida foi usada na instrução de inserção.
+
+22
+01:46.470 --> 01:52.320
+Ok, eu não posso. então aqui vamos demonstrar transações e sua abordagem tudo ou nada para mudar dados
+
+23
+01:52.380 --> 01:54.720
+dentro do banco de dados.
+
+24
+01:54.990 --> 02:02.040
+Vamos adicionar uma nova linha na tabela de estante indicando um estado chamado retirado que indica
+
+25
+02:02.340 --> 02:04.760
+que o livro não está mais na biblioteca.
+
+26
+02:04.830 --> 02:06.810
+Então vamos fazer isso primeiro.
+
+27
+02:06.810 --> 02:13.390
+Selecione * na estante.
+
+28
+02:13.630 --> 02:17.950
+Nós só temos uma prateleira no banco de dados no momento; então vamos adicionar um novo; 
+
+29
+02:17.950 --> 02:25.330
+inserir nos valores da Estante (Localização) ('Retirado')
+
+30
+02:31.810 --> 02:32.620
+Vamos olhar nossa estante de novo.
+
+31
+02:33.990 --> 02:40.190
+Ok, então eu tenho uma id de 7 para retirada; no seu caso -
+
+32
+02:40.360 --> 02:42.530
+Provavelmente serão dois ou diferentes.
+
+33
+02:42.530 --> 02:43.110
+Número
+
+34
+02:43.490 --> 02:45.100
+Então são sete para mim.
+
+35
+02:45.100 --> 02:48.360
+Então tenha isso em mente.
+
+36
+02:48.670 --> 02:53.230
+Agora vamos fazer nossa tabela de livros consistente com este novo estado.
+
+37
+02:53.440 --> 02:57.920
+Então, nós olhamos para nossos empréstimos pendentes.
+
+38
+02:57.920 --> 03:00.880
+Bookloan
+
+39
+03:00.910 --> 03:03.000
+Temos um empréstimo pendente para o livro id 1
+
+40
+03:03.010 --> 03:06.010
+Vamos olhar para nossa mesa de livros
+
+41
+03:13.990 --> 03:14.680
+OKEY.
+
+42
+03:14.730 --> 03:24.200
+E nós vamos atualizar o livro id 1 com a id estante 7 assim;
+
+43
+03:24.210 --> 03:31.550
+livros de atualização definir BookShelfId=7 onde id=1
+
+44
+03:32.250 --> 03:33.980
+Agora, para deixar isso um pouco mais claro.
+
+45
+03:33.980 --> 03:40.160
+Vamos fazer uma junta na mesa da estante; 
+
+46
+03:40.260 --> 03:41.550
+juntar bookShelf bs em bs.id = b.bookShelfId
+
+47
+03:42.170 --> 03:44.710
+juntar bookShelf bs em bs.id = b.bookShelfId
+
+48
+03:47.500 --> 03:53.770
+OK, então neste estado podemos ver que dos três livros em nossa biblioteca um é retirado e dois estão em
+
+49
+03:53.770 --> 03:55.000
+a prateleira ao lado da janela.
+
+50
+03:56.470 --> 04:06.210
+Então, aqui vamos demonstrar como fazer uma transação onde vamos executar um novo empréstimo que
+
+51
+04:06.210 --> 04:13.800
+envolverá duas operações; uma inserção na tabela de empréstimo do livro e dois; atualizando a tabela de livros
+
+52
+04:13.800 --> 04:15.840
+para dizer que o local está agora retirado.
+
+53
+04:16.290 --> 04:16.710
+Então
+
+54
+04:20.740 --> 04:22.590
+nós normalmente trabalhamos da seguinte forma.
+
+55
+04:22.590 --> 04:23.520
+Vamos atualizar
+
+56
+04:26.550 --> 04:36.370
+livros de atualização definir livroShelfId=7 onde id=1
+
+57
+04:37.440 --> 04:40.050
+E nós queremos;
+
+58
+04:42.840 --> 04:47.130
+inserir em bookloan ..
+
+59
+04:53.570 --> 04:56.530
+vamos olhar para a tabela bookloan por um segundo
+
+60
+04:59.800 --> 05:02.980
+inserir em bookloan (StudentId, BookId, DateWithdrawn, DateDue ) valores (
+
+61
+05:03.450 --> 05:04.650
+inserir em bookloan (StudentId, BookId, DateWithdrawn, DateDue ) valores (
+
+62
+05:06.570 --> 05:11.080
+Vamos imaginar que é a carteira de estudante 3; mesma pessoa.
+
+63
+05:11.260 --> 05:13.590
+ID do livro 2
+
+64
+05:19.120 --> 05:28.390
+data retirada 
+
+65
+05:28.850 --> 05:30.770
+e datedue de volta
+
+66
+05:33.920 --> 05:38.260
+Para realizar uma retirada seria uma questão de executar essas duas operações.
+
+67
+05:38.270 --> 05:41.050
+Atualizamos as tabelas de livros; então a id da estante é igual a dois.
+
+68
+05:41.150 --> 05:44.420
+Então inserimos na mesa de empréstimo do livro.
+
+69
+05:44.600 --> 05:53.270
+Agora, o que aconteceria nesta situação onde se fôssemos fazer algo drástico aqui; que havia
+
+70
+05:53.270 --> 06:05.430
+um corte de energia; justamente naquele momento entre a atualização e a inserção; Nesta circunstância isso significaria
+
+71
+06:05.940 --> 06:08.160
+que a tabela de livros é atualizada.
+
+72
+06:08.520 --> 06:10.620
+Assim, o livro é definido para retirada
+
+73
+06:11.160 --> 06:16.310
+No entanto, não haveria inserção de livro correspondente na tabela de empréstimo do livro.
+
+74
+06:16.560 --> 06:21.570
+Isso seria um grande problema, porque isso significa que não poderíamos mais dizer onde esse livro estava porque
+
+75
+06:22.080 --> 06:26.880
+diz que foi retirado, mas não haverá empréstimo de livro correspondente; e efetivamente que o livro seria
+
+76
+06:26.880 --> 06:27.540
+Perdido.
+
+77
+06:28.770 --> 06:30.830
+É aqui que as transações entram
+
+78
+06:33.780 --> 06:36.620
+Então você digita "iniciar transação"
+
+79
+06:43.760 --> 06:47.410
+à medida que a transação começa; e cometer transação
+
+80
+06:51.740 --> 06:53.300
+como a transação termina
+
+81
+06:57.580 --> 06:59.580
+a fim de demonstrar isso.
+
+82
+06:59.680 --> 07:06.420
+O que eu vou fazer é depois do instante do corte de energia, eu vou comentar essas duas linhas
+
+83
+07:09.980 --> 07:13.860
+para dizer que nada funciona após o corte de energia acontece.
+
+84
+07:13.880 --> 07:21.360
+O banco de dados está morto; então eu executo isso; diz que uma linha é afetada.
+
+85
+07:22.110 --> 07:26.820
+Mas vamos redefinir nosso banco de dados e ver o que acontece com a mesa de livros.
+
+86
+07:34.400 --> 07:41.180
+Então este é o nosso banco de dados efetivamente sendo desligado e ligado novamente como se fosse uma potência
+
+87
+07:41.200 --> 07:46.490
+cortar; vamos abrir uma nova consulta e vamos dar uma olhada em nossa tabela de livros
+
+88
+07:52.400 --> 07:54.660
+Desculpe no banco de dados, Biblioteca.
+
+89
+07:57.020 --> 08:02.610
+E agora, como você pode ver, mesmo que eu executei esta declaração SQL.
+
+90
+08:02.610 --> 08:06.270
+Atualizar livros definir estanteID = 7 onde ID = 2.
+
+91
+08:08.100 --> 08:13.500
+Isso não foi alterado; tão efetivamente significa que esta transação não foi cometida assim, portanto,
+
+92
+08:13.650 --> 08:15.710
+não foi realizado.
+
+93
+08:18.880 --> 08:27.050
+Agora, em uma circunstância normal onde não há corte de energia; comentaremos o indicador de corte de energia ..
+
+94
+08:27.070 --> 08:30.360
+não comentar essas duas linhas e executar esta transação novamente.
+
+95
+08:32.360 --> 08:34.160
+Duas linhas são afetadas.
+
+96
+08:34.160 --> 08:39.510
+Vamos dar uma olhada em nossa mesa de livros; a tabela de livros indica que dois livros são retirados.
+
+97
+08:40.940 --> 08:44.120
+Na tabela de empréstimo do livro indica que dois livros foram retirados.
+
+98
+08:44.150 --> 08:47.100
+Então somos perfeitamente consistentes.
+
+99
+08:47.210 --> 08:53.000
+Agora você pode estar pensando para si mesmo é muito improvável que um corte de energia aconteceria no instante
+
+100
+08:53.030 --> 09:03.250
+entre essas duas declarações. Então vamos simular uma circunstância muito mais provável onde vamos
+
+101
+09:03.250 --> 09:11.650
+dizer que há um problema com o código do usuário, portanto, alguém está tentando retirar um livro sobre
+
+102
+09:11.650 --> 09:15.660
+o 31 de fevereiro, que não é uma data.
+
+103
+09:16.200 --> 09:24.820
+Agora também mudaremos o ID do livro para Book ID 3 para fins de demonstração.
+
+104
+09:24.820 --> 09:31.320
+ID do livro 3;  Selecione * dos livros
+
+105
+09:34.840 --> 09:36.440
+É o Livro ID 3.
+
+106
+09:36.520 --> 09:36.790
+OKEY.
+
+107
+09:36.820 --> 09:41.330
+Então, nesta circunstância, vamos executar a transação.
+
+108
+09:41.360 --> 09:48.400
+Agora tenha em mente que sem esta transação esta declaração seria executada;
+
+109
+09:48.420 --> 09:52.150
+livros de atualização definir BookShelfId=6 onde Id=3
+
+110
+09:52.250 --> 10:00.320
+Isso retiraria o terceiro livro no entanto, a inserção em para reservar tabela de empréstimo iria falhar porque há
+
+111
+10:00.320 --> 10:02.430
+não é data de 31 de fevereiro.
+
+112
+10:02.750 --> 10:08.990
+Portanto, esta afirmação fracassaria; deixando o banco de dados em um estado inconsistente, porque os livros
+
+113
+10:08.990 --> 10:13.460
+tabela diria que o livro foi retirado, enquanto o bookloan diria o contrário.
+
+114
+10:14.440 --> 10:16.200
+No entanto, dentro de uma transação.
+
+115
+10:16.250 --> 10:19.170
+Vamos ver o que acontece. Executar.
+
+116
+10:20.020 --> 10:26.380
+Então, como esperado, há uma mensagem de erro aqui dizendo que a conversão falhou ao converter data e ou hora
+
+117
+10:26.410 --> 10:28.150
+da seqüência de caracteres.
+
+118
+10:28.180 --> 10:34.900
+Isso é como esperado; 31 de Fevereiro não existe, portanto, basta deixar de inserir.
+
+119
+10:35.020 --> 10:40.030
+No entanto, o mais importante aqui é que a tabela de livros não foi atualizada.
+
+120
+10:40.730 --> 10:46.860
+Nós executamos isso e podemos ver que o local ainda está definido para 1.
+
+121
+10:46.870 --> 10:51.090
+É assim que as transações mantêm seu banco de dados em um estado consistente.
+
+122
+10:53.190 --> 11:00.270
+Gatilhos; gatilhos são instruções SQL que serão executadas em resposta a mudanças de dados que podem ser
+
+123
+11:00.270 --> 11:06.510
+usado para garantir que uma mudança em uma tabela desencadeia uma mudança em outros gatilhos de tabela pode ser executado
+
+124
+11:06.510 --> 11:09.810
+em resposta a inserir instruções de atualização ou exclusão
+
+125
+11:12.450 --> 11:13.970
+demonstração de vídeo.
+
+126
+11:14.400 --> 11:20.070
+Aqui segue uma demonstração onde criaremos uma tabela chamada bookchanges que registrará atualizações
+
+127
+11:20.070 --> 11:28.110
+para a mesa de livros através do uso de gatilhos. Um gatilho de inserção para gravar novos livros sendo adicionados à biblioteca
+
+128
+11:28.920 --> 11:35.910
+um gatilho de atualização para registrar alterações em livros existentes e um gatilho de exclusão para gravar livros sendo removidos
+
+129
+11:35.910 --> 11:36.570
+da biblioteca.
+
+130
+11:39.440 --> 11:46.660
+Aqui vamos demonstrar gatilhos; onde vamos criar uma tabela chamada bookchanges e
+
+131
+11:46.700 --> 11:55.480
+esta tabela registrará atualizações na tabela do livro através do uso de gatilhos; então vamos primeiro criar o
+
+132
+11:55.480 --> 12:00.760
+tabela de mudanças de livros.
+
+133
+12:04.160 --> 12:14.270
+criar tabela BookChanges (identidade int (1,1) não nula,
+
+134
+12:14.290 --> 12:22.340
+Isso também registrará o ID do livro, que será um int , O tipo de alteração que será varchar(max)
+
+135
+12:23.900 --> 12:28.050
+e também tomará uma nota da data e hora.
+
+136
+12:28.120 --> 12:30.730
+Isso realmente aconteceu; então vamos chamá-lo de dataOcorreu
+
+137
+12:34.100 --> 12:40.400
+Podemos, é claro, incluir a data em cada inserção nesta tabela bookChanges, mas aqui está um atalho
+
+138
+12:40.580 --> 12:44.050
+onde podemos digitar: datade data de data padrão getdate()
+
+139
+12:44.050 --> 12:50.530
+isso significa que se uma data ocorreu não for fornecida na instrução de inserção.
+
+140
+12:50.530 --> 12:55.500
+A data de vencimento do valor padrão() que é a data e a hora atuais serão inseridas.
+
+141
+12:55.990 --> 12:59.560
+Então criaremos a tabela de trocas de livros.
+
+142
+13:01.040 --> 13:04.580
+Vamos dar uma olhada na tabela de trocas de livros; que estará atualmente vazio.
+
+143
+13:10.100 --> 13:11.630
+Vazio.
+
+144
+13:11.660 --> 13:15.620
+Agora vamos criar um gatilho; criar gatilho
+
+145
+13:18.960 --> 13:22.740
+e agora usaremos o nome para o gatilho.
+
+146
+13:22.860 --> 13:25.860
+Então chame de trgBookInsert
+
+147
+13:26.250 --> 13:26.850
+Então chame de trgBookInsert
+
+148
+13:30.660 --> 13:49.740
+em Livros após inserir como
+
+149
+13:49.910 --> 13:52.480
+inserir em BookChanges (BookId, ChangeType) 
+
+150
+13:56.130 --> 14:05.080
+agora, mas eu não tenho este gatilho terá acesso a uma tabela virtual chamada inserida que será a inserção a partir do
+
+151
+14:05.080 --> 14:06.880
+declaração anterior.
+
+152
+14:07.280 --> 14:08.850
+Que caso eu posso usar.
+
+153
+14:08.920 --> 14:21.260
+selecionar id, 'Inserido' de INSERTED
+
+154
+14:21.740 --> 14:24.190
+Agora posso criar este gatilho da seguinte forma.
+
+155
+14:28.190 --> 14:36.150
+Agora, se tentarmos inserir na tabela de livros, então este gatilho será acionado.
+
+156
+14:36.510 --> 14:37.950
+Então vamos dar uma olhada na nossa mesa de livros.
+
+157
+14:45.240 --> 14:48.560
+Certo, vamos adicionar outro livro do Harry Potter.
+
+158
+14:51.780 --> 14:59.940
+inserir em Livros (Nome do livro, páginas, bookshelfId) valores ('
+
+159
+15:01.310 --> 15:10.210
+'Harry Potter à Pedra Filosofal'
+
+160
+15:18.760 --> 15:25.090
+Para passar um apóstrofo, eu tive que passar por um apóstrofo duplo, é assim que você escapa apóstrofes no SQL Server
+
+161
+15:26.150 --> 15:31.320
+Eu acho que há algo como 607 páginas, id estante 1
+
+162
+15:35.490 --> 15:41.690
+Eu insiro na tabela de livros e noto que as duas linhas foram agora inseridas.
+
+163
+15:42.540 --> 15:45.200
+Então vamos dar uma olhada na nossa mesa de livros.
+
+164
+15:45.250 --> 15:47.010
+Vemos a Pedra Filosofal.
+
+165
+15:48.760 --> 15:50.920
+Vamos também dar uma olhada na tabela de trocas de livros.
+
+166
+15:55.530 --> 16:02.250
+SELECIONE * a partir de alterações de livros; e podemos ver que o livro ID 7 foi inserido neste momento.
+
+167
+16:03.660 --> 16:04.000
+OKEY.
+
+168
+16:06.250 --> 16:12.510
+Então isso é um gatilho de inserção.
+
+169
+16:12.580 --> 16:21.670
+Assim, o próximo passo é demonstrar um gatilho de exclusão; onde vamos registrar a ação de um livro sendo excluído.
+
+170
+16:21.670 --> 16:25.240
+Vamos olhar nossa mesa de livros de novo.
+
+171
+16:25.550 --> 16:28.960
+Vamos imaginar que queremos apagar o livro número 7.
+
+172
+16:30.500 --> 16:32.270
+Então é você criando um gatilho.
+
+173
+16:32.330 --> 16:45.120
+Então vamos copiar este gatilho; então nós mudamos;  chamaremos o gatilho de um trgBookDelete após excluir
+
+174
+16:45.120 --> 16:45.870
+O estado será excluído.
+
+175
+16:49.370 --> 16:51.260
+E a tabela virtual é chamada de excluída
+
+176
+16:54.370 --> 17:01.440
+de modo que crie esse gatilho; agora olhe para a nossa mesa de livros novamente.
+
+177
+17:01.940 --> 17:03.880
+E vamos apagar este livro.
+
+178
+17:03.930 --> 17:04.650
+Excluir de livros onde id=7
+
+179
+17:07.420 --> 17:08.710
+Excluir de livros onde id=7
+
+180
+17:09.570 --> 17:18.640
+Nós executamos esta declaração, e podemos ver que as duas linhas foram afetadas.
+
+181
+17:18.680 --> 17:25.670
+Uma linha sendo o livro sendo excluído e a segunda linha sendo a linha sendo inserida nas alterações de livros
+
+182
+17:25.670 --> 17:26.680
+Tabela.
+
+183
+17:26.810 --> 17:30.920
+Vamos dar uma olhada na nossa tabela de trocas de livros. Selecione * a partir de alterações de livros
+
+184
+17:34.390 --> 17:39.310
+e agora podemos ver que o Livro ID 7 foi agora excluído neste momento
+
+185
+17:42.840 --> 17:47.250
+o terceiro e último tipo de gatilho é o gatilho atualizado.
+
+186
+17:47.370 --> 17:51.840
+Isso será disparado quando uma linha for atualizada.
+
+187
+17:51.840 --> 17:54.240
+Então vamos demonstrar isso mais uma vez.
+
+188
+17:54.340 --> 18:07.620
+por isso vamos copiar este código e vamos chamá-lo 
+trgBookUpdate on Books após a atualização; o tipo de mudança vai
+
+189
+18:07.620 --> 18:19.230
+ser "atualizar" e a tabela virtual será inserida; vamos criar este gatilho.
+
+190
+18:19.490 --> 18:21.800
+Agora vamos dar uma olhada na nossa mesa de livros novamente.
+
+191
+18:26.680 --> 18:33.880
+Agora vamos imaginar que queremos mudar o número de página de pequenas coisas bonitas para 437 em vez de 
+
+192
+18:33.950 --> 18:34.720
+438
+
+193
+18:35.860 --> 18:47.950
+Então, eu não posso fazer isso. atualizar livros definir páginas=437 onde ID=3 ; e executar a declaração; duas linhas são afetadas
+
+194
+18:48.240 --> 18:54.460
+um deles é a atualização na tabela de livros e um sendo a inserção na tabela de mudanças do livro.
+
+195
+18:54.480 --> 18:56.320
+Vamos dar uma olhada em nossa tabela de troca de livros agora.
+
+196
+19:02.010 --> 19:07.960
+lá vamos nós, mas eu não posso fazer isso. Agora temos uma terceira linha na tabela de mudanças indicando que um livro foi atualizado
+
+197
+19:11.330 --> 19:20.920
+"em vez de" gatilhos;  os gatilhos podem operar de duas maneiras "depois" ou "em vez de";  "depois" permite a declaração
+
+198
+19:20.920 --> 19:28.560
+para executar e, em seguida, executar o gatilho; "em vez de" impede que a declaração execute, mas executa o gatilho 
+
+199
+19:28.560 --> 19:37.400
+demonstração de vídeo;  Aqui vamos demonstrar um gatilho "em vez de".
+
+200
+19:37.400 --> 19:42.680
+Usaremos um gatilho de exclusão "em vez de" para evitar que as linhas sejam excluídas da tabela bookChanges
+
+201
+19:43.200 --> 19:46.190
+e exibir um aviso em vez disso.
+
+202
+19:46.970 --> 19:53.270
+Ok aqui vamos demonstrar e em vez de excluir gatilho que impedirá que as linhas sejam excluídas
+
+203
+19:53.270 --> 19:56.030
+da tabela de alterações de livros e exibir um aviso em vez disso.
+
+204
+19:56.660 --> 19:59.360
+Então vamos criar um gatilho.
+
+205
+19:59.740 --> 20:06.200
+Criar trigger trgPreventDelete no livroAlterações
+
+206
+20:09.060 --> 20:09.940
+Criar trigger trgPreventDelete no livroAlterações
+
+207
+20:13.050 --> 20:24.080
+Em vez de excluir como;  neste caso, eu só vou imprimir um aviso e não tomar mais nenhuma ação.
+
+208
+20:24.200 --> 20:27.560
+Então eu poderia usar; 
+
+209
+20:28.050 --> 20:28.400
+imprimir 'Aviso: você não está autorizado a excluir da tabela de alterações do livro'
+
+210
+20:31.250 --> 20:41.550
+esta mensagem de impressão em particular só será visível
+
+211
+20:41.550 --> 20:43.710
+para direcionar os usuários do banco de dados.
+
+212
+20:46.460 --> 20:49.140
+Então esse é o nosso gatilho criado.
+
+213
+20:49.140 --> 20:51.480
+Então vamos dar uma olhada na tabela de trocas de livros.
+
+214
+21:00.360 --> 21:00.780
+OKEY.
+
+215
+21:00.880 --> 21:02.440
+Temos três filas.
+
+216
+21:02.650 --> 21:10.810
+Agora vamos tentar apagar; excluir das alterações do livro onde id = 1.
+
+217
+21:14.410 --> 21:19.030
+Agora vemos um aviso dizendo que você não está autorizado a excluir da tabela de alterações do livro.
+
+218
+21:19.960 --> 21:21.660
+Vamos ver sua tabela de mudanças de livros.
+
+219
+21:27.170 --> 21:29.220
+Todas as três linhas ainda estão lá.
+
+220
+21:29.220 --> 21:35.480
+O mesmo se aplica para excluir tudo na tabela ainda diz um aviso.
+
+221
+21:35.720 --> 21:37.280
+As filas ainda estão lá.
+
+222
+21:37.280 --> 21:39.320
+Então isso é um gatilho em vez de.
+
+223
+21:39.380 --> 21:46.160
+Então isso significa que o gatilho funcionou em vez da declaração depois que um gatilho aconteceria após a declaração ser executada.
+
+224
+21:46.160 --> 21:50.730
+E agora acabou para você.
+
+225
+21:50.880 --> 21:56.690
+Seu objetivo é criar um gatilho que impeça os usuários de atualizar a tabela de alterações do livro.
+
+226
+21:57.450 --> 21:59.360
+Então você pode postar este vídeo sobre ela.
+
+227
+21:59.730 --> 22:01.980
+Dê uma chance e retome o vídeo.
+
+228
+22:01.980 --> 22:03.510
+Uma vez que você tenha tentado este exercício
+
+229
+22:06.550 --> 22:06.970
+OKEY.
+
+230
+22:06.990 --> 22:09.670
+Espero que tenha dado uma chance a este exercício.
+
+231
+22:09.730 --> 22:14.050
+Se você ainda não fez pesquisas este vídeo agora e retomá-lo quando você experimentá-lo.
+
+232
+22:15.840 --> 22:22.140
+Assim, nosso objetivo é criar um gatilho que impeça o usuário de atualizar a tabela de alterações do livro; no anterior
+
+233
+22:22.740 --> 22:29.550
+demonstração demonstramos como evitar exclusões, mas é claro que era possível para alguém atualizar
+
+234
+22:29.580 --> 22:36.230
+a tabela e alterar o tipo de alteração ou a data em que aconteceu ou assim por diante.
+
+235
+22:36.230 --> 22:38.260
+Então, vamos criar outro gatilho.
+
+236
+22:38.360 --> 22:44.090
+Então, chame-o; criar trigger trgPreventUpdate 
+
+237
+22:46.670 --> 22:50.730
+em bookChanges
+
+238
+22:50.840 --> 22:51.220
+Apenas.
+
+239
+22:54.480 --> 23:09.850
+em vez de atualizar como impressão "aviso de que você não está autorizado a tomar a tabela de alterações do livro."
+
+240
+23:09.990 --> 23:13.940
+Vamos criar esse gatilho.
+
+241
+23:15.610 --> 23:17.580
+Vamos olhar para nossa tabela de mudanças
+
+242
+23:22.280 --> 23:22.620
+Nwo.
+
+243
+23:22.990 --> 23:33.110
+Vamos tentar modificar o tipo de alteração assim; 
+
+244
+23:33.490 --> 23:42.300
+livro de atualizaçãoAltera set ChangeType = 'qualquer coisa' onde ID = 1
+
+245
+23:43.390 --> 23:44.130
+Eu dirijo isso.
+
+246
+23:45.400 --> 23:46.540
+Me deu um aviso.
+
+247
+23:46.540 --> 23:52.030
+Você não está autorizado a atualizar tabela de alterações de livros e se eu olhar para a tabela de alterações do livro minha atualização tem
+
+248
+23:52.030 --> 23:52.750
+não foi executado.
+
+249
+23:53.380 --> 23:56.860
+Então isso é assim para resolver esse pequeno problema e espero que você tenha resolvido.

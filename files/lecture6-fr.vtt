@@ -1,0 +1,1002 @@
+WEBVTT
+
+0
+00:01.390 --> 00:03.370
+Transactions et déclencheurs.
+
+1
+00:03.370 --> 00:04.950
+Maintenir vos données cohérentes.
+
+2
+00:06.690 --> 00:07.610
+Transactions.
+
+3
+00:07.800 --> 00:13.050
+Les transactions sont la façon de SQL d’appliquer une approche tout ou rien pour modifier vos données.
+
+4
+00:13.050 --> 00:18.480
+Ils offrent un moyen de faire reculer ou de défaire une opération en cas d’erreur ou de défaillance.
+
+5
+00:20.500 --> 00:26.050
+L’exemple classique est que si vous étiez une banque et que vous exécutez en transfert d’argent entre deux comptes
+
+6
+00:26.350 --> 00:30.520
+mais il y a le risque d’une panne soudaine de courant qui écraserait vos systèmes.
+
+7
+00:30.520 --> 00:35.440
+Connaître votre chance la panne de courant se produirait juste à cet instant entre le débit de la source
+
+8
+00:35.440 --> 00:38.350
+compte et créditant le compte de destination.
+
+9
+00:38.470 --> 00:44.020
+Dans ce cas, vous préférez annuler le transfert d’argent afin qu’il puisse être tenté à nouveau plutôt que
+
+10
+00:44.020 --> 00:46.080
+avoir l’argent perdu.
+
+11
+00:46.270 --> 00:48.720
+Les transactions agissent comme un filet de sécurité à cette fin.
+
+12
+00:51.330 --> 00:53.540
+Transactions implicites.
+
+13
+00:53.540 --> 00:59.270
+Chaque opération de déclaration dans SQL est implicitement enveloppée dans une transaction.
+
+14
+00:59.270 --> 01:05.210
+Cela signifie que si vous devait exécuter une grande mise à jour et à mi-chemin à travers l’opération le serveur s’est écrasé.
+
+15
+01:05.210 --> 01:09.380
+Une fois que vous avez rétabli l’alimentation, il semblerait que la mise à jour n’a jamais été exécuté du tout.
+
+16
+01:09.410 --> 01:11.480
+Plutôt que de voir une opération à moitié terminée
+
+17
+01:14.350 --> 01:20.940
+Démonstration vidéo; Ici ajouter une nouvelle ligne à la table de bibliothèque indiquant un état où le livre est
+
+18
+01:20.940 --> 01:26.210
+retirés et non dans la bibliothèque; lors de l’ajout d’une rangée à la table de prêt de livre.
+
+19
+01:26.220 --> 01:31.530
+Nous mettrons également à jour la table des livres pour indiquer que le livre n’est plus dans la bibliothèque.
+
+20
+01:31.650 --> 01:38.180
+Nous utiliserons les transactions pour nous protéger contre deux éventualités; une défaillance de connexion à mi-opération
+
+21
+01:39.230 --> 01:43.570
+ou une erreur lorsqu’une date invalide a été utilisée dans l’instruction d’insertion.
+
+22
+01:46.470 --> 01:52.320
+OK; donc ici, nous allons démontrer les transactions et leur approche tout ou rien à changer les données
+
+23
+01:52.380 --> 01:54.720
+dans la base de données.
+
+24
+01:54.990 --> 02:02.040
+Nous allons ajouter une nouvelle ligne dans la table de bibliothèque indiquant un état appelé retiré qui indique
+
+25
+02:02.340 --> 02:04.760
+que le livre n’est plus dans la bibliothèque.
+
+26
+02:04.830 --> 02:06.810
+Faisons-le d’abord.
+
+27
+02:06.810 --> 02:13.390
+Sélectionnez à partir de l’étagère.
+
+28
+02:13.630 --> 02:17.950
+Nous n’avons qu’une seule étagère dans la base de données pour le moment; donc nous allons ajouter un nouveau; 
+
+29
+02:17.950 --> 02:25.330
+insérer dans les valeurs BookShelf (Location) ('Retrait')
+
+30
+02:31.810 --> 02:32.620
+Regardons notre étagère à nouveau.
+
+31
+02:33.990 --> 02:40.190
+Bon donc j’ai une pièce d’identité de 7 pour retiré; dans votre cas -
+
+32
+02:40.360 --> 02:42.530
+Ce sera sûr ement deux ou un autre.
+
+33
+02:42.530 --> 02:43.110
+Nombre
+
+34
+02:43.490 --> 02:45.100
+Donc c’est sept pour moi.
+
+35
+02:45.100 --> 02:48.360
+Alors gardez cela à l’esprit.
+
+36
+02:48.670 --> 02:53.230
+Maintenant, nous allons ensuite faire notre table de livres compatible avec ce nouvel état.
+
+37
+02:53.440 --> 02:57.920
+Nous examinons donc nos prêts en cours.
+
+38
+02:57.920 --> 03:00.880
+Bookloan (en)
+
+39
+03:00.910 --> 03:03.000
+Nous avons un prêt en cours pour le livre id 1
+
+40
+03:03.010 --> 03:06.010
+Regardons notre table de livres
+
+41
+03:13.990 --> 03:14.680
+d'accord.
+
+42
+03:14.730 --> 03:24.200
+Et nous allons mettre à jour le livre id 1 avec étagère id 7 donc;
+
+43
+03:24.210 --> 03:31.550
+mettre à jour les livres set BookShelfId-7 où id-1
+
+44
+03:32.250 --> 03:33.980
+Maintenant, pour rendre cela un peu plus clair.
+
+45
+03:33.980 --> 03:40.160
+Nous allons faire une adhésion sur la table de l’étagère; 
+
+46
+03:40.260 --> 03:41.550
+joignez-vous au livreShelf bs sur bs.id -b.bookShelfId
+
+47
+03:42.170 --> 03:44.710
+joignez-vous au livreShelf bs sur bs.id -b.bookShelfId
+
+48
+03:47.500 --> 03:53.770
+OK donc dans cet état, nous pouvons voir que des trois livres dans notre bibliothèque un est retiré et deux sont sur
+
+49
+03:53.770 --> 03:55.000
+l’étagère à côté de la fenêtre.
+
+50
+03:56.470 --> 04:06.210
+Donc, ici, nous allons démontrer comment faire une transaction où nous allons exécuter un nouveau prêt qui
+
+51
+04:06.210 --> 04:13.800
+impliquera deux opérations; un insertion dans la table de prêt de livre et deux ; mise à jour de la table des livres
+
+52
+04:13.800 --> 04:15.840
+pour dire que l’emplacement est maintenant retiré.
+
+53
+04:16.290 --> 04:16.710
+ainsi
+
+54
+04:20.740 --> 04:22.590
+nous travaillons généralement comme suit.
+
+55
+04:22.590 --> 04:23.520
+Nous allons mettre à jour
+
+56
+04:26.550 --> 04:36.370
+mettre à jour les livres ensemble de livresShelfId-7 où id 1
+
+57
+04:37.440 --> 04:40.050
+Et nous voulons;
+
+58
+04:42.840 --> 04:47.130
+insérer dans bookloan ..
+
+59
+04:53.570 --> 04:56.530
+regardons la table de bookloan pour une seconde
+
+60
+04:59.800 --> 05:02.980
+insérer dans bookloan (StudentId, BookId, DateWithdrawn, DateDue ) valeurs (
+
+61
+05:03.450 --> 05:04.650
+insérer dans bookloan (StudentId, BookId, DateWithdrawn, DateDue ) valeurs (
+
+62
+05:06.570 --> 05:11.080
+Imaginons que c’est l’étudiant I.D. 3; même personne.
+
+63
+05:11.260 --> 05:13.590
+Livre ID 2
+
+64
+05:19.120 --> 05:28.390
+date retirée 
+
+65
+05:28.850 --> 05:30.770
+et datedue retour
+
+66
+05:33.920 --> 05:38.260
+Pour effectuer un retrait, il s’agirait de l’exécution de ces deux opérations.
+
+67
+05:38.270 --> 05:41.050
+Nous mettons à jour les tableaux de livres; donc l’id de bibliothèque équivaut à deux.
+
+68
+05:41.150 --> 05:44.420
+Ensuite, nous insérons dans la table de prêt de livre.
+
+69
+05:44.600 --> 05:53.270
+Maintenant, ce qui se passerait dans cette situation où si nous devions faire quelque chose de drastique ici; qu’il y avait
+
+70
+05:53.270 --> 06:05.430
+une coupure de courant; juste à ce moment entre la mise à jour et l’encart; Dans ces circonstances, cela signifierait
+
+71
+06:05.940 --> 06:08.160
+que la table des livres est mise à jour.
+
+72
+06:08.520 --> 06:10.620
+Donc, le livre se prépare à retirer
+
+73
+06:11.160 --> 06:16.310
+Cependant, il n’y aurait pas d’encart de livre correspondant dans la table de prêt de livre.
+
+74
+06:16.560 --> 06:21.570
+Ce serait un gros problème parce que cela signifie que nous ne pouvions plus dire où ce livre était parce que
+
+75
+06:22.080 --> 06:26.880
+il dit qu’il est retiré, mais il n’y aura pas de prêt de livres correspondants; et effectivement ce livre serait
+
+76
+06:26.880 --> 06:27.540
+Perdu.
+
+77
+06:28.770 --> 06:30.830
+C’est là que les transactions entrent en
+
+78
+06:33.780 --> 06:36.620
+Donc, vous tapez "commencer la transaction"
+
+79
+06:43.760 --> 06:47.410
+au début de la transaction; et engager la transaction
+
+80
+06:51.740 --> 06:53.300
+à la fin de la transaction
+
+81
+06:57.580 --> 06:59.580
+afin de le démontrer.
+
+82
+06:59.680 --> 07:06.420
+Ce que je vais faire, c’est après l’instant de la coupure de courant, je vais commenter ces deux lignes
+
+83
+07:09.980 --> 07:13.860
+de dire que rien ne fonctionne après la coupure de courant se produit.
+
+84
+07:13.880 --> 07:21.360
+La base de données est morte; alors je l’exécute; il dit qu’une rangée est affectée.
+
+85
+07:22.110 --> 07:26.820
+Mais réinitialisons notre base de données et voyons ce qui se passe avec la table des livres.
+
+86
+07:34.400 --> 07:41.180
+Donc, c’est notre base de données effectivement éteint et remis en marche comme si c’était une puissance
+
+87
+07:41.200 --> 07:46.490
+couper; nous allons ouvrir une nouvelle requête et nous allons jeter un oeil à notre table de livre
+
+88
+07:52.400 --> 07:54.660
+désolé dans la base de données, Bibliothèque.
+
+89
+07:57.020 --> 08:02.610
+Et maintenant, comme vous pouvez le voir, même si j’ai exécuté cette déclaration SQL.
+
+90
+08:02.610 --> 08:06.270
+Mettre à jour les livres ensemble étagères 7 où ID 2.
+
+91
+08:08.100 --> 08:13.500
+Cela n’a pas été modifié; signifie si efficacement que cette transaction n’a pas été commise, donc
+
+92
+08:13.650 --> 08:15.710
+il n’a pas été effectué.
+
+93
+08:18.880 --> 08:27.050
+Maintenant, dans une situation normale où il n’y a pas de coupure de courant; nous allons commenter l’indicateur de coupure de courant ..
+
+94
+08:27.070 --> 08:30.360
+désengagement de ces deux lignes et exécuter cette transaction à nouveau.
+
+95
+08:32.360 --> 08:34.160
+Deux rangées sont touchées.
+
+96
+08:34.160 --> 08:39.510
+Jetons un coup d’œil à notre table de livres; la table des livres indique que deux livres sont retirés.
+
+97
+08:40.940 --> 08:44.120
+Sur la table de prêt de livre indique que deux livres sont retirés.
+
+98
+08:44.150 --> 08:47.100
+Nous sommes donc parfaitement cohérents.
+
+99
+08:47.210 --> 08:53.000
+Maintenant, vous pensez peut-être à vous-même il est très peu probable qu’une coupure de courant se produise dans l’instant
+
+100
+08:53.030 --> 09:03.250
+entre ces deux déclarations. Donc, nous allons simuler une circonstance beaucoup plus probable où nous allons
+
+101
+09:03.250 --> 09:11.650
+dire qu’il ya un problème avec le code utilisateur donc quelqu’un essaie de retirer un livre sur
+
+102
+09:11.650 --> 09:15.660
+le 31 février qui n’est pas une date.
+
+103
+09:16.200 --> 09:24.820
+Maintenant, nous allons également changer l’ID du livre pour réserver ID 3 à des fins de démonstration.
+
+104
+09:24.820 --> 09:31.320
+Id de livre 3;  Sélectionnez -parmi les livres
+
+105
+09:34.840 --> 09:36.440
+C’est Book ID 3.
+
+106
+09:36.520 --> 09:36.790
+d'accord.
+
+107
+09:36.820 --> 09:41.330
+Donc, dans ces circonstances, nous allons exécuter la transaction.
+
+108
+09:41.360 --> 09:48.400
+Maintenant, gardez à l’esprit que sans cette transaction cette déclaration serait exécuté;
+
+109
+09:48.420 --> 09:52.150
+mettre à jour les livres set BookShelfId-6 où Id-3
+
+110
+09:52.250 --> 10:00.320
+Cela retirerait le troisième livre mais l’insertion dans la table de prêt de livre échouerait parce qu’il
+
+111
+10:00.320 --> 10:02.430
+n’est pas une date pour le 31 février.
+
+112
+10:02.750 --> 10:08.990
+Donc, cette déclaration échouerait; laissant la base de données dans un état incohérent parce que les livres
+
+113
+10:08.990 --> 10:13.460
+table dirait que le livre a été retiré alors que le bookloan dirait le contraire.
+
+114
+10:14.440 --> 10:16.200
+Toutefois, dans le cadre d’une transaction.
+
+115
+10:16.250 --> 10:19.170
+Voyons ce qui se passe; Exécuter.
+
+116
+10:20.020 --> 10:26.380
+Donc, comme prévu il ya un message d’erreur ici disant conversion a échoué lors de la conversion de la date et ou l’heure
+
+117
+10:26.410 --> 10:28.150
+de la chaîne de caractère.
+
+118
+10:28.180 --> 10:34.900
+C’est comme prévu; Le 31 février n’existe donc pas.
+
+119
+10:35.020 --> 10:40.030
+Cependant, la chose très importante ici est que la table des livres n’a pas été mis à jour.
+
+120
+10:40.730 --> 10:46.860
+Nous faisons ce et nous pouvons voir que l’emplacement est toujours réglé à 1.
+
+121
+10:46.870 --> 10:51.090
+C’est ainsi que les transactions maintiennent votre base de données dans un état cohérent.
+
+122
+10:53.190 --> 11:00.270
+Déclencheurs; sont des déclarations SQL qui s’exécuteront en réponse aux changements de données qui peuvent être
+
+123
+11:00.270 --> 11:06.510
+utilisé pour s’assurer qu’un changement dans une table déclenche un changement dans un autre déclencheur de table peut être exécuté
+
+124
+11:06.510 --> 11:09.810
+en réponse à insérer des instructions de mise à jour ou de suppression
+
+125
+11:12.450 --> 11:13.970
+démonstration vidéo.
+
+126
+11:14.400 --> 11:20.070
+Voici une démonstration où nous allons créer un tableau appelé bookchanges qui enregistrera les mises à jour
+
+127
+11:20.070 --> 11:28.110
+à la table des livres par l’utilisation de déclencheurs. Un déclencheur d’insertion pour enregistrer de nouveaux livres ajoutés à la bibliothèque
+
+128
+11:28.920 --> 11:35.910
+un déclencheur de mise à jour pour enregistrer les modifications apportées aux livres existants et un déclencheur de suppression des livres d’enregistrement supprimés
+
+129
+11:35.910 --> 11:36.570
+de la bibliothèque.
+
+130
+11:39.440 --> 11:46.660
+Ici, nous allons démontrer les déclencheurs; où nous allons créer une table appelée bookchanges et
+
+131
+11:46.700 --> 11:55.480
+ce tableau consignera les mises à jour de la table du livre grâce à l’utilisation des déclencheurs; alors créons d’abord le
+
+132
+11:55.480 --> 12:00.760
+table de change de livre.
+
+133
+12:04.160 --> 12:14.270
+créer des BookChanges de table (identité id int(1,1) non nuls,
+
+134
+12:14.290 --> 12:22.340
+Cela enregistrera également l’ID livre, qui sera un int , Le type de changement qui sera varchar(max)
+
+135
+12:23.900 --> 12:28.050
+et prendra également note de la date et de l’heure.
+
+136
+12:28.120 --> 12:30.730
+Cela s’est effectivement produit; donc nous allons l’appeler dateOccurred
+
+137
+12:34.100 --> 12:40.400
+Nous pouvons bien sûr inclure la date dans chaque insert dans cette table bookChanges, mais voici un raccourci
+
+138
+12:40.580 --> 12:44.050
+où nous pouvons taper dans : datetime default getdate()
+
+139
+12:44.050 --> 12:50.530
+cela signifie que si cette date d’été n’est pas fournie dans la déclaration d’insertion.
+
+140
+12:50.530 --> 12:55.500
+La valeur par défaut getdate() qui est la date actuelle et l’heure sera insérée.
+
+141
+12:55.990 --> 12:59.560
+Nous allons donc créer la table des changes de livre.
+
+142
+13:01.040 --> 13:04.580
+Jetons un coup d’œil à la table des changes de livre; qui sera actuellement vide.
+
+143
+13:10.100 --> 13:11.630
+Vide.
+
+144
+13:11.660 --> 13:15.620
+Maintenant, nous allons créer un déclencheur; créer un déclencheur
+
+145
+13:18.960 --> 13:22.740
+et nous allons maintenant utiliser le nom pour la gâchette.
+
+146
+13:22.860 --> 13:25.860
+Alors appelez-le trgBookInsert
+
+147
+13:26.250 --> 13:26.850
+Alors appelez-le trgBookInsert
+
+148
+13:30.660 --> 13:49.740
+sur les livres après l’insertion comme
+
+149
+13:49.910 --> 13:52.480
+insérer dans BookChanges (BookId, ChangeType) 
+
+150
+13:56.130 --> 14:05.080
+maintenant; ce déclencheur aura accès à une table virtuelle appelée insérée qui sera l’insert de la
+
+151
+14:05.080 --> 14:06.880
+déclaration précédente.
+
+152
+14:07.280 --> 14:08.850
+Quel cas je peux utiliser.
+
+153
+14:08.920 --> 14:21.260
+sélectionnez id, 'Inséré' à partir d’INSERTED
+
+154
+14:21.740 --> 14:24.190
+Je peux maintenant créer ce déclencheur comme suit.
+
+155
+14:28.190 --> 14:36.150
+Maintenant, si nous essayons maintenant d’insérer dans la table des livres, puis ce déclencheur sera déclenché.
+
+156
+14:36.510 --> 14:37.950
+Jetons donc un coup d’œil à notre table de livres.
+
+157
+14:45.240 --> 14:48.560
+Ok maintenant, ajoutons un autre livre de Harry Potter.
+
+158
+14:51.780 --> 14:59.940
+s’insérer dans les valeurs Livres (Nom du livre, Pages, BookShelfId) ('
+
+159
+15:01.310 --> 15:10.210
+'Harry Potter à la pierre philosophale'
+
+160
+15:18.760 --> 15:25.090
+Afin de passer une apostrophe, j’ai dû passer une double apostrophe, c’est ainsi que vous échapper aux apostrophes dans SQL Server
+
+161
+15:26.150 --> 15:31.320
+Je pense qu’il ya quelque chose comme 607 pages, étagère ID 1
+
+162
+15:35.490 --> 15:41.690
+Je m’insère dans la table des livres et remarque que les deux rangées ont maintenant été insérées.
+
+163
+15:42.540 --> 15:45.200
+Jetons donc un coup d’œil à notre table de livres.
+
+164
+15:45.250 --> 15:47.010
+Nous voyons la Pierre Philosophale.
+
+165
+15:48.760 --> 15:50.920
+Jetons aussi un coup d’œil à la table des change de livre.
+
+166
+15:55.530 --> 16:02.250
+SELECT - à partir de changeurs de livres; et nous pouvons voir le livre ID 7 a été inséré en ce moment.
+
+167
+16:03.660 --> 16:04.000
+d'accord.
+
+168
+16:06.250 --> 16:12.510
+C’est donc un déclencheur d’insertion.
+
+169
+16:12.580 --> 16:21.670
+Donc, l’étape suivante est la démonstration d’un déclencheur de suppression; où nous enregistrerons l’action d’un livre supprimé.
+
+170
+16:21.670 --> 16:25.240
+Regardons notre table de livres à nouveau.
+
+171
+16:25.550 --> 16:28.960
+Imaginons que nous voulons supprimer le livre numéro 7.
+
+172
+16:30.500 --> 16:32.270
+C’est donc vous créez un déclencheur.
+
+173
+16:32.330 --> 16:45.120
+Donc, nous allons copier ce déclencheur; donc nous changeons;  nous appellerons le déclencheur un trgBookDelete après la suppression
+
+174
+16:45.120 --> 16:45.870
+L’état sera supprimé.
+
+175
+16:49.370 --> 16:51.260
+Et la table virtuelle est appelée supprimée
+
+176
+16:54.370 --> 17:01.440
+de sorte que créer ce déclencheur; maintenant regarder notre table de livres à nouveau.
+
+177
+17:01.940 --> 17:03.880
+Et nous allons supprimer ce livre.
+
+178
+17:03.930 --> 17:04.650
+Supprimer des livres où id 7
+
+179
+17:07.420 --> 17:08.710
+Supprimer des livres où id 7
+
+180
+17:09.570 --> 17:18.640
+Nous faisons cette déclaration, et nous pouvons voir que les deux lignes ont été touchées.
+
+181
+17:18.680 --> 17:25.670
+Une rangée étant le livre étant supprimé et la deuxième rangée étant la rangée étant insérée dans les changes de livre
+
+182
+17:25.670 --> 17:26.680
+Table.
+
+183
+17:26.810 --> 17:30.920
+Jetons un coup d’œil à notre table bookChanges. Sélectionnez -- à partir de bookChanges
+
+184
+17:34.390 --> 17:39.310
+et nous pouvons maintenant voir que le livre ID 7 a maintenant été supprimé en ce moment
+
+185
+17:42.840 --> 17:47.250
+le troisième et dernier type de déclencheur est le déclencheur mis à jour.
+
+186
+17:47.370 --> 17:51.840
+Ceci sera tiré quand une rangée est mise à jour.
+
+187
+17:51.840 --> 17:54.240
+Soyons donc le démontrer une fois de plus.
+
+188
+17:54.340 --> 18:07.620
+donc nous allons copier ce code et nous l’appellerons 
+trgBookUpdate sur les livres après mise à jour; le type de changement
+
+189
+18:07.620 --> 18:19.230
+être «mise à jour» et la table virtuelle sera insérée; nous allons créer ce déclencheur.
+
+190
+18:19.490 --> 18:21.800
+Jetons un coup d’œil à notre table de livres.
+
+191
+18:26.680 --> 18:33.880
+Maintenant, imaginons que nous voulons changer le nombre de pages de petites jolies choses à 437 au lieu de 
+
+192
+18:33.950 --> 18:34.720
+438
+
+193
+18:35.860 --> 18:47.950
+Alors, je suis du fait que je mettre à jour les livres définis pages 437 où ID-3 ; et exécuter la déclaration; deux rangées sont touchées
+
+194
+18:48.240 --> 18:54.460
+l’un étant la mise à jour sur la table des livres et l’autre étant l’insert dans la table des changements de livre.
+
+195
+18:54.480 --> 18:56.320
+Jetons un coup d’oeil à notre table de change de livres maintenant.
+
+196
+19:02.010 --> 19:07.960
+nous y voilà; Nous avons maintenant une troisième rangée dans le tableau des changements indiquant un livre a été mis à jour
+
+197
+19:11.330 --> 19:20.920
+déclencheurs "au lieu";  les déclencheurs peuvent fonctionner de deux façons , soit « après » ou « au lieu » ;  "après" permet la déclaration
+
+198
+19:20.920 --> 19:28.560
+d’exécuter et ensuite exécuter la gâchette; "au lieu" empêche la déclaration de s’exécuter, mais exécute le déclencheur 
+
+199
+19:28.560 --> 19:37.400
+démonstration vidéo;  Ici, nous allons démontrer un "au lieu" déclencheur.
+
+200
+19:37.400 --> 19:42.680
+Nous utiliserons un déclencheur de suppression "au lieu" pour éviter que les lignes ne soient supprimées de la table bookChanges
+
+201
+19:43.200 --> 19:46.190
+et afficher un avertissement à la place.
+
+202
+19:46.970 --> 19:53.270
+Bon ici, nous allons démontrer et au lieu de supprimer le déclencheur qui empêchera les lignes d’être supprimés
+
+203
+19:53.270 --> 19:56.030
+de la table de change de livre et afficher un avertissement à la place.
+
+204
+19:56.660 --> 19:59.360
+Donc, nous allons créer un déclencheur.
+
+205
+19:59.740 --> 20:06.200
+Créer la gâchette trgPreventDelete sur bookChanges
+
+206
+20:09.060 --> 20:09.940
+Créer la gâchette trgPreventDelete sur bookChanges
+
+207
+20:13.050 --> 20:24.080
+Au lieu de supprimer comme;  dans ce cas, je vais juste imprimer un avertissement et ne prendre aucune autre mesure.
+
+208
+20:24.200 --> 20:27.560
+Pour que je puisse utiliser; 
+
+209
+20:28.050 --> 20:28.400
+imprimer 'Avertissement: vous n’êtes pas autorisé à supprimer de la table des changements de livre'
+
+210
+20:31.250 --> 20:41.550
+ce message d’impression particulier ne sera visible
+
+211
+20:41.550 --> 20:43.710
+diriger les utilisateurs de la base de données.
+
+212
+20:46.460 --> 20:49.140
+C’est donc notre déclencheur créé.
+
+213
+20:49.140 --> 20:51.480
+Jetons donc un coup d’œil à la table des changes de livres.
+
+214
+21:00.360 --> 21:00.780
+d'accord.
+
+215
+21:00.880 --> 21:02.440
+Nous avons trois rangées.
+
+216
+21:02.650 --> 21:10.810
+Maintenant, nous allons essayer de supprimer; supprimer des modifications de livre où id 1.
+
+217
+21:14.410 --> 21:19.030
+Maintenant, nous voyons un avertissement disant que vous n’êtes pas autorisé à supprimer de la table des changements de livre.
+
+218
+21:19.960 --> 21:21.660
+Regardons votre table de changement de livre.
+
+219
+21:27.170 --> 21:29.220
+Les trois rangées sont toujours là.
+
+220
+21:29.220 --> 21:35.480
+Il en va de même pour la suppression de tout ce qui est dans le tableau, il y a encore un avertissement.
+
+221
+21:35.720 --> 21:37.280
+Les rangées sont toujours là.
+
+222
+21:37.280 --> 21:39.320
+C’est donc une gâchette au lieu de déclencher.
+
+223
+21:39.380 --> 21:46.160
+Donc, cela signifie que la gâchette a couru au lieu de la déclaration après un déclencheur se produirait après la déclaration est exécutée.
+
+224
+21:46.160 --> 21:50.730
+Et maintenant c’est à toi.
+
+225
+21:50.880 --> 21:56.690
+Votre objectif est de créer un déclencheur qui empêche les utilisateurs de mettre à jour le tableau des changements de livre.
+
+226
+21:57.450 --> 21:59.360
+Donc, vous pouvez poster cette vidéo sur elle.
+
+227
+21:59.730 --> 22:01.980
+Donnez-lui un aller et reprendre la vidéo.
+
+228
+22:01.980 --> 22:03.510
+Une fois que vous avez essayé cet exercice
+
+229
+22:06.550 --> 22:06.970
+d'accord.
+
+230
+22:06.990 --> 22:09.670
+J’espère que vous avez donné cet exercice un aller.
+
+231
+22:09.730 --> 22:14.050
+Si vous n’avez pas fait de sondages cette vidéo maintenant et de le reprendre quand vous l’avez essayé.
+
+232
+22:15.840 --> 22:22.140
+Notre objectif est donc de créer un déclencheur qui empêche l’utilisateur de mettre à jour le tableau des changements de livre; dans le précédent
+
+233
+22:22.740 --> 22:29.550
+démonstration, nous avons démontré comment empêcher les suppressions, mais bien sûr il était possible pour quelqu’un de mettre à jour
+
+234
+22:29.580 --> 22:36.230
+le tableau et changer le type de changement ou la date à laquelle il s’est produit ou ainsi de suite.
+
+235
+22:36.230 --> 22:38.260
+Donc, nous allons créer un autre déclencheur.
+
+236
+22:38.360 --> 22:44.090
+Alors appelez-le; créer la gâchette trgPreventUpdate 
+
+237
+22:46.670 --> 22:50.730
+sur bookChanges
+
+238
+22:50.840 --> 22:51.220
+Juste
+
+239
+22:54.480 --> 23:09.850
+au lieu de mettre à jour comme impression «avertissement, vous n’êtes pas autorisé à prendre la table des changements de livre.
+
+240
+23:09.990 --> 23:13.940
+Créons ce déclencheur.
+
+241
+23:15.610 --> 23:17.580
+Regardons notre table de change
+
+242
+23:22.280 --> 23:22.620
+Maintenant.
+
+243
+23:22.990 --> 23:33.110
+Essayons de modifier le type de changement ainsi; 
+
+244
+23:33.490 --> 23:42.300
+mettre à jour bookChanges set ChangeType 'whatever' où ID '1
+
+245
+23:43.390 --> 23:44.130
+Je m’en sédais.
+
+246
+23:45.400 --> 23:46.540
+Il m’a donné un avertissement.
+
+247
+23:46.540 --> 23:52.030
+Vous n’êtes pas autorisé à mettre à jour la table des changements de livre et si je regarde le tableau des changements de livre ma mise à jour a
+
+248
+23:52.030 --> 23:52.750
+pas été exécuté.
+
+249
+23:53.380 --> 23:56.860
+Donc, c’est pour résoudre ce petit problème et j’espère que vous l’avez résolu.

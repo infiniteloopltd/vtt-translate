@@ -1,0 +1,1837 @@
+WEBVTT
+
+0
+00:00.780 --> 00:05.280
+Código de cliente del servidor SQL; Conexión al servidor SQL desde su propio código.
+
+1
+00:07.780 --> 00:13.540
+Conexión del servidor SQL server a su propio código; Es muy probable que su base de datos le conecte fuera del código
+
+2
+00:14.080 --> 00:17.470
+ya sea a un sitio web o una aplicación.
+
+3
+00:17.650 --> 00:24.580
+Aquí vamos a ver muy brevemente cómo varios lenguajes de programación pueden conectarse a SQL Server específicamente;
+
+4
+00:25.240 --> 00:27.390
+C, Nodo, Python y Java.
+
+5
+00:29.670 --> 00:36.450
+Algunas advertencias; no vamos a entrar en ningún detalle en cualquiera de los idiomas del cliente lo suficiente para mostrar
+
+6
+00:36.450 --> 00:38.580
+cómo conectarse a su base de datos y leer de ella.
+
+7
+00:39.840 --> 00:43.400
+Hay muchas bibliotecas diferentes y formas de escribir este tipo de código de cliente.
+
+8
+00:43.410 --> 00:49.700
+Esta es sólo una manera de hacerlo y traté de mantenerlo simple 
+
+9
+00:49.710 --> 00:55.320
+Cadenas de conexión; Una característica común de la mayoría de los idiomas de cliente es que usarán una cadena de conexión para definir la
+
+10
+00:55.320 --> 00:58.050
+conexión entre el código y la base de datos.
+
+11
+00:58.050 --> 01:04.500
+Esta cadena define; La ubicación de la base de datos, es decir, localhost o IP remota.
+
+12
+01:04.850 --> 01:12.210
+La base de datos predeterminada que se va a utilizar (es decir, biblioteca); Las credenciales de acceso, es decir, el nombre de usuario de la autenticación de servidor SQL
+
+13
+01:12.210 --> 01:18.080
+y contraseña o autenticación de Windows; y el software del controlador de base de datos, es decir, SQL Server.
+
+14
+01:18.150 --> 01:26.500
+Continuó; Aquí en este ejemplo de una cadena de conexión utilizada por Python.
+
+15
+01:26.640 --> 01:35.600
+La biblioteca pyODBC; 
+
+16
+01:36.090 --> 01:43.680
+Server-localhost; Base de datos-Biblioteca; Trusted_Connection Sí; Controlador-Servidor SQL-SQL-
+
+17
+01:45.120 --> 01:48.870
+lo que significa que la base de datos se encuentra y localhost; la misma máquina.
+
+18
+01:48.870 --> 01:51.950
+La base de datos inicial que se va a utilizar es "Biblioteca".
+
+19
+01:51.950 --> 01:57.690
+Estamos usando la autenticación de Windows y el software de controlador que se usará es SQL Server.
+
+20
+01:57.960 --> 02:03.090
+Otras propiedades se pueden definir en la cadena de conexión, como el cifrado, los tiempos de espera de conexión y
+
+21
+02:03.090 --> 02:04.550
+si su base de datos está utilizando un puerto distinto de 1433
+
+22
+02:04.560 --> 02:14.550
+Controladores de base de datos; Una biblioteca de bases de datos puede ser específica de una base de datos, es decir, SQL Server
+
+23
+02:15.060 --> 02:22.050
+u otro tipo de base de datos como mySQL; en los casos en que un controlador de base de datos específico está disponible y
+
+24
+02:22.050 --> 02:26.940
+usted no tiene ninguna intención de cambiar el tipo de base de datos que utiliza, entonces un controlador específico ofrecerá mejor
+
+25
+02:26.940 --> 02:34.330
+rendimiento y características. si está utilizando una biblioteca de base de datos que no es específica de SQL Server,
+
+26
+02:34.340 --> 02:40.830
+como uno basado en u ODBC (conectividad de base de datos abierta) u OLEDB (base de datos de vinculación e incrustación de objetos)
+
+27
+02:41.910 --> 02:48.820
+entonces tendrá que especificar que el controlador debe usar SQL Server
+
+28
+02:48.830 --> 02:54.270
+(.NET);  si usted está alojando un sitio web en ASP.NET o ejecutando 
+
+29
+02:54.370 --> 02:55.570
+Una aplicación de escritorio de Windows
+
+30
+02:55.920 --> 02:58.290
+Entonces, C es una buena opción.
+
+31
+02:58.290 --> 03:02.810
+Puede descargar el código desde GitHub o seguir la demostración de vídeo.
+
+32
+03:03.060 --> 03:09.830
+https://github.com/infiniteloopltd/SQLDotNetCore
+
+33
+03:12.420 --> 03:19.130
+Demostración en vídeo; Aquí vamos a demostrar cómo conectarse a nuestra base de datos mediante C - (.NET Core).
+
+34
+03:19.560 --> 03:27.820
+Ahora voy a demostrar cómo conectarse a SQL Server mediante C-; primero abrir el estudio visual.
+
+35
+03:27.860 --> 03:30.330
+En este caso tengo estudio visual 2019.
+
+36
+03:30.560 --> 03:35.420
+Pero cualquier otra versión de Visual Studio servirá 
+
+37
+03:35.420 --> 03:42.850
+Pulse Crear un nuevo proyecto; Voy a crear una nueva aplicación de consola con el marco de trabajo principal de .NET.
+
+38
+03:44.090 --> 03:44.780
+Pulse siguiente.
+
+39
+03:46.790 --> 03:57.690
+Le da un nombre al proyecto; que llamaré SQLDotNetCore; Pulse create;
+
+40
+04:06.070 --> 04:08.850
+Espere a que se cree el proyecto; y la interfaz de usuario para cargar
+
+41
+04:49.600 --> 04:57.110
+OK, ahora está cargado; y tenemos un programa Hello World en pantalla; usted puede notar que tengo un administrador de paquetes
+
+42
+04:57.130 --> 04:58.230
+ventana de la consola.
+
+43
+04:58.330 --> 05:08.980
+Y si no tienes esto, entonces presiona herramientas; Administrador de paquetes NuGet y consola del administrador de paquetes; porque
+
+44
+05:08.980 --> 05:15.190
+lo primero que tenemos que hacer es instalar un paquete NuGet para SQL Server que escribimos
+
+45
+05:15.190 --> 05:18.670
+Install-Package System.Data.SqlClient
+
+46
+05:21.340 --> 05:22.940
+Install-Package System.Data.SqlClient
+
+47
+05:22.940 --> 05:27.930
+Install-Package System.Data.SqlClient
+
+48
+05:31.110 --> 05:38.980
+Esto descargará nuestra biblioteca de cliente SQL a la que podemos consultar aquí.
+
+49
+05:39.230 --> 05:46.640
+usar System.Data.SqlClient;
+
+50
+05:46.640 --> 05:48.420
+Debería aparecer en el intellisense si está instalado correctamente.
+
+51
+05:48.640 --> 05:55.820
+Ahora no necesitas el mundo Hello; pero lo que necesitamos es una cadena de conexión.
+
+52
+05:55.850 --> 06:01.670
+Ahora voy a definir esto como un const porque no va a cambiar.
+
+53
+06:02.090 --> 06:04.590
+const string connectionString ?
+"fuente de datos-localhost; Catálogo inicial-Biblioteca; Seguridad integrada-Verdadero;";
+
+54
+06:07.170 --> 06:10.770
+const string connectionString ?
+"fuente de datos-localhost; Catálogo inicial-Biblioteca; Seguridad integrada-Verdadero;";
+
+55
+06:10.800 --> 06:20.130
+const string connectionString ?
+"fuente de datos-localhost; Catálogo inicial-Biblioteca; Seguridad integrada-Verdadero;";
+
+56
+06:20.130 --> 06:23.550
+const string connectionString ?
+"fuente de datos-localhost; Catálogo inicial-Biblioteca; Seguridad integrada-Verdadero;";
+
+57
+06:24.190 --> 06:26.900
+const string connectionString ?
+"fuente de datos-localhost; Catálogo inicial-Biblioteca; Seguridad integrada-Verdadero;";
+
+58
+06:28.700 --> 06:35.850
+Vamos a usar la autenticación de Windows que efectivamente utiliza el mismo usuario que yo
+
+59
+06:35.850 --> 06:36.420
+conectado como ahora
+
+60
+06:36.450 --> 06:48.390
+debemos utilizar la seguridad integrada, lo que significa que el usuario
+
+61
+06:48.390 --> 06:52.820
+que ejecuta este programa será el mismo que inicia sesión en la base de datos.
+
+62
+06:52.980 --> 06:55.680
+Así que ahora tenemos nuestra cadena de conexión.
+
+63
+06:55.920 --> 07:00.770
+Necesitamos crear un objeto de conexión SQL para:
+
+64
+07:01.090 --> 07:08.050
+var connection á new SqlConnection(connectionString);
+
+65
+07:11.310 --> 07:15.540
+tenemos que abrir la conexión.
+
+66
+07:15.990 --> 07:18.740
+Esto está iniciando sesión eficazmente en la base de datos.
+
+67
+07:18.730 --> 07:24.210
+Ahora vamos a definir nuestra instrucción SQL; tan muy simple.
+
+68
+07:24.210 --> 07:34.580
+const string sql á "select * from students";
+
+69
+07:34.890 --> 07:41.600
+Ahora vamos a definir un dataAdapter, un conjunto de datos.
+
+70
+07:41.800 --> 07:56.020
+Vamos a rellenar el conjunto de datos a través del dataAdapter así;
+
+71
+07:56.010 --> 07:58.740
+var adapter á new SqlDataAdapter(sql, connection);
+
+72
+07:58.810 --> 08:05.950
+No la cadena de conexión, la conexión real; definimos a los estudiantes
+
+73
+08:09.730 --> 08:12.160
+como un conjunto de datos vacío
+
+74
+08:17.020 --> 08:22.330
+Esto ha importado automáticamente esto mediante la instrucción system.data
+
+75
+08:26.110 --> 08:30.240
+y vamos a usar el adaptador de datos para rellenar este conjunto de datos.
+
+76
+08:31.310 --> 08:40.050
+Adaptador. Fill(estudiantes, "estudiantes");
+
+77
+08:40.080 --> 08:42.290
+Y le damos un nombre a la datatable, esto podría ser cualquier cosa, pero voy a llamarlo estudiantes
+
+78
+08:45.250 --> 08:46.350
+Y entonces..
+
+79
+08:49.030 --> 08:58.150
+foreach (estudiante de DataRow en estudiantes. Tablas["estudiantes"]. Filas)
+
+80
+08:58.410 --> 09:00.550
+foreach (estudiante de DataRow en estudiantes. Tablas["estudiantes"]. Filas)
+
+81
+09:00.570 --> 09:02.220
+Este es el mismo texto que aquí arriba.
+
+82
+09:02.370 --> 09:06.080
+así que
+
+83
+09:08.760 --> 09:14.940
+Así que lo que estamos diciendo allí es que una vez que obtenemos el resultado de esto ir a través de cada fila en el resultado
+
+84
+09:15.080 --> 09:19.090
+datatable; vamos a escribir eso en la pantalla.
+
+85
+09:19.140 --> 09:21.400
+Console.WriteLine(student["FirstName"] + " " + student["Surname"]);
+
+86
+09:27.750 --> 09:37.740
+estudiante que es nuestra fila de datos; nombre que es la columna; poner un espacio allí; y el estudiante
+
+87
+09:40.250 --> 09:42.590
+Apellido.
+
+88
+09:43.630 --> 09:48.510
+Manténgalo ordenado; y lo que vamos a hacer para ordenar.
+
+89
+09:48.600 --> 09:50.200
+Vamos a cerrar la conexión.
+
+90
+09:50.250 --> 09:51.420
+Cuando terminemos.
+
+91
+09:51.480 --> 09:52.830
+Esto es opcional.
+
+92
+09:52.840 --> 09:55.060
+Pero buena práctica.
+
+93
+09:55.060 --> 09:59.310
+Y luego vamos a hacer Console.ReadLine();
+
+94
+09:59.310 --> 10:08.020
+Esto es sólo para que podamos ver la salida de esto mientras se ejecuta.
+
+95
+10:08.350 --> 10:08.830
+Bien.
+
+96
+10:08.880 --> 10:13.470
+Ahora tenemos nuestro programa escrito todo o queda por hacer es ejecutar este
+
+97
+10:19.810 --> 10:20.500
+Aquí vamos.
+
+98
+10:20.500 --> 10:30.610
+Tenemos una lista de nuestros tres estudiantes devueltos de nuestra base de datos; por lo que es un recorrido muy rápido de cómo
+
+99
+10:30.610 --> 10:38.490
+para conectarse a la base de datos y leer los datos en C-.NET Core, 
+
+100
+10:38.680 --> 10:45.220
+Si está desarrollando un sitio web, y ya está familiarizado con la programación en JavaScript, entonces NodeJS es moderno y ofrece un
+
+101
+10:45.340 --> 10:46.610
+curva de aprendizaje.
+
+102
+10:46.810 --> 10:51.620
+Puede descargar el código desde github o seguir el vídeo.
+
+103
+10:52.030 --> 10:56.410
+https://github.com/infiniteloopltd/SQLNodeJS
+
+104
+10:56.430 --> 11:00.600
+Demostración en vídeo.
+
+105
+11:00.900 --> 11:08.460
+Aquí demostraremos cómo conectarse a nuestra base de datos utilizando nodeJS
+
+106
+11:08.590 --> 11:15.990
+Está bien; así que ahora voy a demostrar cómo conectarse a la base de datos de SQL Server mediante la autenticación de Windows
+
+107
+11:16.200 --> 11:20.860
+y nodo; así que estoy abriendo el símbolo del sistema.
+
+108
+11:21.720 --> 11:24.140
+Mi entorno de desarrollo de nodo ya está instalado.
+
+109
+11:25.260 --> 11:35.970
+Así que primero quiero crear una carpeta para el proyecto de nodo, así que lo llamaré SQLNode; 
+
+110
+11:35.970 --> 11:36.400
+y navegar en él.
+
+111
+11:40.120 --> 11:45.070
+Este directorio está vacío; y ahora quiero crear un nuevo paquete NPM.
+
+112
+11:45.100 --> 11:46.680
+Así que escribo en NPM init
+
+113
+11:50.170 --> 11:57.130
+aceptar todos los valores predeterminados y si ejecuto esto veremos que tenemos un package.json
+
+114
+11:57.130 --> 12:05.860
+archivo generado para nosotros; ahora lo primero que tengo que hacer es instalar una biblioteca que permitirá
+
+115
+12:05.920 --> 12:10.500
+nodo para conectarse a SQL Server; ahora porque estoy usando la autenticación de Windows.
+
+116
+12:10.510 --> 12:15.300
+Voy a usar una biblioteca que funcionará con la autenticación de Windows.
+
+117
+12:15.310 --> 12:17.230
+Pero esto es en realidad sólo Windows.
+
+118
+12:17.350 --> 12:21.250
+Pero también lo es el paquete que estoy a punto de instalar.
+
+119
+12:21.250 --> 12:24.280
+Se llama msnodesqlv8
+
+120
+12:24.550 --> 12:37.060
+Así que si escribo en npm añadir msnodesqlv8 y esto descargará este paquete y lo agrego a
+
+121
+12:38.180 --> 12:38.790
+nuestro proyecto
+
+122
+12:41.040 --> 12:42.450
+La carrera de esto ahora.
+
+123
+12:42.450 --> 12:48.810
+Podemos ver que tenemos una carpeta node_modules generada ahora.
+
+124
+12:48.930 --> 12:56.640
+Así que lo siguiente que haría es crear un archivo index.js y escribir código para acceder realmente
+
+125
+12:56.640 --> 12:58.090
+la base de datos.
+
+126
+12:58.200 --> 13:05.830
+Así que voy a crear un archivo bastante vacío llamado index.js desde la línea de comandos como este.
+
+127
+13:06.450 --> 13:14.640
+Ahora voy a usar editplus; puedes usar cualquier editor de texto para hacer esto como Bloc de notas, átomo, 
+
+128
+13:14.640 --> 13:16.110
+código de estudio visual.
+
+129
+13:17.930 --> 13:27.750
+Edit Plus es sólo una preferencia personal; así que si ahora abro mi archivo index.js, voy a tener una bonita
+
+130
+13:27.750 --> 13:31.770
+mucho archivo vacío que ahora voy a escribir algún código en.
+
+131
+13:32.460 --> 13:37.570
+Así que lo primero que quiero hacer es importar la biblioteca que acabamos de descargar.
+
+132
+13:37.710 --> 13:47.380
+const sql á require("msnodesqlv8"); 
+
+133
+13:47.450 --> 13:50.700
+const sql á require("msnodesqlv8"); 
+
+134
+13:51.590 --> 14:02.910
+Como antes vamos a definir una cadena de conexión;
+
+135
+14:03.410 --> 14:11.290
+Es un formato ligeramente diferente porque es ODBC, pero define prácticamente las mismas propiedades
+
+136
+14:11.860 --> 14:21.700
+por lo que definimos dónde está el servidor de base de datos que es localhost; la misma máquina; la base de datos inicial.
+
+137
+14:21.710 --> 14:24.050
+Así que vamos a conectar nos a es "biblioteca"
+
+138
+14:27.410 --> 14:33.350
+y vamos a definir la conexión de confianza que implica que la cuenta de Windows que se utiliza para ejecutar
+
+139
+14:33.350 --> 14:41.290
+el software será el mismo que se utiliza para iniciar sesión en SQL Server, es decir, mediante la autenticación de Windows
+
+140
+14:41.330 --> 14:47.470
+Trusted_Connection-Sí
+
+141
+14:47.630 --> 14:54.560
+Ahora, debido a que se trata de un ODBC también necesitamos especificar que se trata de SQL Server que estamos conectando
+
+142
+14:54.560 --> 14:57.410
+y no está en mySQL o en alguna otra base de datos.
+
+143
+14:57.570 --> 15:07.580
+Ahora hay una serie de paquetes de software de controlador como SQL Server, SQL Server SQL Server Native Client, etc.
+
+144
+15:07.910 --> 15:10.300
+Vamos a usar SQL Server.
+
+145
+15:10.310 --> 15:18.010
+No vamos a usar ninguna característica avanzada aquí por lo que SQL Server debe hacernos, 
+
+146
+15:18.010 --> 15:18.700
+ahora que es nuestra cadena de conexión definida
+
+147
+15:18.710 --> 15:31.170
+Ahora usamos sql.query y pasamos la cadena de conexión y pasamos una instrucción SQL que es 
+
+148
+15:31.170 --> 15:34.620
+seleccionar * de los estudiantes
+
+149
+15:36.300 --> 15:45.110
+El tercer parámetro es una función de devolución de llamada que se pasará dos parámetros; un error y un conjunto de registros
+
+150
+15:47.410 --> 15:52.680
+así que definimos esto como una función de flecha.
+
+151
+15:53.140 --> 15:54.410
+Cerraremos esto.
+
+152
+15:56.590 --> 16:04.990
+Ahora esta función de flecha devolverá un error o un conjunto de registros; así que volverá a ambos; pero uno de los
+
+153
+16:04.990 --> 16:07.120
+dos tendrán información relevante en ella.
+
+154
+16:07.840 --> 16:14.550
+Así que si decimos; si el error se rellena con algo; entonces algo malo ha sucedido.
+
+155
+16:14.710 --> 16:23.140
+Nos gustaría escribir eso en la pantalla; so console.log(err); y volver porque el conjunto de registros
+
+156
+16:23.140 --> 16:25.400
+ser inútil.
+
+157
+16:25.600 --> 16:27.690
+Pero si el error es nulo
+
+158
+16:27.700 --> 16:33.460
+Por lo tanto, esto ha funcionado; vamos a iterar a través del conjunto de registros e imprimir los resultados a la
+
+159
+16:33.460 --> 16:33.820
+Pantalla.
+
+160
+16:34.030 --> 16:37.500
+for(var i en el conjunto de registros)
+
+161
+16:42.160 --> 16:44.080
+"i" será un indexador.
+
+162
+16:44.290 --> 16:50.670
+var row á recordset[i];
+
+163
+16:54.030 --> 17:01.320
+va a escribir eso en la pantalla: console.log(row. FirstName + ' ' + row. Apellido);
+
+164
+17:01.490 --> 17:06.200
+Tenga en cuenta que esto distingue entre mayúsculas y minúsculas, así que asegúrese de que su
+
+165
+17:09.350 --> 17:14.490
+variables aquí coincidirán exactamente con los nombres de columna.
+
+166
+17:15.170 --> 17:17.770
+Vamos a regresar de esta función.
+
+167
+17:19.860 --> 17:27.900
+Así que para salvar esto para volver a nuestra ventana del símbolo del sistema.
+
+168
+17:28.200 --> 17:30.570
+Veamos si esto funciona.
+
+169
+17:31.050 --> 17:32.730
+nodo Index.js.
+
+170
+17:32.760 --> 17:33.310
+Aquí vamos.
+
+171
+17:33.320 --> 17:38.420
+Los otros tres estudiantes de nuestra mesa de estudiantes.
+
+172
+17:38.500 --> 17:42.040
+Así que esa fue una introducción muy rápida a SQL Server y Node
+
+173
+17:42.080 --> 17:50.940
+Python; si está escribiendo una aplicación que puede utilizar el aprendizaje automático o la funcionalidad estadística,
+
+174
+17:50.940 --> 17:55.750
+Python es una buena apuesta; puede descargar el código desde github o seguir la demostración de vídeo.
+
+175
+17:55.930 --> 18:01.010
+https://github.com/infiniteloopltd/SQLPython
+
+176
+18:01.050 --> 18:05.430
+Demostración en vídeo.
+
+177
+18:05.580 --> 18:10.500
+Aquí demostramos cómo conectarse a nuestra base de datos mediante Python.
+
+178
+18:10.500 --> 18:15.830
+Ahora vamos a demostrar cómo conectarse a SQL Server mediante Python.
+
+179
+18:15.960 --> 18:21.780
+Así que una vez más estoy abriendo mi símbolo del sistema y voy a crear una nueva carpeta para mi proyecto python
+
+180
+18:21.780 --> 18:26.130
+Voy a llamarlo SQLPython
+
+181
+18:26.440 --> 18:31.110
+Cree una nueva carpeta y, a continuación, muévase a ella. 
+
+182
+18:36.220 --> 18:38.670
+El directorio está vacío.
+
+183
+18:38.740 --> 18:48.780
+Así que lo primero que quiero hacer es instalar el paquete python necesario para tener acceso a SQL Server.
+
+184
+18:49.250 --> 19:01.340
+Y voy a pyodbc, así que me escribo pip instalar pyodbc
+
+185
+19:01.470 --> 19:05.740
+Este paquete ya se ha instalado en mi equipo local.
+
+186
+19:05.790 --> 19:13.820
+Ahora vamos a crear un archivo de script para crear script.py.
+
+187
+19:13.940 --> 19:21.030
+Noe vamos a abrir editplus o cualquier editor de texto que desees, vamos a abrir el script.py
+
+188
+19:21.030 --> 19:21.390
+así que...
+
+189
+19:22.680 --> 19:30.450
+Lo primero que queremos hacer es importar la biblioteca pyodbc
+
+190
+19:34.440 --> 19:44.960
+definimos una conexión; por lo que conn - pyodbc.connect
+
+191
+19:45.330 --> 19:51.840
+Vamos a pasar la cadena de conexión como antes; esta cadena de conexión será prácticamente idéntica
+
+192
+19:51.840 --> 20:03.210
+al utilizado en el nodo; por lo que definimos el servidor-localhost como en es la misma máquina
+
+193
+20:03.960 --> 20:11.400
+la base de datos es "biblioteca" que es nuestra base de datos inicial, así que vamos a usar; y vamos a usar la autenticación de Windows.
+
+194
+20:11.520 --> 20:15.970
+por lo que queremos definir Trusted_Connection de confianza
+
+195
+20:16.020 --> 20:22.530
+Lo que significa que el usuario que se utiliza para ejecutar esta aplicación también será el que inicia sesión en SQL
+
+196
+20:22.530 --> 20:22.950
+Servidor.
+
+197
+20:23.760 --> 20:30.490
+Así que es Trusted_Connection-Sí
+
+198
+20:30.750 --> 20:37.740
+Una vez más definimos el controlador que especifica que nos estamos conectando a SQL Server no mySQL
+
+199
+20:37.770 --> 20:47.910
+o Oracle o algo así;  Controlador-Servidor SQL-SQL-
+
+200
+20:47.910 --> 21:04.560
+Es el controlador ODBC utilizado;  definimos el cursor; cursor: conn.cursor()
+
+201
+21:08.370 --> 21:13.420
+Lo cual viene de nuestro objeto de conexión.
+
+202
+21:13.620 --> 21:16.870
+Vamos a ejecutar un poco de SQL en nuestro cursor.
+
+203
+21:18.010 --> 21:20.260
+cursor.execute('
+
+204
+21:23.400 --> 21:24.890
+escribimos una instrucción SQL
+
+205
+21:24.930 --> 21:27.120
+seleccionar * de los estudiantes
+
+206
+21:34.000 --> 21:40.810
+para cada fila del cursor devuelto.
+
+207
+21:40.920 --> 21:44.430
+para fila en el cursor:
+
+208
+21:47.490 --> 21:54.200
+imprimimos; El cursor no tiene columnas con nombre.
+
+209
+21:54.810 --> 22:04.670
+Así que usamos índices para que 0 y 1 resulten ser el nombre y apellido del estudiante.
+
+210
+22:04.740 --> 22:07.080
+Así que eso es realmente todo lo que hay que hacer.
+
+211
+22:07.080 --> 22:19.740
+Vamos a guardar que vuelva a nuestro símbolo del sistema y ejecute Python script.py;  y ahí lo tenemos
+
+212
+22:19.740 --> 22:19.830
+..
+
+213
+22:19.860 --> 22:27.210
+Tenemos los tres estudiantes de nuestra tabla de estudiantes por lo que fue una introducción muy rápida para acceder
+
+214
+22:27.270 --> 22:28.180
+SQL Server.
+
+215
+22:28.200 --> 22:33.590
+mediante la autenticación de Windows en Python.
+
+216
+22:33.970 --> 22:40.240
+Java; Si has aprendido Java en la universidad o has tenido experiencia programando con Android, entonces sin duda
+
+217
+22:40.240 --> 22:41.920
+ir con Java.
+
+218
+22:42.010 --> 22:47.530
+Puede descargar el código de github seguir la demostración de vídeo.
+
+219
+22:47.530 --> 22:55.900
+https://github.com/infiniteloopltd/SQLJava
+
+220
+22:55.900 --> 22:58.240
+Demostración de vídeo: aquí demostraremos cómo conectarse a nuestra base de datos utilizando Java.
+
+221
+22:58.900 --> 23:05.610
+Aquí voy a demostrar cómo conectarse a SQL Server mediante la integración de Windows y Java como cliente
+
+222
+23:05.620 --> 23:06.330
+Lengua.
+
+223
+23:06.850 --> 23:15.790
+Así que primero voy a crear su carpeta de proyecto; md SQLJava
+
+224
+23:15.820 --> 23:23.950
+Esta carpeta está vacía; ahora como antes voy a tener que obtener algún software cliente con el fin de conectarse
+
+225
+23:23.980 --> 23:25.530
+a SQL Server.
+
+226
+23:25.780 --> 23:29.710
+Puede descargarlo desde el repositorio de GitHub para este proyecto.
+
+227
+23:29.990 --> 23:37.220
+Así que navegaremos a la carpeta github; https://github.com/infiniteloopltd/SQLJava
+
+228
+23:37.570 --> 23:39.930
+Lo que necesitará son estos dos archivos aquí.
+
+229
+23:41.190 --> 23:42.660
+Así que el archivo Jar; descarga;
+
+230
+23:47.240 --> 23:55.580
+y también necesitaremos sqljdbc_auth.dll
+
+231
+23:55.850 --> 23:57.200
+Esto es necesario para realizar la autenticación de Windows.
+
+232
+23:57.230 --> 24:01.010
+vamos a descargar ambos.
+
+233
+24:01.080 --> 24:06.440
+Hay una advertencia en Chrome porque esto puede ser potencialmente archivos ejecutables; Pero voy a presionar.
+
+234
+24:06.440 --> 24:08.770
+Mantener; y confiar en estos dos archivos.
+
+235
+24:09.200 --> 24:13.510
+No voy a copiar esto de mi carpeta de descargas.
+
+236
+24:17.900 --> 24:21.970
+Y péguelo en esta carpeta.
+
+237
+24:32.300 --> 24:35.320
+deberíamos ver que esos archivos están presentes.
+
+238
+24:35.320 --> 24:43.840
+Así que lo siguiente que tenemos que hacer es crear un archivo java así que voy a crear nuestro java casi vacío
+
+239
+24:43.840 --> 24:45.100
+archivo que llamaremos SQLJava.java
+
+240
+24:50.180 --> 24:55.280
+y una vez más vamos a abrir esto en nuestro fiel editplus
+
+241
+24:58.300 --> 25:04.550
+navegar a la carpeta;  abrir sqljava.java
+
+242
+25:05.880 --> 25:07.230
+Así que necesitamos
+
+243
+25:10.170 --> 25:11.720
+clase pública SQLJava ?
+
+244
+25:11.730 --> 25:12.170
+clase pública SQLJava ?
+
+245
+25:16.900 --> 25:21.370
+Vamos a crear nuestro método principal aquí que es estático
+
+246
+25:30.470 --> 25:35.650
+potencialmente podríamos pasar argumentos de línea de comandos, pero estos no se utilizarán.
+
+247
+25:38.940 --> 25:46.410
+Ahora como antes vamos a definir nuestro DSN; o cadena de conexión;
+
+248
+25:46.470 --> 25:55.740
+en Java hay un poco diferente, pero contiene la misma información; así que lo haremos;
+
+249
+25:56.350 --> 26:02.510
+String dsn á "jdbc:sqlserver://localhost;databaseName-Library;integratedsecurity-true";
+
+250
+26:02.620 --> 26:14.020
+String dsn á "jdbc:sqlserver://localhost;databaseName-Library;integratedsecurity-true";
+
+251
+26:14.060 --> 26:21.300
+que es localhost (la misma máquina); definimos el nombre de la base de datos como "biblioteca"
+
+252
+26:24.480 --> 26:34.110
+y vamos a declarar que la seguridad integrada es verdadera
+
+253
+26:34.820 --> 26:44.820
+integratedsecurity-true
+
+254
+26:44.890 --> 26:53.970
+Ahora vamos a envolver esto en un try catch porque java requiere métodos que pueden lanzar una excepción
+
+255
+26:54.030 --> 26:56.490
+para ser envuelto en tratar de atrapar por lo tanto.
+
+256
+26:56.490 --> 27:02.340
+Así que vamos a probar / atrapar (Excepción e)
+
+257
+27:06.870 --> 27:10.180
+y vamos a imprimir el rastro de la pila.
+
+258
+27:10.200 --> 27:15.880
+Si se produce una excepción; e.printStackTrace();
+
+259
+27:19.880 --> 27:29.870
+en nuestro bloque try; vamos a crear un objeto de conexión;  
+
+260
+27:31.270 --> 27:34.970
+Conn de conexión: DriverManager.getConnection(dsn);
+
+261
+27:35.930 --> 27:38.420
+Ahora estamos declarando dos nuevos objetos aquí.
+
+262
+27:38.450 --> 27:39.980
+Así que tenemos que importarlos.
+
+263
+27:39.980 --> 27:43.810
+importar java.sql.Connection;
+
+264
+27:46.630 --> 27:49.790
+importar java.sql.DriverManager;
+
+265
+27:57.070 --> 27:59.250
+no vamos a crear una declaración.
+
+266
+27:59.570 --> 28:09.280
+Instrucción stmt á conn.createStatement();      
+
+267
+28:11.900 --> 28:17.870
+una vez más estamos usando un nuevo objeto; por lo que tendremos que importar eso - importar java.sql.Statement;
+
+268
+28:21.850 --> 28:24.730
+ahora vamos a utilizar un objeto de conjunto de resultados
+
+269
+28:28.510 --> 28:32.060
+ResultSet result á stmt.executeQuery("..
+
+270
+28:32.550 --> 28:34.210
+ResultSet result á stmt.executeQuery("..
+
+271
+28:37.930 --> 28:43.060
+y aquí es donde escribimos la instrucción SQL "select * from students"
+
+272
+28:46.600 --> 28:50.610
+Así que todo va bien debemos tener un conjunto de resultados
+
+273
+28:50.650 --> 28:57.610
+Así que vamos a recorrer en iteración ese resultado que sigue; mientras que (result.next())
+
+274
+29:05.310 --> 29:11.130
+String firstname á result.getString("Firstname");
+
+275
+29:22.020 --> 29:23.740
+String surname á result.getString("Surname"); 
+
+276
+29:26.320 --> 29:29.780
+String surname á result.getString("Surname"); 
+
+277
+29:35.920 --> 29:38.510
+y luego escribiremos eso en la pantalla;
+
+278
+29:49.630 --> 29:57.670
+Así que todo va bien que debe imprimir en la pantalla.
+
+279
+29:57.700 --> 30:05.440
+Ya tengo el objeto de la declaración.
+
+280
+30:09.530 --> 30:16.880
+guardar esto; vamos a ver con suerte esta compilación; así que estamos escribiendo javac sqljava.java
+
+281
+30:26.960 --> 30:29.300
+Así que ahora tenemos un archivo de clase
+
+282
+30:29.390 --> 30:33.630
+SQLJava.class; ahora, al ejecutar esto.
+
+283
+30:33.650 --> 30:44.690
+Necesitamos incluir el archivo jar en la ruta de acceso de clase para hacer eso que escribimos:
+
+284
+30:44.690 --> 30:49.250
+java -cp ".; sqljdbc42.jar" SQLJava
+
+285
+30:52.970 --> 30:53.910
+java -cp ".; sqljdbc42.jar" SQLJava
+
+286
+30:53.970 --> 30:56.640
+java -cp ".; sqljdbc42.jar" SQLJava
+
+287
+30:56.740 --> 31:06.770
+Ahora debo decir que este archivo JAR y DLL están diseñados para JRE 18 y una máquina de 64 bits.
+
+288
+31:06.870 --> 31:15.330
+Si no está ejecutando Java Versión 1.18 (JRE 18) o no está ejecutando esto en 64 bits
+
+289
+31:15.330 --> 31:19.560
+máquina y es posible que necesite un archivo JAR y DLL diferente aquí
+
+290
+31:23.350 --> 31:29.210
+y escribimos el nombre de la clase SQLJava, y ejecutamos esto.
+
+291
+31:32.910 --> 31:39.960
+y ahí vamos; nuestros tres estudiantes; así que fue una introducción muy rápida a Java.
+
+292
+31:40.290 --> 31:48.770
+Y conectarse a SQL Server, pero espero que tenga sentido. ... Y es para ti - usando cualquier idioma de tu elección
+
+293
+31:49.120 --> 31:55.790
+C, Node, Python o Java: escriba una aplicación de consola que solicite al usuario un nombre y
+
+294
+31:55.790 --> 32:02.750
+apellido a un nuevo alumno inserta un nuevo alumno en la base de datos; la solicitud no debe ser susceptible a
+
+295
+32:02.780 --> 32:05.450
+Ataques de inyección SQL.
+
+296
+32:05.900 --> 32:13.660
+Así que dale una gota y echa un vistazo al video de la solución.
+
+297
+32:13.650 --> 32:15.660
+Espero que hayas dado una prueba a este ejercicio.
+
+298
+32:15.680 --> 32:22.640
+Si no lo has hecho, entonces pausa este video ahora; y darle una gota a este ejercicio; puedes elegir cualquier lenguaje de programación
+
+299
+32:22.640 --> 32:30.560
+usted quiere de la elección de C , Python, Nodo o Java y esto le mostrará la solución en cada
+
+300
+32:30.560 --> 32:32.050
+de estas lenguas.
+
+301
+32:32.150 --> 32:39.230
+Así que la primera solución que vamos a mostrar es C, así que si abrimos el estudio visual una vez más vamos a
+
+302
+32:39.350 --> 32:47.660
+abrir nuestro código de ejemplo de núcleo .Net, por lo que sólo esperaremos a que se cargue, debe tomar un momento.
+
+303
+33:07.960 --> 33:14.960
+OK, así que ahora tenemos nuestro código de ejemplo de nuevo, deberíamos sacar el código que no necesitamos.
+
+304
+33:15.140 --> 33:20.220
+Así que no necesitamos el código para leer de la base de datos.
+
+305
+33:20.480 --> 33:23.740
+Ahora mismo necesitamos nuestra conexión.
+
+306
+33:23.990 --> 33:30.920
+Así que lo que queremos hacer es pedir al usuario el nombre y apellidos del estudiante.
+
+307
+33:31.160 --> 33:44.340
+Así que escribimos en Console.WriteLine
+
+308
+33:50.650 --> 33:55.550
+"Por favor, introduzca el nombre del estudiante"
+
+309
+34:06.000 --> 34:06.770
+Console.Writeline
+
+310
+34:11.570 --> 34:15.010
+"Por favor, introduzca el apellido del estudiante"
+
+311
+34:18.950 --> 34:26.060
+var surname-console.readline();
+
+312
+34:26.190 --> 34:31.650
+Ahora necesitamos crear nuestra instrucción SQL basada en las variables de nombre y apellido.
+
+313
+34:31.800 --> 34:37.520
+var sql á string.format(
+
+314
+34:39.960 --> 34:44.660
+"insertar en los estudiantes (nombre, apellidos) ....
+
+315
+34:49.290 --> 35:00.490
+valores ('{0}','{1}')
+
+316
+35:01.360 --> 35:02.370
+{0} y {1} son marcadores de posición para nuestras dos variables.
+
+317
+35:02.730 --> 35:08.320
+Y vamos a pasar nuestro nombre y apellido.
+
+318
+35:09.240 --> 35:16.320
+Así que esto construirá nuestra cadena SQL; Mencioné en el ejercicio por lo que esto debe ser resistente
+
+319
+35:16.510 --> 35:24.570
+a los ataques de inyección SQL; que es muy importante en este punto porque - se podría imaginar si alguien
+
+320
+35:24.570 --> 35:33.690
+iban a escribir - nombre del estudiante es - " estudiantes de mesa desplegable - va a arruinar a nuestros estudiantes
+
+321
+35:33.690 --> 35:34.590
+Mesa.
+
+322
+35:34.590 --> 35:39.840
+Así que lo que voy a hacer es reemplazar todos los apóstrofos con apóstrofos dobles que significará que todavía
+
+323
+35:39.840 --> 35:45.990
+apoyar apóstrofos en nuestros nombres de estudiantes, pero no permiten ataques de inyección de escape.
+
+324
+35:45.990 --> 35:56.300
+nombre de pila: nombre.replace("'","''");
+
+325
+35:57.700 --> 36:00.490
+Y tú haces lo mismo con el apellido.
+
+326
+36:00.590 --> 36:09.330
+Siempre debe escapar de cualquier texto proporcionado por el usuario; incluso si usted no cree que sus usuarios van a ser maliciosos
+
+327
+36:09.690 --> 36:13.290
+la gente puede cometer errores la gente puede probar este tipo de cosas.
+
+328
+36:13.980 --> 36:17.860
+OK, así que ahora tenemos nuestra instrucción SQL creada.
+
+329
+36:18.000 --> 36:29.250
+Ahora vamos a crear un nuevo objeto SQLCommand
+
+330
+36:29.250 --> 36:32.890
+y pasar la instrucción SQL y la conexión.
+
+331
+36:33.990 --> 36:42.930
+Ahora ejecutamos una no consulta como para decir que no necesitamos o no tenemos ningún valor devuelto en esto; ya que es un inserto
+
+332
+36:42.930 --> 36:48.840
+declaración; no una lectura; y cerrar la conexión o simplemente esperar.
+
+333
+36:49.700 --> 36:53.020
+Así que guarda eso; ejecutarlo; Espere a que se compile;
+
+334
+37:17.730 --> 37:21.530
+OK introduzca el nombre del estudiante que voy a llamar John Boyle.
+
+335
+37:21.540 --> 37:28.750
+Así que John; apellidos Boyle; Entrar;
+
+336
+37:29.630 --> 37:30.300
+De acuerdo.
+
+337
+37:30.600 --> 37:37.920
+Así que eso debería haberse ejecutado; mira nuestra mesa de estudiantes; y podemos ver a un nuevo estudiante con el nombre
+
+338
+37:37.920 --> 37:38.720
+John Boyle.
+
+339
+37:38.790 --> 37:40.770
+No hay fecha de nacimiento; porque eso no fue proporcionado.
+
+340
+37:42.060 --> 37:49.220
+Así es como funciona la solución para .net; y vamos a seguir adelante y echar un vistazo al nodo siguiente
+
+341
+37:52.420 --> 37:59.290
+Y ahora vamos a demostrar cómo resolver este ejercicio usando Node; si ha decidido utilizar el nodo para
+
+342
+37:59.890 --> 38:00.740
+hacer este ejercicio.
+
+343
+38:01.360 --> 38:10.560
+Por lo tanto, para recopilar la entrada del usuario, recomendaría usar un paquete NPM llamado prompt-sync.
+
+344
+38:10.580 --> 38:16.420
+Hay otros paquetes que puede utilizar, pero me parece rápido-sincronización muy útil y bastante sencillo para
+
+345
+38:16.420 --> 38:16.740
+Uso.
+
+346
+38:17.290 --> 38:22.090
+Así que comenzaremos con eso; npm añadir prompt-sync
+
+347
+38:22.210 --> 38:31.690
+Creo que esta es una forma sincrónica de recopilar la entrada del usuario para que ejecute ese comando, se descarga
+
+348
+38:31.900 --> 38:36.370
+y lo incluye en nuestro proyecto.
+
+349
+38:36.400 --> 38:42.320
+Volvemos a nuestro editor de texto favorito, estoy usando edit y abrimos nuestro index.js
+
+350
+38:43.060 --> 38:50.650
+Importamos y el módulo rápido
+
+351
+38:55.530 --> 39:00.270
+var prompt á require("prompt-sync")
+
+352
+39:01.470 --> 39:03.610
+Así que ahora tenemos un objeto rápido.
+
+353
+39:03.600 --> 39:10.230
+Ahora vamos a tener un nombre de pila. 
+
+354
+39:16.550 --> 39:22.180
+var firstname á prompt('Por favor ingrese el nombre del estudiante 's:');
+
+355
+39:22.360 --> 39:34.440
+Tenemos que escapar del apóstrofo, sólo una barra invertida. 
+
+356
+39:34.740 --> 39:36.050
+var apellidos á prompt('¿Cuál es el apellido del estudiante 's:');
+
+357
+39:39.270 --> 39:39.710
+var apellidos á prompt('¿Cuál es el apellido del estudiante 's:');
+
+358
+39:42.790 --> 39:44.990
+Ahora; como parte de este ejercicio,
+
+359
+39:45.000 --> 39:50.640
+Dijimos que queríamos asegurarnos de que esto era inmune a los ataques de inyección SQL, que efectivamente
+
+360
+39:50.640 --> 39:54.060
+significa que necesitamos reemplazar todos los apóstrofos con apóstrofos dobles.
+
+361
+39:54.640 --> 40:08.430
+Así que en JavaScript que se hace de la siguiente manera:
+
+362
+40:08.490 --> 40:15.110
+nombre de pila.nombre.replace(/'/g,"''");
+
+363
+40:15.400 --> 40:20.930
+Este formato aquí /'/g está declarando un regex
+
+364
+40:21.690 --> 40:30.120
+La razón por la que no lo estamos haciendo así; es que esta declaración en particular eliminaría la primera ocurrencia
+
+365
+40:30.240 --> 40:34.070
+de un apóstrofo pero no de ocurrencias posteriores de un apóstrofo.
+
+366
+40:34.080 --> 40:40.060
+Esto eliminará todos los apóstrofos, así reemplazar todos los apóstrofos un doble apóstrofos.
+
+367
+40:40.060 --> 40:43.280
+No vamos a hacer lo mismo por el apellido.
+
+368
+40:44.120 --> 40:44.940
+Y...
+
+369
+40:45.150 --> 40:53.790
+Eso debería mantenernos a salvo de los ataques de inyección SQL, ahora van a escribir nuestra instrucción SQL
+
+370
+40:53.910 --> 40:57.360
+insertar en los valores de los estudiantes (firsname,surname) (
+
+371
+41:00.180 --> 41:16.290
+'''nombre'',''''nombre_apellido')'. 
+
+372
+41:16.360 --> 41:17.190
+'''nombre'',''''nombre_apellido')'. 
+
+373
+41:18.660 --> 41:21.960
+'''nombre'',''''nombre_apellido')'. 
+
+374
+41:22.350 --> 41:29.620
+'''nombre'',''''nombre_apellido')'. 
+
+375
+41:29.860 --> 41:34.950
+no necesitamos iterar a través de un conjunto de registros porque no obtendremos uno para una instrucción insert.
+
+376
+41:34.990 --> 41:36.850
+Sólo escribiremos la palabra console.log(
+
+377
+41:36.890 --> 41:37.650
+"Muy buena"
+
+378
+41:37.690 --> 41:39.850
+Saber que esto ha vuelto a llamar.
+
+379
+41:40.340 --> 41:42.360
+Revisaremos la base de datos después.
+
+380
+41:42.580 --> 41:44.890
+Así que eso salvó;
+
+381
+41:44.920 --> 41:49.370
+Vamos a ejecutar node index.js
+
+382
+41:50.360 --> 41:51.780
+Diremos Paul
+
+383
+41:54.620 --> 41:55.180
+Murphy.
+
+384
+41:56.880 --> 42:03.350
+OK; y vamos a comprobar en la base de datos ahora para ver si esto se insertó correctamente.
+
+385
+42:03.350 --> 42:09.470
+Seleccione * de los alumnos; allá vamos; tenemos a Paul Murphy; fecha de nacimiento es nula porque no hemos pasado en
+
+386
+42:09.470 --> 42:11.720
+una fecha de nacimiento, pero esa es nuestra fila.
+
+387
+42:14.760 --> 42:17.670
+Y aquí está la solución para Python.
+
+388
+42:17.670 --> 42:24.690
+Si usted ha decidido utilizar python como un lenguaje de programación para resolver este ejercicio tan de inmediato sólo
+
+389
+42:25.650 --> 42:33.260
+entrar en nuestro editor de código; necesitamos recoger un nombre y apellidos del usuario.
+
+390
+42:33.870 --> 42:49.660
+nombre de pila: input("¿Cuál es el nombre del alumno?")
+
+391
+42:49.840 --> 43:00.280
+apellidos: input("¿Cuál es el apellido del estudiante")
+
+392
+43:00.370 --> 43:06.050
+Ahora, como parte de este ejercicio, he pedido asegurarme de que esto está a salvo de los ataques de inyección SQL, lo que efectivamente sólo significa que reemplazamos apóstrofos individuales con
+
+393
+43:06.060 --> 43:11.290
+apóstrofos dobles en caso de que el usuario fuera a tratar de enviar algo desagradable.
+
+394
+43:11.290 --> 43:21.010
+nombre de pila: nombre.replace("'","''")
+
+395
+43:21.220 --> 43:26.020
+y debemos hacer lo mismo por el apellido
+
+396
+43:30.530 --> 43:38.690
+ahora vamos a cambiar la declaración execute a
+
+397
+43:42.470 --> 43:44.420
+insertar en los valores de los estudiantes (nombre, apellidos) (...
+
+398
+43:47.560 --> 43:54.690
+debemos poner en lugar titulares aquí para el primer nombre; y un portalugars para el apellido
+
+399
+43:58.210 --> 44:04.810
+.format(firstname,surname)
+
+400
+44:07.590 --> 44:17.230
+y antes de que realmente va a funcionar tenemos que comprometer la conexión de la tal forma; no tenemos un cursor por lo que
+
+401
+44:17.230 --> 44:20.430
+sólo vamos a decir print("OK")
+
+402
+44:23.500 --> 44:35.410
+OK vamos a guardar esto; volver al símbolo del sistema y escriba Python script.py
+
+403
+44:35.500 --> 44:40.490
+nombre john, apellido Boyle.
+
+404
+44:40.790 --> 44:41.210
+Bien.
+
+405
+44:42.250 --> 44:51.090
+seleccionar * de los estudiantes; Mira en la base de datos y tenemos a John Boyle como el nuevo estudiante
+
+406
+44:51.090 --> 44:58.470
+Y finalmente si usted ha elegido Java como su idioma de elección para completar este ejercicio aquí están las instrucciones para
+
+407
+44:58.470 --> 45:02.680
+cómo resolver esta solución utilizando Java.
+
+408
+45:02.960 --> 45:09.260
+Así que lo que vamos a hacer es volver a nuestro editor de texto y abrir el programa SQLJava.java que teníamos
+
+409
+45:09.270 --> 45:10.950
+escrito anteriormente.
+
+410
+45:11.060 --> 45:19.900
+Así que para recoger la entrada del usuario de la línea de comandos en Java vamos a utilizar es una clase llamada escáner.
+
+411
+45:20.960 --> 45:23.630
+Así que lo primero que tenemos que importar es importarlo.
+
+412
+45:23.630 --> 45:28.730
+importar java.util.Scanner;
+
+413
+45:31.400 --> 45:32.210
+vamos a
+
+414
+45:36.680 --> 45:40.510
+declarar nuestro objeto escáner;  Escáner de escáner : nuevo escáner (System.in);
+
+415
+45:41.150 --> 45:55.290
+Así que estamos creando un escáner a partir de la entrada estándar, es decir, la interfaz de texto.
+
+416
+45:55.460 --> 46:00.490
+Ahora vamos a escribir una declaración diciendo que ingrese en el nombre del estudiante.
+
+417
+46:00.590 --> 46:06.230
+System.out.printLn("
+
+418
+46:07.010 --> 46:11.740
+"Introduzca el nombre del estudiante:");
+
+419
+46:15.290 --> 46:19.820
+y luego vamos a recoger la entrada del escáner.
+
+420
+46:19.850 --> 46:29.750
+Nombre de la cadena: Scanner.nextLine();
+
+421
+46:31.550 --> 46:34.520
+Lo que llevará todo hasta la siguiente entrada, como en cuando el usuario presiona enter.
+
+422
+46:34.520 --> 46:41.360
+Ahora como antes y le he pedido que se asegure de que esto es resistente a los ataques de inyección SQL
+
+423
+46:41.390 --> 46:47.640
+lo que sólo significa que usted necesita para escapar de los apóstrofos y reemplazar los apóstrofos con apóstrofos dobles.
+
+424
+46:47.900 --> 46:48.860
+Es así de simple.
+
+425
+46:48.880 --> 46:53.420
+Ahora para hacer eso en Java usamos:
+
+426
+46:57.410 --> 47:06.530
+nombre de pila: firname.replace("'","''");
+
+427
+47:06.530 --> 47:07.770
+Y ahora vamos a hacer lo mismo por el apellido.
+
+428
+47:07.770 --> 47:17.580
+Entonces copie esas tres líneas de código y cambie según sea necesario. apellido del estudiante, apellido de cadena.
+
+429
+47:18.050 --> 47:20.660
+scanner.newLine()
+
+430
+47:21.800 --> 47:26.730
+Y reemplazamos las comas invertidas.
+
+431
+47:27.710 --> 47:36.440
+Lo que tenemos que hacer ahora es crear nuestra instrucción SQL para que usemos string.format porque
+
+432
+47:36.530 --> 47:40.640
+Voy a usar algunos portamonedas aquí
+
+433
+47:45.030 --> 47:48.180
+String.format("insertar en los valores de los alumnos (nombre,apellido) ( ...
+
+434
+47:51.960 --> 48:06.210
+'%s','%s')",nombre,apellido);
+
+435
+48:06.900 --> 48:09.140
+'%s','%s')",nombre,apellido);
+
+436
+48:12.550 --> 48:17.170
+por lo que cuando esto ejecuta el primer nombre entra en el primer %s, y el 
+
+437
+48:17.170 --> 48:17.960
+apellido entra en el segundo %s
+
+438
+48:24.340 --> 48:30.610
+Vamos a usar stmt.execute, y pasar en el SQL
+
+439
+48:30.760 --> 48:42.200
+Ahora esto no va a devolver resultsset así que vamos a deshacer nos de esto; y no necesitamos eso.
+
+440
+48:42.380 --> 48:44.470
+Tal vez quiera una impresión.
+
+441
+48:44.720 --> 48:49.200
+Está bien decir que la declaración fue ejecutada.
+
+442
+48:51.070 --> 48:51.510
+Y..
+
+443
+48:51.550 --> 48:52.510
+...
+
+444
+48:52.580 --> 48:53.990
+Eso debería bafuncionar por ahora.
+
+445
+48:53.990 --> 49:03.950
+Vamos a salvar esto; compilarlo; y ejecutarlo; así que vuelva al símbolo del sistema; vamos a escribir en
+
+446
+49:04.860 --> 49:06.830
+javac SQLJava.java
+
+447
+49:06.830 --> 49:07.270
+javac SQLJava.java
+
+448
+49:10.380 --> 49:10.760
+Bien.
+
+449
+49:10.780 --> 49:12.990
+Se compila correctamente.
+
+450
+49:13.020 --> 49:23.010
+java -cp ".; sqljdbc42.jar" SQLJava
+
+451
+49:23.310 --> 49:31.240
+java -cp ".; sqljdbc42.jar" SQLJava
+
+452
+49:32.520 --> 49:35.050
+Nombre: Pedro.
+
+453
+49:35.670 --> 49:37.180
+Apellido: Doyle.
+
+454
+49:39.240 --> 49:41.510
+Y está regresando con ... De acuerdo
+
+455
+49:41.630 --> 49:48.950
+volvamos a la base de datos y vamos a "seleccionar * de los estudiantes"
+
+456
+49:48.950 --> 49:50.300
+Ahí está Peter Doyle.
+
+457
+49:51.110 --> 49:55

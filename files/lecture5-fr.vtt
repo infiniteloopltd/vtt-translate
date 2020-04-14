@@ -1,0 +1,482 @@
+WEBVTT
+
+0
+00:00.930 --> 00:09.570
+Données agrégées; Regrouper les données; Questions de données agrégées; Les données tombent parfois naturellement dans des groupes où de nombreux
+
+1
+00:09.570 --> 00:15.340
+les lignes peuvent partager les mêmes caractéristiques; si vous avez gardé une base de données qui incluait les détails des gens, vous
+
+2
+00:15.340 --> 00:20.830
+voir que les points de données comme le nom et l’adresse peuvent être raisonnablement uniques lorsque la nationalité et le sexe
+
+3
+00:20.830 --> 00:28.560
+être partagé entre de nombreuses personnes; les requêtes globales agissent sur le groupe de données qui partagent une caractéristique commune
+
+4
+00:28.590 --> 00:33.830
+compte, somme, max, min et statistiques.
+
+5
+00:33.830 --> 00:38.820
+Il existe de nombreuses fonctions de valeur scalaire qui agissent sur un groupe avec soit une valeur de retour 1 par groupe.
+
+6
+00:39.050 --> 00:44.930
+Il s’agit notamment de: Compte - retourner le nombre de lignes dans un groupe ou une table. Somme - additionnez toutes les valeurs d’un groupe
+
+7
+00:44.930 --> 00:52.850
+ou table; Max - trouver la valeur maximale dans un groupe ou une table; Min - trouver une valeur minimale dans un groupe ou une table,
+
+8
+00:52.940 --> 00:55.840
+AVG - trouver la valeur moyenne dans un groupe par table.
+
+9
+00:55.980 --> 01:00.900
+STDEV - Trouver l’écart standard dans un groupe ou une table; démonstration vidéo.
+
+10
+01:01.160 --> 01:05.320
+Il démontrera une sélection de fonctions statistiques mentionnées dans la diapositive précédente.
+
+11
+01:07.800 --> 01:13.090
+Ok ici, nous allons démontrer certaines des fonctions de valeur scalaire dans le serveur SQL.
+
+12
+01:13.200 --> 01:15.180
+Commençons par le compte
+
+13
+01:15.370 --> 01:16.360
+Regardons notre table de livres
+
+14
+01:20.710 --> 01:29.450
+et voir seulement trois livres dans cette table afin que nous puissions utiliser le compte pour dire le nombre de rangées dans la table.
+
+15
+01:29.500 --> 01:29.800
+Trois
+
+16
+01:34.300 --> 01:43.390
+nous pouvons trouver; utiliser la somme() pour trouver le nombre total de pages dans tous les livres de notre bibliothèque.
+
+17
+01:43.450 --> 01:44.410
+somme (pages)
+
+18
+01:48.030 --> 01:50.140
+1177
+
+19
+01:50.360 --> 01:56.230
+Vous pouvez trouver le nombre maximum de pages dans n’importe quel livre de notre bibliothèque.
+
+20
+01:56.240 --> 02:01.100
+438;  ou le livre le plus court de notre bibliothèque - 
+
+21
+02:01.290 --> 02:14.110
+en utilisant Min;  326; la longueur moyenne du livre dans notre bibliothèque 392; ou l’écart standard de la
+
+22
+02:14.110 --> 02:15.440
+pages dans notre bibliothèque.
+
+23
+02:15.440 --> 02:16.270
+Serait 58
+
+24
+02:19.960 --> 02:25.720
+groupe par clause qui sépare un tableau en groupes de données afin que les fonctions scalar évaluées puissent être
+
+25
+02:25.720 --> 02:27.910
+utilisé contre chaque groupe de données.
+
+26
+02:27.970 --> 02:34.630
+Par exemple, une banque pourrait utiliser "groupe par" pour déterminer le solde bancaire moyen par code postal / code postal
+
+27
+02:35.260 --> 02:42.160
+sélectionnez le code postal,avg (équilibre) du groupe BankAccounts par zipCode
+
+28
+02:42.160 --> 02:46.840
+démonstration vidéo.
+
+29
+02:47.170 --> 02:53.520
+Ici, nous allons démontrer le groupe par clause à; énumérer le nombre de livres écrits par chaque auteur.
+
+30
+02:53.770 --> 03:01.080
+Trouvez le nombre de pages écrites par chaque auteur, commandées par pages;  
+
+31
+03:01.080 --> 03:02.030
+Ici, je vais démontrer le groupe par clause.
+
+32
+03:02.130 --> 03:07.140
+Tout d’abord pour énumérer le nombre de livres écrits par chaque auteur et d’autre part pour énumérer le nombre de pages
+
+33
+03:07.140 --> 03:09.380
+écrit par chaque auteur commandé par pages.
+
+34
+03:10.170 --> 03:17.190
+Donc, nous allons grouper par sur le nom de l’auteur, puis utiliser le compte dans le premier cas pour trouver le nombre
+
+35
+03:17.190 --> 03:23.220
+de livres et de somme dans le second cas pour additionler toutes les pages.
+
+36
+03:23.340 --> 03:25.100
+Alors écrivons notre requête de base
+
+37
+03:29.280 --> 03:31.760
+sélectionner à partir de l’auteur ; pour obtenir nos auteurs.
+
+38
+03:31.840 --> 03:41.500
+Nous devons maintenant nous joindre à cette question sur la table des auteurs de livres;
+rejoindre BookAuthor ba sur ba.authorId - a.id
+
+39
+03:46.880 --> 03:49.420
+et de regrouper cela sur le nom de l’auteur
+
+40
+03:53.310 --> 03:55.190
+maintenant avant que je dirige cette requête.
+
+41
+03:55.190 --> 04:03.590
+Il va provoquer une erreur à moins que vous changez l’étoile pour le groupement d’une colonne par; pour démontrer l’erreur.
+
+42
+04:03.610 --> 04:14.190
+Si j’essaie de gérer cela; il dit qu’il est invalide dans la liste de sélection; donc si je dis juste nom d’auteur à la place
+
+43
+04:14.190 --> 04:18.130
+de Star I obtenir le nom d’auteur.
+
+44
+04:18.750 --> 04:22.350
+Maintenant, je peux ajouter des fonctions de valeur scalaire telles que Le compte
+
+45
+04:26.710 --> 04:29.660
+il me montre maintenant que J.K. Rowling a écrit deux livres.
+
+46
+04:30.140 --> 04:43.820
+Dhonielle en a écrit un; et Sona en a écrit un; donc si nous voulons maintenant résumer nos pages, nous pouvons changer ... 
+
+47
+04:44.060 --> 04:46.160
+Mais d’abord nous devons nous joindre à la table des livres
+
+48
+04:51.600 --> 04:53.510
+joignez-vous aux livres b sur b.id ba.bookid
+
+49
+04:53.920 --> 04:55.520
+joignez-vous aux livres b sur b.id ba.bookid
+
+50
+04:55.770 --> 04:57.350
+joignez-vous aux livres b sur b.id ba.bookid
+
+51
+05:00.900 --> 05:01.800
+rapide regarder cela.
+
+52
+05:11.690 --> 05:15.280
+Donc, ici, nous avons toute la table non-groupé
+
+53
+05:15.450 --> 05:17.110
+Nous voulons nous regrouper là-dessus.
+
+54
+05:17.210 --> 05:20.890
+Eh bien à résumer sur la table des pages et le groupe par le nom de l’auteur
+
+55
+05:24.090 --> 05:35.280
+groupe par authorName ... somme (pages)
+
+56
+05:35.520 --> 05:43.100
+Et la dernière partie de ceci est à commander par les pages que vous pouvez taper simplement ; commande par somme (pages)
+
+57
+05:49.050 --> 05:52.900
+et cette liste est maintenant commandée par le total des pages.
+
+58
+05:54.860 --> 05:57.650
+Pour rendre cela plus concis, nous pouvons donner à ce alias colonne
+
+59
+06:01.900 --> 06:12.870
+et inclure l’alias de colonne dans l’ordre par; et nous avons maintenant un nom pour cette colonne. 
+
+60
+06:13.020 --> 06:15.630
+Avoir une clause; Est similaire à l’endroit où la clause fonctionne sur les groupes.
+
+61
+06:16.470 --> 06:21.930
+Donc, si une banque voulait énumérer les codes postaux seulement lorsque le solde moyen du compte bancaire était de plus d’un million
+
+62
+06:21.930 --> 06:28.200
+dollars alors qu’ils pourraient utiliser; sélect code postal, avg(balance) de bankAccounts
+
+63
+06:28.860 --> 06:37.720
+groupe par code postal ayant avg(équilibre)-1000000
+
+64
+06:37.910 --> 06:43.210
+Voici une démonstration de la clause d’avoir; où allez-vous montrer les auteurs de liste qui ont écrit au moins
+
+65
+06:43.210 --> 06:45.630
+deux livres.
+
+66
+06:45.860 --> 06:52.290
+Ok ici, nous allons démontrer que la clause; en énumérant les auteurs qui ont écrit au moins deux livres.
+
+67
+06:52.400 --> 06:58.100
+Donc, une fois de plus, nous allons choisir parmi la table des auteurs rejoint sur la table des auteurs de livres et nous sommes
+
+68
+06:58.100 --> 07:06.730
+va courir un compte sur chaque auteur; sélectionner des auteurs
+
+69
+07:10.800 --> 07:12.160
+rejoindre sur la table des auteurs de livres
+
+70
+07:22.330 --> 07:33.880
+nous voulons maintenant regrouper uniquement le nom de l’auteur, et inclure un compte
+
+71
+07:34.140 --> 07:40.320
+Maintenant, rien ne peut apparaître dans la liste de sélection à moins qu’il ne soit dans le groupe par clause ou si c’est une fonction scalaire.
+
+72
+07:44.630 --> 07:53.210
+Inclure un compte.
+
+73
+07:53.320 --> 07:58.190
+Maintenant, nous avons tous les auteurs et le nombre de livres que j’ai écrit.
+
+74
+07:58.290 --> 08:02.220
+Maintenant, vous voulez limiter cela à tous ceux qui sont écrits au moins deux livres.
+
+75
+08:02.310 --> 08:04.620
+Donc, je peux dire avoir le compte () 2
+
+76
+08:13.410 --> 08:14.870
+et il retourne J.K. Rowling
+
+77
+08:18.230 --> 08:23.870
+variables globales du système; Il ya certaines variables qui sont disponibles système large sur le serveur SQL
+
+78
+08:24.150 --> 08:26.230
+et ne dépendent pas du contexte de la base de données.
+
+79
+08:26.270 --> 08:32.260
+Il s’agit notamment de @@connections au nombre de connexions de base de données au démarrage; @@identity la dernière identité
+
+80
+08:32.410 --> 08:40.070
+colonne insérée; @@CPU_Busy la quantité de millisecondes voir SQL Server a utilisé le processeur.
+
+81
+08:40.100 --> 08:45.400
+@@Language - La langue actuellement utilisée par SQL Server. @@RowCount le nombre de lignes effectuées par la dernière déclaration de la SQL
+
+82
+08:46.070 --> 08:51.290
+@@SERVERNAME Le nom du serveur SQL;  @@VERSION la version du serveur SQL.
+
+83
+08:53.150 --> 08:58.960
+Démonstration vidéo; Ici démontrera quelques variables globales du système pour générer un diagnostic simple
+
+84
+08:58.960 --> 09:01.410
+rapport pour un autre développeur.
+
+85
+09:01.720 --> 09:08.500
+Nous voulons signaler la version sqL Server exacte à un développeur et vous souhaitez vérifier les connexions excessives
+
+86
+09:08.620 --> 09:12.150
+ou l’utilisation du processeur.
+
+87
+09:12.320 --> 09:15.790
+Ok ici, nous allons démontrer certaines variables globales du système.
+
+88
+09:16.420 --> 09:19.910
+Nous voulons donc signaler la version serveur SQL exacte au développeur.
+
+89
+09:19.930 --> 09:22.350
+Donc, nous allons simplement sélectionner la version actuelle
+
+90
+09:25.540 --> 09:27.740
+maintenant cela est tronqué.
+
+91
+09:27.800 --> 09:32.850
+Alors peut-être aimeriez-vous voir cela comme un texte plutôt qu’une grille.
+
+92
+09:32.920 --> 09:36.590
+Quel cas nous pouvons aller résultats au texte.
+
+93
+09:38.820 --> 09:43.510
+Et c’est notre version complète du serveur SQL
+
+94
+09:45.270 --> 09:52.560
+Jetons un coup d’œil; par exemple; notre nombre de connexions OK.
+
+95
+09:52.570 --> 09:54.680
+Nous en avons deux cent quatre-vingt-dix-neuf.
+
+96
+09:54.700 --> 09:56.100
+C’est beaucoup.
+
+97
+09:56.110 --> 10:03.070
+Voyons ce qui se passe lorsque nous réinitialiser SQL Server et exécuter cette requête à nouveau alors nous allons cliquer à droite
+
+98
+10:16.870 --> 10:24.330
+et rejouons ceci; et nous revenons vers le bas.
+
+99
+10:24.510 --> 10:25.320
+Maintenant, c’est à toi.
+
+100
+10:25.740 --> 10:27.380
+Voyons si vous pouvez appliquer ce que vous avez appris.
+
+101
+10:28.290 --> 10:33.690
+Écrivez une requête qui montrera combien d’étudiants nous sommes nés sur chaque mois de l’année.
+
+102
+10:34.050 --> 10:40.590
+Vous pouvez mettre cette vidéo en pause maintenant et essayer cette requête.
+
+103
+10:41.130 --> 10:41.580
+D'accord.
+
+104
+10:41.590 --> 10:46.540
+Nous allons donc écrire une requête qui montrera combien d’étudiants sont nés chaque mois de l’année.
+
+105
+10:46.540 --> 10:51.850
+J’espère que vous avez donné à ce d’abord un essai d’être n’avez pas vous pouvez mettre en pause cette vidéo maintenant et lui donner un aller.
+
+106
+10:52.380 --> 10:54.160
+OK, alors voici la solution.
+
+107
+10:54.200 --> 11:03.250
+Nous voulons voir nos étudiants table.
+
+108
+11:03.460 --> 11:12.190
+Nous avons besoin d’une fonction pour déterminer le mois de la date de naissance que je vais utiliser mois (dateOfBirth)
+
+109
+11:17.250 --> 11:19.650
+3 pour le 1er mars pour janvier.
+
+110
+11:20.990 --> 11:22.130
+Donnons-lui un nom.
+
+111
+11:22.290 --> 11:25.670
+MonthOfBirth à l’aide d’une colonne Alias
+
+112
+11:31.290 --> 11:41.190
+nous ne pouvons pas utiliser un ' parce que nous voulons utiliser un groupe par clause maintenant. Groupe par moisDe naissance; de sorte que cela reviendra
+
+113
+11:42.170 --> 11:51.950
+deux rangées une pour Mars un pour Janvier Janvier Mars et maintenant nous voulons savoir combien d’étudiants dans chaque
+
+114
+11:51.950 --> 11:54.060
+groupe que nous venons d’utiliser.
+
+115
+11:54.230 --> 11:54.560
+Compter
+
+116
+12:02.100 --> 12:06.010
+a obtenu un pour Janvier à Mars.
+
+117
+12:06.080 --> 12:06.710
+Donne-nous un nom.
+
+118
+12:14.100 --> 12:15.330
+Et c’est la solution.
+
+119
+12:16.160 --> 12:16.680
+J’espère que tu y vas.

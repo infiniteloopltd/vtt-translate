@@ -1,0 +1,1381 @@
+WEBVTT
+
+0
+00:01.420 --> 00:06.660
+Performances du serveur SQL; l’amélioration de la latence des données.
+
+1
+00:07.120 --> 00:09.120
+Pourquoi la performance est importante.
+
+2
+00:09.190 --> 00:16.360
+Amazon a constaté que pour chaque 100 millisecondes de retard de la latence coût sur 1 pour cent et les ventes; 
+
+3
+00:16.360 --> 00:23.230
+Google a constaté un supplément de 500 millisecondes de latence a chuté le trafic de 20 pour cent; faire en sorte que votre base de données réponde plus rapidement
+
+4
+00:23.230 --> 00:32.400
+requêtes fera le site Web ou l’application qu’il prend en charge de travailler plus rapidement. Mesurer les performances; en bas à droite
+
+5
+00:32.460 --> 00:34.260
+de l’interface utilisateur.
+
+6
+00:34.550 --> 00:41.220
+Un compteur de temps montrerait la performance à la seconde la plus proche; pour une mesure plus précise.
+
+7
+00:41.320 --> 00:46.290
+Vous sélectionnez les requêtes et incluez les statistiques des clients.
+
+8
+00:46.520 --> 00:51.980
+Notez que le serveur SQL cache les résultats et la mémoire afin pour un test équitable, vous pouvez effacer SQL plusieurs mémoire
+
+9
+00:51.980 --> 00:56.150
+cache en utilisant la commande dbcc dropcleanbuffers
+
+10
+00:59.830 --> 01:00.550
+SÉLECTIONNEZ LE HAUT.
+
+11
+01:02.350 --> 01:08.620
+Si vous n’avez pas besoin de chaque enregistrement correspondant seulement les 5 premiers enregistrements, alors vous pouvez taper l’instruction.
+
+12
+01:08.680 --> 01:16.330
+SELECT TOP FIVE - de table;  pour donner un gain de performance le nombre d’enregistrements correspondants devrait être
+
+13
+01:16.330 --> 01:24.750
+plus de cinq; l’ordre par et par groupe par clauses limitent le gain de performance puisque la base de données doit
+
+14
+01:24.750 --> 01:26.300
+lire l’ensemble correspondant de toute façon.
+
+15
+01:29.500 --> 01:31.060
+Démonstration vidéo.
+
+16
+01:31.390 --> 01:39.610
+Ici, nous allons démontrer comment créer un grand jeu de données aléatoires. Nous démontrerons ensuite le gain de performance par
+
+17
+01:39.610 --> 01:43.260
+par SELECT TOP.
+
+18
+01:43.780 --> 01:48.970
+Dans cette vidéo, nous allons démontrer comment créer un grand jeu de données aléatoires et ensuite nous allons démontrer
+
+19
+01:49.210 --> 01:54.750
+le gain de performance offert par SELECT TOP. Création d’un grand jeu de données aléatoire.
+
+20
+01:54.750 --> 01:57.390
+Ce n’est pas quelque chose que vous faites couramment dans le serveur SQL.
+
+21
+01:58.020 --> 02:01.620
+Cependant, travailler avec de grands ensembles de données est très commun.
+
+22
+02:02.950 --> 02:10.420
+Afin de voir les avantages offerts par ces améliorations de performance, il aide à travailler avec une grande
+
+23
+02:10.420 --> 02:15.410
+données parce que les différences sont plus prononcées.
+
+24
+02:15.670 --> 02:18.340
+Donc, tout d’abord, nous allons créer un grand ensemble aléatoire.
+
+25
+02:18.400 --> 02:27.550
+Donc, je vais créer une table de test et en ce que je vais avoir un couple de colonnes qui seront automatiquement
+
+26
+02:27.790 --> 02:39.720
+remplir avec des valeurs par défaut qui sont à peu près aléatoire;
+
+27
+02:39.770 --> 02:40.210
+créer le test de table1 (identité id int(1,1) non nulle
+
+28
+02:45.000 --> 02:48.220
+Nous aurons un GUID
+
+29
+02:48.690 --> 02:49.570
+Colonne.
+
+30
+02:50.430 --> 02:53.750
+GUID représente un identificateur véritablement unique.
+
+31
+02:54.000 --> 03:07.210
+Il s’agit d’un varchar à 36 chiffres et il a une valeur par défaut de newid (). qui est un nouvel identificateur véritablement unique.
+
+32
+03:07.890 --> 03:15.810
+Nous pouvons avoir une date créée qui est un défaut de date.
+
+33
+03:16.080 --> 03:17.930
+getdate ()
+
+34
+03:18.000 --> 03:23.550
+Nous allons avoir un flotteur aléatoire appelé "numéro" .
+
+35
+03:23.670 --> 03:26.590
+Rand par défaut()
+
+36
+03:27.780 --> 03:32.210
+Il y a donc quelques colonnes aléatoires et une table.
+
+37
+03:32.230 --> 03:35.590
+Nous devrions créer cette table maintenant; Exécuter.
+
+38
+03:37.410 --> 03:45.420
+Si nous insérons une ligne avec toutes les valeurs par défaut que vous dites insérer dans Le test 1.
+
+39
+03:45.750 --> 03:47.040
+Valeurs par défaut
+
+40
+03:54.040 --> 03:56.320
+Exécuter
+
+41
+03:59.000 --> 03:59.530
+sélectionner à partir de test1
+
+42
+04:04.560 --> 04:14.340
+et nous verrons qu’il a créé un autonumber, un guid, une date, et un certain nombre; afin de créer
+
+43
+04:14.820 --> 04:16.170
+beaucoup d’entre eux.
+
+44
+04:16.170 --> 04:18.810
+Je vais créer une boucle de temps une boucle infinie.
+
+45
+04:19.620 --> 04:31.700
+tandis que 1-1 commencent; fin; donc je cours ce que je peux l’arrêter à tout moment et voir ce qui est créé.
+
+46
+04:32.550 --> 04:40.500
+Cela a créé beaucoup, beaucoup de lignes, donc je ne vais pas exécuter cela et je vais essayer de générer
+
+47
+04:40.530 --> 04:44.590
+quelques millions de lignes, donc cela prendra un certain temps.
+
+48
+04:44.620 --> 04:51.210
+Alors allez vous faire un café et la vidéo va couper.
+
+49
+04:51.220 --> 04:51.490
+Ici
+
+50
+04:54.600 --> 04:55.060
+ainsi.
+
+51
+04:55.400 --> 05:03.450
+J’ai maintenant repris cette vidéo et cette déclaration a été en cours d’exécution pendant environ trois minutes.
+
+52
+05:03.520 --> 05:07.680
+Je vais m’arrêter maintenant et si je le fais;
+
+53
+05:10.560 --> 05:15.450
+sélectionner le nombre de personnes à partir du test1; nous avons un million et demi de lignes
+
+54
+05:18.750 --> 05:23.630
+afin de voir combien de temps il faudrait pour faire la sélection de Test1.
+
+55
+05:23.730 --> 05:30.330
+À ce stade, évidemment, en fonction des performances de votre système particulier, cela peut être plus long ou
+
+56
+05:30.330 --> 05:33.190
+plus court; Exécuter
+
+57
+05:35.460 --> 05:42.720
+Vous pouvez voir le coin inférieur de la main droite que la minuterie est tic-tac comme il est
+
+58
+05:42.720 --> 05:43.830
+retourner toutes ces données
+
+59
+05:48.180 --> 05:56.820
+plus d’un million de rangées qui reviennent à là-bas; 19 secondes, 20 secondes, 21 secondes pour revenir une et demie
+
+60
+05:56.820 --> 06:00.410
+millions de rangées.
+
+61
+06:00.560 --> 06:04.790
+Il va sans dire que si je ne voulais que le top 10 des rangées
+
+62
+06:09.050 --> 06:11.840
+alors il revient en pratiquement aucun temps du tout.
+
+63
+06:13.600 --> 06:21.890
+Maintenant, si vous vouliez voir exactement combien de temps il faut réellement; Allons-y.
+
+64
+06:21.920 --> 06:34.600
+Les requêtes comprennent des statistiques sur les clients et; exécuter; cliquez sur les statistiques des clients et le temps d’exécution total est
+
+65
+06:34.780 --> 06:45.040
+huit millisecondes alors que si je change cela pour sélectionner les mille premiers ; Exécuter
+
+66
+06:47.920 --> 06:57.600
+l’exécution totale est de 42 millisecondes; si évidemment dans une situation où vous n’avez pas besoin de toutes les lignes.
+
+67
+06:57.820 --> 07:02.620
+Si vous sélectionnez le haut afin d’améliorer considérablement votre vitesse.
+
+68
+07:05.300 --> 07:11.210
+C’est donc une démonstration très simple d’un gain de performance très simple.
+
+69
+07:11.240 --> 07:19.220
+Par exemple, si vous faites un site Web où vous souhaitez afficher plusieurs pages de données, il
+
+70
+07:19.220 --> 07:26.780
+beaucoup de sens d’utiliser le haut sélectionné afin de montrer pour récupérer les données pour cette page plutôt que de retourner
+
+71
+07:26.810 --> 07:32.480
+toutes les données, puis en utilisant le code côté client pour faire le paaging.
+
+72
+07:32.600 --> 07:41.890
+C’est donc un exemple simple et nous devrions aller de l’avant avec le reste. 
+
+73
+07:42.520 --> 07:47.670
+Indexes pour accélérer les opérations de lecture en accélérant le fonctionnement des clauses; ils sont créés comme suit:
+
+74
+07:47.710 --> 07:57.430
+Créer l’index idxBookTitle sur les livres (Titre);
+
+75
+07:57.790 --> 08:06.100
+Une fois créé une déclaration sélectionnée sur la table des livres impliquant une clause sur
+
+76
+08:06.100 --> 08:16.420
+la colonne de titre s’exécutera plus rapidement; Toutefois, les indices ralentissent LÉGÈREMENT les opérations INSERT, UPDATE et suppriment légèrement les opérations
+
+77
+08:17.120 --> 08:19.630
+donc seulement inclure les index où ils sont utiles
+
+78
+08:23.280 --> 08:30.640
+index non groupés. L’indice groupé garantit que les données sont
+
+79
+08:30.640 --> 08:38.260
+un disque alors qu’un indice non groupé existe indépendamment des données n’appliquant aucun ordre physique pour
+
+80
+08:38.260 --> 08:47.380
+les données; un seul indice groupé peut exister sur une table, mais il est plus rapide pour la lecture qu’un
+
+81
+08:47.380 --> 08:47.830
+Index
+
+82
+08:50.640 --> 08:54.560
+un index groupé ne doit être utilisé que sur les colonnes d’identité.
+
+83
+08:55.820 --> 09:03.140
+Étant donné qu’un encart à un point autre qu’à la fin de la table causerait toutes les lignes d’être physiquement
+
+84
+09:03.140 --> 09:03.920
+déplacé sur le disque.
+
+85
+09:07.480 --> 09:09.410
+Démonstration vidéo.
+
+86
+09:09.500 --> 09:16.310
+Ici, nous démontrons un gain de performance offert par la création d’un index et de montrer comment le plan d’exécution
+
+87
+09:16.340 --> 09:19.670
+peut expliquer les gains de performance.
+
+88
+09:19.770 --> 09:26.710
+Nous démontrons également des indices illustratifs par rapport aux indices non groupés; ici démontrera un gain de performance
+
+89
+09:26.740 --> 09:33.610
+en créant un index et en présentant comment le plan d’exécution peut expliquer les gains de performance.
+
+90
+09:33.610 --> 09:37.330
+Nous démontrerons également des indices groupés par rapport aux indices non groupés.
+
+91
+09:37.390 --> 09:44.380
+Commençons donc par écrire une question très simple contre nos données de test; donc je tape:
+
+92
+09:44.620 --> 09:50.230
+sélectionner à partir de test1 où guid comme «ABCD%»
+
+93
+09:51.210 --> 09:57.810
+C’est donc là que je suis à la recherche de lignes où le GUID; qui est une chaîne aléatoire; commence par les lettres
+
+94
+09:57.840 --> 09:58.610
+Abcd
+
+95
+09:59.760 --> 10:10.940
+Donc, si j’allume à la fois inclure des statistiques clients et je vais aussi demander ici requête et inclure réelle
+
+96
+10:10.940 --> 10:17.020
+plan d’exécution; le plan d’exécution dira sous le capot.
+
+97
+10:17.060 --> 10:25.460
+Qu’est-ce que la base de données SQL Server faire pour exécuter cette commande et les statistiques des clients diront exactement comment
+
+98
+10:25.460 --> 10:26.620
+long qu’il a fallu.
+
+99
+10:26.930 --> 10:28.340
+Alors exécutez ce
+
+100
+10:31.270 --> 10:39.610
+regarder les statistiques des clients et nous allons voir que cela a pris cinq cent cinquante-deux millisecondes qui est
+
+101
+10:39.610 --> 10:44.080
+bon, mais pas assez bon.
+
+102
+10:46.090 --> 10:50.750
+L’onglet d’exécution nous dira ce qui s’est passé sous le capot.
+
+103
+10:51.190 --> 10:55.660
+Donc, ce qui est utilisé ici est un balayage de table qui est la lecture de la base de données.
+
+104
+10:55.660 --> 11:03.990
+Ligne par rangée à travers la table jusqu’à ce qu’il atteigne des rangées qui correspondaient à nos critères où comme dans GUID est 
+
+105
+11:03.990 --> 11:12.390
+comme ABCD%; Il n’y avait pas d’index en usage, donc c’est en fait allusion qu’il ya un indice manquant
+
+106
+11:12.930 --> 11:16.920
+disant qu’il y aura une augmentation de performance de 79 pour cent.
+
+107
+11:16.950 --> 11:22.030
+Si nous devions créer un indice non groupé sur cette table.
+
+108
+11:22.380 --> 11:31.550
+C’est donc ce que nous allons faire maintenant; 
+
+109
+11:31.580 --> 11:39.950
+créer l’index idxGuid sur test1(guid)
+
+110
+11:40.680 --> 11:44.480
+Donc, nous devrions exécuter cela et cela va créer un indice non groupé.
+
+111
+11:44.540 --> 11:50.340
+Maintenant, l’index non groupé vit en dehors des données principales elles-mêmes n’affecte pas l’ordre physique de la
+
+112
+11:50.340 --> 11:53.040
+données sur le disque.
+
+113
+11:53.850 --> 11:57.750
+De cette façon, vous pouvez créer autant d’entre eux que vous le souhaitez.
+
+114
+11:57.990 --> 12:05.450
+Toutefois, les indices améliorent généralement les performances de lecture, mais ils ont un léger effet négatif sur l’écriture
+
+115
+12:05.450 --> 12:12.630
+écrire des performances afin qu’ils affectent légèrement votre mise à jour, insérer , supprimer les déclarations afin de ne pas créer trop
+
+116
+12:12.630 --> 12:19.170
+index; seulement là où ils ont un sens et va réellement accélérer vos requêtes.
+
+117
+12:19.280 --> 12:28.910
+Donc, nous allons exécuter cela et il faudra quelques secondes pour créer cet index pour nous
+
+118
+12:28.910 --> 12:29.570
+comme il trie les lignes
+
+119
+12:33.040 --> 12:37.230
+Ok, donc c’est en train d’être créé dans environ 11 secondes.
+
+120
+12:37.240 --> 12:45.310
+Donc maintenant, si je cours cette déclara tion à nouveau, il va utiliser cet index et nous allons voir que reflété
+
+121
+12:45.370 --> 12:48.400
+dans le plan d’exécution et les statistiques des clients.
+
+122
+12:48.400 --> 12:51.400
+J’espère que cela s’exécutera beaucoup plus rapidement.
+
+123
+12:51.400 --> 13:01.640
+Alors, je suis du fait que je exécuter; Statistiques des clients; montre maintenant que le temps d’exécution total est maintenant à trente-huit millisecondes
+
+124
+13:01.740 --> 13:05.370
+donc c’est une énorme amélioration des performances avec exactement la même chose.
+
+125
+13:05.420 --> 13:08.960
+Déclaration SQL 
+
+126
+13:09.030 --> 13:11.120
+Le plan d’exécution maintenant il semble tout à fait différent.
+
+127
+13:11.300 --> 13:19.520
+Il n’a plus l’indice disant que nous manquons un index et il montre qu’il utilise un index chercher
+
+128
+13:19.730 --> 13:22.440
+qui est une opération plus rapide qu’un balayage de table
+
+129
+13:26.170 --> 13:29.770
+Il utilise un tas de recherche parce que 
+
+130
+13:29.770 --> 13:33.140
+Il n’y a pas d’indice groupé sur cette table.
+
+131
+13:34.680 --> 13:43.440
+Donc, pour démontrer ce qu’est un indice groupé par rapport à un indice non groupé est de rafraîchir cette
+
+132
+13:46.330 --> 13:54.800
+Index d’expansion; et nous pouvons voir que idxGuid est un non unique, non clustered index de sorte que nous n’avons pas indiqué à
+
+133
+13:54.800 --> 14:00.910
+la base de données que la colonne guid est véritablement unique.
+
+134
+14:01.760 --> 14:02.920
+On ne l’a pas dit.
+
+135
+14:03.260 --> 14:08.130
+Donc, la base de données suppose qu’il n’est pas unique.
+
+136
+14:08.240 --> 14:15.650
+Il pourrait être; non groupé ce qui signifie que l’indice vit indépendamment du point lui-même sur son indice
+
+137
+14:15.650 --> 14:19.980
+n’affecte pas l’ordre des données sur le disque.
+
+138
+14:20.000 --> 14:25.380
+Si nous regardions l’indice créé sur une autre table.
+
+139
+14:25.500 --> 14:32.740
+Maintenant, c’est l’indice clé principal sur la table d’auteur qui est essentiellement un index est créé à chaque fois
+
+140
+14:32.740 --> 14:37.110
+vous créez une clé primaire.
+
+141
+14:37.190 --> 14:45.070
+Nous pouvons voir qu’il s’agit d’un indice groupé qui signifie que sur la table de l’auteur de l’ordre physique
+
+142
+14:45.070 --> 14:49.540
+des données sur le disque suit en fait la clé principale.
+
+143
+14:49.810 --> 14:59.320
+Ainsi, l’auteur 1, auteur 2, auteur 3 apparaîtrait dans l’ordre sur le disque tandis que sur test1
+
+144
+14:59.320 --> 15:08.840
+nous ne disons pas que les GUIDs doivent être par ordre alphabétique ou quelque chose comme ça.
+
+145
+15:08.980 --> 15:13.450
+L’avantage de l’indice groupé est qu’il est plus rapide qu’un indice non groupé, mais vous ne pouvez avoir qu’un seul
+
+146
+15:13.450 --> 15:20.330
+d’entre eux par tableau et aussi l’indice groupé ne doit être utilisé que sur une colonne d’identité.
+
+147
+15:20.470 --> 15:30.520
+Parce que si vous le mettez par exemple la colonne GUID dans ce alors que vous avez inséré un nouveau GUID
+
+148
+15:30.940 --> 15:36.920
+il n’y a aucune garantie que ça va être alphabétiquement inférieur à autre chose.
+
+149
+15:37.630 --> 15:45.150
+Donc, il serait réorganiser toutes les données dans ce tableau de faire vos inserts, mises à jour, supprime beaucoup plus lent
+
+150
+15:46.450 --> 15:55.630
+donc c’est une brève démonstration des index et vous pouvez très clairement voir qu’il ya une énorme performance
+
+151
+15:55.630 --> 15:59.680
+gain à obtenir en utilisant correctement les index.
+
+152
+16:03.510 --> 16:13.140
+Avec (NOLOCK) indice, SQL serveur valeurs la cohérence des données de sorte qu’il va verrouiller les tables si elles sont au milieu
+
+153
+16:13.230 --> 16:22.050
+d’être mis à jour; avec (NOLOCK) indice retournera les données indépendamment d’une autre mise à jour en cours et comme écrit
+
+154
+16:22.050 --> 16:25.680
+en tant que tel: sélectionnez à partir de l’auteur avec (nolock)
+
+155
+16:27.150 --> 16:32.460
+Évidemment, ce n’est que pour les situations où la cohérence des données est moins importante que la vitesse.
+
+156
+16:37.860 --> 16:43.160
+Démonstration vidéo: Ici, nous allons démontrer le gain de performance d’un avec (NOLOCK) indice de sélection
+
+157
+16:43.170 --> 16:48.450
+Ici, nous allons démontrer le gain de performance d’un avec (NOLOCK).
+
+158
+16:48.450 --> 16:49.250
+sélectionner l’indice
+
+159
+16:50.040 --> 16:58.020
+Ce que cela fait, c’est qu’il laisse entendre à SQL Server que nous préférerions obtenir les données rapidement que d’obtenir cohérente
+
+160
+16:58.110 --> 16:59.420
+Données.
+
+161
+16:59.430 --> 17:06.120
+Ce que je veux dire par données cohérentes, c’est que si deux processus mettent à jour un tableau,
+
+162
+17:06.120 --> 17:07.380
+déclaration sera verrouillée.
+
+163
+17:08.520 --> 17:16.440
+Jusqu’à ce que la mise à jour soit terminée; maintenant dans certaines circonstances la cohérence statique est cruciale
+
+164
+17:16.440 --> 17:23.480
+important et vous ne voudriez pas utiliser cet indice de sélection afin d’essayer d’accélérer votre base de données.
+
+165
+17:23.610 --> 17:31.350
+Par exemple, si vous êtes une banque, vous ne pourriez pas autoriser deux retraits A.T.M. en même temps sans
+
+166
+17:31.350 --> 17:36.140
+que la première transaction avait été conclue avant la fin de la deuxième transaction.
+
+167
+17:37.050 --> 17:45.390
+Dans le cas contraire, deux transactions A.T.M. pourraient être effectuées et l’argent pourrait être débité deux fois et ce compte
+
+168
+17:45.390 --> 17:47.880
+pourrait être à découvert par exemple.
+
+169
+17:47.880 --> 17:55.350
+Toutefois, dans certaines circonstances, la vitesse est plus importante que la cohérence des données afin que vous puissiez utiliser l’indice de sélection
+
+170
+17:56.340 --> 17:57.660
+pour le démontrer.
+
+171
+17:57.660 --> 18:04.410
+Ce que je vais faire est de créer une deuxième connexion à la base de données à l’aide d’une deuxième fenêtre de requête.
+
+172
+18:04.720 --> 18:12.210
+Et va commencer une transaction dans ce et démontrer qu’une sélection sera mise en pause jusqu’à la transaction
+
+173
+18:12.210 --> 18:16.270
+est terminé, sauf si vous utilisez la sélection sans indice de verrouillage.
+
+174
+18:17.640 --> 18:29.190
+Donc, nous allons d’abord créer une nouvelle requête et je vais faire un changement inutile à la table d’auteur dans
+
+175
+18:29.190 --> 18:29.960
+la transaction.
+
+176
+18:30.110 --> 18:31.790
+Donc, je tape commencer la transaction
+
+177
+18:35.240 --> 18:40.820
+mettre à jour le nom d’auteur de l’auteur - nom d’auteur ''
+
+178
+18:41.210 --> 18:43.330
+chaîne vide
+
+179
+18:43.400 --> 18:49.690
+Cela est effectivement l’ajout d’une chaîne vide à la colonne de l’auteur qui ne fera aucune différence que ce soit.
+
+180
+18:49.800 --> 18:57.800
+Mais je suis juste la démonstration d’une transaction de mise à jour qui n’est pas terminée parce que je ne suis pas l’engager
+
+181
+18:57.800 --> 18:58.160
+Encore.
+
+182
+18:58.190 --> 19:03.350
+Nous devons donc imaginer beaucoup d’autres opérations ici.
+
+183
+19:06.190 --> 19:11.550
+Donc, nous exécutons ceci; et cela va maintenant verrouiller
+
+184
+19:11.580 --> 19:19.420
+Le tableau d’auteur de sorte que je ne peux pas réellement voir ce que le nom de l’auteur est parce qu’il est à mi-mise à jour; Démontrer
+
+185
+19:19.450 --> 19:23.020
+cela reviendrait à l’autre fenêtre pour sélectionner - de l’auteur
+
+186
+19:27.040 --> 19:30.110
+et la déclaration est suspendue.
+
+187
+19:30.390 --> 19:38.340
+C’est exprès parce que nous n’avons pas commis la transaction dans l’autre session donc donc cette
+
+188
+19:38.520 --> 19:40.210
+n’est pas autorisé à lire.
+
+189
+19:40.230 --> 19:43.520
+Le tableau d’auteur parce qu’il est en milieu de mise à jour.
+
+190
+19:44.670 --> 19:47.170
+Arrêtons ça.
+
+191
+19:47.520 --> 19:49.340
+Si j’utilise le (nolock) indice
+
+192
+19:53.900 --> 19:58.220
+cela me permettra de revoir la table de nom de l’auteur.
+
+193
+19:58.360 --> 20:03.680
+Maintenant, vous pouvez imaginer et une situation occupée et une base de données occupée où vous avez beaucoup de mises à jour qui se passe
+
+194
+20:03.770 --> 20:10.110
+sur beaucoup de déclarations sélectionnées qui se passe en même temps, mais certaines déclarations peuvent être retenues en raison d’autres
+
+195
+20:10.130 --> 20:11.110
+Updates.
+
+196
+20:11.150 --> 20:20.690
+Maintenant, une fois de plus pour réitérer le point que cela ignore la cohérence des données de sorte que si elle était très
+
+197
+20:20.690 --> 20:28.310
+important que vous avez montré le dernier nom de l’auteur et non pas le nom de l’auteur avant la mise à jour, puis
+
+198
+20:28.310 --> 20:30.080
+vous ne pouviez pas utiliser cela avec un indice nolock
+
+199
+20:30.110 --> 20:30.670
+Indice.
+
+200
+20:30.680 --> 20:37.900
+Mais dans ce cas particulier avec nolock vous donne un avantage de performance parce qu’il nie le
+
+201
+20:37.900 --> 20:38.230
+Verrouillage
+
+202
+20:42.620 --> 20:44.990
+Profiler serveur SQL.
+
+203
+20:45.250 --> 20:51.630
+Souvent, lorsque vous diagnostiquez les problèmes de performance du serveur SQL, vous ne savez peut-être pas exactement quelles déclarations SQL
+
+204
+20:51.690 --> 20:52.800
+sont en cours de course.
+
+205
+20:52.920 --> 21:00.150
+Par exemple, s’il s’agit d’un site Web en direct exécutant le code d’un autre développeur, vous pouvez utiliser le profileur de serveur SQL.
+
+206
+21:00.150 --> 21:08.140
+Dans ce cas, pour voir exactement ce qui se passe; démonstration vidéo : ici nous allons démontrer 
+
+207
+21:08.140 --> 21:09.380
+Profileur de serveur SQL
+
+208
+21:12.090 --> 21:20.430
+Ici, nous allons démontrer SQL Server Profiler; SQL Server Profiler est un outil vraiment utile si vous enquêtez
+
+209
+21:20.910 --> 21:29.690
+goulots d’étranglement de performance d’un système en direct ou d’un système qui implique le code SQL que vous n’avez pas écrit
+
+210
+21:30.840 --> 21:34.190
+et il vous permet de voir ce qui est géré.
+
+211
+21:34.370 --> 21:44.690
+Et s’il y a quelque chose qui prend trop de temps; donc pour l’exécuter juste faire une recherche pour SQL Server Profiler
+
+212
+21:49.900 --> 21:56.410
+et nous allons creat une nouvelle trace; connectez-vous à votre serveur de base de données local.
+
+213
+21:56.660 --> 21:57.670
+Courir
+
+214
+21:59.380 --> 22:03.480
+Et si nous courons quelque chose comme "sélectionner - de l’auteur"
+
+215
+22:07.360 --> 22:12.700
+nous pouvons voir "sélectionner de l’auteur" apparaissant dans la trace, et vous pouvez l’imaginer dans un système en direct cette
+
+216
+22:12.700 --> 22:19.210
+pourrait être vraiment utile pour voir quelles déclarations sont exécutées combien de temps ils prennent ce que le client est
+
+217
+22:19.420 --> 22:22.160
+les exécuter.
+
+218
+22:22.720 --> 22:24.420
+C’est à peu près tout ce qu’il y a à cela.
+
+219
+22:24.730 --> 22:26.020
+Alors je vais passer à autre chose.
+
+220
+22:29.560 --> 22:33.760
+Importation de données; les données aléatoires ne sont pas quelque chose qui est utilisé dans le monde réel.
+
+221
+22:34.330 --> 22:39.290
+Voici donc un exemple de la façon d’importer de grands ensembles de données dans une base de données.
+
+222
+22:39.310 --> 22:42.620
+Téléchargeons une base de données de livres de github.com à cette URL;
+
+223
+22:42.780 --> 22:43.390
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+224
+22:43.410 --> 22:47.450
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+225
+22:47.470 --> 22:52.800
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+226
+22:52.810 --> 22:56.020
+Ou vous pouvez numériser le code QR en bas à droite de cet écran.
+
+227
+22:58.580 --> 23:00.810
+Démonstration vidéo.
+
+228
+23:00.960 --> 23:08.340
+Ici, nous allons démontrer comment importer un CSV dans le serveur SQL à l’aide de l’outil d’importation de données.
+
+229
+23:08.340 --> 23:12.320
+Jusqu’à présent, nous avons travaillé avec des données aléatoires; maintenant dans le monde réel.
+
+230
+23:12.320 --> 23:17.060
+Vous ne travaillerez jamais avec des données aléatoires, mais vous travaillerez avec de grands jeux de données.
+
+231
+23:17.070 --> 23:22.350
+Il s’agit donc d’un exemple de la façon de télécharger et d’importer un grand jeu de données.
+
+232
+23:22.650 --> 23:28.080
+Il s’agit donc d’une liste de 10000 livres de goodbooks.com.
+
+233
+23:28.680 --> 23:34.110
+Vous pouvez y accéder via https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+234
+23:34.130 --> 23:38.820
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+235
+23:39.380 --> 23:42.090
+Maintenant, vous arrivez à cette page; presse vue brute.
+
+236
+23:44.070 --> 23:51.120
+Vous pouvez jeter un oeil à ce que le CSV ressemble; CSV représente une virgule des valeurs séparées; il est également connu
+
+237
+23:51.120 --> 24:00.200
+comme un fichier plat; la première rangée d’un CSV aura généralement les titres de colonne; tels que Book ID
+
+238
+24:00.240 --> 24:01.950
+Bonne lecture Livre ID
+
+239
+24:01.950 --> 24:11.170
+BestBookID, etc., ISBN, Auteurs et la prochaine rangée auront ;
+
+240
+24:11.450 --> 24:14.140
+C’est la prochaine rangée.
+
+241
+24:14.180 --> 24:20.880
+Cela aura les valeurs correspondant à chacune de ces colonnes de sorte bookID est 1
+
+242
+24:20.900 --> 24:21.190
+GoodReadsBookID (en)
+
+243
+24:21.200 --> 24:22.010
+C’est ça ?
+
+244
+24:22.130 --> 24:22.840
+Et ainsi de suite.
+
+245
+24:23.480 --> 24:28.790
+Donc, nous sommes goint aller sauver cela; clic droit; enregistrer comme; bureau; Books.csv (en)
+
+246
+24:28.820 --> 24:31.110
+sauvegarder
+
+247
+24:31.580 --> 24:34.240
+Nous revenons maintenant dans notre base de données.
+
+248
+24:34.240 --> 24:43.370
+Nous écrivons cliquez sur notre base de données; tâches; importez le fichier plat; fichiers plats et autre mot pour CSV; appuyez sur la prochaine
+
+249
+24:43.520 --> 24:45.250
+fichier d’entrée; Parcourir.
+
+250
+24:45.320 --> 24:47.640
+Prenez-le à partir du bureau.
+
+251
+24:47.840 --> 24:52.230
+Nous avons déjà une table de livres; donc nous allons appeler cela allBooks.
+
+252
+24:52.970 --> 24:54.910
+Suivant; données de prévisualisation;
+
+253
+24:54.920 --> 24:59.870
+Cela vous donnera une vue des 50 premières rangées de votre CSV
+
+254
+24:59.900 --> 25:06.250
+Vous pouvez rapidement vérifier si chacune de ces données semble si elles sont au bon endroit.
+
+255
+25:06.260 --> 25:09.750
+Donc ça me semble bien.
+
+256
+25:10.130 --> 25:12.700
+Ensuite, modifiez les colonnes.
+
+257
+25:12.710 --> 25:19.250
+Maintenant, la chose très importante à ce sujet est que c’est la meilleure supposition que cet outil a pris de
+
+258
+25:19.250 --> 25:22.330
+les 50 premières lignes de vos données.
+
+259
+25:23.200 --> 25:29.830
+Donc, par exemple, il a regardé vers le bas à travers les auteurs de l’auteur le plus long qu’il a trouvé dans le premier
+
+260
+25:29.830 --> 25:35.550
+50 rangées est d’environ cent cinquante caractères de large.
+
+261
+25:35.590 --> 25:43.450
+Maintenant, je sais par expérience qu’il ya des livres ici qui ont beaucoup plus d’auteurs et de ne pas avoir beaucoup
+
+262
+25:43.450 --> 25:48.030
+plus de 150 valeurs.
+
+263
+25:48.130 --> 25:50.690
+C’est pourquoi cela échouera lors de sa première tentative.
+
+264
+25:50.710 --> 25:54.970
+Vous devez revenir à cet écran pour augmenter certains de ces nombres au-delà de 150.
+
+265
+25:55.000 --> 25:57.120
+Donc, par exemple, je veux changer cela à mille.
+
+266
+25:58.210 --> 26:00.130
+Mais voyons ce qui se passe ensuite.
+
+267
+26:00.130 --> 26:00.550
+prochain.
+
+268
+26:01.330 --> 26:03.770
+Donc l’opération a échoué.
+
+269
+26:03.840 --> 26:11.200
+Et il est dit "Les données de chaîne ou binaires seraient tronquées"; tronqué signifie que les données dans le CSV est trop
+
+270
+26:11.200 --> 26:12.430
+Long.
+
+271
+26:12.430 --> 26:15.640
+Dans un cas pour la colonne qu’il essaie d’entrer dans.
+
+272
+26:15.960 --> 26:26.230
+Donc, je dois arrêter cela; presse précédente; précédent; et puis je vais mettre à jour les auteurs à un millier
+
+273
+26:32.240 --> 26:36.110
+Je veux changer le titre original à mille ainsi.
+
+274
+26:41.970 --> 26:43.920
+Titre lui donner un autre millier
+
+275
+26:47.390 --> 26:56.040
+code linguistique mille; vous pouvez raccourcir ce plus tard, vous pouvez modifier vos colonnes pour
+
+276
+26:58.970 --> 27:00.620
+d’autres longueurs qui sont plus appropriées.
+
+277
+27:00.640 --> 27:04.700
+Mais cela devrait fonctionner cette fois; prochain.
+
+278
+27:04.760 --> 27:05.320
+prochain.
+
+279
+27:07.170 --> 27:10.950
+L’insertion est maintenant réussie; Proche.
+
+280
+27:11.260 --> 27:13.600
+Maintenant, si nous actualisons cette
+
+281
+27:18.450 --> 27:21.060
+tables; vous devriez avoir une table allBooks.
+
+282
+27:21.060 --> 27:24.560
+sélectionner à partir de tous les livres
+
+283
+27:27.270 --> 27:38.690
+et nous pouvons voir que nous avons maintenant dix mille livres avec leurs auteurs, noms, titres, ISBN etc qui est vraiment
+
+284
+27:38.690 --> 27:39.260
+génial.
+
+285
+27:39.350 --> 27:45.770
+C’est beaucoup plus le long des lignes du type de données que vous travailleriez avec dans une base de données réelle plutôt
+
+286
+27:45.770 --> 27:49.310
+que les cinq ou six rangées ou les données aléatoires que nous avons montrées à ce jour.
+
+287
+27:52.630 --> 27:54.130
+Et enfin, c’est à toi.
+
+288
+27:54.760 --> 28:01.330
+Donc, nous allons optimiser les données que nous venons d’importer: écrire une déclaration sélectionnée retour de cinq livres
+
+289
+28:01.450 --> 28:09.480
+par Dan Brown à l’aide d’un indice groupé un indice non groupé; et en utilisant le haut sélectionné et
+
+290
+28:09.550 --> 28:11.800
+conseils nolock.
+
+291
+28:12.000 --> 28:12.840
+Bonne chance.
+
+292
+28:12.840 --> 28:14.560
+Vous pouvez mettre cette vidéo en pause maintenant.
+
+293
+28:14.930 --> 28:19.290
+Essayez d’écrire la déclaration et de reprendre une fois que vous lui avez donné un aller.
+
+294
+28:20.540 --> 28:21.020
+D'accord.
+
+295
+28:21.060 --> 28:23.280
+J’espère que vous avez donné ça un peu.
+
+296
+28:23.490 --> 28:24.450
+Vous pouvez.
+
+297
+28:24.450 --> 28:27.160
+Si vous n’avez pas alors vous pouvez mettre cette vidéo en pause maintenant.
+
+298
+28:27.300 --> 28:31.510
+Essayez-le vous-même et reprenez-le quand vous êtes prêt.
+
+299
+28:32.690 --> 28:39.900
+OK donc nous voulons écrire une déclaration sélectionnée retourne cinq livres de Dan Brown.
+
+300
+28:40.300 --> 28:44.370
+Nous devons créer un indice groupé, un indice non groupé 
+
+301
+28:44.560 --> 28:48.230
+et utilisez le haut sélectionné et l’indice nolock.
+
+302
+28:48.500 --> 28:53.520
+Jetons donc un coup d’œil à notre table allbooks
+
+303
+28:56.900 --> 28:58.130
+évidemment le top 5
+
+304
+28:58.290 --> 29:01.260
+C’est simple; de tous les livres
+
+305
+29:05.270 --> 29:18.890
+notre auteur va être un Dan Brown, donc nous disons où les auteurs -Dan Brown
+
+306
+29:19.450 --> 29:21.710
+C’est donc notre top sélect.
+
+307
+29:22.150 --> 29:26.610
+Et si nous voulons mettre sur avec l’indice nolock c’est juste avec (nolock)
+
+308
+29:30.070 --> 29:33.580
+Ce
+
+309
+29:33.640 --> 29:36.800
+nous devons créer notre index groupé.
+
+310
+29:36.810 --> 29:46.870
+Maintenant, vous devez mettre un index groupé sur une colonne d’identité, comme dans une pièce d’identité qui va automatiquement
+
+311
+29:46.870 --> 29:47.610
+Incrément.
+
+312
+29:47.640 --> 29:55.020
+Maintenant, je pense que si vous regardez la table allbooks la colonne d’identité va être book_id.
+
+313
+29:55.180 --> 29:58.920
+Donc, nous allons créer un index groupé là-bas.
+
+314
+29:59.170 --> 30:06.010
+Mettre un index groupé sur autre chose serait une mauvaise idée parce que si vous devait insérer,
+
+315
+30:06.400 --> 30:12.640
+supprimer ou mettre à jour des lignes à ce sujet, vous pouvez physiquement déplacer autour des données.
+
+316
+30:12.700 --> 30:15.550
+Donc, nous allons créer notre index groupé là-bas.
+
+317
+30:15.550 --> 30:16.960
+ainsi
+
+318
+30:21.040 --> 30:24.710
+créer un index groupé idxBookId sur AllBooks (book_id)
+
+319
+30:29.510 --> 30:30.340
+créer un index groupé idxBookId sur AllBooks (book_id)
+
+320
+30:34.710 --> 30:35.060
+créer un index groupé idxBookId sur AllBooks (book_id)
+
+321
+30:40.100 --> 30:44.960
+créé; et nous voulons maintenant créer un indice non groupé.
+
+322
+30:44.960 --> 30:51.050
+Maintenant, la colonne que nous interrogeons sur est la colonne des auteurs de sorte que c’est là que nous voulons mettre l’indice non groupé.
+
+323
+30:51.050 --> 30:55.820
+Donc, si vous ne spécifiez pas groupé alors il ne sera pas groupé par défaut.
+
+324
+30:55.940 --> 31:00.160
+ainsi:
+
+325
+31:01.370 --> 31:02.070
+créer idxAuthors sur AllBooks (auteurs)
+
+326
+31:06.120 --> 31:10.650
+créer idxAuthors sur AllBooks (auteurs)
+
+327
+31:22.980 --> 31:24.350
+donc c’est intéressant.
+
+328
+31:24.450 --> 31:30.730
+La longueur maximale des clés pour un indice non groupé est de 1700 octets,
+
+329
+31:30.830 --> 31:31.130
+d'accord.
+
+330
+31:31.140 --> 31:36.840
+Donc, la colonne des auteurs, c’est un nvarchar qui signifie qu’il est de 2 octets par personnage.
+
+331
+31:37.050 --> 31:39.480
+Et nous avons une liste de mille d’entre eux.
+
+332
+31:39.480 --> 31:46.620
+Jetons donc un coup d’œil et voyons; pouvons-nous raccourcir la colonne des auteurs
+
+333
+31:50.080 --> 31:52.540
+sélectionnez Max (len(auteurs)) de tous les livres
+
+334
+31:53.730 --> 31:54.200
+sélectionnez Max (len(auteurs)) de tous les livres
+
+335
+32:04.410 --> 32:05.280
+742
+
+336
+32:08.980 --> 32:18.570
+modifier la table allbooks modifier les auteurs de colonne nvarchar(742)
+
+337
+32:21.690 --> 32:24.690
+modifier la table allbooks modifier les auteurs de colonne nvarchar(742)
+
+338
+32:33.110 --> 32:34.280
+baisse de l’indice
+
+339
+32:48.190 --> 32:56.830
+créer cette nouvelle fois; et nous n’allons pas recréer cet indice ; et il est créé avec succès.
+
+340
+32:57.730 --> 33:09.720
+Alors maintenant, dirigez ceci; et nous pouvons voir le plan d’exécution qui utilise notre plan d’index; statistiques sur les clients; 10 milisecondes très
+
+341
+33:09.720 --> 33:10.140
+Rapide.
+
+342
+33:11.610 --> 33:11.980
+d'accord.
+
+343
+33:12.180 --> 33:13.780
+Eh bien, j’espère que vous avez obtenu que ...
+
+344
+33:13.830 --> 33:14.910
+Bonne chance.

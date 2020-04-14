@@ -1,0 +1,1390 @@
+WEBVTT
+
+0
+00:01.640 --> 00:05.300
+Seguridad de SQL Server; Datos sobre una base de necesidad de saber.
+
+1
+00:06.870 --> 00:09.960
+Autenticación de Windows frente a SQL Server.
+
+2
+00:10.200 --> 00:16.560
+Los usuarios de SQL Server pueden autenticarse a través de Microsoft Windows o a través de SQL Server directamente mediante un
+
+3
+00:16.560 --> 00:18.390
+nombre de usuario y contraseña.
+
+4
+00:18.390 --> 00:25.080
+Normalmente, si su cliente; estudio de administración de beit o aplicación .NET; está en la misma máquina o local
+
+5
+00:25.080 --> 00:32.040
+como servidor de base de datos, utilizará la autenticación de Microsoft Windows; si su cliente lo es; o podría
+
+6
+00:32.040 --> 00:37.740
+estar ubicado en otro lugar de Internet, entonces normalmente usaría la autenticación de SQL Server mediante
+
+7
+00:37.740 --> 00:38.930
+un nombre de usuario y una contraseña.
+
+8
+00:41.170 --> 00:48.940
+Usuarios y roles; Los roles de SQL Server definen un nivel de acceso a la base de datos y varios usuarios pueden
+
+9
+00:48.940 --> 00:52.280
+asignarse a un rol o a varios roles.
+
+10
+00:52.460 --> 00:56.420
+Hay ciertos roles definidos por el sistema que permiten el acceso completo.
+
+11
+00:56.510 --> 00:59.910
+Por ejemplo sysadmin o prácticamente sin acceso.
+
+12
+00:59.990 --> 01:06.500
+Por ejemplo, público; puede definir su propio rol de base de datos si necesita un acceso más granular a la base de datos
+
+13
+01:08.600 --> 01:15.480
+demostración de vídeo: aquí se mostrará la autenticación de Windows y la autenticación de servidor SQL.
+
+14
+01:15.620 --> 01:21.890
+También demostraremos cómo definir un rol personalizado que permita el acceso a la información del libro, pero
+
+15
+01:21.890 --> 01:24.370
+no información de los estudiantes.
+
+16
+01:24.380 --> 01:29.000
+Aquí se mostrará la autenticación de Windows y la autenticación de SQL Server.
+
+17
+01:29.030 --> 01:33.560
+También demostramos cómo definir un rol personalizado que permitirá el acceso a la información del libro, pero no
+
+18
+01:33.560 --> 01:35.780
+información de los estudiantes.
+
+19
+01:35.780 --> 01:40.670
+Hasta ahora hemos estado usando la autenticación de Windows, lo que significa que nos hemos estado autenticando
+
+20
+01:40.670 --> 01:45.470
+contra SQL Server mediante el sistema de usuario integrado de Windows.
+
+21
+01:45.470 --> 01:47.050
+Esto es realmente bueno.
+
+22
+01:47.060 --> 01:54.140
+Es seguro, pero si queremos crear varios inicios de sesión que tienen roles diferentes, entonces tal vez no lo haría
+
+23
+01:54.140 --> 01:56.260
+desea crear nuevos usuarios de Windows.
+
+24
+01:56.300 --> 02:03.260
+Cada vez que queremos hacer esto; así que vamos a habilitar primero la autenticación en modo mixto, lo que significa que tanto
+
+25
+02:03.260 --> 02:12.620
+Autenticación de Windows y SQL Server; para hacerlo clic derecho en su servidor; propiedades de clic;
+
+26
+02:12.680 --> 02:20.360
+haga clic en seguridad; Haga clic en SQL Server y en el modo de autenticación de Windows en la autenticación del servidor.
+
+27
+02:20.360 --> 02:26.750
+Esto nos permitirá autenticarnos usando el sistema de usuarios de Windows y también usar nombres de usuario y contraseñas
+
+28
+02:26.990 --> 02:28.950
+según lo definido por SQL Server.
+
+29
+02:29.150 --> 02:36.030
+Así que pulse OK; ahora está pidiendo que SQL Server se reinicie, lo que simplemente puede hacer haciendo clic en
+
+30
+02:36.030 --> 02:37.250
+el servidor.
+
+31
+02:37.830 --> 02:45.120
+Pulse el reinicio y pulse sí; debe reiniciarse rápidamente.
+
+32
+02:49.450 --> 02:55.290
+Y ahora podemos usar la autenticación de SQL Server para iniciar sesión, así como la autenticación de Windows.
+
+33
+02:55.690 --> 03:05.020
+Así que para crear un nuevo inicio de sesión; primero vamos a ampliar los plugins de seguridad; clic derecho;  nuevo inicio de sesión
+
+34
+03:05.020 --> 03:10.360
+le vas a dar un nombre; que voy a llamarlo lector de libros
+
+35
+03:14.450 --> 03:15.710
+Autenticación de SQL Server.
+
+36
+03:15.710 --> 03:20.430
+Vamos a darle una contraseña que le voy a dar los números uno a nueve.
+
+37
+03:20.460 --> 03:22.850
+Por favor, dar una contraseña mucho más fuerte que esta
+
+38
+03:27.300 --> 03:31.880
+1,2,3,4,5,6,7,8,9.
+
+39
+03:31.990 --> 03:33.480
+Pulse OK.
+
+40
+03:34.160 --> 03:44.290
+Ahora voy a demostrar cómo conectarse a SQL Server con este nuevo usuario para conectarse; y cambiar
+
+41
+03:44.730 --> 03:50.450
+Autenticación de Windows para la autenticación de SQL Server el inicio de sesión es bookreader
+
+42
+03:53.480 --> 03:59.510
+Y la contraseña es 123456789 prensa conectar.
+
+43
+03:59.530 --> 04:03.700
+Se nos pide cambiar la contraseña y voy a dejarla a nosotros de 1 a 9
+
+44
+04:10.410 --> 04:10.800
+pulse OK
+
+45
+04:10.830 --> 04:19.080
+así que ahora hemos iniciado sesión en nuestra base de datos de dos maneras a través de la autenticación de Windows.
+
+46
+04:19.840 --> 04:22.990
+y la autenticación de SQL Server.
+
+47
+04:23.080 --> 04:31.510
+Ahora, cuando tengamos autenticación de servidor SQL, notará que esto no tiene literalmente acceso a la base de datos.
+
+48
+04:31.510 --> 04:37.590
+Esto se debe a que no hemos asignado a bookreader a ningún rol.
+
+49
+04:37.660 --> 04:42.280
+Así que lo que vamos a hacer ahora es usar la autenticación de Windows.
+
+50
+04:42.280 --> 04:45.520
+Vamos a definir un papel.
+
+51
+04:45.520 --> 04:48.160
+Vamos a crear un nuevo usuario.
+
+52
+04:48.160 --> 04:56.180
+Vamos a asignar al usuario a un rol y luego vamos a dar a ese rol algunos permisos 
+
+53
+04:56.200 --> 04:59.230
+es decir, para leer la mesa de libros, pero no la mesa de los estudiantes.
+
+54
+04:59.890 --> 05:09.130
+Así que vamos a empezar con la expansión de nuestra base de datos; ampliar la seguridad; ampliar los roles; roles de base de datos; Y
+
+55
+05:09.130 --> 05:14.590
+debemos crear un nuevo rol de base de datos que deberíamos llamar rol de bookreader.
+
+56
+05:19.200 --> 05:20.190
+y pulse OK
+
+57
+05:20.250 --> 05:37.470
+vamos a crear un usuario; Nuevo usuario al que llamaré bookreaderuser; nombre de inicio de sesión debe ser
+
+58
+05:37.860 --> 05:38.220
+lector de libros
+
+59
+05:41.770 --> 05:43.050
+y podemos presionar.
+
+60
+05:43.050 --> 05:43.430
+De acuerdo.
+
+61
+05:45.030 --> 05:55.630
+Así que ahora tenemos un rol y un usuario; y este usuario debe ser miembro del rol; por lo que hacemos clic en la membresía
+
+62
+05:56.350 --> 05:59.870
+y agregue el usuario al rol.
+
+63
+05:59.910 --> 06:05.730
+Todavía no hemos dado a este rol o usuario ningún permiso todavía por lo que no tendrá ningún acceso a la
+
+64
+06:05.730 --> 06:07.320
+Base.
+
+65
+06:07.320 --> 06:14.640
+Así que vamos a ampliar las mesas y vamos a hacer clic derecho en los libros y vamos a hacer clic
+
+66
+06:15.090 --> 06:15.660
+Propiedades.
+
+67
+06:18.180 --> 06:20.330
+Permisos.
+
+68
+06:20.610 --> 06:24.090
+Voy a buscar el libro lector
+
+69
+06:29.190 --> 06:30.300
+y voy a....
+
+70
+06:30.390 --> 06:36.570
+Estos son los diversos permisos para que el usuario pueda tener; para que pudieran eliminar la tabla; 
+
+71
+06:36.570 --> 06:37.280
+insertar en la mesa.
+
+72
+06:37.470 --> 06:45.020
+Pero digamos que sólo queremos presionar select; para que puedan leer esta tabla; sólo un acceso tan realmente mínimo.
+
+73
+06:45.540 --> 06:48.030
+Así que vamos a presionar OK aquí.
+
+74
+06:48.610 --> 06:57.290
+Ahora volvamos a la segunda conexión que está usando la autenticación de SQL Server y.
+
+75
+06:57.300 --> 07:03.630
+Cree una nueva ventana de consulta con este usuario.
+
+76
+07:03.630 --> 07:08.300
+En la barra de título se puede ver el nombre del usuario que se utiliza que es bookreader.
+
+77
+07:08.550 --> 07:17.250
+Así que si hago una selección de la tabla de estudiantes primero; Necesito comprobar si tengo acceso a tener acceso a
+
+78
+07:17.250 --> 07:18.730
+la biblioteca.
+
+79
+07:18.810 --> 07:21.330
+Seleccione la biblioteca
+
+80
+07:28.100 --> 07:32.910
+así que no tengo acceso a la tabla de estudiantes a pesar de que existe.
+
+81
+07:33.240 --> 07:38.390
+Pero si hago "seleccionar * de los libros" entonces puedo ver la mesa de libros.
+
+82
+07:38.660 --> 07:45.090
+Si tuviera que hacer lo mismo usando la autenticación de Windows seleccione * de los libros.
+
+83
+07:45.560 --> 07:50.090
+Seleccione la base de datos correcta; para que pueda ver la mesa de libros
+
+84
+07:54.660 --> 08:01.650
+También puedo ver la mesa de los estudiantes, pero el lector de libros no puede ver la tabla de estudiantes, pero no puede ver el 
+
+85
+08:01.650 --> 08:03.880
+mesa de libros.
+
+86
+08:04.440 --> 08:06.810
+Así que esta es una manera ideal de configurar un sistema.
+
+87
+08:06.900 --> 08:10.990
+Si desea bloquear el acceso particular a clientes particulares.
+
+88
+08:11.070 --> 08:20.110
+Así que si tuviera sin un sitio web que tal vez se conectaría a esta base de datos, pero es sólo de lectura propósitos
+
+89
+08:20.160 --> 08:24.120
+sólo donde te gustaría ayudar a la gente a encontrar libros en una biblioteca.
+
+90
+08:24.120 --> 08:28.800
+A continuación, puede limitar ese acceso a la lectura solo desde la biblioteca.
+
+91
+08:28.800 --> 08:38.670
+Así que incluso si su nombre de usuario está en peligro o ese sitio web tiene un defecto de seguridad SQL Server limitará la
+
+92
+08:38.670 --> 08:42.450
+daño que esa aplicación en particular puede hacer.
+
+93
+08:43.950 --> 08:45.810
+Así que espero que esto tenga sentido, vamos a seguir adelante.
+
+94
+08:45.930 --> 08:50.760
+Proteger SQL Server mediante un firewall.
+
+95
+08:51.030 --> 08:56.130
+Si usted tiene SQL servidor conectado a Internet, entonces es probable que las partes maliciosas
+
+96
+08:56.130 --> 09:00.330
+tratar de obtener acceso a ella tratando de adivinar su contraseña.
+
+97
+09:00.330 --> 09:05.820
+Una de las primeras líneas de defensa es utilizar el firewall de Windows para bloquear el puerto TCP.
+
+98
+09:05.910 --> 09:13.320
+1433 para permitir solamente el acceso desde direcciones IP conocidas.
+
+99
+09:13.330 --> 09:14.730
+Demostración en vídeo.
+
+100
+09:14.730 --> 09:20.400
+Aquí se muestra cómo configurar SQL Server para controlar el acceso desde direcciones IP remotas o
+
+101
+09:20.400 --> 09:24.480
+donde es necesario utilizar un firewall para limitar las direcciones IP que tendrán acceso a ella.
+
+102
+09:26.820 --> 09:32.550
+Aquí vamos a demostrar cómo configurar SQL Server para controlar el acceso desde direcciones IP remotas o donde
+
+103
+09:32.550 --> 09:33.360
+es necesario.
+
+104
+09:33.360 --> 09:36.540
+Utilice un firewall para limitar las direcciones IP que tendrán acceso a ella.
+
+105
+09:37.600 --> 09:43.690
+Para obtener la mejor seguridad, debe intentar mantener el cliente y el servidor SQL en el mismo equipo y usar
+
+106
+09:43.810 --> 09:46.680
+conexiones locales solo a través de la autenticación de Windows.
+
+107
+09:47.260 --> 09:53.830
+Sin embargo, es muy probable que una situación del mundo real tenga el servidor SQL en una ubicación diferente
+
+108
+09:53.860 --> 09:54.580
+al cliente.
+
+109
+09:55.510 --> 10:02.150
+Así que aquí vamos a tratar de demostrar una conexión local a través de Internet.
+
+110
+10:03.270 --> 10:10.770
+Así que para simular este tipo de conexión en una máquina lo que tendremos que hacer es obtener nuestra dirección IP local
+
+111
+10:11.460 --> 10:22.530
+para ello, abra un símbolo del sistema tipo IPconfig y notará que tendrá su propia dirección IP local.
+
+112
+10:22.530 --> 10:29.430
+Esto normalmente tendrá el formato 192.168 seguido de dos números.
+
+113
+10:29.520 --> 10:40.260
+En mi caso es 0.147; para demostrar que actualmente mi servidor local no permitirá conexiones
+
+114
+10:40.260 --> 10:41.400
+a través de IP remotas.
+
+115
+10:41.430 --> 10:49.650
+Vamos a tratar de conectarnos a la cuenta del bookreader usando esta dirección IP como nombre de servidor 
+
+116
+10:49.650 --> 10:52.110
+por lo que entramos en nuestra contraseña segura de nuevo.
+
+117
+10:52.110 --> 11:02.870
+De 1 a 9; 123456789; conectar; y esto se colgará y eventualmente fallará.
+
+118
+11:05.300 --> 11:09.370
+Como puedes ver, no está funcionando, así que cancela.
+
+119
+11:09.380 --> 11:15.900
+Ahora cuando usted marca 2 cosas para aseegurese que nuestro servidor puede conectar se puede conectar de los IP remotos.
+
+120
+11:15.900 --> 11:25.120
+La primera es que seleccionamos propiedades; conexiones de clic; y asegúrese de que esta caja permite conexiones remotas
+
+121
+11:25.140 --> 11:29.480
+el servidor está marcado; que es perfecto.
+
+122
+11:29.970 --> 11:37.590
+Lo siguiente que necesitamos cambiar es en otro programa llamado configuración de SQL Server Management para
+
+123
+11:37.590 --> 11:45.250
+escribimos en el administrador de configuración del servidor SQL.
+
+124
+11:45.920 --> 11:54.200
+Ampliamos la red de servidores SQL; protocolos de configuración para MS SQL Server; hacemos clic derecho en TCP/IP
+
+125
+11:54.970 --> 12:06.480
+Haga clic en habilitar;  ahora necesitamos reiniciar nuestro reinicio local del servidor SQL; presionar sí; permitir que se reinicie
+
+126
+12:11.980 --> 12:16.860
+y ahora mientras trato de conectarusando usando la dirección IP y la contraseña
+
+127
+12:19.930 --> 12:23.270
+ahora me permite conectarme a través de una dirección IP.
+
+128
+12:23.270 --> 12:28.390
+Ahora esta dirección IP está en mi máquina local, pero potencialmente podría estar en cualquier lugar de Internet.
+
+129
+12:29.590 --> 12:35.980
+Ahora, una vez que abra su servidor SQL a Internet es muy probable que alguien en algún lugar
+
+130
+12:35.980 --> 12:41.980
+descubrir que usted tiene un servidor SQL en vivo y vamos a tratar de entrar en él usando la contraseña de fuerza bruta
+
+131
+12:42.580 --> 12:44.050
+o algún otro tipo de ataque.
+
+132
+12:45.100 --> 12:54.490
+Por lo general, su cliente o clientes tendrán direcciones IP conocidas que puede utilizar firewall de Windows u otros
+
+133
+12:54.490 --> 13:08.110
+productos de firewall para limitar el acceso a direcciones IP dadas para abrir el firewall de Windows; presionar nueva regla;
+
+134
+13:08.150 --> 13:13.050
+seleccionar puerto; porque sabemos que el puerto es 1433
+
+135
+13:13.070 --> 13:18.550
+Pulse Siguiente; es TCP; Escriba 1433.
+
+136
+13:19.370 --> 13:22.140
+Permitimos la conexión.
+
+137
+13:22.310 --> 13:23.870
+próximo.
+
+138
+13:23.910 --> 13:25.730
+Asigne un nombre que sea SQL Server
+
+139
+13:28.370 --> 13:29.830
+Terminado.
+
+140
+13:29.980 --> 13:33.370
+Ahora para limitar este clic derecho en la nueva regla.
+
+141
+13:33.380 --> 13:40.090
+Propiedades de prensa; alcance de la prensa; y luego puedes elegir
+
+142
+13:43.260 --> 13:50.760
+una dirección IP remota; es esta dirección IP; pulse add y luego podemos escribir la dirección IP de nuestro
+
+143
+13:50.760 --> 13:52.190
+Cliente.
+
+144
+13:52.310 --> 14:00.300
+Ahora en este ejemplo si el cliente tiene una dirección IP de 8.8.8.8 que resulta ser Google entonces el
+
+145
+14:01.230 --> 14:05.640
+cliente se permitirá si está en cualquier otro lugar se desconectará.
+
+146
+14:06.030 --> 14:08.040
+Reglamento General de Protección de Datos.
+
+147
+14:08.250 --> 14:14.580
+GDPR; si tiene datos de identificación personal sobre ciudadanos de la UE, entonces estará sujeto al RGPD
+
+148
+14:14.580 --> 14:18.090
+regulación independientemente de dónde se base usted o su empresa.
+
+149
+14:19.560 --> 14:25.290
+En trazos muy amplios esta ley requiere que usted; permitir a los usuarios eliminar sus propios datos.
+
+150
+14:25.290 --> 14:30.890
+Permitir a los usuarios ver o actualizar sus propios datos; para mantener sus datos seguros e informarles.
+
+151
+14:30.900 --> 14:34.160
+Quién más tiene sus datos.
+
+152
+14:34.230 --> 14:41.100
+Otros países con GDPR - leyes similares; Otros países aplican leyes similares al RGPD como Brasil
+
+153
+14:41.340 --> 14:46.130
+Australia, California, Japón, Corea del Sur y Tailandia.
+
+154
+14:46.170 --> 14:49.500
+Debe informarse de cualquier ley que pueda aplicarse a sus datos.
+
+155
+14:51.210 --> 14:52.340
+Almacenamiento de contraseñas.
+
+156
+14:52.980 --> 14:58.230
+Si almacena nombres de usuario y contraseñas en su base de datos, nunca debe almacenarlos como texto sin formato.
+
+157
+14:58.290 --> 15:04.800
+La forma más común de cifrar las contraseñas se llama hash que es un mecanismo de cifrado unidireccional.
+
+158
+15:04.830 --> 15:12.090
+Todo lo que necesita hacer es comprobar que el hash de las contraseñas proporcionadas por el usuario coincide con el hash en la base de datos
+
+159
+15:12.740 --> 15:20.460
+y usted puede estar seguro de que la contraseña es correcta sin almacenar la contraseña en sí 
+
+160
+15:20.730 --> 15:27.660
+Hashes fuertes; Hay una serie de algoritmos hash diferentes, pero se recomienda utilizar SHA2_256 o SHA2_512
+
+161
+15:27.660 --> 15:34.100
+Para aumentar la fuerza de un hash,
+
+162
+15:34.150 --> 15:40.270
+Puede agregar una cadena arbitraria a la contraseña que se está algoritmo y la misma cadena al usuario proporcionado
+
+163
+15:40.270 --> 15:41.580
+Contraseña.
+
+164
+15:41.590 --> 15:44.520
+Esto se llama salazón.
+
+165
+15:44.680 --> 15:52.270
+Puede utilizar el comando hashbytes para realizar hash en SQL Server, como 
+
+166
+15:52.510 --> 15:57.220
+seleccionar hashbytes('SHA2_256','esta es mi contraseña')
+
+167
+15:57.220 --> 15:57.880
+seleccionar hashbytes('SHA2_256','esta es mi contraseña')
+
+168
+15:57.880 --> 16:01.960
+seleccionar hashbytes('SHA2_256','esta es mi contraseña')
+
+169
+16:04.130 --> 16:10.460
+Demostración de vídeo: Aquí demostraremos cómo almacenar hashes de contraseña en una base de datos y cómo verificar
+
+170
+16:10.490 --> 16:12.210
+si la contraseña coincide.
+
+171
+16:12.380 --> 16:16.550
+Demostraremos aún más cómo aumentar el nivel de seguridad mediante el uso de salazón.
+
+172
+16:17.880 --> 16:23.600
+OK aquí demostrará cómo almacenar hashes de contraseña en una base de datos y cómo verificar si la contraseña
+
+173
+16:23.600 --> 16:30.350
+partidos; demostrará aún más cómo aumentar el nivel de seguridad mediante el uso de salazón.
+
+174
+16:30.500 --> 16:37.250
+Por lo tanto, asegúrese de que ha iniciado sesión en la base de datos con el usuario de autenticación de Windows; en lugar de
+
+175
+16:37.250 --> 16:43.250
+el lector de libros o el usuario porque el usuario del bookreader tendrá demasiado poco acceso a la base de datos para
+
+176
+16:43.250 --> 16:45.780
+en realidad proceder a la demostración.
+
+177
+16:45.830 --> 17:00.060
+Así que primero vamos a crear la tabla de un usuario así; 
+
+178
+17:02.810 --> 17:10.040
+crear usuarios de tabla (id int identity(1,1) no null, nombre de usuario varchar(100),
+
+179
+17:10.180 --> 17:16.060
+Ahora en lugar de guardar la contraseña como varchar y permitir que cualquiera que tenga acceso a la base de datos
+
+180
+17:16.090 --> 17:23.020
+para leer realmente esta contraseña que vamos a almacenar como varbinary y la longitud del hash siempre
+
+181
+17:23.020 --> 17:24.550
+256.
+
+182
+17:24.610 --> 17:29.670
+Si usamos SHA2_ 256 para que podamos usar varbinary(256).
+
+183
+17:31.820 --> 17:34.150
+Así que crea esa tabla.
+
+184
+17:35.320 --> 17:44.430
+Ahora, al crear un usuario en esta tabla de usuario, vamos a escribir;
+
+185
+17:45.420 --> 17:48.370
+insertar en los valores de los usuarios (nombre de usuario, contraseña) ('
+
+186
+17:48.570 --> 17:51.130
+El nombre de usuario puede ser...
+
+187
+17:51.360 --> 17:59.010
+John como nombre de usuario y en lugar de darle texto sin formato como la contraseña vamos a usar hashbytes
+
+188
+18:00.510 --> 18:10.510
+vamos a proporcionar un algoritmo que se puede utilizar SHA2_256 y la contraseña.
+
+189
+18:10.530 --> 18:12.270
+Sólo vamos a llamar a mi contraseña
+
+190
+18:15.060 --> 18:15.830
+Ahora.
+
+191
+18:16.020 --> 18:18.480
+Nos quedamos con esto.
+
+192
+18:18.510 --> 18:19.220
+Echemos un vistazo.
+
+193
+18:19.230 --> 18:20.790
+¿Cómo usas tu mesa ahora.
+
+194
+18:25.320 --> 18:31.590
+Así que usted puede ver el nombre de usuario en texto sin formato, pero la contraseña está cifrada.
+
+195
+18:31.590 --> 18:32.830
+Es una manera cifrada.
+
+196
+18:32.830 --> 18:38.160
+No hay manera de llegar de este largo valor hexadecimal de vuelta a la palabra.
+
+197
+18:38.220 --> 18:39.050
+"Mi contraseña"
+
+198
+18:40.030 --> 18:41.640
+Pero, ¿cómo usamos esto?
+
+199
+18:41.640 --> 18:44.240
+Bueno, nuestro inicio de sesión será algo como esto:
+
+200
+18:44.340 --> 18:52.520
+seleccionar el top 1 * de los usuarios donde nombre de usuario 'john' y
+
+201
+18:53.640 --> 18:58.860
+password-hashbytes('SHA2_256','my password')
+
+202
+18:58.980 --> 19:02.540
+password-hashbytes('SHA2_256','my password')
+
+203
+19:04.220 --> 19:16.110
+Si se proporcionó la misma contraseña; "mi contraseña"; Entonces 
+
+204
+19:16.130 --> 19:22.940
+Puede ejecutar esto; y podemos recuperar nuestra identificación de usuario.
+
+205
+19:22.940 --> 19:31.820
+Si se proporcionó la contraseña incorrecta, evidentemente esto devolverá cero filas, ya que no hay ningún usuario coincidente.
+
+206
+19:33.380 --> 19:41.260
+Por lo tanto, esa es una demostración rápida de cómo usar el hash para cifrar una contraseña en la base de datos.
+
+207
+19:41.540 --> 19:48.860
+Y eso significa que ni siquiera un administrador de base de datos puede ver las contraseñas del usuario.
+
+208
+19:49.290 --> 19:54.710
+Hemos tomado grandes pasos ahora para proteger el valor de contraseña en la base de datos.
+
+209
+19:54.840 --> 20:00.760
+Sin embargo, podemos hacer uno mejor y hacer que este hash sea aún más seguro.
+
+210
+20:00.870 --> 20:10.140
+Pero antes de poder explicar cómo podemos hacer esto más seguro puedo tener que demostrar cómo hay una seguridad
+
+211
+20:10.140 --> 20:12.460
+defecto en lo que hemos hecho hasta ahora.
+
+212
+20:12.840 --> 20:23.050
+Así que en este ejemplo voy a imaginar que nuestro usuario ha seleccionado una contraseña muy muy insegura
+
+213
+20:23.050 --> 20:28.420
+contraseña obvia y la más obvia que se me ocurre es la palabra "contraseña" que usted debe
+
+214
+20:28.420 --> 20:30.360
+nunca usar como contraseña.
+
+215
+20:30.400 --> 20:37.710
+Ahora, en este caso, nuestro usuario; John ha seleccionado "contraseña" como contraseña.
+
+216
+20:37.750 --> 20:43.400
+Esto dará el valor hash de este 0x5E....
+
+217
+20:43.480 --> 20:44.950
+Etc., etc.
+
+218
+20:45.160 --> 20:48.100
+Lo cual parece ser muy seguro.
+
+219
+20:48.250 --> 20:53.280
+Sin embargo, el problema es que este es probablemente un hash muy conocido.
+
+220
+20:53.380 --> 20:56.830
+Así que si simplemente google este hash
+
+221
+20:59.780 --> 21:05.930
+haga clic en el primer resultado algo y apilade desbordar y alguien está hablando de este dicho si
+
+222
+21:05.930 --> 21:10.840
+Yo s cifrar la palabra contraseña blah obtengo este valor.
+
+223
+21:10.850 --> 21:19.070
+Por lo tanto, alguien con una búsqueda rápida en Google o tal vez con herramientas más sofisticadas como el arco iris
+
+224
+21:19.070 --> 21:24.830
+tablas podrían romper estos hashes muy rápidamente, especialmente si el usuario utiliza algo muy muy simple
+
+225
+21:24.830 --> 21:26.390
+Así.
+
+226
+21:26.710 --> 21:34.520
+Ahora la solución a este problema es lo que se llama salazón donde se agrega una cadena arbitraria conocida a
+
+227
+21:34.520 --> 21:38.600
+el final de la contraseña que se va a aplicar un algoritmo hash.
+
+228
+21:38.600 --> 21:46.610
+Así que en este caso vamos a elegir un largo y complejo
+
+229
+21:49.350 --> 21:58.120
+Veamos que estoy presionando botones aleatorios aquí arriba, pero voy a recordar esto para más tarde; ejecutamos esto y
+
+230
+21:58.120 --> 21:59.200
+obtenemos un hash diferente
+
+231
+22:02.660 --> 22:08.420
+si googlear este hash, entonces no habrá resultados porque es suficientemente fuerte.
+
+232
+22:09.740 --> 22:20.420
+Por lo tanto, si añadimos esta cadena aleatoria que se llama la sal a la contraseña y también la agregamos a la
+
+233
+22:21.660 --> 22:28.350
+script de inicio de sesión entonces vamos a crear "John2"
+
+234
+22:32.100 --> 22:38.130
+por lo que los usuarios de inserción John2 debe ir aquí.
+
+235
+22:38.260 --> 22:51.210
+Si ahora uso esa contraseña John2 se devuelve, incluso si John2 ha utilizado una contraseña muy insegura
+
+236
+22:51.810 --> 22:53.660
+todavía pasará esta prueba.
+
+237
+22:54.450 --> 22:57.010
+Así que espero que tenga sentido y seguiremos adelante.
+
+238
+22:59.460 --> 23:05.340
+Inyección de servidor SQL; si el servidor SQL Server está conectado a una aplicación que acepta la entrada del usuario
+
+239
+23:05.670 --> 23:10.710
+debe tener en cuenta que esta entrada puede contener instrucciones SQL malintencionadas.
+
+240
+23:10.830 --> 23:15.570
+Por ejemplo, si tiene un comando SQL pero está escrito como tal.
+
+241
+23:15.750 --> 23:21.660
+seleccionar * de los libros en los que el nombre '[alguna entrada del usuario]'
+
+242
+23:21.660 --> 23:26.880
+Entonces tal vez no espere que la entrada del usuario sea 
+
+243
+23:26.890 --> 23:31.560
+'; drop table books; --
+
+244
+23:31.680 --> 23:35.120
+Debe eliminar o escapar de los apóstrofos de la entrada del usuario
+
+245
+23:38.620 --> 23:41.820
+cifrado de datos transparente (TDE).
+
+246
+23:43.150 --> 23:48.520
+Es posible que tenga el acceso a su base de datos bloqueado, pero si un usuario no autorizado tiene acceso físico a
+
+247
+23:48.520 --> 23:56.730
+su servidor entonces podrían analizar potencialmente el archivo MDF para extraer información confidencial.
+
+248
+23:56.870 --> 24:06.600
+TDE Encryption protege su MDF subyacente de este tipo de acceso no autorizado.
+
+249
+24:06.600 --> 24:13.380
+Aquí vamos a demostrar cómo aplicar TDE a su base de datos de SQL Server.
+
+250
+24:13.410 --> 24:15.370
+Aquí demostraremos cómo aplicar.
+
+251
+24:15.420 --> 24:18.660
+TDE a la base de datos de SQL Server.
+
+252
+24:18.660 --> 24:31.560
+Así que para empezar, debe asegurarse de que está en la base de datos maestra; así; usar maestro.
+
+253
+24:32.370 --> 24:40.990
+Ahora necesita crear una clave maestra para que el comando sea;
+
+254
+24:46.090 --> 24:52.150
+CREAR CIFRADO DE CLAVE MAESTRA
+POR CONTRASEÑA''123456789';
+
+255
+24:52.370 --> 24:53.430
+CREAR CIFRADO DE CLAVE MAESTRA
+POR CONTRASEÑA''123456789';
+
+256
+24:53.690 --> 25:03.810
+Voy a usar 1 a 9 que no es muy fuerte, pero funcionará.
+
+257
+25:03.870 --> 25:07.340
+Deberíamos ejecutar esto ahora.
+
+258
+25:07.650 --> 25:09.530
+Necesitamos crear un certificado.
+
+259
+25:11.980 --> 25:15.910
+CREAR CERTIFICADO TDE_Certificate
+Con 
+SUBJECT''Certificado para TDE';
+
+260
+25:19.240 --> 25:23.170
+CREAR CERTIFICADO TDE_Certificate
+Con 
+SUBJECT''Certificado para TDE';
+
+261
+25:24.260 --> 25:25.120
+CREAR CERTIFICADO TDE_Certificate
+Con 
+SUBJECT''Certificado para TDE';
+
+262
+25:29.000 --> 25:32.310
+CREAR CERTIFICADO TDE_Certificate
+Con 
+SUBJECT''Certificado para TDE';
+
+263
+25:33.690 --> 25:38.800
+Este será un certificado autofirmado por la base de datos.
+
+264
+25:43.700 --> 25:50.070
+Ahora seleccionamos la base de datos que deseamos cifrar; que es la base de datos de la biblioteca.
+
+265
+25:50.080 --> 25:59.100
+Así que use la biblioteca; y el siguiente paso es crear una clave de cifrado de base de datos que debemos asegurarnos de que estamos
+
+266
+25:59.100 --> 26:01.230
+en la base de datos de la biblioteca
+
+267
+26:04.540 --> 26:11.250
+y tememos:
+
+268
+26:16.870 --> 26:21.550
+CREAR CLAVE DE CIFRADO DE BASE DE DATOS
+CON EL ALGORITHM - AES_256
+ENCRYPTION POR CERTIFICADO DE SERVIDOR TDE_Certificate;
+
+269
+26:24.190 --> 26:26.710
+CREAR CLAVE DE CIFRADO DE BASE DE DATOS
+CON EL ALGORITHM - AES_256
+ENCRYPTION POR CERTIFICADO DE SERVIDOR TDE_Certificate;
+
+270
+26:26.710 --> 26:28.600
+CREAR CLAVE DE CIFRADO DE BASE DE DATOS
+CON EL ALGORITHM - AES_256
+ENCRYPTION POR CERTIFICADO DE SERVIDOR TDE_Certificate;
+
+271
+26:28.600 --> 26:34.510
+CREAR CLAVE DE CIFRADO DE BASE DE DATOS
+CON EL ALGORITHM - AES_256
+ENCRYPTION POR CERTIFICADO DE SERVIDOR TDE_Certificate;
+
+272
+26:34.790 --> 26:35.330
+CREAR CLAVE DE CIFRADO DE BASE DE DATOS
+CON EL ALGORITHM - AES_256
+ENCRYPTION POR CERTIFICADO DE SERVIDOR TDE_Certificate;
+
+273
+26:38.710 --> 26:41.800
+CREAR CLAVE DE CIFRADO DE BASE DE DATOS
+CON EL ALGORITHM - AES_256
+ENCRYPTION POR CERTIFICADO DE SERVIDOR TDE_Certificate;
+
+274
+26:44.870 --> 26:51.170
+CREAR CLAVE DE CIFRADO DE BASE DE DATOS
+CON EL ALGORITHM - AES_256
+ENCRYPTION POR CERTIFICADO DE SERVIDOR TDE_Certificate;
+
+275
+26:54.070 --> 26:59.990
+Me ha dado una advertencia diciendo que siempre debe hacer una copia de seguridad de su clave de cifrado de base de datos.
+
+276
+27:00.060 --> 27:03.890
+Esto es muy importante porque si lo pierdes; entonces perderás el acceso a tu base de datos
+
+277
+27:06.510 --> 27:07.090
+Y...
+
+278
+27:07.120 --> 27:17.980
+Entonces finalmente escribiremos;
+
+279
+27:18.160 --> 27:18.420
+MODIFICAR LA BIBLIOTECA DE BASES DE DATOS
+ESTABLECER CIFRADO ACTIVADO;
+
+280
+27:23.170 --> 27:27.530
+y ejecutar.
+
+281
+27:27.820 --> 27:32.860
+Esto volverá inmediatamente, aunque puede tomar unos segundos para que el cifrado se ejecute realmente a través de
+
+282
+27:32.860 --> 27:37.200
+su base de datos.
+
+283
+27:37.210 --> 27:43.160
+Ahora la advertencia que apareció anteriormente diciendo que debe hacer una copia de seguridad de su clave de cifrado si hace esto.
+
+284
+27:43.210 --> 27:46.540
+Así que vamos a escribir:
+
+285
+27:53.090 --> 27:58.940
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+286
+28:03.380 --> 28:06.050
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+287
+28:13.250 --> 28:23.630
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+288
+28:23.660 --> 28:24.110
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+289
+28:28.910 --> 28:30.470
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+290
+28:37.450 --> 28:43.410
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+291
+28:43.410 --> 28:43.760
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+292
+28:46.970 --> 28:50.160
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+293
+28:55.750 --> 28:57.030
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+294
+29:05.310 --> 29:08.700
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+295
+29:08.700 --> 29:09.270
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+296
+29:09.350 --> 29:09.900
+CERTIFICADO DE BACKUP TDE_Certificate
+PARA ARCHIVO de archivos 'C:'temp'TDE_Certificate.cer'
+CON CLAVE PRIVADA (archivo 'C:'temp-TDE_Certificate.pvk',
+CIFRADO POR CONTRASEÑA '123456789') 
+
+297
+29:09.900 --> 29:23.490
+Ejecute esto y esperemos que debamos tener nuestras copias de seguridad en nuestra carpeta C:-temp.
+
+298
+29:27.660 --> 29:28.390
+Aquí vamos.
+
+299
+29:28.400 --> 29:31.700
+Estas son nuestras copias de seguridad; el CER y el PVK.
+
+300
+29:31.700 --> 29:36.620
+Usted debe mantener estos seguros porque si usted pierde estos; entonces perderás el acceso a tu base de datos
+
+301
+29:39.490 --> 29:48.120
+OK por lo que es cifrado TDE; y mantiene sus datos a salvo de cualquier persona que pueda tener acceso físico
+
+302
+29:48.120 --> 29:48.690
+a su servidor
+
+303
+29:52.580 --> 29:56.580
+Y a ti; si su usuario olvida sus contraseñas -
+
+304
+29:56.810 --> 29:58.880
+Y está hacestado un algoritmo hash en tu base de datos.
+
+305
+29:58.880 --> 30:02.490
+No puedes recuperarlo de ellos, pero puedes restablecerlo.
+
+306
+30:02.690 --> 30:10.490
+Así que escriba un procedimiento almacenado para restablecer una contraseña hash usando la misma sal que antes; 
+
+307
+30:10.490 --> 30:13.730
+Puedepar este video ahora y reanudarlo cuando desee ver la solución.
+
+308
+30:15.960 --> 30:16.310
+De acuerdo.
+
+309
+30:16.340 --> 30:18.000
+Así que aquí está la solución.
+
+310
+30:18.140 --> 30:24.200
+Queríamos que escribiera un procedimiento almacenado para restablecer una contraseña hash usando la misma sal que antes.
+
+311
+30:24.200 --> 30:27.110
+Ahora lo que pasa con el hash es que es un cifrado unidireccional.
+
+312
+30:27.110 --> 30:34.670
+No hay manera de invertir realmente el cifrado para determinar el texto sin formato original del cifrado
+
+313
+30:34.670 --> 30:35.170
+Texto.
+
+314
+30:35.780 --> 30:38.780
+Sin embargo, puede comparar textos cifrados.
+
+315
+30:38.880 --> 30:46.020
+Así que en el caso de un usuario que ha olvidado su contraseña y necesita restablecerla con una nueva contraseña.
+
+316
+30:46.020 --> 30:48.330
+Ahora; tenemos que sobrescribir la contraseña antigua.
+
+317
+30:49.070 --> 30:53.310
+Así que vamos a empezar
+
+318
+30:55.230 --> 30:59.440
+crear sp_resetPassword de procedimiento (
+
+319
+30:59.560 --> 31:01.720
+Esto tomará parámetros; el nombre de usuario
+
+320
+31:06.090 --> 31:13.510
+que debe ser un varchar(100) que coincida con el valor máximo de la tabla; varchar(100) y
+
+321
+31:13.740 --> 31:14.270
+Contraseña
+
+322
+31:16.880 --> 31:26.140
+que vamos a varchar(100) también; 100 caracteres es bastante generoso para una contraseña.
+
+323
+31:26.360 --> 31:40.760
+los usuarios de actualización establecen la contraseña-hashbytes('SHA2_256',@password + 
+
+324
+31:41.370 --> 31:46.760
+Y usted quiere reemplazar eso con el parámetro pasado en
+
+325
+31:46.760 --> 31:49.170
+Esta era la sal que usamos antes.
+
+326
+31:49.610 --> 32:02.840
+Es un poco de un texto aleatorio; pero fuerte es bueno; donde nombre de usuario @username.
+
+327
+32:03.880 --> 32:08.200
+Bien, así que vamos a poner esto a prueba; y echemos un vistazo a nuestra tabla de usuarios
+
+328
+32:18.000 --> 32:21.700
+¡Oh! asegúrese de que está en la base de datos correcta
+
+329
+32:24.310 --> 32:26.410
+así que mira nuestra tabla de usuarios.
+
+330
+32:26.410 --> 32:29.110
+Así que tenemos este John y John2.
+
+331
+32:29.190 --> 32:38.200
+Imaginemos que queremos restablecer la contraseña de John para sp_resetPassword 'john','....

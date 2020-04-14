@@ -13,7 +13,7 @@ namespace VTT_Translate
     {
         static void Main(string[] args)
         {
-            const string language = "de"; // german
+            const string language = "fr"; // french
             const string path = @"C:\projects\VTT-Translate\files\";
             var inputFiles = Directory.GetFiles(path);
             foreach (var inputFile in inputFiles)
@@ -46,6 +46,8 @@ namespace VTT_Translate
                     Console.WriteLine("File:" + inputFile);
                     Console.WriteLine("Progress:" + progress + "/" + strInput.Length);
                 }
+                fsOut.Flush();
+                fsOut.Close();
             }
             Console.WriteLine("Complete");
             Console.ReadLine();

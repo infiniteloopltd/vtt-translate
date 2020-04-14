@@ -1,0 +1,918 @@
+WEBVTT
+
+0
+00:00.090 --> 00:05.660
+Ahora en la manipulación básica de datos, cree una actualización de lectura y elimine
+
+1
+00:08.190 --> 00:14.190
+al crear una tabla, un servidor de bases de datos puede contener varias bases de datos.
+
+2
+00:14.190 --> 00:22.200
+Cada base de datos contendrá varias tablas y cada tabla tiene varias filas y columnas, un poco como una hoja de cálculo
+
+3
+00:23.250 --> 00:24.810
+sin embargo, antes de saltar.
+
+4
+00:24.930 --> 00:34.320
+Echemos un vistazo a los tipos de datos comunes utilizados para las columnas dentro de los tipos de datos de tablas de SQL ServerSQL Server .
+
+5
+00:34.320 --> 00:43.090
+Una columna de una tabla puede contener diferentes tipos de datos comunes pueden ser números de texto o fechas y
+
+6
+00:43.120 --> 00:49.350
+necesidad de decirle a la base de datos de antemano qué tipo de datos vamos a poner en esa columna para que
+
+7
+00:49.350 --> 00:59.490
+puede almacenarlo y procesarlo de manera eficiente más tarde. El texto es uno de los tipos más comunes de datos, para almacenar texto
+
+8
+00:59.580 --> 01:02.300
+como el nombre de alguien que puedes usar:
+
+9
+01:02.310 --> 01:11.970
+Char, Varchar o NVarchar. Varchar de pie para carácter variable. Char sólo se utiliza si el texto
+
+10
+01:12.000 --> 01:12.650
+se fija.
+
+11
+01:12.650 --> 01:15.780
+y nunca varía.
+
+12
+01:16.050 --> 01:24.870
+Varchar se utiliza si el texto es de longitud variable, puede especificar una longitud máxima como verchar(50) o puede
+
+13
+01:24.870 --> 01:30.390
+puede hacer es ilimitado especificando varchar(max) el siguiente ejemplo.
+
+14
+01:30.390 --> 01:39.400
+Deberíamos usar varchar(max) para el nombre de somebodies.  Varchar es similar a NVarchar, pero solo se utiliza
+
+15
+01:39.520 --> 01:49.200
+si tiene la intención de almacenar texto no latino como ruso, hebreo, chino, árabe japonés así sucesivamente.
+
+16
+01:49.210 --> 01:56.050
+En muchos entornos de producción podría ser más seguro usar nVarchar en caso de que algún día tenga un
+
+17
+01:56.050 --> 01:56.930
+Cliente ruso.
+
+18
+02:01.400 --> 02:04.180
+Números. Para almacenar números en SQL Server.
+
+19
+02:04.190 --> 02:05.760
+Hay algunas opciones.
+
+20
+02:06.020 --> 02:09.030
+Los dos más comunes son int y float.
+
+21
+02:09.560 --> 02:17.120
+Int se utiliza para almacenar números enteros como uno dos tres float se utiliza para almacenar números de puntos decimales
+
+22
+02:17.330 --> 02:24.680
+tales como tres puntos cuatro cinco (PI).  Sin embargo flotador tiene un efecto secundario.
+
+23
+02:24.680 --> 02:32.270
+Puede que no siempre represente el número con precisión, por lo que el número puede variar por una pequeña fracción que podría
+
+24
+02:32.270 --> 02:35.230
+resultados no deseados.
+
+25
+02:35.240 --> 02:44.840
+Así, por ejemplo, en lugar de almacenar tres puntos uno para 1 5 6 9 7 8 podría ser tres puntos 1 4 1 5 6
+
+26
+02:44.840 --> 02:48.690
+9 7 7.
+
+27
+02:48.790 --> 02:56.170
+Puede utilizar el tipo de datos money para representar fracciones exactamente, pero esto está limitado a cuatro puntos decimales
+
+28
+03:00.290 --> 03:01.880
+Fechas. Para almacenar fechas 
+
+29
+03:01.910 --> 03:05.880
+Puede utilizar los tipos de datos date o datetime. Fecha de uso
+
+30
+03:05.930 --> 03:08.390
+Si solo almacena los datos, use la fecha y hora
+
+31
+03:08.390 --> 03:10.110
+Si está almacenando la fecha y la hora.
+
+32
+03:13.460 --> 03:19.820
+Creación de una tabla puede crear una tabla en SQL Server mediante la interfaz de usuario de SQL Server Management
+
+33
+03:19.820 --> 03:22.540
+estudio o el uso de código.
+
+34
+03:22.610 --> 03:25.630
+En el siguiente vídeo se muestran ambos enfoques.
+
+35
+03:25.970 --> 03:31.210
+Lo que vamos a configurar ahora es una base de datos que representa una biblioteca.
+
+36
+03:31.220 --> 03:40.290
+La biblioteca en su corazón tendrá estudiantes que alquilan libros que son alquilados por los estudiantes.
+
+37
+03:40.290 --> 03:49.670
+Así que crearemos dos mesas una para los estudiantes y para los libros. Así que "conectar"
+
+38
+03:52.510 --> 03:58.800
+la primera tabla para los estudiantes crearemos utilizando la interfaz de usuario.
+
+39
+03:59.810 --> 04:08.660
+Segunda tabla que debe crear utilizando código. Seleccione las tablas de la base de datos, haga clic con el botón derecho.
+
+40
+04:08.990 --> 04:09.410
+Mesa
+
+41
+04:12.180 --> 04:13.900
+tabla consta de columnas.
+
+42
+04:13.920 --> 04:15.580
+Cada columna tiene un nombre.
+
+43
+04:15.630 --> 04:24.290
+Cada columna tiene un tipo de datos por lo que un estudiante que representaremos como que tiene un apellido de nombre y la fecha
+
+44
+04:24.290 --> 04:24.850
+de nacimiento.
+
+45
+04:29.340 --> 04:31.390
+Para introducir un nombre de nombre de columna
+
+46
+04:35.290 --> 04:37.390
+y cuando me atabal al tipo de datos.
+
+47
+04:37.390 --> 04:39.660
+Tenemos una lista de tipos de datos.
+
+48
+04:39.670 --> 04:47.680
+Esto puede parecer desalentador al principio, pero efectivamente lo que tenemos que decirle al motor de base de datos es qué tipo
+
+49
+04:47.680 --> 04:51.240
+de los datos será un nombre de pila.
+
+50
+04:51.850 --> 04:52.510
+¿Será
+
+51
+04:55.710 --> 04:58.720
+y BigInt al que es un entero que es un número.
+
+52
+04:58.720 --> 05:01.450
+Así que el primer nombre del estudiante no será un número.
+
+53
+05:01.480 --> 05:15.020
+Será una cadena de caracteres lo que la secuencia llama esto se llama nvarchar o varchar
+
+54
+05:15.070 --> 05:17.190
+Aquí tenemos cerca del final.
+
+55
+05:17.470 --> 05:24.980
+Un campo varchar. un varchar significa carácter variable.
+
+56
+05:24.970 --> 05:32.570
+El número después de que 50 indica la longitud máxima del primer nombre puede ser.
+
+57
+05:32.570 --> 05:39.940
+También puede elegir varchar(Max) que le dará una longitud limitada.
+
+58
+05:41.430 --> 05:45.260
+Esta es nuestra elección.
+
+59
+05:48.710 --> 05:51.170
+El apellido del estudiante
+
+60
+05:53.960 --> 06:02.470
+también será de tipo varchar(max) que es una cadena de caracteres variables de longitud ilimitada.
+
+61
+06:05.290 --> 06:07.390
+Y finalmente fecha de nacimiento.
+
+62
+06:12.490 --> 06:16.270
+Esto también podría ser de tipo varchar.
+
+63
+06:17.350 --> 06:29.760
+Pero hay otro tipo de datos que es más aplicable que es el tipo de fecha que un montón de otros
+
+64
+06:29.760 --> 06:38.240
+tipos de datos allí como ints para números y flotantes número de punto flotante, datetime.
+
+65
+06:38.330 --> 06:43.630
+Si quería especificar la hora de la fecha, así como la fecha, pero vamos a mantener las cosas simples por un momento.
+
+66
+06:45.760 --> 06:51.850
+Cuando digo esto pide un nombre para la mesa voy a llamar a estos estudiantes
+
+67
+07:07.900 --> 07:10.740
+y presiono la actualización.
+
+68
+07:10.900 --> 07:13.150
+Puedo ver una tabla llamada estudiantes
+
+69
+07:16.190 --> 07:20.700
+si tuviera que mirar en la tabla vería que no hay datos disponibles.
+
+70
+07:27.570 --> 07:35.820
+El uso de la interfaz de usuario es una gran manera para que los principiantes utilicen el motor de SQL Server para diseñar
+
+71
+07:35.820 --> 07:48.890
+tablas sin embargo más y más dependemos de la ventana de código para escribir consultas más complejas.
+
+72
+07:49.070 --> 07:52.500
+Debe presionar el botón de consulta para entrar en la ventana de código.
+
+73
+07:57.110 --> 08:02.280
+Es importante que la base de datos seleccionada sea biblioteca.
+
+74
+08:02.350 --> 08:07.420
+Hay otras bases de datos disponibles en el servidor que no desea cambiar.
+
+75
+08:10.250 --> 08:15.120
+El comando para crear una nueva tabla es crear tabla
+
+76
+08:21.420 --> 08:22.890
+y utiliza esta sintaxis.
+
+77
+08:24.550 --> 08:29.990
+Entramos en el nombre de la tabla que en este caso serán libros.
+
+78
+08:34.510 --> 08:39.970
+Un libro tendrá un nombre de libro un autor y el número de páginas
+
+79
+08:42.500 --> 08:47.960
+por lo que escribimos el nombre del libro, el tipo de datos.
+
+80
+08:49.210 --> 08:50.940
+Que es
+
+81
+08:51.190 --> 08:51.760
+varchar(Max)
+
+82
+08:54.950 --> 08:55.300
+Autor
+
+83
+08:58.060 --> 09:00.230
+varchar(Max)
+
+84
+09:02.660 --> 09:10.530
+y el número de páginas que es un entero, es decir, un número completo de páginas.
+
+85
+09:10.620 --> 09:15.630
+Quieres decir que un libro puede tener 300 pero no tendrá trescientos punto cinco páginas
+
+86
+09:19.300 --> 09:20.090
+seleccionamos.
+
+87
+09:20.150 --> 09:25.330
+El SQL que vamos a ejecutar y pulse el botón Ejecutar.
+
+88
+09:27.960 --> 09:32.650
+El comando se ha completado correctamente ahora.
+
+89
+09:32.800 --> 09:40.470
+Si tuviera que presionar refresh podemos ver que se ha creado una segunda tabla.
+
+90
+09:42.560 --> 09:43.520
+Si presiono seleccionar
+
+91
+09:46.520 --> 09:53.900
+se puede ver una vez más que no hay datos todavía en esta tabla, pero vamos a volver a que más tarde
+
+92
+09:57.720 --> 10:06.180
+C.R.U.D. Las cuatro operaciones básicas de una base de datos son crear una actualización de lectura y eliminar.
+
+93
+10:06.510 --> 10:13.580
+Dado el acrónimo CRUD. Puede llevar a cabo estas operaciones utilizando la interfaz de usuario en la gestión
+
+94
+10:13.580 --> 10:17.580
+estudio o a través de código SQL.
+
+95
+10:17.840 --> 10:26.750
+Aquí mostramos ambos enfoques para las cuatro operaciones una vez que hemos creado dos tablas.
+
+96
+10:26.770 --> 10:30.240
+El siguiente paso es colocar algunos datos dentro de estas tablas.
+
+97
+10:30.700 --> 10:36.740
+En primer lugar, demostraré cómo hacerlo utilizando la interfaz de usuario y, en segundo lugar, demostraré cómo
+
+98
+10:36.740 --> 10:44.390
+para hacer esto usando código por lo que en primer lugar el uso de la interfaz de usuario.
+
+99
+10:44.390 --> 10:49.220
+Haga clic con el botón derecho en la tabla de alumnos, haga clic en Editar.
+
+100
+10:49.240 --> 10:54.270
+Ahora bien, si escribes alguna información para los estudiantes John Doe
+
+101
+10:58.930 --> 11:03.450
+datos de nacimiento deben seguir el año.
+
+102
+11:03.490 --> 11:11.580
+formato de día del mes se puede introducir Michael Doe.
+
+103
+11:20.120 --> 11:30.040
+Ahora hemos introducido dos filas en la base de datos bajo la tabla de estudiantes y Eliminar
+
+104
+11:30.210 --> 11:33.290
+Tenga en cuenta que no hay ninguna opción de deshacer en SQL Server.
+
+105
+11:33.320 --> 11:34.250
+Así que ten cuidado
+
+106
+11:39.270 --> 11:40.980
+utilizando la interfaz de usuario.
+
+107
+11:40.980 --> 11:44.150
+Es muy fácil introducir pequeñas cantidades de datos.
+
+108
+11:44.430 --> 11:55.830
+Sin embargo, si queríamos escribir consultas más complejas o para introducir grandes cantidades de datos, usamos el código.
+
+109
+11:56.100 --> 12:00.620
+De nuevo cuando se trata de una base de datos.
+
+110
+12:00.770 --> 12:11.270
+Hay cuatro operaciones básicas que reciben el acrónimo C.R.U.D. que es crear actualización de lectura y eliminar
+
+111
+12:11.300 --> 12:18.030
+Así que la primera de esas operaciones es crear.
+
+112
+12:18.030 --> 12:30.760
+Así que si quería crear un nuevo estudiante utilizo el comando insertar: Escriba insertar en los estudiantes
+
+113
+12:34.500 --> 12:47.900
+ahora usando los corchetes debo enumerar las columnas que deseo insertar en las que son nombre, apellido
+
+114
+12:52.410 --> 13:01.900
+y fecha de nacimiento y sigo esto con la palabra valores de apóstrofo
+
+115
+13:05.160 --> 13:06.540
+que debería llamar "María"
+
+116
+13:11.100 --> 13:11.760
+apellido "Reid"
+
+117
+13:16.950 --> 13:21.290
+fecha de nacimiento en el formato del día del mes del año.
+
+118
+13:21.620 --> 13:22.310
+1980-03-03
+
+119
+13:29.540 --> 13:39.490
+Selecciono el SQL que voy a ejecutar y presiono la ejecución 1 Fila afectada.
+
+120
+13:39.590 --> 13:52.170
+Si ahora hago clic derecho en esta selección puedo ver que hay dos filas en esto.
+
+121
+13:52.170 --> 13:57.450
+El primero fue introducido a través de la interfaz de usuario y el segundo fue a través de un código
+
+122
+14:03.530 --> 14:08.470
+ha demostrado un ejemplo básico de creación de
+
+123
+14:12.310 --> 14:25.700
+la siguiente operación es leer que puede haber visto esto brevemente es la declaración selecta por lo que puede
+
+124
+14:25.710 --> 14:29.130
+seleccionar * de los estudiantes
+
+125
+14:35.130 --> 14:43.950
+Ejecutar. Esto ha devuelto todos los datos de la tabla students.
+
+126
+14:43.970 --> 14:53.030
+Ahora puedes tener curiosidad por lo que significa la estrella,
+estrella en este ejemplo indica todas las columnas.
+
+127
+14:54.260 --> 15:01.140
+Podemos modificar esta instrucción para decir nombre y apellido solamente.
+
+128
+15:01.140 --> 15:01.760
+Tipo:
+
+129
+15:08.530 --> 15:10.540
+Seleccione el nombre, apellido de los estudiantes
+
+130
+15:14.430 --> 15:18.990
+esto ahora sólo devuelve el nombre y apellido sano del estudiante
+
+131
+15:23.570 --> 15:24.450
+Ahora.
+
+132
+15:24.740 --> 15:31.220
+En este caso sólo tenemos dos estudiantes, pero a menudo en las bases de datos puede haber miles de estudiantes
+
+133
+15:32.530 --> 15:39.270
+así que digamos que tenemos curiosidad por ver a todos los estudiantes con el apellido doe.
+
+134
+15:39.850 --> 15:41.270
+En qué caso escribo.
+
+135
+15:41.440 --> 15:50.210
+SELECT * de los alumnos en los que el apellido es 'Doe'
+
+136
+15:56.580 --> 15:58.890
+SELECT * de los alumnos en los que el apellido es 'Doe'
+
+137
+16:01.790 --> 16:03.200
+Ejecutar.
+
+138
+16:03.670 --> 16:16.130
+Esto ahora devuelve todas las columnas de los alumnos donde el apellido coincide con Doe. Si por ejemplo quisiera decir esto
+
+139
+16:16.240 --> 16:18.920
+nombre no es doe ¿yo uso
+
+140
+16:22.640 --> 16:32.790
+el signo menor que seguido por el signo más que para indicar no es igual a ejecutar y puedo ver una lista de los estudiantes
+
+141
+16:32.790 --> 16:34.450
+donde el apellido no es Doe
+
+142
+16:45.720 --> 16:55.520
+las dos operaciones siguientes se actualizan y eliminan, así que echemos un vistazo a nuestra tabla de estudiantes de nuevo.
+
+143
+17:05.110 --> 17:09.590
+Ahora imaginemos que Mary Reid se casa y cambia su apellido
+
+144
+17:09.700 --> 17:17.330
+Vamos a cambiarlo a Mary Smith Así que el comando es:
+
+145
+17:21.640 --> 17:27.550
+actualizar los estudiantes establecer apellido 'Smith'
+
+146
+17:30.830 --> 17:34.570
+ahora esto por sí solo cambiará cada apellido a Smith.
+
+147
+17:35.330 --> 17:37.060
+Así que tenemos que añadir una cláusula where
+
+148
+17:41.550 --> 17:44.300
+donde el apellido 'Reid'
+
+149
+17:47.220 --> 17:48.540
+en este ejemplo en particular.
+
+150
+17:48.540 --> 17:52.430
+Sólo hay un estudiante con el apellido Reid.
+
+151
+17:52.450 --> 17:58.780
+Sin embargo, esto cambiaría efectivamente a cada estudiante con un apellido Reid a Smith este caso está bien.
+
+152
+17:58.810 --> 18:03.880
+Pero querríamos saber que eso es exactamente lo que queremos hacer.
+
+153
+18:05.730 --> 18:09.610
+Ejecutar. Una fila afectada.
+
+154
+18:09.870 --> 18:11.580
+Ahora mira nuestra mesa de estudiantes de nuevo
+
+155
+18:19.990 --> 18:23.730
+podemos ver que Mary Reid ahora ha cambiado a 
+
+156
+18:23.730 --> 18:24.320
+Mary Smith
+
+157
+18:27.330 --> 18:29.550
+la operación final se elimina
+
+158
+18:33.930 --> 18:42.130
+eliminar de los estudiantes donde el nombre 'john'
+
+159
+18:45.420 --> 18:49.150
+eliminar de los estudiantes donde el nombre 'john'
+
+160
+18:49.220 --> 18:53.330
+Tenga en cuenta que no hay ninguna opción de deshacer en SQL Server.
+
+161
+18:53.390 --> 19:02.550
+Por lo tanto, una vez que se ejecuta esta consulta, este registro de John Doe se eliminará para siempre, por lo que el
+
+162
+19:02.630 --> 19:03.470
+excusa de prensa.
+
+163
+19:05.980 --> 19:09.830
+Ahora, si escribimos, seleccionamos * de los estudiantes
+
+164
+19:14.010 --> 19:16.410
+sólo debemos ver un registro Mary Smith
+
+165
+19:20.780 --> 19:26.930
+modificar una mente principal de tabla siempre debe tratar de diseñar correctamente la tabla antes de agregar datos
+
+166
+19:26.930 --> 19:27.290
+a ella.
+
+167
+19:27.620 --> 19:31.970
+Dado que cambiar y tabla después puede ser problemático.
+
+168
+19:31.970 --> 19:41.300
+En el siguiente ejemplo tendría que añadir una columna id a una tabla existente, en el ejemplo anterior en
+
+169
+19:41.300 --> 19:48.130
+actualizar o eliminar los registros necesarios para hacer referencia a una fecha de nacimiento del apellido de nombre.
+
+170
+19:48.200 --> 19:56.170
+También podríamos referirnos a múltiples de estos sin embargo es muy posible en una escuela grande, pero puede
+
+171
+19:56.170 --> 20:01.740
+ser un segundo estudiante con el mismo apellido y fecha de nacimiento que otro estudiante.
+
+172
+20:01.870 --> 20:09.160
+En cuyo caso nos haría imposible eliminar o actualizar a ese estudiante sin afectar
+
+173
+20:09.650 --> 20:13.130
+un estudiante no relacionado que pasó a tener los mismos detalles.
+
+174
+20:13.900 --> 20:22.770
+Vamos a crear esa situación creando una segunda Mary Smith con la misma fecha de nacimiento.
+
+175
+20:23.520 --> 20:59.120
+insertar en los estudiantes (nombre, apellido, fecha de nacimiento) valores ('María','Smith','1980-03-03')
+
+176
+20:59.280 --> 21:05.880
+Ahora tenemos dos estudiantes en nuestra base de datos ambos llamados Mary Smith ambos con la misma fecha de
+
+177
+21:05.880 --> 21:07.660
+Nacimiento.
+
+178
+21:07.980 --> 21:16.650
+En esta situación nos hace imposible actualizar una de estas dos Mary Smiths sin afectar
+
+179
+21:16.720 --> 21:20.780
+las otras dos Mary Smith en esta situación.
+
+180
+21:22.300 --> 21:32.110
+Y no hace falta decir en realidad en todas las tablas se recomienda que usted tiene un identificador único que
+
+181
+21:32.590 --> 21:41.570
+simplemente un número que cuenta hasta uno dos tres cuatro o cinco dependiendo del número de registro con el fin de
+
+182
+21:41.570 --> 21:42.100
+hacer esto.
+
+183
+21:42.110 --> 21:51.080
+Agregaremos una nueva columna llamada ID esta columna ID tendrá un número generado automáticamente que
+
+184
+21:51.200 --> 21:58.860
+automáticamente contar a medida que agregamos registros de eliminación de esta base de datos.
+
+185
+21:58.860 --> 22:02.030
+Así que para hacerlo voy a alterar los estudiantes de mesa
+
+186
+22:06.630 --> 22:15.370
+añadir un ID debe ser de tipo de datos int que es un entero, lo que significa que es un número entero uno dos tres
+
+187
+22:15.370 --> 22:17.210
+cuatro cinco.
+
+188
+22:17.230 --> 22:24.250
+No un punto dos sino tres por cuatro que será un punto flotante para tenerlo en incremento automático.
+
+189
+22:24.280 --> 22:25.810
+Voy a usar la palabra identidad
+
+190
+22:31.730 --> 22:38.720
+(1, 1) indica que la identidad debe comenzar en el número 1 e incrementarse en 1 por cada
+
+191
+22:38.720 --> 22:41.670
+grabar.
+
+192
+22:42.030 --> 22:51.370
+A medida que ejecuto esto y miro de nuevo en la tabla de estudiantes puedo ver una nueva columna llamada ID que se establece
+
+193
+22:51.700 --> 23:00.770
+que se establece en 1 4 1 Mary Smith 2 para la segunda Mary Smith ahora, por ejemplo, puedo actualizar a los estudiantes
+
+194
+23:00.770 --> 23:13.720
+tabla y establezca el apellido en Reid, donde el ID es 2
+
+195
+23:14.050 --> 23:17.500
+Y esto actualizará solo este registro, pero no este registro.
+
+196
+23:21.610 --> 23:27.690
+Selecciona de nuevo y podemos ver lo que hemos sido capaces de indicar.
+
+197
+23:27.850 --> 23:32.580
+Una de las dos filas en lugar de la otra.
+
+198
+23:32.620 --> 23:41.760
+Ahora también verá que este ID se mantendrá a medida que agregamos más estudiantes para
+
+199
+23:41.800 --> 23:42.360
+insertar en los estudiantes (nombre, apellido, DateOfBirth) valores ('Peter', 'Murphy','1980-01-01')
+
+200
+23:45.960 --> 23:48.960
+insertar en los estudiantes (nombre, apellido, DateOfBirth) valores ('Peter', 'Murphy','1980-01-01')
+
+201
+23:49.350 --> 23:53.230
+insertar en los estudiantes (nombre, apellido, DateOfBirth) valores ('Peter', 'Murphy','1980-01-01')
+
+202
+23:53.440 --> 23:53.850
+insertar en los estudiantes (nombre, apellido, DateOfBirth) valores ('Peter', 'Murphy','1980-01-01')
+
+203
+24:04.720 --> 24:06.170
+insertar en los estudiantes (nombre, apellido, DateOfBirth) valores ('Peter', 'Murphy','1980-01-01')
+
+204
+24:07.980 --> 24:11.560
+Ejecutar. Seleccione los alumnos.
+
+205
+24:11.550 --> 24:17.730
+Y el ID se ha generado automáticamente para nosotros como número tres basado en lo que has aprendido hasta ahora.
+
+206
+24:18.150 --> 24:19.890
+Aquí hay un ejercicio rápido.
+
+207
+24:19.970 --> 24:21.260
+Detenga el vídeo cuando se le solicite.
+
+208
+24:21.950 --> 24:23.850
+Y pruébalo en tu propia computadora.
+
+209
+24:23.850 --> 24:29.410
+Buena suerte.
+
+210
+24:29.800 --> 24:36.910
+Así que ahora se acabó para usted y ver si se puede hacer algunas de las tareas que ya se han demostrado
+
+211
+24:36.910 --> 24:38.930
+hasta ahora en este video.
+
+212
+24:39.130 --> 24:46.750
+Así que quiero que cree dos libros en la mesa de libros - Harry Potter y la cámara de secretos, JK Rowling, 326 páginas
+
+213
+24:47.780 --> 24:50.110
+y un segundo libro Harry Potter y el prisionero de Azkaban
+
+214
+24:50.120 --> 24:58.240
+J.K. Rowling 413 páginas una vez que se agregan esos dos libros, me gustaría que agregara una columna de identificación
+
+215
+24:58.600 --> 25:04.220
+con una identidad establecida en (1 1) para que pueda pausar este video.
+
+216
+25:04.220 --> 25:10.200
+Ahora intenta ver cómo te enciendes y reinicia el video.
+
+217
+25:10.280 --> 25:11.990
+para ver la solución.
+
+218
+25:11.990 --> 25:14.770
+Deténgase ahora.
+
+219
+25:15.090 --> 25:16.700
+Bien, veamos cómo te llevas.
+
+220
+25:17.970 --> 25:21.990
+Así que lo primero que haces es echar un vistazo a la mesa de libros.
+
+221
+25:28.160 --> 25:28.860
+Mesas vacías.
+
+222
+25:28.920 --> 25:29.830
+Como era de esperar.
+
+223
+25:30.000 --> 25:35.050
+Así que insertamos dos libros ahora.
+
+224
+25:39.900 --> 25:41.960
+insertar en libros (BookName, Author, Pages) valores ('
+
+225
+25:45.200 --> 25:46.540
+copiar y pegar para ahorrar tiempo
+
+226
+25:57.430 --> 26:04.210
+puede observar que los tres valores están en el mismo orden que los nombres de columna.
+
+227
+26:04.840 --> 26:05.370
+Primera fila, segunda fila
+
+228
+26:18.650 --> 26:19.870
+vamos a ver la mesa de libros de nuevo.

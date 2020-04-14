@@ -1,0 +1,952 @@
+WEBVTT
+
+0
+00:01.110 --> 00:10.260
+Consultas más avanzadas; profundizar en la instrucción select. 
+
+1
+00:10.260 --> 00:12.520
+Y / o si desea devolver datos que cumplan más de un criterio.
+
+2
+00:12.900 --> 00:20.460
+Puede utilizar el operador armado para especificar que se cumplen ambos criterios o para especificar que un criterio
+
+3
+00:20.520 --> 00:21.500
+se cumple.
+
+4
+00:21.660 --> 00:26.340
+Tal vez un banco podría querer buscar saldos de cuenta inusuales con consultas tales como:
+
+5
+00:26.340 --> 00:31.740
+seleccionar * de bankAccount donde el saldo > 1000000 y la edad<12
+
+6
+00:31.740 --> 00:33.440
+o; seleccionar * de la cuenta bancaria donde la edad 1 o la edad >100
+
+7
+00:33.490 --> 00:38.430
+demostración de vídeo.
+
+8
+00:38.430 --> 00:42.620
+Aquí demostraremos o cláusulas para lograr lo siguiente.
+
+9
+00:42.780 --> 00:45.670
+Encuentre alumnos con el nombre Mary Smith.
+
+10
+00:45.930 --> 00:51.160
+Encuentre alumnos llamados Pedro o con el apellido Smith.
+
+11
+00:51.570 --> 00:55.720
+OK, así que aquí estamos de vuelta en SQL Server Management studio.
+
+12
+00:55.760 --> 01:01.850
+Nuestra tarea es encontrar alumnos llamados Mary Smith o encontrar alumnos llamados Peter o con un apellido Smith.
+
+13
+01:02.600 --> 01:03.820
+Así que echemos un vistazo a nuestros estudiantes.
+
+14
+01:12.040 --> 01:18.980
+Así que para encontrar estudiantes llamados Mary y Smith necesitamos consultar la columna de nombre y el apellido
+
+15
+01:19.000 --> 01:32.460
+columna de la letra donde la cláusula nombre de pila á 'María' y apellidos ' 'smith'
+
+16
+01:32.760 --> 01:34.870
+Esto devuelve una fila como se esperaba.
+
+17
+01:36.360 --> 01:44.130
+Nuestra segunda tarea es encontrar alumnos llamados Peter o con el apellido Smith Soo; seleccionar * de los estudiantes
+
+18
+01:45.420 --> 01:55.240
+donde el nombre 'Peter' o apellido 'Smith'
+
+19
+01:58.440 --> 02:03.090
+esto devuelve dos Filas la primera fila porque un apellido es Smith.
+
+20
+02:03.180 --> 02:07.220
+Segunda fila porque el primer nombre es Peter.
+
+21
+02:07.550 --> 02:10.230
+Más que igual o no igual.
+
+22
+02:11.090 --> 02:16.540
+Puede utilizar los siguientes operadores para comparar las cosas más que, menor que, igual o no igual.
+
+23
+02:16.580 --> 02:23.210
+Cuando se aplica al texto, el operador más que y menor que hará referencia al orden del diccionario de palabras, es decir.  perro aparecería después de gato
+
+24
+02:23.210 --> 02:26.680
+demostración de vídeo.
+
+25
+02:26.690 --> 02:33.410
+Aquí demostrarán la igualdad y los operadores de comparación para encontrar libros con más de 450 páginas, 
+
+26
+02:33.410 --> 02:41.300
+menos de 400 páginas, exactamente 413 páginas, o no tienen 413 páginas.
+
+27
+02:41.310 --> 02:43.940
+Aquí vamos a demostrar algunos operadores de comparación.
+
+28
+02:44.090 --> 02:50.180
+Así que queremos buscar libros de más de 400 páginas, menos de 400 páginas, exactamente 413, 
+
+29
+02:50.870 --> 02:51.530
+y no tienen 413 páginas
+
+30
+02:52.250 --> 02:54.470
+Así que seleccionamos de la mesa de libros
+
+31
+02:59.110 --> 03:04.690
+y simplemente podemos decir donde las páginas más de 400
+
+32
+03:09.380 --> 03:15.070
+devuelve que, no menos de 400 devuelve el otro libro
+
+33
+03:17.850 --> 03:21.810
+equivale a 413
+
+34
+03:21.810 --> 03:27.420
+o no igual a 413, devuelve estos dos libros
+
+35
+03:30.860 --> 03:36.930
+como operador;  Al comparar texto, puede utilizar el operador like para comparar patrones de texto utilizando el porcentaje
+
+36
+03:36.930 --> 03:42.620
+titular del lugar de la señal para indicar el texto que falta, por ejemplo, a una lista de estudiantes donde María es parte de su
+
+37
+03:42.620 --> 03:43.230
+Nombre.
+
+38
+03:43.310 --> 03:46.070
+Así que sólo María y María Jane, y Amaryah.
+
+39
+03:46.340 --> 03:51.050
+Esto se escribirá como; seleccionar * de los estudiantes donde el nombre como '%Mary%'
+
+40
+03:51.050 --> 03:56.610
+demostración de vídeo.
+
+41
+03:56.850 --> 04:01.820
+Aquí vamos a demostrar el uso del operador similar para lograr la siguiente lista de estudiantes cuyos
+
+42
+04:01.830 --> 04:10.090
+nombre comienza con la letra M y lista todos los libros que contienen Harry Potter y el título.
+
+43
+04:10.210 --> 04:13.570
+Aquí es donde demostrará el uso del operador similar.
+
+44
+04:13.660 --> 04:19.610
+Enumeramos todos los estudiantes cuyo nombre comienza con la letra M y luego enumeramos todos los libros que contienen
+
+45
+04:19.610 --> 04:20.410
+Harry Potter en el título.
+
+46
+04:21.050 --> 04:22.960
+Echemos un vistazo a nuestra mesa de estudiantes
+
+47
+04:29.630 --> 04:40.440
+así que hay dos estudiantes que comienzan con M. Ambas marías. donde el nombre como 'M%' 
+
+48
+04:41.050 --> 04:45.050
+Así que comenzamos con la letra M seguida de cualquier otra cosa.
+
+49
+04:45.070 --> 04:51.810
+Por lo tanto, tenemos los dos Marías. Libros que contienen Harry Potter en el título, 
+
+50
+04:51.950 --> 04:52.420
+seleccionar * de libros 
+
+51
+04:58.810 --> 05:01.510
+no necesariamente tiene que empezar con la palabra Harry Potter.
+
+52
+05:01.780 --> 05:08.860
+Así que decimos; 
+
+53
+05:09.190 --> 05:11.090
+donde nombre de libro como '%Harry Potter%'
+
+54
+05:11.230 --> 05:12.070
+donde nombre de libro como '%Harry Potter%'
+
+55
+05:12.100 --> 05:17.200
+Eso significa que Harry Potter puede aparecer en cualquier parte del nombre del libro
+
+56
+05:23.280 --> 05:29.490
+seleccionar un operador distinto si desea mover duplicados exactos de un resultado de consulta que podemos usar para seleccionar
+
+57
+05:29.490 --> 05:30.750
+operador distinto.
+
+58
+05:31.110 --> 05:35.920
+Por ejemplo, si desea ver todas las fechas de nacimiento únicas de los alumnos, será;
+
+59
+05:35.930 --> 05:41.030
+seleccionar distinto DateOfBirth de los estudiantes
+
+60
+05:41.060 --> 05:47.230
+Demostrará el uso de select distinct operator para lograr la siguiente lista;
+
+61
+05:47.230 --> 05:51.440
+lista rallón de todos los nombres de los alumnos excluyendo duplicados.
+
+62
+05:51.830 --> 05:57.710
+Aquí demostramos SELECT DISTINCT enumerando todos los nombres de los alumnos excluyendo duplicados.
+
+63
+05:57.780 --> 05:59.430
+Así que echemos un vistazo a nuestra mesa de estudiantes
+
+64
+06:06.030 --> 06:08.700
+que cuidan específicamente el primer nombre.
+
+65
+06:09.980 --> 06:14.700
+Columna
+
+66
+06:14.950 --> 06:17.660
+Pueden ver que tenemos dos Marías y un Pedro, así que digo;
+
+67
+06:17.710 --> 06:22.300
+SELECCIONE DISTINCT.
+
+68
+06:22.360 --> 06:25.260
+Luego tenemos a una María y Pedro.
+
+69
+06:25.330 --> 06:31.450
+Ahora usted puede ser curioso en cuanto a por qué especificé el nombre en lugar de hacer una estrella selecta.
+
+70
+06:32.310 --> 06:39.550
+Veo que esto no tiene ningún efecto porque hay otras columnas que son únicas, como un apellido
+
+71
+06:39.610 --> 06:45.190
+o la identificación. Así que la solución correcta es seleccionar distinto el nombre de los estudiantes
+
+72
+06:47.840 --> 06:55.160
+Ordenar datos: de forma predeterminada, los datos devueltos por la instrucción select no son un orden garantizado. Para ordenar por uno
+
+73
+06:55.160 --> 07:03.980
+columna en orden ascendente de uso por y para orden de uso de orden descendente por DESC para una reproducción aleatoria.
+
+74
+07:04.080 --> 07:13.310
+Utilice order by newid() para ordenar a los estudiantes por uso de apellidos 
+
+75
+07:13.310 --> 07:18.480
+seleccionar * de los estudiantes orden por apellido
+
+76
+07:18.480 --> 07:23.370
+Así que poniendo todos los temas pasados juntos vamos a demostrar una consulta compleja que devuelve una lista de
+
+77
+07:23.370 --> 07:31.350
+nombres de libros que están escritos por Dhonielle Clayton o tienen más de 400 páginas de longitud y o traen los resultados
+
+78
+07:31.500 --> 07:34.670
+Alfabéticamente.
+
+79
+07:35.460 --> 07:41.690
+OK, así que combinando lo que hemos aprendido hasta ahora vamos a escribir una consulta compleja que enumera los nombres de los libros
+
+80
+07:41.690 --> 07:49.070
+que están escritos por Danielle Clayton o más de 400 páginas de longitud, y queremos ordenar el resultado
+
+81
+07:49.080 --> 07:49.650
+Alfabéticamente.
+
+82
+07:51.130 --> 07:54.510
+Así que echemos un vistazo a nuestra mesa de libros
+
+83
+07:59.570 --> 08:10.090
+con el fin de conseguir que el autor se una a eso en la tabla de autores y autores del libro.
+
+84
+08:12.510 --> 08:22.620
+unirse a bookAuthor ba on ba.bookid - b.id unirse al autor a en a.id á ba.authorid
+
+85
+08:23.090 --> 08:24.390
+Muy bien.
+
+86
+08:24.590 --> 08:29.390
+De la lección anterior usted debe recordar las muchas a muchas relaciones que tenemos entre los libros
+
+87
+08:29.420 --> 08:40.800
+y los autores de libros por lo que ahora tenemos nombres de libros y nombres de autores quiero limitar esto a los autores
+
+88
+08:43.760 --> 08:46.670
+llamado "Dhonielle Clayton"
+
+89
+08:53.030 --> 09:02.820
+o páginas superiores a 400.
+
+90
+09:02.930 --> 09:05.120
+Ahora tenemos un duplicado en la lista.
+
+91
+09:05.390 --> 09:08.740
+Así que todo lo que nos interesa son los nombres de los libros.
+
+92
+09:14.950 --> 09:19.610
+dos libros, pero una clave duplicada para el autor múltiple
+
+93
+09:20.270 --> 09:21.500
+Así que usted selecciona distinto
+
+94
+09:27.110 --> 09:32.090
+y para ordenar esto alfabéticamente se dice orden por nombre de libro
+
+95
+09:41.180 --> 09:48.350
+Operaciones de fecha; Ciertas operaciones son específicas de los tipos de datos date o datetime, como; Día(): la parte del día de la fecha
+
+96
+09:48.350 --> 09:50.330
+mes(): la parte del mes de la fecha
+
+97
+09:50.370 --> 09:54.030
+año(): la parte del año de la fecha.
+
+98
+09:54.640 --> 09:59.090
+Y para un funcionamiento más flexible; es datepart que acepta dos parámetros.
+
+99
+09:59.090 --> 10:06.230
+El intervalo y la fecha; y esto devolverá una parte de la fecha especificada por el intervalo. 
+
+100
+10:06.500 --> 10:08.210
+El intervalo puede ser día, mes, año,
+
+101
+10:08.240 --> 10:11.810
+hora, minuto, díaDe Año, día de la semana y así sucesivamente.
+
+102
+10:13.090 --> 10:22.560
+Para obtener la fecha de hoy se puede escribir select getdate()
+
+103
+10:22.910 --> 10:27.480
+Aquí demostramos algunas operaciones de fecha; conseguir la fecha de hoy.
+
+104
+10:27.770 --> 10:34.860
+Obtener el mes actual; obtener la fecha actual; y obtener el número de días desde el inicio de la
+
+105
+10:34.860 --> 10:35.130
+año.
+
+106
+10:38.100 --> 10:41.170
+Aquí se mostrarán algunas operaciones de fecha; conseguir la fecha de hoy.
+
+107
+10:41.220 --> 10:45.690
+Obtener el mes actual; obtener el día actual; y obtener el número de días desde el inicio de la
+
+108
+10:45.690 --> 10:46.830
+año.
+
+109
+10:46.890 --> 10:52.380
+Este video se está preparando el 20 de noviembre de 2019.
+
+110
+10:52.680 --> 10:54.820
+Sus resultados serán obviamente en el futuro.
+
+111
+10:56.020 --> 10:56.930
+seleccionar getdate()
+
+112
+11:01.200 --> 11:03.240
+esto devuelve la fecha actual de hoy.
+
+113
+11:06.060 --> 11:18.000
+El mes en curso que sería un mes del 11 de noviembre, el día con es el 20 de vueltas 20 y para
+
+114
+11:18.000 --> 11:19.930
+el número de días desde el inicio del año.
+
+115
+11:19.950 --> 11:25.880
+Usamos la palabra fecha de salida y día de año.
+
+116
+11:25.950 --> 11:34.190
+Operador y esto devuelve 324 porque ese es el número de días desde el 1 de enero.
+
+117
+11:35.740 --> 11:44.830
+Operaciones de texto; ciertas operaciones son específicas de los tipos de datos char, varchar y nvarchar, como;
+
+118
+11:45.250 --> 11:51.690
+reverse() - invierte el orden de los caracteres; Len() - obtiene la longitud del texto dado; substring() - extraer algún texto de texto más grande
+
+119
+11:51.760 --> 11:59.320
+charindex() - encontrar algún texto en el texto más grande; y muchas otras operaciones 
+
+120
+11:59.320 --> 12:01.240
+Recomiendo mirar el sitio web de Microsoft para la lista completa
+
+121
+12:04.130 --> 12:05.690
+demostración de vídeo.
+
+122
+12:05.690 --> 12:13.240
+Aquí demostramos algunas operaciones de texto; invertir un fragmento de texto; obtener la longitud de algún texto
+
+123
+12:13.240 --> 12:21.200
+devolver una lista de los alumnos como primera inicial seguida de apellido; lista de los libros de Harry Potter sólo por subtítulos
+
+124
+12:24.070 --> 12:30.750
+aquí vamos a demostrar un par de operaciones de texto específicamente; invertir un fragmento de texto; conseguir la longitud
+
+125
+12:30.750 --> 12:36.390
+de algún texto; devolver a todos los estudiantes primera inicial seguido de apellido y lista de los libros de Harry Potter
+
+126
+12:36.390 --> 12:37.380
+sólo por subtítulos
+
+127
+12:38.340 --> 12:54.390
+Así que primero vamos a echar un vistazo a uno simple; seleccionar reverse('lived') al revés de hechizos devil; longitud del texto;
+
+128
+12:55.650 --> 12:59.080
+len('hello') es una palabra de cinco letras.
+
+129
+12:59.180 --> 13:03.260
+Ahora una lista de estudiantes primero inicial seguido de apellido; echemos un vistazo a nuestra mesa de estudiantes
+
+130
+13:08.040 --> 13:18.160
+queremos la primera inicial que usamos el nombre del comando substring el primer parámetro es el número
+
+131
+13:18.250 --> 13:22.680
+de los personajes desde la izquierda; Una.
+
+132
+13:22.780 --> 13:31.580
+Cuántos caracteres desea tomar, que es uno; Así que eso da una M para María y una P para Pedro.
+
+133
+13:32.590 --> 13:36.020
+Añade un punto, espacio y el apellido
+
+134
+13:40.740 --> 13:50.220
+por lo que hace un M Smith de Mary Smith y un P Murphy de Peter Murphy; ahora vamos a ver a Harry Potter
+
+135
+13:50.220 --> 13:51.550
+libros sólo por subtítulos.
+
+136
+13:51.720 --> 13:53.010
+Así que echemos un vistazo a nuestros libros
+
+137
+13:58.750 --> 14:00.610
+así que sólo queremos libros de Harry Potter.
+
+138
+14:00.610 --> 14:07.330
+Así que di dónde nombre del libro como 'Harry Potter%'
+
+139
+14:11.750 --> 14:12.390
+Ahora.
+
+140
+14:12.550 --> 14:17.480
+El subtítulo aquí será Cámara de Secretos para este libro Prisionero de Azkaban para este libro.
+
+141
+14:18.830 --> 14:23.450
+Así que necesitamos encontrar la ubicación de ese texto dentro del nombre del libro.
+
+142
+14:24.620 --> 14:29.980
+¿En qué caso voy a buscar la palabra y el porque es común a ambos.
+
+143
+14:30.140 --> 14:31.880
+Así que usamos la charindex
+
+144
+14:34.540 --> 14:40.460
+el poco de texto que estamos buscando y el espacio y el nombre del libro.
+
+145
+14:40.750 --> 14:41.620
+Que es la columna.
+
+146
+14:43.180 --> 14:51.050
+Si ejecutamos esto veremos que el subtítulo aparece en el carácter 14 en todo el libro.
+
+147
+14:52.210 --> 14:55.510
+Así que vamos a combinar esto con la palabra subcadena
+
+148
+14:58.580 --> 15:12.410
+nombre de libro de la posición que será 14 y la longitud que vamos a tomar máximo 400.
+
+149
+15:12.560 --> 15:18.680
+Así que mientras ejecutamos esto podemos ver que en realidad ha vuelto y la Cámara de los Secretos.
+
+150
+15:18.680 --> 15:26.450
+Tal vez si no queríamos que aparecieran podemos añadir un len más('y el ')
+
+151
+15:29.340 --> 15:29.830
+Otra vez.
+
+152
+15:31.060 --> 15:39.620
+Así que ahora tenemos una columna con los subtítulos ahí.
+
+153
+15:40.490 --> 15:45.380
+Al escribir una consulta donde la columna de la instrucción SELECT es un valor calculado, la columna
+
+154
+15:45.380 --> 15:46.560
+no tener un nombre.
+
+155
+15:46.910 --> 15:50.330
+Puede asignarlo escribiendo COMO y luego un nombre de columna
+
+156
+15:50.420 --> 15:56.720
+Por ejemplo, si quisiéramos una columna con el nombre completo del estudiante podríamos escribir 
+
+157
+15:56.760 --> 16:04.850
+seleccionar nombre + ' ' + apellido como nombre completo de los estudiantes 
+
+158
+16:04.850 --> 16:09.540
+También puede asignar un nuevo nombre a una columna mediante un alias de columna si esto tiene más sentido en el contexto, por ejemplo.
+
+159
+16:09.560 --> 16:17.840
+Apellido SELECT DISTINCT como apellido del estudiante 
+
+160
+16:17.840 --> 16:27.780
+demostraremos un alias de columna devolviendo una lista de alumnos con un nombre y apellido combinados al nombre completo de la columna.
+
+161
+16:28.170 --> 16:33.690
+Así que ahora para demostrar COLUMN ALIAS nos gusta devolver una lista de estudiantes con nombre combinado y
+
+162
+16:33.690 --> 16:37.390
+apellido bajo la columna fullname
+
+163
+16:42.440 --> 16:53.850
+Combinaremos su nombre y apellido.
+
+164
+16:53.960 --> 16:55.800
+Observe que esto todavía no tiene ningún nombre de columna.
+
+165
+16:56.600 --> 16:59.450
+Así que lo llamamos nombre completo
+
+166
+17:02.910 --> 17:05.120
+y de nuevo se puede ver la columna ahora tiene un nombre.
+
+167
+17:06.900 --> 17:14.140
+Subconsultas; a veces es necesario tener un filtro de consulta en los resultados de otra consulta.
+
+168
+17:14.220 --> 17:17.040
+Este tipo de consultas de selección tiene el siguiente formato.
+
+169
+17:17.070 --> 17:24.470
+SELECT * en la Tabla1 donde X en ( seleccione Y en la tabla2 )
+
+170
+17:24.480 --> 17:29.310
+Esto significaría que desea ver que todas las filas de la tabla 1 o la columna X es igual a uno de los valores
+
+171
+17:30.030 --> 17:32.600
+de Y de la tabla 2.
+
+172
+17:32.820 --> 17:35.990
+No se puede utilizar para invertir la función de
+
+173
+17:39.000 --> 17:40.790
+demostración de vídeo.
+
+174
+17:41.130 --> 17:50.330
+Aquí demostramos subconsulta; volver a la lista de préstamos de libros para cualquier libro de la serie Harry Potter.
+
+175
+17:50.560 --> 17:56.780
+Aquí se mostrará una subconsulta; devolver una lista de préstamos de libros para cualquier libro de la serie Harry Potter.
+
+176
+17:56.920 --> 17:59.470
+Así que echemos un vistazo a nuestros libros.
+
+177
+18:06.060 --> 18:06.530
+Um.
+
+178
+18:06.690 --> 18:09.290
+Queremos limitar esto a los libros de Harry Potter.
+
+179
+18:09.390 --> 18:15.340
+Nombre del libro como Harry Potter.
+
+180
+18:20.590 --> 18:25.050
+Al escribir una subconsulta, solo debe devolver una columna.
+
+181
+18:25.990 --> 18:34.880
+Así que en este caso quiero devolver el id.
+
+182
+18:35.190 --> 18:41.130
+Así que esto devolverá los identificadores asociados con ambos libros de Harry Potter.
+
+183
+18:41.140 --> 18:43.150
+Ahora echemos un vistazo a nuestra mesa de préstamos de libros.
+
+184
+18:50.180 --> 19:00.400
+Y si limitamos esto a los libros que están contenidos en la consulta posterior que usaríamos;
+
+185
+19:00.400 --> 19:06.040
+donde bookId en (
+
+186
+19:06.330 --> 19:07.080
+Segunda consulta
+
+187
+19:10.790 --> 19:19.260
+ejecutar esto; así que ahora estamos viendo préstamos de libros donde el libro está en la lista de libros.
+
+188
+19:19.260 --> 19:29.450
+Por Harry Potter; podemos revertir esto diciendo "no en" con el fin de obtener cero resultados; pero esta es nuestra respuesta.
+
+189
+19:33.370 --> 19:40.090
+Unión Europea; si tuviera que escribir para seleccionar declaraciones y quisiera combinarlas en un solo resultado, puede
+
+190
+19:40.090 --> 19:46.750
+utilizar la declaración de la Unión; seleccione X de la unión de tabla seleccione Y en la tabla.
+
+191
+19:46.750 --> 19:51.850
+Esto significaría que desea tanto la columna X como la columna y en una columna del resultado.
+
+192
+19:51.850 --> 19:58.760
+Es posible que deba asegurarse de que el número y el tipo de las columnas coinciden. 
+
+193
+19:58.760 --> 20:07.200
+Aquí lo demostramos en unión; devolver una lista de autores combinado con una lista de estudiantes o por su nombre
+
+194
+20:07.200 --> 20:12.810
+Aquí demostraremos una unión; donde seleccionamos una lista de autores y una lista de estudiantes.
+
+195
+20:12.960 --> 20:15.380
+Combínalos juntos y orótalos por su nombre.
+
+196
+20:16.140 --> 20:21.720
+Echemos un vistazo a nuestros autores.
+
+197
+20:21.790 --> 20:28.790
+Tomemos el nombre del autor de aquí.
+
+198
+20:29.000 --> 20:30.110
+Echemos un vistazo a nuestros estudiantes
+
+199
+20:35.210 --> 20:36.250
+Y
+
+200
+20:36.680 --> 20:38.420
+Combinemos el nombre y el apellido
+
+201
+20:49.650 --> 20:50.690
+combinarlos;
+
+202
+20:51.030 --> 21:00.220
+Podemos escribir unión para esto ahora devuelve a los autores y a los estudiantes.
+
+203
+21:00.230 --> 21:07.190
+Ahora bien, si queremos ordenar esto; podemos decir orden por nombre de autor
+
+204
+21:11.920 --> 21:13.670
+y finalmente se acabó para ti.
+
+205
+21:14.450 --> 21:18.360
+Así que basado en lo que has aprendido en esta lección aquí hay una prueba 
+
+206
+21:18.410 --> 21:26.680
+Lista de autores que comparten la misma primera letra de su apellido puedes pausar este video ahora y reanudarlo una vez
+
+207
+21:26.680 --> 21:33.510
+has intentado esta prueba.
+
+208
+21:33.590 --> 21:35.880
+Bien, espero que hayas dado una buena invernada.
+
+209
+21:35.970 --> 21:37.120
+Y si aún no lo has hecho.
+
+210
+21:37.120 --> 21:41.050
+A continuación, puede pausar este vídeo ahora y reanudarlo una vez que haya intentado esta prueba.
+
+211
+21:42.580 --> 21:44.550
+Bien, aquí estamos.
+
+212
+21:44.640 --> 21:50.890
+Queremos enumerar los autores que comparten la misma primera letra de su apellido con otro autor.
+
+213
+21:50.970 --> 21:53.280
+Así que si echamos un vistazo a la tabla de autores
+
+214
+21:59.300 --> 22:05.690
+podemos ver que estos dos autores comparten la misma primera letra de su apellido, pero tendrán que extraer
+
+215
+22:05.690 --> 22:10.810
+los que conelel de extraer la primera letra del apellido.
+
+216
+22:10.880 --> 22:18.230
+Lo que tendremos que hacer es encontrar el espacio entre el nombre y el apellido y extraer la letra que
+
+217
+22:18.230 --> 22:19.900
+inmediatamente sigue el espacio.
+
+218
+22:20.870 --> 22:24.070
+Así que para encontrar el espacio debemos usar el charIndex.
+
+219
+22:24.090 --> 22:24.450
+Muy bien
+
+220
+22:32.970 --> 22:39.360
+por lo que ahora esto devuelve la posición del espacio que ahora queremos la letra que sigue inmediatamente el espacio.
+
+221
+22:39.360 --> 22:46.560
+Así que usamos un más que será la ubicación de la primera letra del apellido con el fin de extraer
+
+222
+22:46.560 --> 22:48.360
+la primera letra del apellido.
+
+223
+22:48.360 --> 22:55.940
+Debemos usar la subcadena; nombre de autor; charIndex así sucesivamente
+
+224
+23:02.120 --> 23:02.760
+Un personaje
+
+225
+23:05.860 --> 23:15.990
+esto ahora devuelve R para Rowling, C, etc. Así que en la segunda consulta como mencioné anteriormente que sólo debe
+
+226
+23:15.990 --> 23:17.530
+devolver una columna.
+
+227
+23:18.510 --> 23:21.690
+Así que esto ahora devuelve todos los
+
+228
+23:25.180 --> 23:28.450
+primeras letras de los apellidos de los autores.
+
+229
+23:28.720 --> 23:32.470
+Así que eso formará la base de nuestra subconsulta.
+
+230
+23:32.470 --> 23:39.040
+Ahora echemos un vistazo a nuestra consulta principal.
+
+231
+23:39.350 --> 23:40.990
+Ahora nuestra consulta principal
+
+232
+23:43.570 --> 23:51.010
+una vez más comparará la primera letra del apellido con la de la misma consulta.
+
+233
+23:51.010 --> 23:52.080
+Así que lo tomaremos.
+
+234
+23:52.150 --> 23:55.330
+Esta expresión utilizaba el operador
+
+235
+23:59.010 --> 24:02.530
+y compararlo con la subconsulta.
+
+236
+24:02.630 --> 24:10.250
+Ahora, antes de ejecutar esto debo señalar que ya que la subconsulta devuelve la primera carta de cada autor
+
+237
+24:10.

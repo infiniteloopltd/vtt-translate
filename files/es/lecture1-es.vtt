@@ -1,0 +1,513 @@
+WEBVTT
+
+0
+00:00.900 --> 00:02.090
+¡Hola!
+
+1
+00:02.220 --> 00:05.070
+Este es nuestro curso de Udemy sobre Microsoft SQL Server
+
+2
+00:05.070 --> 00:13.640
+Microsoft SQL Server es el sistema de bases de datos relacionales más popular para
+
+3
+00:13.730 --> 00:14.550
+Sistema operativo.
+
+4
+00:15.920 --> 00:26.150
+Así que sin más preámbulos, comencemos e instalemos SQL Server y SQL Management studio.
+
+5
+00:26.550 --> 00:33.690
+Este es un curso de Udemy sobre Microsoft SQL Server; En primer lugar voy a demostrar cómo descargar
+
+6
+00:33.690 --> 00:42.240
+e instale SQL Server y SQL Server Management studio que necesitarátener acceso a SQL Server.
+
+7
+00:42.910 --> 00:46.850
+También una búsqueda en Google para microsoft SQL Server express edition.
+
+8
+00:46.870 --> 00:49.850
+Esta es una versión gratuita que te ayudará a empezar.
+
+9
+00:50.950 --> 00:55.930
+Esta es la página de inicio en Microsoft y vamos a seguir adelante y pulse el botón de descarga.
+
+10
+01:08.380 --> 01:16.110
+Queremos ir a una instalación básica; aceptar el acuerdo; instalar en la ubicación predeterminada
+
+11
+01:19.280 --> 01:21.890
+y ahora vamos a esperar a que la descarga se complete
+
+12
+01:35.450 --> 01:39.350
+Una vez instalada la edición de SQL Server Express.
+
+13
+01:39.410 --> 01:47.330
+Vamos a seguir adelante e instalar SSMS o SQL Server Management studio; pulsando este botón
+
+14
+01:47.510 --> 01:50.450
+que se vinculará a la página de descarga en Microsoft
+
+15
+01:53.220 --> 01:54.300
+Pulse el botón de descarga.
+
+16
+01:58.840 --> 02:01.210
+Y esperaremos a que se descargue.
+
+17
+02:01.400 --> 02:01.970
+Cinco minutos
+
+18
+02:06.230 --> 02:11.810
+Una vez que se descarga SQL Server Management studio; abrir el ejecutable para iniciar la instalación
+
+19
+02:24.910 --> 02:33.010
+para abrir SQL Server Management studio; ir a la barra de búsqueda; y escriba SQL; El mejor partido debe ser
+
+20
+02:33.220 --> 02:35.890
+Microsoft SQL Server Management studio; haga clic en este
+
+21
+02:39.930 --> 02:47.400
+una vez abierto el nombre del servidor debe rellenarse previamente en este cuadro; dejar la autenticación como autenticación de Windows
+
+22
+02:47.490 --> 02:56.470
+y pulse conectar. Por el momento, este servidor de bases de datos no tiene bases de datos; Ahora voy a crear una nueva base de datos
+
+23
+02:57.630 --> 02:59.170
+y quiero llamarlo biblioteca
+
+24
+03:02.500 --> 03:15.280
+pulse OK; y ahora se crea nuestra nueva base de datos. Esta base de datos está vacía; no tiene tablas ni datos en su interior, pero
+
+25
+03:15.280 --> 03:16.770
+vamos a dejarlo así por el momento
+
+26
+03:19.580 --> 03:28.490
+otra opción en lugar de instalar SQL Server localmente en el equipo es usar Microsoft Azure
+
+27
+03:28.490 --> 03:38.540
+plataforma; para que pueda configurar una instancia de SQL Server en Microsoft Azure. Uso de la nube de Microsoft
+
+28
+03:38.540 --> 03:46.800
+plataforma le permitiría escalar su base de datos a medida que crece sin embargo este paso requiere que tenga un
+
+29
+03:46.830 --> 03:55.490
+cuenta activa de Microsoft Azure y puede incurrir en costos; puede omitir este paso si no desea utilizar
+
+30
+03:56.000 --> 03:57.140
+Microsoft Azure
+
+31
+04:00.240 --> 04:06.450
+La siguiente demostración que voy a hacer es cómo configurar la misma base de datos de SQL Server; pero esta vez se alojó en
+
+32
+04:06.690 --> 04:15.450
+Azure, que es la oferta de plataformas en la nube de Microsoft; por lo que el uso de plataformas en la nube que no es necesario instalar
+
+33
+04:15.450 --> 04:16.370
+software local.
+
+34
+04:17.550 --> 04:27.300
+Por lo tanto, debemos configurar la misma base de datos; haga clic en bases de datos de SQL Server. Crear base de datos SQL
+
+35
+04:32.940 --> 04:37.930
+Aquí ingresamos el nombre de la base de datos en la que vamos a llamarla biblioteca.
+
+36
+04:38.150 --> 04:38.850
+Como antes
+
+37
+04:42.120 --> 04:44.580
+presionamos la revisión y creamos
+
+38
+04:51.780 --> 04:53.630
+Esto tomará unos segundos para crear
+
+39
+05:02.710 --> 05:09.010
+por lo que una vez que se crea la base de datos; lo primero que voy a hacer es establecer la contraseña; 
+
+40
+05:09.010 --> 05:09.990
+Así que haga clic en el nombre del servidor aquí.
+
+41
+05:12.430 --> 05:18.860
+Quiero presionar la contraseña de reinicio; ahora con el fin de generar una contraseña segura.
+
+42
+05:18.890 --> 05:21.450
+Puedes escribir lo que quieras.
+
+43
+05:22.700 --> 05:25.430
+Si sigue esas reglas.
+
+44
+05:26.780 --> 05:30.530
+Lo que me gusta usar es un sitio web llamado generador de contraseñas seguras.
+
+45
+05:32.910 --> 05:34.080
+Generar contraseña.
+
+46
+05:34.720 --> 05:40.500
+Y esta es una contraseña segura que puedo usar; pegarlo en ambas cajas
+
+47
+05:43.100 --> 05:57.180
+y pulse guardar.
+
+48
+06:00.030 --> 06:03.360
+Debe tener SQL Server Management studio abierto desde antes.
+
+49
+06:04.330 --> 06:08.130
+Y voy a introducir el nombre del servidor.
+
+50
+06:08.220 --> 06:08.600
+Copia
+
+51
+06:11.850 --> 06:14.900
+cambiar la autenticación de Windows a la autenticación de SQL Server.
+
+52
+06:17.580 --> 06:19.870
+El inicio de sesión debe ser el administrador del servidor aquí.
+
+53
+06:20.120 --> 06:23.120
+Sería diferente para su cuenta.
+
+54
+06:23.160 --> 06:29.730
+La contraseña será de lo que haya escrito en o desde este sitio web.
+
+55
+06:29.730 --> 06:34.390
+El generador de contraseñas seguras y pulse Conectar.
+
+56
+06:41.590 --> 06:43.300
+Ahora expandimos esto.
+
+57
+06:43.340 --> 06:52.780
+Deberíamos ver la configuración de la base de datos con la biblioteca de bases de datos accesible.
+
+58
+06:52.840 --> 06:58.250
+Esto no tiene tablas asociadas. Pero esto está alojado en Azure
+
+59
+07:01.960 --> 07:03.360
+una vez que haya terminado con esto.
+
+60
+07:04.180 --> 07:10.750
+Y si no desea seguir usando Azure, ya que hay ciertos costos asociados con el uso
+
+61
+07:10.900 --> 07:14.730
+Microsoft Azure, puede eliminar la base de datos después.
+
+62
+07:14.980 --> 07:22.970
+Haga clic en bases de datos SQL; haga clic en su base de datos; y pulse el botón DELETE, escriba la palabra sí y elimine.
+
+63
+07:30.280 --> 07:39.450
+Una alternativa al uso de Microsoft Azure son los servicios web de Amazon, por lo que si prefiere utilizar la nube de Amazon
+
+64
+07:39.450 --> 07:46.530
+plataforma o AWS abreviatura para Amazon Web Services, a continuación, también puede configurar una instancia de servidor SQL
+
+65
+07:46.920 --> 07:49.750
+en la plataforma de AWS.
+
+66
+07:50.940 --> 07:58.790
+Como antes de este paso, es necesario tener una cuenta de AWS activa y puede incurrir en costos.
+
+67
+07:58.790 --> 08:02.390
+Puede omitir el paso si no desea utilizar AWS
+
+68
+08:10.840 --> 08:20.380
+otra plataforma en la nube para alojar bases de datos de SQL Server es AWS o Amazon Web Services de Amazon.
+
+69
+08:20.440 --> 08:24.340
+Esta es una alternativa a Azure, pero es bastante similar a ella.
+
+70
+08:25.930 --> 08:34.480
+Así que para iniciar el registro en la consola de administración de AWS búsqueda de RDS que es 
+
+71
+08:35.200 --> 08:36.040
+servicio de base de datos relacional administrada
+
+72
+08:44.520 --> 08:45.070
+Ahora.
+
+73
+08:45.270 --> 08:46.980
+Si pulsa crear base de datos
+
+74
+08:49.690 --> 08:56.420
+puede seleccionar diferentes tipos de bases de datos aquí, pero vamos por el servidor Microsoft SQL
+
+75
+08:56.420 --> 09:01.010
+ir por la adición exprés; una vez más por razones de costo.
+
+76
+09:02.090 --> 09:03.320
+Seleccionar nivel gratuito
+
+77
+09:06.560 --> 09:09.340
+Voy a llamar a la base de datos "biblioteca"
+
+78
+09:15.050 --> 09:20.110
+el nombre de usuario "admin" está bien; para la contraseña maestra.
+
+79
+09:20.110 --> 09:25.920
+Voy a ir una vez más a las contraseñas generator.net sitio web.
+
+80
+09:25.940 --> 09:30.090
+Obviamente puede escribir su propia contraseña aquí.
+
+81
+09:30.290 --> 09:37.650
+He seleccionado excluir símbolos y esta opción copia la contraseña.
+
+82
+09:39.620 --> 09:41.880
+Y esa es la contraseña maestra.
+
+83
+09:41.910 --> 09:42.630
+Confírmelo.
+
+84
+09:45.230 --> 09:49.160
+Aceptará la configuración predeterminada para todo lo demás.
+
+85
+09:55.020 --> 09:56.830
+Este caso tuve que seleccionar library2
+
+86
+10:02.850 --> 10:11.040
+esto está creando; se quedará en el estado por unos minutos, así que hazte una taza de café y ven
+
+87
+10:11.040 --> 10:11.280
+Atrás.
+
+88
+10:15.870 --> 10:22.860
+Ahora nuestra base de datos se crea ahora, pero tenemos que hacer dos cambios para hacer esta base de datos públicamente
+
+89
+10:22.860 --> 10:25.110
+Accesible.
+
+90
+10:25.110 --> 10:28.460
+Haga clic en la base de datos; haga clic en modificar;
+
+91
+10:34.180 --> 10:35.590
+desplácese hacia abajo en esta página
+
+92
+10:38.480 --> 10:42.130
+hasta que vea la accesibilidad pública.
+
+93
+10:42.140 --> 10:47.580
+Esto permite que la base de datos se conecte desde fuera de la red de Amazon, por lo que presionamos
+
+94
+10:47.600 --> 10:48.600
+Sí.
+
+95
+10:49.070 --> 10:55.520
+Desplácese hasta la parte inferior de la página y pulse Continuar y modificar
+
+96
+10:59.830 --> 11:06.710
+después de que el estado vuelva del estado de modificación al estado disponible.
+
+97
+11:08.590 --> 11:18.580
+Ahora podemos actualizar la base de datos para que acepte conexiones desde fuera de la red de Amazon.
+
+98
+11:18.580 --> 11:21.880
+Para ello necesitamos actualizar el cortafuegos asociado a la base de datos
+
+99
+11:24.450 --> 11:27.410
+seguridad; Grupos de seguridad de VPC.
+
+100
+11:27.450 --> 11:28.380
+Haga clic en este enlace aquí
+
+101
+11:32.510 --> 11:43.230
+ahora seleccione la pestaña Entrada; ahora necesita editar las reglas; añadir una regla
+
+102
+11:44.140 --> 11:44.770
+Todo el tráfico
+
+103
+11:49.050 --> 11:53.530
+de mi IP; prensa guardar
+
+104
+11:58.540 --> 11:59.890
+volviendo a la base de datos.
+
+105
+12:04.820 --> 12:15.200
+Una vez que hemos habilitado el acceso público y modificado el cortafuegos para permitir el acceso desde esta dirección IP,
+
+106
+12:15.200 --> 12:16.050
+ahora se puede conectar a él.
+
+107
+12:17.150 --> 12:19.980
+Haga clic en la base de datos una vez más.
+
+108
+12:20.360 --> 12:28.700
+Copie el punto de conexión; abra la copia local del estudio de administración de Microsoft SQL Server.
+
+109
+12:28.840 --> 12:32.440
+Pegue el punto final en la dirección del nombre del servidor; 
+
+110
+12:32.520 --> 12:37.180
+Inicie sesión como administrador como anterior; contraseña era la contraseña que elegimos anteriormente.
+
+111
+12:40.930 --> 12:43.720
+Ahora estoy esperando un problema aquí.
+
+112
+12:43.750 --> 12:47.210
+Cuando trato de conectarme; Demostraré el problema.
+
+113
+12:49.800 --> 12:58.380
+Al tratar de conectar me está dando este mensaje bastante horrible diciendo que el certificado SSL tiene
+
+114
+12:58.380 --> 13:01.140
+no ha sido confiado.
+
+115
+13:01.460 --> 13:03.110
+No hay de qué preocuparse.
+
+116
+13:03.680 --> 13:06.430
+Se puede confiar en el certificado SSL.
+
+117
+13:06.890 --> 13:10.340
+Sólo tiene que cambiar una opción aquí.
+
+118
+13:10.430 --> 13:16.990
+Opciones de prensa; certificados de servidor de confianza de prensa; y que la prensa conectar.
+
+119
+13:21.190 --> 13:24.940
+Ahora estamos conectados.
+
+120
+13:25.240 --> 13:32.470
+Tenemos un servidor de bases de datos sin bases de datos; pero como antes podemos seleccionar una nueva base de datos
+
+121
+13:38.830 --> 13:40.180
+y lo llamaremos biblioteca
+
+122
+13:58.970 --> 14:05.490
+y ahora tenemos una base de datos de biblioteca que usamos como si estuviera en nuestra máquina local.
+
+123
+14:05.520 --> 14:11.960
+Pero esto está alojado en Amazon AWS
+
+124
+14:11.970 --> 14:16.470
+Tanto Amazon como Azure pueden incurrir en costos.
+
+125
+14:16.620 --> 14:23.670
+Por lo tanto, si no tiene la intención de utilizar la base de datos, le recomendaría que la elimine después.
+
+126
+14:23.880 --> 14:32.350
+Así que vuelva a su base de datos; seleccionar la base de datos; acciones de prensa y eliminar
+
+127
+14:37.610 --> 14:42.180
+no se requiere una instantánea final; Lo recono

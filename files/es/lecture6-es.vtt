@@ -1,0 +1,978 @@
+WEBVTT
+
+0
+00:01.390 --> 00:03.370
+Transacciones y desencadenadores.
+
+1
+00:03.370 --> 00:04.950
+Mantener sus datos coherentes.
+
+2
+00:06.690 --> 00:07.610
+Transacciones.
+
+3
+00:07.800 --> 00:13.050
+Las transacciones son la forma de SQL de aplicar un enfoque de todo o nada para cambiar los datos.
+
+4
+00:13.050 --> 00:18.480
+Ofrecen una manera de revertir o deshacer una operación en caso de error o error.
+
+5
+00:20.500 --> 00:26.050
+El ejemplo clásico es si usted era un banco y está ejecutando en transferencia de efectivo entre dos cuentas
+
+6
+00:26.350 --> 00:30.520
+pero existe el riesgo de un apagón repentino que bloquearía sus sistemas.
+
+7
+00:30.520 --> 00:35.440
+Conociendo tu suerte el Power Outage ocurriría justo en ese instante entre debitar la fuente
+
+8
+00:35.440 --> 00:38.350
+cuenta y acreditando la cuenta de destino.
+
+9
+00:38.470 --> 00:44.020
+En este caso, prefiere revertir la transferencia de efectivo para que pueda volver a intentarse
+
+10
+00:44.020 --> 00:46.080
+tener el dinero perdido.
+
+11
+00:46.270 --> 00:48.720
+Ley de Transacciones como una red de seguridad para este propósito.
+
+12
+00:51.330 --> 00:53.540
+Transacciones implícitas.
+
+13
+00:53.540 --> 00:59.270
+Cada operación de instrucción en SQL se ajusta implícitamente en una transacción.
+
+14
+00:59.270 --> 01:05.210
+Esto significa que si se ejecuta una actualización grande y a mitad de la operación, el servidor se bloqueó.
+
+15
+01:05.210 --> 01:09.380
+Una vez que restauró la energía, parecería como si la actualización nunca se ejecutara en absoluto.
+
+16
+01:09.410 --> 01:11.480
+En lugar de ver una operación a medio completar
+
+17
+01:14.350 --> 01:20.940
+Demostración en vídeo; Aquí agregue una nueva fila a la tabla de estanterías que indica un estado donde el libro es
+
+18
+01:20.940 --> 01:26.210
+retirado y no en la biblioteca; al agregar una fila a la tabla de préstamos contables.
+
+19
+01:26.220 --> 01:31.530
+También actualizaremos la tabla de libros para indicar que el libro ya no está en la biblioteca.
+
+20
+01:31.650 --> 01:38.180
+Usaremos transacciones para protegernos contra dos eventualidades; un fallo de conexión en pleno funcionamiento
+
+21
+01:39.230 --> 01:43.570
+o un error en el que se utilizó una fecha no válida en la instrucción insert.
+
+22
+01:46.470 --> 01:52.320
+OK; así que aquí vamos a demostrar las transacciones y su enfoque de todo o nada para cambiar los datos
+
+23
+01:52.380 --> 01:54.720
+dentro de la base de datos.
+
+24
+01:54.990 --> 02:02.040
+Vamos a agregar una nueva fila en la mesa de estantería que indica un estado llamado retirado que indica
+
+25
+02:02.340 --> 02:04.760
+que el libro ya no está en la biblioteca.
+
+26
+02:04.830 --> 02:06.810
+Así que hagámoslo primero.
+
+27
+02:06.810 --> 02:13.390
+Seleccione * en estantería.
+
+28
+02:13.630 --> 02:17.950
+Sólo tenemos un estante en la base de datos en este momento; así que vamos a añadir uno nuevo; 
+
+29
+02:17.950 --> 02:25.330
+insertar en los valores de BookShelf (Ubicación) ('Retraído')
+
+30
+02:31.810 --> 02:32.620
+Vamos a ver nuestra estantería de nuevo.
+
+31
+02:33.990 --> 02:40.190
+Bien, tengo una identificación de 7 para Retirado; en su caso -
+
+32
+02:40.360 --> 02:42.530
+Probablemente serán dos o más diferentes.
+
+33
+02:42.530 --> 02:43.110
+Número
+
+34
+02:43.490 --> 02:45.100
+Así que son siete para mí.
+
+35
+02:45.100 --> 02:48.360
+Así que tenlo en cuenta.
+
+36
+02:48.670 --> 02:53.230
+Ahora vamos a hacer que nuestra mesa de libros sea consistente con este nuevo estado.
+
+37
+02:53.440 --> 02:57.920
+Así que nos fijamos en nuestros préstamos pendientes.
+
+38
+02:57.920 --> 03:00.880
+Bookloan
+
+39
+03:00.910 --> 03:03.000
+Tenemos un préstamo pendiente para la identificación del libro 1
+
+40
+03:03.010 --> 03:06.010
+Echemos un vistazo a nuestra mesa de libros
+
+41
+03:13.990 --> 03:14.680
+Bien.
+
+42
+03:14.730 --> 03:24.200
+Y vamos a actualizar el identificador de libro 1 con id de estantería 7 así;
+
+43
+03:24.210 --> 03:31.550
+actualización de libros set BookShelfId-7 donde id-1
+
+44
+03:32.250 --> 03:33.980
+Ahora para que esto sea un poco más claro.
+
+45
+03:33.980 --> 03:40.160
+Vamos a hacer una unión en la mesa de la estantería; 
+
+46
+03:40.260 --> 03:41.550
+unirse a bookShelf bs en bs.id b.bookShelfId
+
+47
+03:42.170 --> 03:44.710
+unirse a bookShelf bs en bs.id b.bookShelfId
+
+48
+03:47.500 --> 03:53.770
+OK, así que en este estado podemos ver que de los tres libros en nuestra biblioteca uno se retira y dos están en
+
+49
+03:53.770 --> 03:55.000
+el estante al lado de la ventana.
+
+50
+03:56.470 --> 04:06.210
+Así que aquí vamos a demostrar cómo hacer una transacción donde vamos a ejecutar un nuevo préstamo que
+
+51
+04:06.210 --> 04:13.800
+implicará dos operaciones; uno insertando en la tabla de préstamos contables y dos; actualizar la mesa de libros
+
+52
+04:13.800 --> 04:15.840
+decir que la ubicación ahora está retirada.
+
+53
+04:16.290 --> 04:16.710
+así que
+
+54
+04:20.740 --> 04:22.590
+normalmente trabajamos de la siguiente manera.
+
+55
+04:22.590 --> 04:23.520
+Vamos a actualizar
+
+56
+04:26.550 --> 04:36.370
+actualizar los libros set bookShelfId-7 donde id-1
+
+57
+04:37.440 --> 04:40.050
+Y queremos;
+
+58
+04:42.840 --> 04:47.130
+insertar en bookloan ..
+
+59
+04:53.570 --> 04:56.530
+vamos a ver la mesa bookloan por un segundo
+
+60
+04:59.800 --> 05:02.980
+insertar en bookloan(StudentId, BookId, DateWithdrawn, DateDue ) valores (
+
+61
+05:03.450 --> 05:04.650
+insertar en bookloan(StudentId, BookId, DateWithdrawn, DateDue ) valores (
+
+62
+05:06.570 --> 05:11.080
+Imaginemos que es la identificación del estudiante 3; misma persona.
+
+63
+05:11.260 --> 05:13.590
+ID de libro 2
+
+64
+05:19.120 --> 05:28.390
+fecha retirada 
+
+65
+05:28.850 --> 05:30.770
+y datedue back
+
+66
+05:33.920 --> 05:38.260
+Para llevar a cabo una retirada sería una cuestión de ejecutar estas dos operaciones.
+
+67
+05:38.270 --> 05:41.050
+Actualizamos las tablas de libros; por lo que la identificación de la estantería es igual a dos.
+
+68
+05:41.150 --> 05:44.420
+Luego insertamos en la mesa de préstamos contables.
+
+69
+05:44.600 --> 05:53.270
+Ahora, ¿qué pasaría en esta situación en la que si hiciéramos algo drástico aquí; que había
+
+70
+05:53.270 --> 06:05.430
+un corte de energía; justo en ese momento entre la actualización y el inserto; En esta circunstancia, esto significaría
+
+71
+06:05.940 --> 06:08.160
+que la tabla de libros se actualiza.
+
+72
+06:08.520 --> 06:10.620
+Así que el libro se establece para retirar
+
+73
+06:11.160 --> 06:16.310
+Sin embargo, no habría ningún inserto de libro correspondiente en la tabla de préstamos contables.
+
+74
+06:16.560 --> 06:21.570
+Esto sería un gran problema porque significa que ya no podíamos decir dónde estaba ese libro porque
+
+75
+06:22.080 --> 06:26.880
+dice que está retirado, pero no habrá ningún préstamo contable correspondiente; y efectivamente ese libro sería
+
+76
+06:26.880 --> 06:27.540
+extraviado.
+
+77
+06:28.770 --> 06:30.830
+Aquí es donde las transacciones entran en
+
+78
+06:33.780 --> 06:36.620
+Así que escribe "begin transaction"
+
+79
+06:43.760 --> 06:47.410
+cuando se inicia la transacción; y comprometer la transacción
+
+80
+06:51.740 --> 06:53.300
+a medida que finaliza la transacción
+
+81
+06:57.580 --> 06:59.580
+para demostrarlo.
+
+82
+06:59.680 --> 07:06.420
+Lo que voy a hacer es después del instante del corte de energía, voy a comentar estas dos líneas
+
+83
+07:09.980 --> 07:13.860
+decir que nada funciona después de que ocurra el corte de energía.
+
+84
+07:13.880 --> 07:21.360
+La base de datos está muerta; así que ejecuto esto; dice que una fila se ve afectada.
+
+85
+07:22.110 --> 07:26.820
+Pero vamos a restablecer nuestra base de datos y ver qué pasa con la tabla de libros.
+
+86
+07:34.400 --> 07:41.180
+Así que esta es nuestra base de datos efectivamente se apaga y se vuelve a encender como si fuera una potencia
+
+87
+07:41.200 --> 07:46.490
+corte; vamos a abrir una nueva consulta y vamos a echar un vistazo a nuestra tabla de libros
+
+88
+07:52.400 --> 07:54.660
+Lo siento en la base de datos, Library.
+
+89
+07:57.020 --> 08:02.610
+Y ahora como se puede ver a pesar de que ejecutó esta instrucción SQL.
+
+90
+08:02.610 --> 08:06.270
+Actualizar los libros set bookshelfID 7 donde ID 2.
+
+91
+08:08.100 --> 08:13.500
+Esto no se ha cambiado; tan eficazmente significa que esta transacción no se comprometió por lo tanto
+
+92
+08:13.650 --> 08:15.710
+no se llevó a cabo.
+
+93
+08:18.880 --> 08:27.050
+Ahora, en una circunstancia normal en la que no hay corte de energía; comentaremos el indicador de corte de energía ..
+
+94
+08:27.070 --> 08:30.360
+quite el comentario de esas dos líneas y ejecute esta transacción de nuevo.
+
+95
+08:32.360 --> 08:34.160
+Se ven afectadas dos filas.
+
+96
+08:34.160 --> 08:39.510
+Echemos un vistazo a nuestra mesa de libros; la tabla de libros indica que dos libros están retirados.
+
+97
+08:40.940 --> 08:44.120
+En la tabla de préstamos contables se indica que se retiran dos libros.
+
+98
+08:44.150 --> 08:47.100
+Así que somos perfectamente consistentes.
+
+99
+08:47.210 --> 08:53.000
+Ahora usted puede estar pensando a sí mismo es muy poco probable que un corte de energía ocurriría en el instante
+
+100
+08:53.030 --> 09:03.250
+entre estas dos declaraciones. Así que vamos a simular una circunstancia mucho más probable donde vamos a
+
+101
+09:03.250 --> 09:11.650
+decir que hay un problema con el código de usuario por lo que alguien está tratando de retirar un libro en
+
+102
+09:11.650 --> 09:15.660
+el 31 de febrero que no es una fecha.
+
+103
+09:16.200 --> 09:24.820
+Ahora también cambiaremos el ID del libro a Book ID 3 para fines de demostración.
+
+104
+09:24.820 --> 09:31.320
+ID de libro 3;  Seleccione * de libros
+
+105
+09:34.840 --> 09:36.440
+Es la identificación del libro 3.
+
+106
+09:36.520 --> 09:36.790
+Bien.
+
+107
+09:36.820 --> 09:41.330
+Así que en esta circunstancia vamos a ejecutar la transacción.
+
+108
+09:41.360 --> 09:48.400
+Ahora tenga en cuenta que sin esta transacción esta instrucción se ejecutaría;
+
+109
+09:48.420 --> 09:52.150
+actualización de libros set BookShelfId6 donde Id 3
+
+110
+09:52.250 --> 10:00.320
+Esto retiraría el tercer libro sin embargo, el inserción en la mesa de préstamos de libros fallaría porque no
+
+111
+10:00.320 --> 10:02.430
+no es fecha el 31 de febrero.
+
+112
+10:02.750 --> 10:08.990
+Por lo tanto, esta declaración fallaría; dejando la base de datos en un estado incoherente porque los libros
+
+113
+10:08.990 --> 10:13.460
+mesa diría que el libro fue retirado mientras que el bookloan diría lo contrario.
+
+114
+10:14.440 --> 10:16.200
+Sin embargo, dentro de una transacción.
+
+115
+10:16.250 --> 10:19.170
+Veamos qué pasa; Ejecutar.
+
+116
+10:20.020 --> 10:26.380
+Así que como era de esperar hay un mensaje de error aquí diciendo que la conversión falló al convertir la fecha y o la hora
+
+117
+10:26.410 --> 10:28.150
+de la cadena de caracteres.
+
+118
+10:28.180 --> 10:34.900
+Esto es como se esperaba; El 31 de febrero no existe, por lo que no se puede insertar.
+
+119
+10:35.020 --> 10:40.030
+Sin embargo, lo más importante aquí es que la tabla de libros no se ha actualizado.
+
+120
+10:40.730 --> 10:46.860
+Ejecutamos esto y podemos ver que la ubicación todavía está establecida en 1.
+
+121
+10:46.870 --> 10:51.090
+Así es como las transacciones mantienen la base de datos en un estado coherente.
+
+122
+10:53.190 --> 11:00.270
+Desencadenadores; desencadenadores son instrucciones SQL que se ejecutarán en respuesta a los cambios en los datos que se pueden
+
+123
+11:00.270 --> 11:06.510
+para asegurarse de que un cambio en una tabla desencadena un cambio en otro desencadenador de tabla se puede ejecutar
+
+124
+11:06.510 --> 11:09.810
+en respuesta a insertar instrucciones de actualización o eliminación
+
+125
+11:12.450 --> 11:13.970
+demostración de vídeo.
+
+126
+11:14.400 --> 11:20.070
+Aquí sigue una demostración donde crearemos una tabla llamada bookchanges que registrará las actualizaciones
+
+127
+11:20.070 --> 11:28.110
+a la mesa de libros a través del uso de disparadores. Un disparador de inserción para grabar nuevos libros que se añaden a la biblioteca
+
+128
+11:28.920 --> 11:35.910
+un desencadenador de actualización para registrar los cambios en los libros existentes y un desencadenador de eliminación para registrar los libros que se están eliminando
+
+129
+11:35.910 --> 11:36.570
+de la biblioteca.
+
+130
+11:39.440 --> 11:46.660
+Aquí vamos a demostrar los desencadenantes; donde vamos a crear una tabla llamada bookchanges y
+
+131
+11:46.700 --> 11:55.480
+esta tabla registrará las actualizaciones de la tabla de libros mediante el uso de desencadenadores; así que primero vamos a crear el
+
+132
+11:55.480 --> 12:00.760
+tabla de cambios de libros.
+
+133
+12:04.160 --> 12:14.270
+crear tabla BookChanges ( id int identity(1,1) not null,
+
+134
+12:14.290 --> 12:22.340
+Esto también registrará el ID del libro, que será un int , El tipo de cambio que será varchar(max)
+
+135
+12:23.900 --> 12:28.050
+y también tomará nota de la fecha y hora.
+
+136
+12:28.120 --> 12:30.730
+Esto ha sucedido realmente; así que lo llamaremos fechaOcurrió
+
+137
+12:34.100 --> 12:40.400
+Por supuesto, podemos incluir la fecha en cada inserción en esta tabla bookChanges, pero aquí hay un atajo
+
+138
+12:40.580 --> 12:44.050
+donde podemos escribir : datetime default getdate()
+
+139
+12:44.050 --> 12:50.530
+eso significa que si no se proporciona una fecha en la instrucción insert.
+
+140
+12:50.530 --> 12:55.500
+Se insertará el valor predeterminado getdate() que es la fecha y hora actuales.
+
+141
+12:55.990 --> 12:59.560
+Así que vamos a crear la tabla de cambios de libros.
+
+142
+13:01.040 --> 13:04.580
+Echemos un vistazo a la tabla bookchanges; que estará actualmente vacío.
+
+143
+13:10.100 --> 13:11.630
+Vacío.
+
+144
+13:11.660 --> 13:15.620
+Ahora vamos a crear un desencadenador; crear disparador
+
+145
+13:18.960 --> 13:22.740
+y ahora usaremos el nombre para el gatillo.
+
+146
+13:22.860 --> 13:25.860
+Así que llámalo trgBookInsert
+
+147
+13:26.250 --> 13:26.850
+Así que llámalo trgBookInsert
+
+148
+13:30.660 --> 13:49.740
+en Libros después de insertar como
+
+149
+13:49.910 --> 13:52.480
+insertar en BookChanges (BookId, ChangeType) 
+
+150
+13:56.130 --> 14:05.080
+ahora; este desencadenador tendrá acceso a una tabla virtual llamada insertada que será la inserción de la
+
+151
+14:05.080 --> 14:06.880
+declaración anterior.
+
+152
+14:07.280 --> 14:08.850
+¿Qué caso puedo usar?
+
+153
+14:08.920 --> 14:21.260
+select id, 'Inserted' from INSERTED
+
+154
+14:21.740 --> 14:24.190
+Ahora puedo crear este desencadenador de la siguiente manera.
+
+155
+14:28.190 --> 14:36.150
+Ahora, si ahora intentamos insertar en la tabla de libros, entonces este desencadenador se activará.
+
+156
+14:36.510 --> 14:37.950
+Así que echemos un vistazo a nuestra mesa de libros.
+
+157
+14:45.240 --> 14:48.560
+Bien, agreguemos otro libro de Harry Potter.
+
+158
+14:51.780 --> 14:59.940
+insertar en Books ( BookName, Pages, BookShelfId) valores ('
+
+159
+15:01.310 --> 15:10.210
+'Harry Potter a la piedra del filósofo'
+
+160
+15:18.760 --> 15:25.090
+Con el fin de pasar un apóstrofo, He tenido que pasar un apóstrofo doble, así es como se escapan de los apóstrofos en SQL Server
+
+161
+15:26.150 --> 15:31.320
+Creo que hay algo así como 607 páginas, id 1 de estantería
+
+162
+15:35.490 --> 15:41.690
+Inserto en la tabla de libros y noto que las dos filas se han insertado.
+
+163
+15:42.540 --> 15:45.200
+Así que echemos un vistazo a nuestra mesa de libros.
+
+164
+15:45.250 --> 15:47.010
+Vemos la piedra filosofal.
+
+165
+15:48.760 --> 15:50.920
+También echemos un vistazo a la tabla bookchanges.
+
+166
+15:55.530 --> 16:02.250
+SELECT * de bookchanges ; y podemos ver que el libro ID 7 se ha insertado en este momento.
+
+167
+16:03.660 --> 16:04.000
+Bien.
+
+168
+16:06.250 --> 16:12.510
+Así que eso es un disparador de inserción.
+
+169
+16:12.580 --> 16:21.670
+Así que el siguiente paso es demostrar un desencadenador de eliminación; donde registraremos la acción de un libro que se está eliminando.
+
+170
+16:21.670 --> 16:25.240
+Echemos un vistazo a nuestra mesa de libros otra vez.
+
+171
+16:25.550 --> 16:28.960
+Imaginemos que queremos eliminar el libro número 7.
+
+172
+16:30.500 --> 16:32.270
+Así que eres tú la creación de un disparador.
+
+173
+16:32.330 --> 16:45.120
+Así que vamos a copiar este desencadenador; así que cambiamos;  vamos a llamar al disparador un trgBookDelete después de eliminar
+
+174
+16:45.120 --> 16:45.870
+El estado se eliminará.
+
+175
+16:49.370 --> 16:51.260
+Y la tabla virtual se llama eliminada
+
+176
+16:54.370 --> 17:01.440
+para que se cree este desencadenador; ahora mira nuestra mesa de libros de nuevo.
+
+177
+17:01.940 --> 17:03.880
+Y vamos a borrar este libro.
+
+178
+17:03.930 --> 17:04.650
+Eliminar de los libros en los que id-7
+
+179
+17:07.420 --> 17:08.710
+Eliminar de los libros en los que id-7
+
+180
+17:09.570 --> 17:18.640
+Ejecutamos esta instrucción y podemos ver que las dos filas se han visto afectadas.
+
+181
+17:18.680 --> 17:25.670
+Una fila es el libro que se está eliminando y la segunda fila es la fila que se inserta en el bookchanges
+
+182
+17:25.670 --> 17:26.680
+Mesa.
+
+183
+17:26.810 --> 17:30.920
+Echemos un vistazo a nuestro libroCambios tabla. Seleccione * de bookChanges
+
+184
+17:34.390 --> 17:39.310
+y ahora podemos ver que el libro ID 7 ha sido eliminado en este momento
+
+185
+17:42.840 --> 17:47.250
+el tercer y último tipo de desencadenador es el desencadenador actualizado.
+
+186
+17:47.370 --> 17:51.840
+Esto se desencadenará cuando se actualice una fila.
+
+187
+17:51.840 --> 17:54.240
+Así que vamos a demostrar esto una vez más.
+
+188
+17:54.340 --> 18:07.620
+por lo que copiaremos este código y lo llamaremos 
+trgBookUpdate en Libros después de la actualización; el tipo de cambio se
+
+189
+18:07.620 --> 18:19.230
+ser "actualización" y se insertará la tabla virtual; vamos a crear este desencadenante.
+
+190
+18:19.490 --> 18:21.800
+Ahora echemos un vistazo a nuestra mesa de libros de nuevo.
+
+191
+18:26.680 --> 18:33.880
+Ahora imaginemos que queremos cambiar el número de página de pequeñas cosas bonitas a 437 en lugar de 
+
+192
+18:33.950 --> 18:34.720
+438
+
+193
+18:35.860 --> 18:47.950
+Por lo tanto; actualizar las páginas del conjunto de libros 437 donde ID 3 ; y ejecutar la instrucción; dos filas se ven afectadas
+
+194
+18:48.240 --> 18:54.460
+uno es la actualización en la tabla de libros y otro es el inserto en la tabla de cambios de libro.
+
+195
+18:54.480 --> 18:56.320
+Echemos un vistazo a nuestra mesa de cambios de libros ahora.
+
+196
+19:02.010 --> 19:07.960
+allá vamos; Ahora tenemos una tercera fila en la tabla de cambios que indica que se ha actualizado un libro
+
+197
+19:11.330 --> 19:20.920
+"en lugar de" activa;  los desencadenantes pueden funcionar de dos maneras, ya sea "después" o "en lugar de";  "después" permite la declaración
+
+198
+19:20.920 --> 19:28.560
+para ejecutar y luego ejecutará el desencadenador; "en lugar de" impide que la instrucción se ejecute, pero ejecuta el desencadenador 
+
+199
+19:28.560 --> 19:37.400
+demostración de vídeo;  Aquí demostraremos un disparador "en lugar de".
+
+200
+19:37.400 --> 19:42.680
+Usaremos un desencadenador de eliminación "en lugar de" para evitar que las filas se eliminen de la tabla bookChanges
+
+201
+19:43.200 --> 19:46.190
+y mostrar una advertencia en su lugar.
+
+202
+19:46.970 --> 19:53.270
+Bien aquí vamos a demostrar y en lugar de eliminar el desencadenador que evitará que las filas de ser eliminado
+
+203
+19:53.270 --> 19:56.030
+de la tabla bookchanges y mostrar una advertencia en su lugar.
+
+204
+19:56.660 --> 19:59.360
+Así que vamos a crear un desencadenador.
+
+205
+19:59.740 --> 20:06.200
+Crear disparador trgPreventDelete en bookChanges
+
+206
+20:09.060 --> 20:09.940
+Crear disparador trgPreventDelete en bookChanges
+
+207
+20:13.050 --> 20:24.080
+En lugar de eliminar como;  en este caso sólo voy a imprimir una advertencia y no tomar ninguna otra acción.
+
+208
+20:24.200 --> 20:27.560
+Así que podría usar; 
+
+209
+20:28.050 --> 20:28.400
+imprimir 'Advertencia: no se le permite eliminar de la tabla de cambios del libro'
+
+210
+20:31.250 --> 20:41.550
+este mensaje impreso en particular sólo será visible
+
+211
+20:41.550 --> 20:43.710
+para dirigir a los usuarios de la base de datos.
+
+212
+20:46.460 --> 20:49.140
+Así que ese es nuestro gatillo creado.
+
+213
+20:49.140 --> 20:51.480
+Así que echemos un vistazo a la tabla de cambios de libros.
+
+214
+21:00.360 --> 21:00.780
+Bien.
+
+215
+21:00.880 --> 21:02.440
+Tenemos tres filas.
+
+216
+21:02.650 --> 21:10.810
+Ahora vamos a tratar de eliminar; eliminar de los cambios de libro donde id 1.
+
+217
+21:14.410 --> 21:19.030
+Ahora vemos una advertencia que indica que no se le permite eliminar de la tabla de cambios del libro.
+
+218
+21:19.960 --> 21:21.660
+Echemos un vistazo a su libro Cambios tabla.
+
+219
+21:27.170 --> 21:29.220
+Las tres filas siguen ahí.
+
+220
+21:29.220 --> 21:35.480
+Lo mismo se aplica para eliminar todo en la tabla todavía dice una advertencia.
+
+221
+21:35.720 --> 21:37.280
+Las filas siguen ahí.
+
+222
+21:37.280 --> 21:39.320
+Así que eso es un en lugar de desencadenar.
+
+223
+21:39.380 --> 21:46.160
+Por lo tanto, esto significa que el desencadenador se ejecutó en lugar de la instrucción después de que se ejecutara un desencadenador después de ejecutar la instrucción.
+
+224
+21:46.160 --> 21:50.730
+Y ahora se acabó para ti.
+
+225
+21:50.880 --> 21:56.690
+El objetivo es crear un desencadenador que impida a los usuarios actualizar la tabla de cambios del libro.
+
+226
+21:57.450 --> 21:59.360
+Así que puedes publicar este video en ella.
+
+227
+21:59.730 --> 22:01.980
+Dale una gota y reanuda el video.
+
+228
+22:01.980 --> 22:03.510
+Una vez que hayas probado este ejercicio
+
+229
+22:06.550 --> 22:06.970
+Bien.
+
+230
+22:06.990 --> 22:09.670
+Así que espero que hayas dado un visto al este ejercicio.
+
+231
+22:09.730 --> 22:14.050
+Si no has hecho encuestas este video ahora y resuélvelo cuando lo hayas probado.
+
+232
+22:15.840 --> 22:22.140
+Por lo tanto, nuestro objetivo es crear un desencadenador que impida al usuario actualizar la tabla de cambios del libro; en el anterior
+
+233
+22:22.740 --> 22:29.550
+demostración que demostramos cómo evitar eliminaciones, pero por supuesto que era posible que alguien actualizar
+
+234
+22:29.580 --> 22:36.230
+la tabla y cambiar el tipo de cambio o la fecha en la que ocurrió o así sucesivamente.
+
+235
+22:36.230 --> 22:38.260
+Así que por lo tanto vamos a crear otro disparador.
+
+236
+22:38.360 --> 22:44.090
+Así que llámalo; crear disparador trgPreventUpdate 
+
+237
+22:46.670 --> 22:50.730
+en bookChanges
+
+238
+22:50.840 --> 22:51.220
+Sólo
+
+239
+22:54.480 --> 23:09.850
+en lugar de actualizar como impresión 'advertencia no se le permite tomar la tabla de cambios del libro.'
+
+240
+23:09.990 --> 23:13.940
+Vamos a crear ese gatillo.
+
+241
+23:15.610 --> 23:17.580
+Echemos un vistazo a nuestra tabla de cambios
+
+242
+23:22.280 --> 23:22.620
+Ahora.
+
+243
+23:22.990 --> 23:33.110
+Va

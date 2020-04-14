@@ -319,4 +319,1030 @@ gruppierte und nicht gruppierte Indizes. Der gruppierte Index stellt sicher, das
 79
 08:30.640 --> 08:38.260
 einen Datenträger, während ein nicht gruppierter Index unabhängig von den Daten vorhanden ist, die keine physische
-
+
+80
+08:38.260 --> 08:47.380
+die Daten; Für eine Tabelle kann nur ein gruppierter Index vorhanden sein, der jedoch schneller gelesen werden kann als ein nicht gruppierter Index
+
+81
+08:47.380 --> 08:47.830
+Index
+
+82
+08:50.640 --> 08:54.560
+Ein gruppierter Index sollte nur für Identitätsspalten verwendet werden.
+
+83
+08:55.820 --> 09:03.140
+Da ein Einfügen an einem anderen Punkt als am Ende der Tabelle dazu führen würde, dass alle Zeilen physisch
+
+84
+09:03.140 --> 09:03.920
+auf dem Datenträger verschoben werden.
+
+85
+09:07.480 --> 09:09.410
+Video-Demonstration.
+
+86
+09:09.500 --> 09:16.310
+Hier zeigen wir eine Leistungssteigerung, die durch die Erstellung eines Indexes geboten wird, und zeigen, wie der Ausführungsplan
+
+87
+09:16.340 --> 09:19.670
+leistungssteigerungen.
+
+88
+09:19.770 --> 09:26.710
+Wir zeigen auch illustrative und nicht gruppierte Indizes; hier wird eine Leistungssteigerung demonstrieren
+
+89
+09:26.740 --> 09:33.610
+durch Erstellen eines Indexes angeboten und zeigen, wie der Ausführungsplan die Leistungssteigerungen erklären kann.
+
+90
+09:33.610 --> 09:37.330
+Wir werden auch gruppierte vs. nicht gruppierte Indizes zeigen.
+
+91
+09:37.390 --> 09:44.380
+Beginnen wir also mit dem Schreiben einer sehr einfachen Abfrage an unsere Testdaten; also tippe ich:
+
+92
+09:44.620 --> 09:50.230
+Wählen Sie * aus test1, wo GUId wie 'ABCD%'
+
+93
+09:51.210 --> 09:57.810
+Hier suche ich nach Zeilen, in denen die GUID. die sausen eine zufällige Zeichenfolge; beginnt mit den Buchstaben
+
+94
+09:57.840 --> 09:58.610
+Abcd
+
+95
+09:59.760 --> 10:10.940
+Wenn ich also beide einschalte, schließen Sie Client-Statistiken ein und ich werde auch hier Fragen stellen und
+
+96
+10:10.940 --> 10:17.020
+Ausführungsplan; der Ausführungsplan wird unter der Haube sagen.
+
+97
+10:17.060 --> 10:25.460
+Was hat die SQL Server-Datenbank getan, um diesen Befehl auszuführen, und Client-Statistiken werden genau sagen, wie
+
+98
+10:25.460 --> 10:26.620
+lange es gedauert hat.
+
+99
+10:26.930 --> 10:28.340
+Führen Sie also diese
+
+100
+10:31.270 --> 10:39.610
+schauen Sie sich die Kundenstatistiken an und wir werden sehen, dass dies fünfhundertzweiundfünfzig Millisekunden
+
+101
+10:39.610 --> 10:44.080
+gut, aber nicht gut genug.
+
+102
+10:46.090 --> 10:50.750
+Die Ausführungsregisterkarte wird uns sagen, was unter der Haube passiert ist.
+
+103
+10:51.190 --> 10:55.660
+Was hier verwendet wird, ist ein Tabellenscan, der die Datenbank liest.
+
+104
+10:55.660 --> 11:03.990
+Zeile für Zeile durch die Tabelle, bis sie Zeilen erreicht hat, die mit unseren Kriterien wie in GUID übereinstimmen. 
+
+105
+11:03.990 --> 11:12.390
+wie ABCD%; Es wurde kein Index verwendet, daher deutet es tatsächlich darauf hin, dass ein Index fehlt.
+
+106
+11:12.930 --> 11:16.920
+dass es eine Leistungssteigerung von 79 Prozent geben wird.
+
+107
+11:16.950 --> 11:22.030
+Wenn wir einen nicht gruppierten Index für diese Tabelle erstellen würden.
+
+108
+11:22.380 --> 11:31.550
+Das ist es, was wir jetzt tun werden; 
+
+109
+11:31.580 --> 11:39.950
+Index idxGuid auf test1(guid) erstellen
+
+110
+11:40.680 --> 11:44.480
+Also sollten wir dies ausführen und dies wird einen nicht gruppierten Index erstellen.
+
+111
+11:44.540 --> 11:50.340
+Nun lebt der nicht gruppierte Index neben den Hauptdaten selbst und hat keinen Einfluss auf die physische
+
+112
+11:50.340 --> 11:53.040
+Daten auf der Festplatte.
+
+113
+11:53.850 --> 11:57.750
+Auf diese Weise können Sie so viele davon erstellen, wie Sie möchten.
+
+114
+11:57.990 --> 12:05.450
+Indizes verbessern jedoch im Allgemeinen die Leseleistung, haben aber einen leichten negativen Einfluss auf die Schreib-
+
+115
+12:05.450 --> 12:12.630
+Schreibleistung, damit sie sich leicht auf Ihr Update auswirken, einfügen, Anweisungen löschen, also nicht zu viele erstellen
+
+116
+12:12.630 --> 12:19.170
+Indizes; nur dort, wo sie Sinnvollsind und Ihre Abfragen tatsächlich beschleunigen.
+
+117
+12:19.280 --> 12:28.910
+Also werden wir dies ausführen und es wird ein paar Sekunden dauern, um diesen Index für uns zu erstellen
+
+118
+12:28.910 --> 12:29.570
+beim Aussortiert der Zeilen
+
+119
+12:33.040 --> 12:37.230
+Okay, das wird jetzt in etwa 11 Sekunden erstellt.
+
+120
+12:37.240 --> 12:45.310
+Wenn ich diese Anweisung nun erneut ausführe, wird dieser Index verwendet, und wir werden sehen, dass dies
+
+121
+12:45.370 --> 12:48.400
+sowohl im Ausführungsplan als auch in der Clientstatistik.
+
+122
+12:48.400 --> 12:51.400
+Hoffentlich wird dies viel schneller ausgeführt.
+
+123
+12:51.400 --> 13:01.640
+Also; ausführen; Kundenstatistiken; Zeigt nun an, dass die Gesamtausführungszeit jetzt auf 38 Millisekunden gesunken ist
+
+124
+13:01.740 --> 13:05.370
+das ist also eine enorme Leistungssteigerung mit genau dem gleichen.
+
+125
+13:05.420 --> 13:08.960
+SQL-Anweisung 
+
+126
+13:09.030 --> 13:11.120
+Der Ausführungsplan sieht jetzt ganz anders aus.
+
+127
+13:11.300 --> 13:19.520
+Es hat nicht mehr den Hinweis, dass wir einen Index fehlen und es zeigt, dass es eine Indexsuche verwendet
+
+128
+13:19.730 --> 13:22.440
+Dies ist ein schnellerer Vorgang als ein Tabellenscan
+
+129
+13:26.170 --> 13:29.770
+Es verwendet eine Heap-Suche, weil 
+
+130
+13:29.770 --> 13:33.140
+Für diese Tabelle ist kein gruppierter Index vorhanden.
+
+131
+13:34.680 --> 13:43.440
+Um zu veranschaulichen, was ein gruppierter Index im Vergleich zu einem nicht gruppierten Index ist, aktualisieren wir dies
+
+132
+13:46.330 --> 13:54.800
+Erweitern von Indizes; und wir können sehen, dass idxGuid ein nicht eindeutiger, nicht gruppierter Index ist, sodass wir
+
+133
+13:54.800 --> 14:00.910
+die Datenbank, in der die GUID-Spalte wirklich eindeutig ist.
+
+134
+14:01.760 --> 14:02.920
+Wir haben es einfach nicht gesagt.
+
+135
+14:03.260 --> 14:08.130
+Die Datenbank geht also davon aus, dass sie nicht eindeutig ist.
+
+136
+14:08.240 --> 14:15.650
+Es könnte sein; nicht gruppiert, was bedeutet, dass der Index unabhängig vom Punkt selbst auf seinem Index lebt
+
+137
+14:15.650 --> 14:19.980
+hat keinen Einfluss auf die Reihenfolge der Daten auf dem Datenträger.
+
+138
+14:20.000 --> 14:25.380
+Wenn wir uns den Index ansehen, der in einer anderen Tabelle erstellt wurde.
+
+139
+14:25.500 --> 14:32.740
+Dies ist nun der Primärschlüsselindex für die Autorentabelle, der im Grunde ein Index ist, der jedes Mal erstellt wird.
+
+140
+14:32.740 --> 14:37.110
+Sie einen Primärschlüssel erstellen.
+
+141
+14:37.190 --> 14:45.070
+Wir können sehen, dass dies ein gruppierter Index ist, was bedeutet, dass in der Autorentabelle die physische Reihenfolge
+
+142
+14:45.070 --> 14:49.540
+der Daten auf dem Datenträger folgt tatsächlich dem Primärschlüssel.
+
+143
+14:49.810 --> 14:59.320
+So würde Autor 1, Autor 2, Autor 3 in der Reihenfolge auf der Festplatte erscheinen, während auf test1
+
+144
+14:59.320 --> 15:08.840
+wir sagen nicht, dass die GUIDs in alphabetischer Reihenfolge oder so sein müssen.
+
+145
+15:08.980 --> 15:13.450
+Der Vorteil des gruppierten Indexes ist, dass er schneller ist als ein nicht gruppierter Index, aber Sie können nur einen
+
+146
+15:13.450 --> 15:20.330
+sie pro Tabelle und auch den gruppierten Index sollte nur für eine Identitätsspalte verwendet werden.
+
+147
+15:20.470 --> 15:30.520
+Denn wenn Sie es z.B. in die GUID-Spalte in diesem dann, wie Sie eine neue GUID eingefügt
+
+148
+15:30.940 --> 15:36.920
+es gibt keine Garantie, dass das alphabetisch niedriger sein wird als alles andere.
+
+149
+15:37.630 --> 15:45.150
+Es würde also alle Daten in dieser Tabelle neu anordnen, sodass Ihre Einfügungen, Aktualisierungen,
+
+150
+15:46.450 --> 15:55.630
+das ist also eine kurze Demonstration von Indizes und Man kann ganz klar sehen, dass es eine enorme Performance gibt
+
+151
+15:55.630 --> 15:59.680
+durch die korrekte Verwendung von Indizes zu erhalten.
+
+152
+16:03.510 --> 16:13.140
+Mit (NOLOCK) Hinweis, SQL Server Werte Datenkonsistenz, so dass tabellensperren, wenn sie in der Mitte sind
+
+153
+16:13.230 --> 16:22.050
+aktualisiert werden; mit (NOLOCK) Hinweis gibt Daten unabhängig von einer weiteren laufenden Aktualisierung und wie geschrieben zurück
+
+154
+16:22.050 --> 16:25.680
+als solche: Wählen Sie * aus dem Autor mit (nolock)
+
+155
+16:27.150 --> 16:32.460
+Offensichtlich ist dies nur für Situationen, in denen Datenkonsistenz weniger wichtig ist als Geschwindigkeit.
+
+156
+16:37.860 --> 16:43.160
+Video-Demonstration: Hier zeigen wir den Leistungsgewinn eines mit (NOLOCK) Auswahlhinweises
+
+157
+16:43.170 --> 16:48.450
+Hier zeigen wir den Leistungsgewinn von a mit (NOLOCK).
+
+158
+16:48.450 --> 16:49.250
+Tipp auswählen
+
+159
+16:50.040 --> 16:58.020
+Dies ist, dass es SQL Server hinweise, dass wir es vorziehen würden, die Daten schnell zu erhalten, als konsistent zu werden.
+
+160
+16:58.110 --> 16:59.420
+Daten.
+
+161
+16:59.430 --> 17:06.120
+Was ich mit konsistenten Daten meine, ist, dass, wenn zwei Prozesse eine Tabelle aktualisieren, dann in der Regel die
+
+162
+17:06.120 --> 17:07.380
+Anweisung gesperrt wird.
+
+163
+17:08.520 --> 17:16.440
+Bis die Aktualisierung abgeschlossen ist; unter bestimmten Umständen ist die statische Konsistenz entscheidend
+
+164
+17:16.440 --> 17:23.480
+wichtig, und Sie möchten diesen ausgewählten Hinweis nicht verwenden, um zu versuchen, Ihre Datenbank zu beschleunigen.
+
+165
+17:23.610 --> 17:31.350
+Wenn Sie z. B. eine Bank sind, können Sie nicht zwei A.T.M.-Abhebungen gleichzeitig zulassen, ohne
+
+166
+17:31.350 --> 17:36.140
+sicher, dass die erste Transaktion vor Abschluss der zweiten Transaktion abgeschlossen wurde.
+
+167
+17:37.050 --> 17:45.390
+Andernfalls könnten zwei A.T.M.-Transaktionen abgeschlossen und das Geld zweimal belastet werden, und dieses Konto
+
+168
+17:45.390 --> 17:47.880
+könnte z. B. überzeichnet werden.
+
+169
+17:47.880 --> 17:55.350
+Unter bestimmten Umständen ist die Geschwindigkeit jedoch wichtiger als die Datenkonsistenz, sodass Sie den
+
+170
+17:56.340 --> 17:57.660
+um dies zu demonstrieren.
+
+171
+17:57.660 --> 18:04.410
+Ich werde eine zweite Verbindung mit der Datenbank mithilfe eines zweiten Abfragefensters erstellen.
+
+172
+18:04.720 --> 18:12.210
+Und wird eine Transaktion in diesem beginnen und zeigen, dass eine Auswahl angehalten wird, bis die Transaktion
+
+173
+18:12.210 --> 18:16.270
+abgeschlossen ist, es sei denn, Sie verwenden die Option "Keine Sperre".
+
+174
+18:17.640 --> 18:29.190
+Lassen Sie uns also zuerst eine neue Abfrage erstellen, und ich werde eine sinnlose Änderung an der Autorentabelle in
+
+175
+18:29.190 --> 18:29.960
+die Transaktion.
+
+176
+18:30.110 --> 18:31.790
+Also tippe ich die Transaktion begin ein
+
+177
+18:35.240 --> 18:40.820
+Update-Autorsatz Autorname = Autorenname + ''
+
+178
+18:41.210 --> 18:43.330
+leere Zeichenfolge
+
+179
+18:43.400 --> 18:49.690
+Dies fügt der Autorenspalte effektiv eine leere Zeichenfolge hinzu, die keinerlei Unterschied macht.
+
+180
+18:49.800 --> 18:57.800
+Aber ich zeige nur eine Update-Transaktion, die nicht abgeschlossen wird, weil ich sie nicht begehe
+
+181
+18:57.800 --> 18:58.160
+Noch.
+
+182
+18:58.190 --> 19:03.350
+Wir müssen uns hier also nur viele andere Operationen vorstellen.
+
+183
+19:06.190 --> 19:11.550
+Also führen wir dies aus; und dies wird nun sperren
+
+184
+19:11.580 --> 19:19.420
+Die Autorentabelle, damit ich den Namen des Autors nicht sehen kann, da er sich in der Mitte des Updates befindet. Zeigen
+
+185
+19:19.450 --> 19:23.020
+Dies würde zum anderen Fenster zurückkehren, um * aus dem Autor auszuwählen
+
+186
+19:27.040 --> 19:30.110
+und die Anweisung hängt.
+
+187
+19:30.390 --> 19:38.340
+Dies ist absichtlich, weil wir die Transaktion in der anderen Sitzung nicht festgeschrieben haben, daher
+
+188
+19:38.520 --> 19:40.210
+ist nicht lesbar.
+
+189
+19:40.230 --> 19:43.520
+Die Autorentabelle, da sie sich in der Mitte des Updates beschließt.
+
+190
+19:44.670 --> 19:47.170
+Lassen Sie uns also damit aufhören.
+
+191
+19:47.520 --> 19:49.340
+Wenn ich den mit (nolock) Hinweis verwende
+
+192
+19:53.900 --> 19:58.220
+Dadurch kann ich die Namenstabelle des Autors erneut sehen.
+
+193
+19:58.360 --> 20:03.680
+Jetzt können Sie sich eine geschäftige Situation und eine belebte Datenbank vorstellen, in der Viele Updates stattfinden
+
+194
+20:03.770 --> 20:10.110
+auf vielen ausgewählten Anweisungen, die gleichzeitig stattfinden, aber Select-Anweisungen können aufgrund anderer
+
+195
+20:10.130 --> 20:11.110
+Updates.
+
+196
+20:11.150 --> 20:20.690
+Nun noch einmal, um den Punkt zu wiederholen, dass dies die Datenkonsistenz ignoriert,
+
+197
+20:20.690 --> 20:28.310
+wichtig, dass Sie den neuesten Autorennamen und nicht den Namen des Autors vor dem Update angezeigt haben, dann
+
+198
+20:28.310 --> 20:30.080
+Sie konnten dies nicht mit Nolock-Hinweis verwenden
+
+199
+20:30.110 --> 20:30.670
+Hinweis.
+
+200
+20:30.680 --> 20:37.900
+Aber in diesem speziellen Fall mit Nolock gibt Ihnen einen Leistungsvorteil, weil es die
+
+201
+20:37.900 --> 20:38.230
+Sperren
+
+202
+20:42.620 --> 20:44.990
+SQL-Serverprofiler.
+
+203
+20:45.250 --> 20:51.630
+Häufig wissen Sie bei der Diagnose von SQL Server-Leistungsproblemen nicht genau, welche SQL-Anweisungen
+
+204
+20:51.690 --> 20:52.800
+werden ausgeführt.
+
+205
+20:52.920 --> 21:00.150
+Wenn es sich beispielsweise um eine Live-Website handelt, auf der Code eines anderen Entwicklers ausgeführt wird, können Sie den SQL Server-Profiler verwenden.
+
+206
+21:00.150 --> 21:08.140
+In diesem Fall, um genau zu sehen, was ausgeführt wird; Video-Demonstration: Hier zeigen wir die 
+
+207
+21:08.140 --> 21:09.380
+SQL Server-Profiler
+
+208
+21:12.090 --> 21:20.430
+Hier zeigen wir SQL Server Profiler; SQL Server Profiler ist ein wirklich nützliches Tool, wenn Sie
+
+209
+21:20.910 --> 21:29.690
+Leistungsengpässe eines Live-Systems oder eines Systems, das SQL-Code enthält, den Sie nicht geschrieben haben
+
+210
+21:30.840 --> 21:34.190
+und es ermöglicht Ihnen zu sehen, was ausgeführt wird.
+
+211
+21:34.370 --> 21:44.690
+Und wenn es etwas gibt, das zu lange dauert; Also, um es auszuführen, führen Sie einfach eine Suche nach SQL Server Profiler durch
+
+212
+21:49.900 --> 21:56.410
+und wir werden eine neue Spur ziehen; Stellen Sie eine Verbindung zu Ihrem lokalen Datenbankserver her.
+
+213
+21:56.660 --> 21:57.670
+Ausführen
+
+214
+21:59.380 --> 22:03.480
+Und wenn wir etwas wie "Select * from author" ausführen
+
+215
+22:07.360 --> 22:12.700
+wir können sehen, "Select * from author" erscheint in der Ablaufverfolgung, und Sie können es sich in einem Live-System vorstellen
+
+216
+22:12.700 --> 22:19.210
+könnte wirklich hilfreich sein, um zu sehen, welche Anweisungen ausgeführt werden, wie lange sie den Client nehmen
+
+217
+22:19.420 --> 22:22.160
+sie auszuführen.
+
+218
+22:22.720 --> 22:24.420
+Das ist so ziemlich alles, was es dazu gibt.
+
+219
+22:24.730 --> 22:26.020
+Also gehe ich weiter.
+
+220
+22:29.560 --> 22:33.760
+Importieren von Daten; Zufallsdaten sind nicht etwas, das in der realen Welt verwendet wird.
+
+221
+22:34.330 --> 22:39.290
+Hier ist ein Beispiel für das Importieren großer Datasets in eine Datenbank.
+
+222
+22:39.310 --> 22:42.620
+Lassen Sie uns eine Datenbank mit Büchern aus github.com unter dieser URL herunterladen;
+
+223
+22:42.780 --> 22:43.390
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+224
+22:43.410 --> 22:47.450
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+225
+22:47.470 --> 22:52.800
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+226
+22:52.810 --> 22:56.020
+Oder Sie scannen den QR-Code unten rechts auf diesem Bildschirm.
+
+227
+22:58.580 --> 23:00.810
+Video-Demonstration.
+
+228
+23:00.960 --> 23:08.340
+Hier erfahren Sie, wie Sie mithilfe des Datenimporttools eine CSV in den SQL-Server importieren.
+
+229
+23:08.340 --> 23:12.320
+Bisher haben wir mit zufälligen Daten gearbeitet; jetzt in der realen Welt.
+
+230
+23:12.320 --> 23:17.060
+Sie werden nie mit zufälligen Daten arbeiten, aber Sie werden mit großen Datasets arbeiten.
+
+231
+23:17.070 --> 23:22.350
+Dies ist also ein Beispiel für das Herunterladen und Importieren eines großen Datasets.
+
+232
+23:22.650 --> 23:28.080
+Dies ist also eine Liste von 10000 Büchern von goodbooks.com.
+
+233
+23:28.680 --> 23:34.110
+Sie können darauf über https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+234
+23:34.130 --> 23:38.820
+https://github.com/infiniteloopltd/goodbooks-10k/blob/master/books.csv
+
+235
+23:39.380 --> 23:42.090
+Jetzt gelangen Sie zu dieser Seite; Presseansicht roh.
+
+236
+23:44.070 --> 23:51.120
+Sie können einen Blick darauf werfen, wie der CSV aussieht; CSV steht für durch Kommas getrennte Werte; es ist auch bekannt
+
+237
+23:51.120 --> 24:00.200
+als flache Datei; Die erste Zeile eines CSV hat in der Regel die Spaltentitel. z. B. Buch-ID
+
+238
+24:00.240 --> 24:01.950
+Gute Lese-Buch-ID
+
+239
+24:01.950 --> 24:11.170
+BestBookID, etc, ISBN, Autoren und die nächste Zeile haben;
+
+240
+24:11.450 --> 24:14.140
+Dies ist die nächste Zeile.
+
+241
+24:14.180 --> 24:20.880
+Dies hat die Werte, die jeder dieser Spalten entsprechen, so dass bookID 1
+
+242
+24:20.900 --> 24:21.190
+GoodReadsBookID
+
+243
+24:21.200 --> 24:22.010
+Ist das.
+
+244
+24:22.130 --> 24:22.840
+Und so weiter.
+
+245
+24:23.480 --> 24:28.790
+Also gehen wir goint gehen, speichern Sie dies; Rechtsklick; speichern als; Desktop; Bücher.csv
+
+246
+24:28.820 --> 24:31.110
+Speichern
+
+247
+24:31.580 --> 24:34.240
+Wir gehen nun zurück in unsere Datenbank.
+
+248
+24:34.240 --> 24:43.370
+Wir schreiben klicken Sie auf unsere Datenbank; Aufgaben; Flatfile importieren; Flatfiles und anderes Wort für CSV; drücken Sie weiter
+
+249
+24:43.520 --> 24:45.250
+Eingabedatei; Durchsuchen.
+
+250
+24:45.320 --> 24:47.640
+Nehmen Sie es vom Desktop.
+
+251
+24:47.840 --> 24:52.230
+Wir haben bereits eine Büchertafel; also nennen wir dies allBooks.
+
+252
+24:52.970 --> 24:54.910
+Als nächstes; Vorschaudaten;
+
+253
+24:54.920 --> 24:59.870
+Auf diese Weise erhalten Sie einen Blick auf die ersten 50 Zeilen Ihres CSV
+
+254
+24:59.900 --> 25:06.250
+Sie können schnell überprüfen, ob jede dieser Daten aussieht, wenn sie an der richtigen Stelle sind.
+
+255
+25:06.260 --> 25:09.750
+Das sieht für mich gut aus.
+
+256
+25:10.130 --> 25:12.700
+Ändern Sie als Nächstes Spalten.
+
+257
+25:12.710 --> 25:19.250
+Nun ist die sehr wichtige Sache darüber, dass dies die beste Vermutung ist, die dieses Tool von
+
+258
+25:19.250 --> 25:22.330
+die ersten 50 Zeilen Ihrer Daten.
+
+259
+25:23.200 --> 25:29.830
+So hat es zum Beispiel durch die Autoren den längsten Autor, den es innerhalb der ersten gefunden hat,
+
+260
+25:29.830 --> 25:35.550
+50 Zeilen sind etwa hundertfünfzig Zeichen breit.
+
+261
+25:35.590 --> 25:43.450
+Jetzt weiß ich aus Erfahrung, dass es Bücher gibt, die viel mehr Autoren haben und nicht viel haben
+
+262
+25:43.450 --> 25:48.030
+längeren Werten als 150.
+
+263
+25:48.130 --> 25:50.690
+Das wird also beim ersten Versuch scheitern.
+
+264
+25:50.710 --> 25:54.970
+Sie müssen zu diesem Bildschirm zurückkehren, um einige dieser Zahlen über 150 hinaus zu erhöhen.
+
+265
+25:55.000 --> 25:57.120
+Ich möchte das zum Beispiel auf tausend ändern.
+
+266
+25:58.210 --> 26:00.130
+Aber mal sehen, wie es weitergeht.
+
+267
+26:00.130 --> 26:00.550
+nächster.
+
+268
+26:01.330 --> 26:03.770
+Der Vorgang ist also fehlgeschlagen.
+
+269
+26:03.840 --> 26:11.200
+Und es heißt "String- oder Binärdaten würden abgeschnitten werden"; abgeschnitten bedeutet, dass die Daten in der CSV zu
+
+270
+26:11.200 --> 26:12.430
+Lange.
+
+271
+26:12.430 --> 26:15.640
+In einem Fall für die Spalte, in die es gehen soll.
+
+272
+26:15.960 --> 26:26.230
+Also soll ich das stoppen; drücken Sie vorher; vorherige; und dann werde ich Autoren auf tausend aktualisieren
+
+273
+26:32.240 --> 26:36.110
+Ich möchte auch den ursprünglichen Titel in tausend ändern.
+
+274
+26:41.970 --> 26:43.920
+Titel geben ihm weitere tausend
+
+275
+26:47.390 --> 26:56.040
+Sprachcode tausend; Sie können dies später kürzen, indem Sie Ihre Spalten so ändern, dass
+
+276
+26:58.970 --> 27:00.620
+andere Längen, die besser geeignet sind.
+
+277
+27:00.640 --> 27:04.700
+Aber das sollte diesmal funktionieren; nächster.
+
+278
+27:04.760 --> 27:05.320
+nächster.
+
+279
+27:07.170 --> 27:10.950
+Einfügen ist jetzt erfolgreich; Schließen.
+
+280
+27:11.260 --> 27:13.600
+Nun, wenn wir diese
+
+281
+27:18.450 --> 27:21.060
+Tabellen; Sie sollten über eine allBooks-Tabelle verfügen.
+
+282
+27:21.060 --> 27:24.560
+Wählen Sie * aus allen Büchern
+
+283
+27:27.270 --> 27:38.690
+und wir können sehen, dass wir jetzt zehntausend Bücher mit ihren Autoren, Namen, Titeln, ISBN usw. haben, was wirklich
+
+284
+27:38.690 --> 27:39.260
+Großartig.
+
+285
+27:39.350 --> 27:45.770
+Das ist viel mehr in der Richtung der Art von Daten, die Sie mit in einer echten Datenbank eher arbeiten würden
+
+286
+27:45.770 --> 27:49.310
+als die fünf oder sechs Zeilen oder die zufälligen Daten, die wir bisher gezeigt haben.
+
+287
+27:52.630 --> 27:54.130
+Und schließlich ist es an dir vorbei.
+
+288
+27:54.760 --> 28:01.330
+Optimieren wir also die Daten, die wir gerade importiert haben: Schreiben Sie eine select-Anweisung, die alle fünf Bücher zurückgibt.
+
+289
+28:01.450 --> 28:09.480
+von Dan Brown unter Verwendung eines gruppierten Indexes einen nicht gruppierten Index; und mit der Auswahl oben und
+
+290
+28:09.550 --> 28:11.800
+nolock Hinweise.
+
+291
+28:12.000 --> 28:12.840
+viel Glück.
+
+292
+28:12.840 --> 28:14.560
+Sie können dieses Video jetzt anhalten.
+
+293
+28:14.930 --> 28:19.290
+Versuchen Sie, die Anweisung zu schreiben und fortzusetzen, sobald Sie es ausprobiert haben.
+
+294
+28:20.540 --> 28:21.020
+Okay.
+
+295
+28:21.060 --> 28:23.280
+Ich hoffe also, dass Sie dies in sausen lassen.
+
+296
+28:23.490 --> 28:24.450
+Sie können.
+
+297
+28:24.450 --> 28:27.160
+Wenn Sie dies nicht der Falle haben, können Sie dieses Video jetzt anhalten.
+
+298
+28:27.300 --> 28:31.510
+Probieren Sie es selbst aus und setzen Sie es fort, wenn Sie bereit sind.
+
+299
+28:32.690 --> 28:39.900
+OK, also wollen wir eine ausgewählte Aussage schreiben, die fünf Bücher von Dan Brown zurückgibt.
+
+300
+28:40.300 --> 28:44.370
+Wir müssen einen gruppierten Index, einen nicht gruppierten Index erstellen. 
+
+301
+28:44.560 --> 28:48.230
+und verwenden Sie den select top und nolock-Hinweis.
+
+302
+28:48.500 --> 28:53.520
+Werfen wir also einen Blick auf unsere Allbooks-Tabelle
+
+303
+28:56.900 --> 28:58.130
+offensichtlich die Top 5
+
+304
+28:58.290 --> 29:01.260
+Das ist einfach; von allbooks
+
+305
+29:05.270 --> 29:18.890
+unser Autor wird ein Dan Brown sein, also sagen wir, wo Autoren = 'Dan Brown'
+
+306
+29:19.450 --> 29:21.710
+Das ist also unser ausgewähltes Top.
+
+307
+29:22.150 --> 29:26.610
+Und wenn wir mit Nolock-Hinweis anziehen wollen, ist es nur mit (nolock)
+
+308
+29:30.070 --> 29:33.580
+das
+
+309
+29:33.640 --> 29:36.800
+wir müssen unseren gruppierten Index erstellen.
+
+310
+29:36.810 --> 29:46.870
+Jetzt müssen Sie einen gruppierten Index für eine Identitätsspalte einfügen, wie in einer ID, die automatisch
+
+311
+29:46.870 --> 29:47.610
+Inkrement.
+
+312
+29:47.640 --> 29:55.020
+Nun denke ich, dass, wenn Sie sich die Allbooks-Tabelle ansehen, die Identitätsspalte book_id sein wird.
+
+313
+29:55.180 --> 29:58.920
+Daher erstellen wir dort einen gruppierten Index.
+
+314
+29:59.170 --> 30:06.010
+Das Einfügen eines gruppierten Indexes auf irgendetwas anderes wäre eine schlechte Idee, da, wenn Sie einfügen würden,
+
+315
+30:06.400 --> 30:12.640
+Löschen oder aktualisieren Sie Zeilen dazu, die Sie physisch um die Daten verschieben können.
+
+316
+30:12.700 --> 30:15.550
+Also werden wir dort unseren gruppierten Index erstellen.
+
+317
+30:15.550 --> 30:16.960
+Also
+
+318
+30:21.040 --> 30:24.710
+Erstellen von gruppierter Index-IDxBookId auf AllBooks(book_id)
+
+319
+30:29.510 --> 30:30.340
+Erstellen von gruppierter Index-IDxBookId auf AllBooks(book_id)
+
+320
+30:34.710 --> 30:35.060
+Erstellen von gruppierter Index-IDxBookId auf AllBooks(book_id)
+
+321
+30:40.100 --> 30:44.960
+erstellt; und wir möchten nun einen nicht gruppierten Index erstellen.
+
+322
+30:44.960 --> 30:51.050
+Die Spalte, nach der wir abfragen, ist nun die Autorenspalte, daher möchten wir den nicht gruppierten Index einfügen.
+
+323
+30:51.050 --> 30:55.820
+Wenn Sie also keine Cluster angeben, wird sie standardmäßig nicht gruppiert.
+
+324
+30:55.940 --> 31:00.160
+Also:
+
+325
+31:01.370 --> 31:02.070
+erstellen sie auf AllBooks(Autoren)
+
+326
+31:06.120 --> 31:10.650
+erstellen sie auf AllBooks(Autoren)
+
+327
+31:22.980 --> 31:24.350
+so ist es interessant.
+
+328
+31:24.450 --> 31:30.730
+Die maximale Schlüssellänge für einen nicht gruppierten Index beträgt 1700 Byte,
+
+329
+31:30.830 --> 31:31.130
+Okay.
+
+330
+31:31.140 --> 31:36.840
+Also die Autoren-Spalte, es ist ein nvarchar, was bedeutet, es ist 2 Bytes pro Zeichen.
+
+331
+31:37.050 --> 31:39.480
+Und wir haben eine Liste von tausend von ihnen.
+
+332
+31:39.480 --> 31:46.620
+Schauen wir uns also um; können wir die Autorenspalte kürzen?
+
+333
+31:50.080 --> 31:52.540
+Wählen Sie Max(len(autoren)) aus allen Büchern
+
+334
+31:53.730 --> 31:54.200
+Wählen Sie Max(len(autoren)) aus allen Büchern
+
+335
+32:04.410 --> 32:05.280
+742
+
+336
+32:08.980 --> 32:18.5

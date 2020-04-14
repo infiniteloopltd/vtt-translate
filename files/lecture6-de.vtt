@@ -814,4 +814,148 @@ und zeigen Stattdessen eine Warnung an.
 Okay, hier werden wir demonstrieren und anstatt Trigger zu löschen, die Zeilen nicht gelöscht werden
 
 203
-19:53
+19:53.270 --> 19:56.030
+aus der Bookchanges-Tabelle und zeigen stattdessen eine Warnung an.
+
+204
+19:56.660 --> 19:59.360
+Lassen Sie uns also einen Trigger erstellen.
+
+205
+19:59.740 --> 20:06.200
+Trigger trgPreventDelete für bookChanges erstellen
+
+206
+20:09.060 --> 20:09.940
+Trigger trgPreventDelete für bookChanges erstellen
+
+207
+20:13.050 --> 20:24.080
+Anstatt als zu löschen;  in diesem Fall werde ich nur eine Warnung drucken und keine weiteren Maßnahmen ergreifen.
+
+208
+20:24.200 --> 20:27.560
+So könnte ich verwenden; 
+
+209
+20:28.050 --> 20:28.400
+Drucken 'Warnung: Sie dürfen nicht aus der Buchänderungstabelle löschen'
+
+210
+20:31.250 --> 20:41.550
+Diese bestimmte Drucknachricht ist nur sichtbar
+
+211
+20:41.550 --> 20:43.710
+, um die Benutzer der Datenbank zu leiten.
+
+212
+20:46.460 --> 20:49.140
+Das ist also unser Auslöser.
+
+213
+20:49.140 --> 20:51.480
+Werfen wir also einen Blick auf die Tabelle "Buchänderungen".
+
+214
+21:00.360 --> 21:00.780
+Okay.
+
+215
+21:00.880 --> 21:02.440
+Wir haben drei Reihen.
+
+216
+21:02.650 --> 21:10.810
+Versuchen wir nun, zu löschen; aus Buchänderungen löschen, wobei id = 1.
+
+217
+21:14.410 --> 21:19.030
+Jetzt sehen wir eine Warnung, die besagt, dass Sie nicht aus der Tabelle mit den Buchänderungen löschen dürfen.
+
+218
+21:19.960 --> 21:21.660
+Sehen wir uns die Tabelle "Änderungen" ihres Buches an.
+
+219
+21:27.170 --> 21:29.220
+Alle drei Reihen sind noch da.
+
+220
+21:29.220 --> 21:35.480
+Dasselbe gilt für das Löschen von allem in der Tabelle sagt noch eine Warnung.
+
+221
+21:35.720 --> 21:37.280
+Die Zeilen sind noch da.
+
+222
+21:37.280 --> 21:39.320
+Das ist also ein Anstatt Trigger.
+
+223
+21:39.380 --> 21:46.160
+Dies bedeutet also, dass der Trigger anstelle der Anweisung ausgeführt wurde, nachdem ein Trigger nach der Ausführung der Anweisung geschehen würde.
+
+224
+21:46.160 --> 21:50.730
+Und jetzt ist es an dir vorbei.
+
+225
+21:50.880 --> 21:56.690
+Ihr Ziel ist es, einen Trigger zu erstellen, der verhindert, dass Benutzer die Tabelle "Buchänderungen" aktualisieren.
+
+226
+21:57.450 --> 21:59.360
+So können Sie dieses Video auf ihr posten.
+
+227
+21:59.730 --> 22:01.980
+Geben Sie dies aus und setzen Sie das Video fort.
+
+228
+22:01.980 --> 22:03.510
+Sobald Sie diese Übung ausprobiert haben
+
+229
+22:06.550 --> 22:06.970
+Okay.
+
+230
+22:06.990 --> 22:09.670
+Ich hoffe also, dass Sie diese Übung in sausen lassen.
+
+231
+22:09.730 --> 22:14.050
+Wenn Sie dieses Video noch nicht absehen und es fortsetzen, wenn Sie es ausprobiert haben.
+
+232
+22:15.840 --> 22:22.140
+Unser Ziel ist es daher, einen Trigger zu erstellen, der verhindert, dass Benutzer die Tabelle "Buchänderungen" aktualisieren. in der vorherigen
+
+233
+22:22.740 --> 22:29.550
+Demonstration haben wir gezeigt, wie löschvorgänge zu verhindern, aber natürlich war es möglich, dass jemand aktualisiert
+
+234
+22:29.580 --> 22:36.230
+und ändern Sie den Änderungstyp oder das Datum, an dem sie aufgetreten sind.
+
+235
+22:36.230 --> 22:38.260
+Daher werden wir einen weiteren Auslöser erstellen.
+
+236
+22:38.360 --> 22:44.090
+So nennen Sie es; Trigger trgPreventUpdate erstellen 
+
+237
+22:46.670 --> 22:50.730
+zu bookChanges
+
+238
+22:50.840 --> 22:51.220
+gerade
+
+239
+22
